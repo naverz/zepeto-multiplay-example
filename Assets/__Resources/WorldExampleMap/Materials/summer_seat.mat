@@ -1,0 +1,253 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: summer_seat
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _SHADING_FLAT _WAVES_OFF _ZWRITE_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Distortion_Texture:
+        m_Texture: {fileID: 2800000, guid: 210982dd9266a334392b45a3088a0121, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FresnelTex:
+        m_Texture: {fileID: 2800000, guid: 36ed0deed9c6a8f4d94b06524222ae1a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LogLut:
+        m_Texture: {fileID: 2800000, guid: 03ac8a3fe58c148deaeaedb6213c4167, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 54a85436ba01ad047ba93056c360c312, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexRGBGradientA:
+        m_Texture: {fileID: 2800000, guid: 36ed0deed9c6a8f4d94b06524222ae1a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexure:
+        m_Texture: {fileID: 2800000, guid: 210982dd9266a334392b45a3088a0121, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Main_Texture:
+        m_Texture: {fileID: 2800000, guid: 36ed0deed9c6a8f4d94b06524222ae1a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MoonTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: 6a1c221a7d11eaa4e875ae74a888d906, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarLayer1DataTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarLayer1Tex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarLayer2DataTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarLayer2Tex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarLayer3DataTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarLayer3Tex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex3coord3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Angle: 0.1
+    - _AngleSpeed: 3.66
+    - _Bias: 0
+    - _BumpScale: 1
+    - _Burn: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _Direction: 180
+    - _Dissolve: 2.35
+    - _Dissolve_Sharpness: 7.12
+    - _Distortion_Intensity: 0.2
+    - _Distortion_U_Panning: 0
+    - _Distortion_U_Tiling: 1
+    - _Distortion_V_Panning: -0.2
+    - _Distortion_V_Tiling: 1
+    - _DstBlend: 0
+    - _EdgeBlend: 0
+    - _Gloss: 0.6
+    - _GlossMapScale: 1
+    - _Glossiness: 0
+    - _GlossyReflections: 1
+    - _GradientFadeBegin: -0.179
+    - _GradientFadeEnd: 0.302
+    - _GradientValue: 0.521
+    - _Height: 1
+    - _Height_: 0
+    - _HorizonScaleFactor: 0.7
+    - _InitRotate: 0
+    - _InitScale: 1
+    - _InitUOffset: 0
+    - _InitVOffset: 0
+    - _Length: 3.3
+    - _MainTex_U_Panning: 0
+    - _MainTex_V_Panning: 0
+    - _Main_U_Tiling: 1
+    - _Main_V_Tiling: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _MoonAngle: 1.57
+    - _MoonEdgeFade: 0.3
+    - _MoonHDRBoost: 1
+    - _MoonHeight: 0.89
+    - _MoonRadius: 0.1
+    - _Multiplier: 1
+    - _OcclusionStrength: 1
+    - _Opacity: 0.545
+    - _Parallax: 0.02
+    - _Power: 0.65
+    - _RHeight: 0.2
+    - _RHeight_: 0.2
+    - _RSpeed: 1
+    - _RSpeed_: 0.2
+    - _RotateSpeed: 0
+    - _Scale: 2.17
+    - _ScaleSpeed: 0
+    - _Scale_: 1
+    - _Screen_Position: 0
+    - _ScrollX: 0
+    - _ScrollY: 0
+    - _Shading: 0
+    - _Shininess: 0.03
+    - _ShoreDistance: 1
+    - _ShoreIntensity: 0
+    - _Smoothness: 1
+    - _SmoothnessTextureChannel: 0
+    - _Specular: 0.6
+    - _SpecularHighlights: 1
+    - _Speed: 0.5
+    - _Speed_: 0
+    - _SrcBlend: 1
+    - _StarFadeBegin: 0.067
+    - _StarFadeEnd: 0.36
+    - _StarLayer1Density: 0.01
+    - _StarLayer1EdgeFade: 0.2
+    - _StarLayer1HDRBoost: 1
+    - _StarLayer1MaxRadius: 0.007
+    - _StarLayer1RotationSpeed: 2
+    - _StarLayer1TwinkleAmount: 0.775
+    - _StarLayer1TwinkleSpeed: 2
+    - _StarLayer2Density: 0.01
+    - _StarLayer2EdgeFade: 0.2
+    - _StarLayer2HDRBoost: 1
+    - _StarLayer2MaxRadius: 0.014
+    - _StarLayer2RotationSpeed: 2
+    - _StarLayer2TwinkleAmount: 0.875
+    - _StarLayer2TwinkleSpeed: 3
+    - _StarLayer3Density: 0.01
+    - _StarLayer3EdgeFade: 0.2
+    - _StarLayer3HDRBoost: 1
+    - _StarLayer3MaxRadius: 0.01
+    - _StarLayer3RotationSpeed: 2
+    - _StarLayer3TwinkleAmount: 0.7
+    - _StarLayer3TwinkleSpeed: 1
+    - _Steepness: 0.5
+    - _Stretch: 10
+    - _TexSize_: 64
+    - _USpeed: 0
+    - _UVSec: 0
+    - _U_Panning: 0
+    - _U_Tiling: 1.28
+    - _Use_CustomData: 0
+    - _VSpeed: 0
+    - _V_Panning: 0.07
+    - _V_Tiling: 1.2
+    - _Waves: 0
+    - _ZWrite: 1
+    - __dirty: 1
+    m_Colors:
+    - _Color: {r: 0.79294235, g: 0.9449167, b: 0.9716981, a: 1}
+    - _Direction_: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _GradientHorizonColor: {r: 0.7, g: 0.53, b: 0.69, a: 1}
+    - _GradientSkyColor: {r: 0.47, g: 0.45, b: 0.75, a: 1}
+    - _MoonColor: {r: 0.66, g: 0.65, b: 0.55, a: 1}
+    - _MoonComputedPositionData: {r: 0, g: 0, b: 0, a: 0}
+    - _MoonComputedRotationData: {r: 0, g: 0, b: 0, a: 0}
+    - _ShoreColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
+    - _StarLayer1Color: {r: 1, g: 1, b: 1, a: 1}
+    - _StarLayer2Color: {r: 1, g: 0.5, b: 0.96, a: 1}
+    - _StarLayer3Color: {r: 0.22, g: 1, b: 0.55, a: 1}
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - __Color: {r: 1, g: 1, b: 1, a: 1}

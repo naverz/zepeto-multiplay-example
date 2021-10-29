@@ -1,0 +1,28 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Zepeto Script",
+			"address": "127.0.0.1",
+			"port": 18081,
+			"request": "attach",
+			"type": "pwa-node"
+		},
+		{
+			"name": "Zepeto Multiplay Script",
+			"address": "127.0.0.1",
+			"port": 9229,
+			"request": "attach",
+			"type": "pwa-node"
+		}
+	],
+	"compounds": [
+		{
+			"name": "Zepeto Script/Zepeto Multiplay Script Debug",
+			"configurations": [
+				"Zepeto Script",
+				"Zepeto Multiplay Script"
+			]
+		}
+	]
+}

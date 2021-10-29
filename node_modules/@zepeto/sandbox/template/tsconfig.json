@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "moduleResolution": "node",
+        "types": [
+            "./",
+            "./SchemaTypes"
+        ],
+        "noImplicitAny": true,
+        "strictFunctionTypes": true,
+        "strictBindCallApply": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "noUnusedLocals": true,
+        "removeComments": true
+    }
+}

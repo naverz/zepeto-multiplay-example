@@ -1,0 +1,17 @@
+{
+	"name": "zepeto-script-sample",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@zepeto/sandbox": "file:Library/Packages/zepeto-sandbox.tgz",
+		"typescript": "^4.4.4",
+		"zepeto-script-compiler": "file:Library/Packages/zepeto-script-compiler.tgz"
+	}
+}

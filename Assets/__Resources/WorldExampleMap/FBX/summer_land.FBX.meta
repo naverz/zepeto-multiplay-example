@@ -1,0 +1,251 @@
+fileFormatVersion: 2
+guid: 1e85c45490917b34dbaabcb28730ed96
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: summer_banana
+    100002: summer_cafe
+    100004: summer_hamberg
+    100006: summer_ice
+    100008: //RootNode
+    100010: summer_plam
+    100012: summer_plam_plant
+    100014: summer_plant
+    100016: summer_sand
+    100018: summer_sea
+    100020: summer_terrain
+    100022: summer_terrain_obj
+    100024: summer_tile_dark
+    100026: summer_tile_light
+    100028: summer_tile_wood
+    100030: pool_water
+    100032: Object
+    100034: c1
+    100036: summer_pool_FX
+    400000: summer_banana
+    400002: summer_cafe
+    400004: summer_hamberg
+    400006: summer_ice
+    400008: //RootNode
+    400010: summer_plam
+    400012: summer_plam_plant
+    400014: summer_plant
+    400016: summer_sand
+    400018: summer_sea
+    400020: summer_terrain
+    400022: summer_terrain_obj
+    400024: summer_tile_dark
+    400026: summer_tile_light
+    400028: summer_tile_wood
+    400030: pool_water
+    400032: Object
+    400034: c1
+    400036: summer_pool_FX
+    2100000: summer_tile
+    2100002: 'Material #11'
+    2100004: summer_plant
+    2100006: summer_main_tex
+    2100008: 'Material #15'
+    2100010: 'Material #349'
+    2100012: summer_tile_dark
+    2100014: summer_tile_wood
+    2300000: summer_banana
+    2300002: summer_cafe
+    2300004: summer_hamberg
+    2300006: summer_ice
+    2300008: summer_plam
+    2300010: summer_plam_plant
+    2300012: summer_plant
+    2300014: summer_sand
+    2300016: summer_sea
+    2300018: summer_terrain
+    2300020: summer_terrain_obj
+    2300022: summer_tile_dark
+    2300024: summer_tile_light
+    2300026: summer_tile_wood
+    2300028: pool_water
+    2300030: Object
+    2300032: c1
+    2300034: summer_pool_FX
+    3300000: summer_banana
+    3300002: summer_cafe
+    3300004: summer_hamberg
+    3300006: summer_ice
+    3300008: summer_plam
+    3300010: summer_plam_plant
+    3300012: summer_plant
+    3300014: summer_sand
+    3300016: summer_sea
+    3300018: summer_terrain
+    3300020: summer_terrain_obj
+    3300022: summer_tile_dark
+    3300024: summer_tile_light
+    3300026: summer_tile_wood
+    3300028: pool_water
+    3300030: Object
+    3300032: c1
+    3300034: summer_pool_FX
+    4300000: summer_tile_light
+    4300002: summer_sand
+    4300004: summer_plant
+    4300006: summer_terrain
+    4300008: summer_sea
+    4300010: summer_ice
+    4300012: summer_cafe
+    4300014: summer_hamberg
+    4300016: summer_plam
+    4300018: summer_tile_dark
+    4300020: summer_tile_wood
+    4300022: summer_terrain_obj
+    4300024: summer_plam_plant
+    4300026: summer_banana
+    4300028: pool_water
+    4300030: Object
+    4300032: c1
+    4300034: summer_pool_FX
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 01 - Default
+    second: {fileID: 2100000, guid: b7f3db621f4bd3e44a09460994c40d0e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #11'
+    second: {fileID: 2100000, guid: 3985000751032ec46bc9e6738e1703d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #15'
+    second: {fileID: 2100000, guid: fe859e12e254fb842b61bfbe6867ed8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #349'
+    second: {fileID: 2100000, guid: 13be80ea76f6e00409630f41b0f65665, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #353'
+    second: {fileID: 2100000, guid: 71883c0db383891418b31b5fc7cca0d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: summer_main_tex
+    second: {fileID: 2100000, guid: 0ce3b26824203a04f87166d5c684abee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: summer_plant
+    second: {fileID: 2100000, guid: 6f4757f4c91b19f4bac07d25bb326c2c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: summer_sand
+    second: {fileID: 2100000, guid: 3985000751032ec46bc9e6738e1703d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: summer_sea
+    second: {fileID: 2100000, guid: ca6dc93614ec2db4fa215c796db53837, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: summer_tile
+    second: {fileID: 2100000, guid: 8c61de74c9b4f144a923407b8cd2ff50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: summer_tile_dark
+    second: {fileID: 2100000, guid: bd1aca6cd138b8c49930560e65a7fbfc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: summer_tile_wood
+    second: {fileID: 2100000, guid: c071adbfafdf343409f2ac58c43ce61c, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

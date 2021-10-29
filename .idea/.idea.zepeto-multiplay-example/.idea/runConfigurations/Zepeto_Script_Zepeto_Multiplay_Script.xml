@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="Zepeto Script/Zepeto Multiplay Script Debug" type="CompoundRunConfigurationType">
+        <toRun name="Zepeto Script" type="ChromiumRemoteDebugType" />
+        <toRun name="Zepeto Multiplay Script" type="ChromiumRemoteDebugType" />
+        <method v="2" />
+    </configuration>
+</component>
