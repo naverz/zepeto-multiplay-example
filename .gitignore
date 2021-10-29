@@ -58,3 +58,18 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+.idea
+[Dd]eploy*/
+
+# OSX
+*.DS_Store
+
+# VS CODE
+.vscode
+
+# NODE
+node_modules/
+
+package-lock.json
+tsconfig.json
+Packages/packages-lock.json
