@@ -2,14 +2,16 @@ import {ZepetoScriptBehaviour} from 'ZEPETO.Script'
 import {ZepetoWorldMultiplay} from 'ZEPETO.World'
 import {Room, RoomData} from 'ZEPETO.Multiplay'
 import {Player, State, Vector3} from 'ZEPETO.Multiplay.Schema'
-import {CharacterState, SpawnInfo, ZepetoPlayers} from 'ZEPETO.Character.Controller'
+import {CharacterState, SpawnInfo, ZepetoPlayers, ZepetoPlayer} from 'ZEPETO.Character.Controller'
 import * as UnityEngine from "UnityEngine";
 
 
 export default class Starter extends ZepetoScriptBehaviour {
 
     public multiplay: ZepetoWorldMultiplay;
+
     private room: Room;
+    private currentPlayers: Map<string, Player> = new Map<string, Player>();
 
     private Start() {
 
@@ -45,19 +47,8 @@ export default class Starter extends ZepetoScriptBehaviour {
         // 첫 OnStateChange 이벤트 수신 시, State 전체 스냅샷을 수신합니다.
         if (isFirst) {
 
-            // [RoomState] 현재 Room에 존재하는 player 인스턴스 생성
-            state.players.ForEach((sessionId: string, player: Player) => this.OnJoinPlayer(sessionId, player));
-
-            // [RoomState] 이후 Room에 입장하는 player 인스턴스 생성
-            state.players.OnAdd += (player: Player, sessionId: string) => this.OnJoinPlayer(sessionId, player);
-
-            // [RoomState] 이후 Room에서 퇴장하는 player 인스턴스 제거
-            state.players.OnRemove += (player: Player, sessionId: string) => this.OnRemovePlayer(sessionId, player);
-
-
-            // [CharacterController] 내 (Local)player 인스턴스 생성이 완료된 후, 초기화
+            // [CharacterController] (Local)Player 인스턴스가 Scene에 완전히 로드되었을 때 호출
             ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(() => {
-
                 const myPlayer = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer;
 
                 myPlayer.character.OnChangedState.AddListener((cur, next) => {
@@ -65,30 +56,38 @@ export default class Starter extends ZepetoScriptBehaviour {
                 });
             });
 
-            // [CharacterController] 다른 player 인스턴스 생성이 완료된 후, 초기화
+            // [CharacterController] Player 인스턴스가 Scene에 완전히 로드되었을 때 호출
             ZepetoPlayers.instance.OnAddedPlayer.AddListener((sessionId: string) => {
+                const isLocal = this.room.SessionId === sessionId;
+                if (!isLocal) {
+                    const player: Player = this.currentPlayers.get(sessionId);
 
-                const playerState : Player = this.room.State.players.get_Item(sessionId);
-
-                // [RoomState] player 인스턴스의 state가 갱신될 때마다 호출됩니다.
-                playerState.OnChange += (changedValues) => {
-                    const zepetoPlayer = ZepetoPlayers.instance.GetPlayer(sessionId);
-
-                    if (zepetoPlayer.isLocalPlayer === false) {
-                        const position = this.ParseVector3(playerState.transform.position);
-                        zepetoPlayer.character.MoveToPosition(position);
-
-                        if (playerState.state === CharacterState.JumpIdle || playerState.state === CharacterState.JumpMove)
-                            zepetoPlayer.character.Jump();
-                    }
-                };
+                    // [RoomState] player 인스턴스의 state가 갱신될 때마다 호출됩니다.
+                    player.OnChange += (changeValues) => this.OnUpdatePlayer(sessionId, player);
+                }
             });
-
         }
+
+        let join = new Map<string, Player>();
+        let leave = new Map<string, Player>(this.currentPlayers);
+
+        state.players.ForEach((sessionId: string, player: Player) => {
+            if (!this.currentPlayers.has(sessionId)) {
+                join.set(sessionId, player);
+            }
+            leave.delete(sessionId);
+        });
+
+        // [RoomState] Room에 입장한 player 인스턴스 생성
+        join.forEach((player: Player, sessionId: string) => this.OnJoinPlayer(sessionId, player));
+
+        // [RoomState] Room에서 퇴장한 player 인스턴스 제거
+        leave.forEach((player: Player, sessionId: string) => this.OnLeavePlayer(sessionId, player));
     }
 
     private OnJoinPlayer(sessionId: string, player: Player) {
         console.log(`[OnJoinPlayer] players - sessionId : ${sessionId}`);
+        this.currentPlayers.set(sessionId, player);
 
         const spawnInfo = new SpawnInfo();
         const position = this.ParseVector3(player.transform.position);
@@ -100,9 +99,22 @@ export default class Starter extends ZepetoScriptBehaviour {
         ZepetoPlayers.instance.CreatePlayerWithUserId(sessionId, player.zepetoUserId, spawnInfo, isLocal);
     }
 
-    private OnRemovePlayer(sessionId: string, player: Player) {
+    private OnLeavePlayer(sessionId: string, player: Player) {
         console.log(`[OnRemove] players - sessionId : ${sessionId}`);
+        this.currentPlayers.delete(sessionId);
+
         ZepetoPlayers.instance.RemovePlayer(sessionId);
+    }
+
+    private OnUpdatePlayer(sessionId: string, player: Player) {
+
+        const position = this.ParseVector3(player.transform.position);
+
+        const zepetoPlayer = ZepetoPlayers.instance.GetPlayer(sessionId);
+        zepetoPlayer.character.MoveToPosition(position);
+
+        if (player.state === CharacterState.JumpIdle || player.state === CharacterState.JumpMove)
+            zepetoPlayer.character.Jump();
     }
 
     private SendTransform(transform: UnityEngine.Transform) {

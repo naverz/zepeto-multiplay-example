@@ -714,7 +714,8 @@ declare module "ZEPETO.Multiplay" {
         readonly sessionId: string;
         readonly userId: string;
         readonly hashCode?: string;
-        send(type: string | number, message?: any): void;
+        
+        send(type: string | number, message?: number | boolean | string | Schema): void;
         send(message: Schema): void;
         error(code: number, message?: string): void;
         leave(code?: number, data?: string): void;
