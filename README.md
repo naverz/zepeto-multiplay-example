@@ -163,7 +163,7 @@ onCreate(options: SandboxOptions) {
 ```
 
 - Client<br/>
-1. [내 캐릭터 위치 정보 전달하기](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L108)
+1. [내 캐릭터 위치 정보 전달하기](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L108) </br>
 내 캐릭터(local player)의 위치를 서버에 업데이트 하려면, RoomdData 객체에 캐릭터 위치를 업데이트 한 후, onChangedTransform를 키워드로 전달합니다. 캐릭터의 상태나 인벤토리 설정등과 같은 정보도 자유롭게 정의하여 전달 할 수 있습니다.
 ```
 private SendTransform(transform: UnityEngine.Transform) {
@@ -184,7 +184,7 @@ private SendTransform(transform: UnityEngine.Transform) {
         this.room.Send("onChangedTransform", data.GetObject());
     }
 ```
-2. [다른 캐릭터 위치 수신 하기](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L74)
+2. [다른 캐릭터 위치 수신 하기](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L74)</br>
 OnStateChange 이벤트 함수는 서버에서 State (캐릭터 상태 또는 위치)가 변경시 호출됩니다. 수신된 캐릭터의 State를 로컬에 생성된 CharacterController instance에 업데이트 합니다. 
 
 ```
@@ -200,5 +200,53 @@ OnStateChange 이벤트 함수는 서버에서 State (캐릭터 상태 또는 �
   };
 
 ```
+<br/>
 
+#### Room 퇴장
+Room에서 Player가 퇴장할 때 필요한 로직을 삽입합니다.
+- Server
 
+```
+async onLeave(client: SandboxPlayer, consented ?: boolean) {
+ 
+    // 퇴장 Player Storage Load
+    const storage: DataStorage = client.loadDataStorage();
+    const player = this.state.players.get(client.sessionId);
+    ...  
+ 
+    const transform = {
+        position: { x: position.x, y: _pos.y, z: _pos.z },
+        ...
+    };
+ 
+    // 퇴장하는 유저의 transform을 json 형태로 저장한 다음, 재접속 시 load 합니다.
+    await storage.set("transform", JSON.stringify(transform));
+ 
+    // sessionId에 해당하는 player를 state에서 제거합니다.
+    this.state.players.delete(client.sessionId);
+}
+```
+
+- Client-Side
+```
+OnStateChange(state: State, isFirst: boolean) {
+ 
+    ...
+    let leave = new Map<string, Player>(this.currentPlayers);
+ 
+    state.players.ForEach((sessionId: string, player: Player) => { 
+         
+        ...
+        leave.delete(sessionId);
+    });
+ 
+    ...
+    // [RoomState] Room에서 퇴장한 player 인스턴스 제거
+    leave.forEach((player: Player, sessionId: string) => this.OnLeavePlayer(sessionId, player));
+}
+ 
+OnLeavePlayer(sessionId: string, player: Player) {
+    this.currentPlayers.delete(sessionId);
+    ZepetoPlayers.instance.RemovePlayer(sessionId);
+}
+```
