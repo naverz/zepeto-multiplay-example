@@ -213,7 +213,8 @@ OnStateChange 이벤트 함수는 서버에서 State (캐릭터 상태 또는 �
 
 #### Room 퇴장
 Room에서 Player가 퇴장할 때 필요한 로직을 삽입합니다.
-- Server
+- [Server](https://github.com/naverz/zepeto-multiplay-example/blob/774ec92ccc3cca7ceb6ccbf5d6ee6ac2c15363c4/Assets/World.multiplay/index.ts#L92) </br>
+Player가 Room을 떠날때 onLeave이벤트가 호출됩니다. 이때 해당 player를 State>players 목록에서 제거합니다. 
 
 ```typescript
 async onLeave(client: SandboxPlayer, consented ?: boolean) {
@@ -236,7 +237,10 @@ async onLeave(client: SandboxPlayer, consented ?: boolean) {
 }
 ```
 
-- Client-Side
+- [Client](https://github.com/naverz/zepeto-multiplay-example/blob/774ec92ccc3cca7ceb6ccbf5d6ee6ac2c15363c4/Assets/ZepetoScripts/ClientStarter.ts#L85) </br>
+Player가 Room을 떠나면 서버 로직에서 player state를 변경합니다. 변경된 state정보는 클라이언트에 등록된 onStateChange 이벤트로 호출됩니다. 
+이때 클라이언트 코드내에 ZepetoPlayers instance에서도 퇴장된 캐릭터를 삭제합니다. 
+
 ```typescript
 OnStateChange(state: State, isFirst: boolean) {
  
