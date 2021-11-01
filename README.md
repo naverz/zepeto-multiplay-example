@@ -85,7 +85,9 @@ async onJoin(client: SandboxPlayer) {
 }
 ```
 
-- [Client](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L14)
+- [Client](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L14) </br>
+Player가 Room에 입장하면 RoomCreated와 RoomJoined 이벤트가 호출됩니다.
+Room에 입장이 완료되면 서버 상태 변경을 수신하기 위해서 OnStateChage(State, isFirst:true)에 이벤트를 등록합니다. 
 
 ```typescript
 Start()
