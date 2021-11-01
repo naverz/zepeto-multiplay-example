@@ -23,7 +23,7 @@
 State는 접속 중인 Room의 플레이어 정보, 플레이어 또는 오브젝트의 위치 등을 관리하기 위한 data structure 입니다. 
 Multiplay 패키지내에 [schema 파일](https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/World.multiplay/schemas.json)에 정의되어 있으며, 서버 구동시 생성되며 데이터 변경(유저 접속/퇴장, 위치 이동등)시 각 클라이언트에 broadcast 됩니다. 
 
-```
+```typescript
 declare module "ZEPETO.Multiplay.Schema" {
     interface State extends Schema {
         players: MapSchema<Player>;
@@ -59,7 +59,7 @@ Server에 처음 Player가 접속할 때 Room객체가 생성되고 onCreate 이
 
 onJoin 이벤트는 Room에 새로운 Player가 입장할 때 마다 호출됩니다. 해당 이벤트에 새로운 Player의 StateObject를 생성해 State에 추가 합니다. 
 
-```
+```typescript
 onCreate(options: SandboxOptions) {
 
     this.onMessage("onChangedTransform", (client, message) => { ... });	
@@ -86,7 +86,8 @@ async onJoin(client: SandboxPlayer) {
 ```
 
 - [Client](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L14)
-```
+
+```typescript
 Start()
 {
     this.multiplay.RoomCreated += (room: Room) => {
@@ -101,23 +102,28 @@ Start()
 
 OnStateChange(state: State, isFirst: boolean) {
 
-    // Client가 Server에 접속한 다음, isFirst(true) Flag와 함께 전체 State를 1회 수신합니다.
-    if (isFirst) {
-
-        // 현재 Room에 존재하는 player를 생성합니다.
-        state.players.ForEach((sessionId: string, player: Player) => this.OnJoinPlayer(sessionId, player));
-
-        // 이후 Room에 입장하는 player를 생성하기 위해 이벤트 핸들러를 등록합니다.
-        state.players.OnAdd += (player: Player, sessionId: string) => this.OnJoinPlayer(sessionId, player);
-		
-		...
-    }
+    ...
+ 
+    let join = new Map<string, Player>();
+ 
+    state.players.ForEach((sessionId: string, player: Player) => {
+       
+        // Room에 새로 입장한 player를 확인합니다.
+        if (!this.currentPlayers.has(sessionId))
+            join.set(sessionId, player);    
+        ...
+    });
+ 
+    ...
+    // [RoomState] Room에 입장한 player 인스턴스 생성
+    join.forEach((player: Player, sessionId: string) => this.OnJoinPlayer(sessionId, player));
 }
 ```
 
 Room에 새로운 플레이가 입장할때 에벤트를 수신 할 수 있도록 player 객체에 OnJoinPlayer 이벤트를 연결합니다. 
 OnJoinPlayer 호출시 해당 플레이어용 CharacterController instance를 생성하고, 캐릭터 로딩 이벤트(OnAddedPlayer / OnAddedLocalPlayer)를 연결합니다.
-```
+
+```typescript
 OnJoinPlayer(sessionId: string, player: Player) {
 
     ...
@@ -165,7 +171,8 @@ onCreate(options: SandboxOptions) {
 - Client<br/>
 1. [내 캐릭터 위치 정보 전달하기](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L108) </br>
 내 캐릭터(local player)의 위치를 서버에 업데이트 하려면, RoomdData 객체에 캐릭터 위치를 업데이트 한 후, onChangedTransform를 키워드로 전달합니다. 캐릭터의 상태나 인벤토리 설정등과 같은 정보도 자유롭게 정의하여 전달 할 수 있습니다.
-```
+
+```typescript
 private SendTransform(transform: UnityEngine.Transform) {
         const data = new RoomData();
  
@@ -184,10 +191,11 @@ private SendTransform(transform: UnityEngine.Transform) {
         this.room.Send("onChangedTransform", data.GetObject());
     }
 ```
+
 2. [다른 캐릭터 위치 수신 하기](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L74)</br>
 OnStateChange 이벤트 함수는 서버에서 State (캐릭터 상태 또는 위치)가 변경시 호출됩니다. 수신된 캐릭터의 State를 로컬에 생성된 CharacterController instance에 업데이트 합니다. 
 
-```
+```typescript
  playerState.OnChange += (changedValues) => {
         const zepetoPlayer = ZepetoPlayers.instance.GetPlayer(sessionId);
         ...
@@ -198,7 +206,6 @@ OnStateChange 이벤트 함수는 서버에서 State (캐릭터 상태 또는 �
                 zepetoPlayer.character.Jump();
         ...
   };
-
 ```
 <br/>
 
@@ -206,7 +213,7 @@ OnStateChange 이벤트 함수는 서버에서 State (캐릭터 상태 또는 �
 Room에서 Player가 퇴장할 때 필요한 로직을 삽입합니다.
 - Server
 
-```
+```typescript
 async onLeave(client: SandboxPlayer, consented ?: boolean) {
  
     // 퇴장 Player Storage Load
@@ -228,7 +235,7 @@ async onLeave(client: SandboxPlayer, consented ?: boolean) {
 ```
 
 - Client-Side
-```
+```typescript
 OnStateChange(state: State, isFirst: boolean) {
  
     ...
