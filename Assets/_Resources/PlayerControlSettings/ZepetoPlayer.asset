@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1013562859, guid: d328479d06a874cd1bda7a86f9cdd3a9, type: 3}
+  m_Name: ZepetoPlayer
+  m_EditorClassIdentifier: 
+  isInitialized: 1
+  camera: {fileID: 8964358907584766589, guid: 5be4eddc5b02f4ec0a07a69db26df962, type: 3}
+  cameraMaxZoomDistance: 10
+  cameraMinZoomDistance: 1
+  cameraSensitivity: 5
+  cameraSpeed: 20
+  eyeHeight: 1
+  characterJumpPower: 5
+  MaxSlopeAngle: 50
+  WalkSpeed: 2
+  RunSpeed: 5
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
+  animatorController: {fileID: 9100000, guid: 019901d3486cc411abc6c84594c03743, type: 2}
+  inputAsset: {fileID: -944628639613478452, guid: 090135bc9e5ee4c89b1642240eb723fe, type: 3}
+  useDefaultVirtualController: 1
+  verticalController: {fileID: 2919188649297340810, guid: c93455f4813024972abd7e02718b345a, type: 3}
+  horizontalController: {fileID: 2787167779785370926, guid: 6f2611065df244d8c99ceed0336f3aab, type: 3}
+  shadow: {fileID: 1025544020809228, guid: 4512418b2a1844f42961867ad8421ab8, type: 3}
+  eventSystem: {fileID: 7328100774219155841, guid: 67971ba158b48401988f9aad07940d6f, type: 3}

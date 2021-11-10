@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1477627158727208}
+  m_IsPrefabAsset: 1
+--- !u!1 &1477627158727208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4813742558067794}
+  - component: {fileID: 114682498974907752}
+  m_Layer: 4
+  m_Name: SK_LPWaterFoam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &4813742558067794
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1477627158727208}
+  m_LocalRotation: {x: -0, y: -0.41289112, z: -0, w: 0.91078043}
+  m_LocalPosition: {x: -2.79, y: -0.144, z: 6.03}
+  m_LocalScale: {x: 2, y: 1.3640251, z: 2}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -48.773003, z: 0}
+--- !u!114 &114682498974907752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1477627158727208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6a49d405310944fb9cd55bef9e018f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridType: 1
+  LOD: 0.2
+  LODPower: 3
+  customMesh: {fileID: 0}
+  material: {fileID: 2100000, guid: c0f386ab82a951d45b4af3b6c2b2a34d, type: 2}
+  sun: {fileID: 0}
+  sizeX: 3
+  sizeZ: 2
+  noise: 0.478
+  enableReflection: 0
+  enableRefraction: 0
+  reflection:
+    disablePixelLights: 1
+    textureSize: 256
+    clipPlaneOffset: 0.07
+    reflectLayers:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    refractLayers:
+      serializedVersion: 2
+      m_Bits: 4294967295
+  receiveShadows: 0
+  waveScale: -1337
+  gridTypeLite: 1
+  displayProgress: 0

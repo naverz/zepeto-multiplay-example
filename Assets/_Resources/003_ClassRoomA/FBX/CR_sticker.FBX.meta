@@ -1,0 +1,161 @@
+fileFormatVersion: 2
+guid: e1c92d149e7869844baea579c78cebba
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: CR_Sticker_001
+    100004: CR_Sticker_002
+    100006: CR_Sticker_003
+    100008: CR_Sticker_004
+    100010: CR_Sticker_005
+    100012: CR_Sticker_006
+    100014: CR_Sticker_007
+    100016: CR_Sticker_008
+    100018: CR_Sticker_009
+    100020: CR_Sticker_010
+    100022: CR_Sticker_011
+    100024: CR_Sticker_012
+    100026: CR_Sticker_013
+    400000: //RootNode
+    400002: CR_Sticker_001
+    400004: CR_Sticker_002
+    400006: CR_Sticker_003
+    400008: CR_Sticker_004
+    400010: CR_Sticker_005
+    400012: CR_Sticker_006
+    400014: CR_Sticker_007
+    400016: CR_Sticker_008
+    400018: CR_Sticker_009
+    400020: CR_Sticker_010
+    400022: CR_Sticker_011
+    400024: CR_Sticker_012
+    400026: CR_Sticker_013
+    2100000: texturemap
+    2300000: CR_Sticker_001
+    2300002: CR_Sticker_002
+    2300004: CR_Sticker_003
+    2300006: CR_Sticker_004
+    2300008: CR_Sticker_005
+    2300010: CR_Sticker_006
+    2300012: CR_Sticker_007
+    2300014: CR_Sticker_008
+    2300016: CR_Sticker_009
+    2300018: CR_Sticker_010
+    2300020: CR_Sticker_011
+    2300022: CR_Sticker_012
+    2300024: CR_Sticker_013
+    3300000: CR_Sticker_001
+    3300002: CR_Sticker_002
+    3300004: CR_Sticker_003
+    3300006: CR_Sticker_004
+    3300008: CR_Sticker_005
+    3300010: CR_Sticker_006
+    3300012: CR_Sticker_007
+    3300014: CR_Sticker_008
+    3300016: CR_Sticker_009
+    3300018: CR_Sticker_010
+    3300020: CR_Sticker_011
+    3300022: CR_Sticker_012
+    3300024: CR_Sticker_013
+    4300000: CR_Sticker_001
+    4300002: CR_Sticker_002
+    4300004: CR_Sticker_003
+    4300006: CR_Sticker_004
+    4300008: CR_Sticker_005
+    4300010: CR_Sticker_006
+    4300012: CR_Sticker_007
+    4300014: CR_Sticker_008
+    4300016: CR_Sticker_009
+    4300018: CR_Sticker_010
+    4300020: CR_Sticker_011
+    4300022: CR_Sticker_012
+    4300024: CR_Sticker_013
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: texturemap
+    second: {fileID: 2100000, guid: 6dd07da24f2e8454681970250471c5c7, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: videobooth_sky_cloud
+  m_Shader: {fileID: 10750, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _SUNDISK_HIGH_QUALITY
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BackgroundTex:
+        m_Texture: {fileID: 2800000, guid: 493b914f1a3a7344dac3f622ab871bdd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LogLut:
+        m_Texture: {fileID: 2800000, guid: 03ac8a3fe58c148deaeaedb6213c4167, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 493b914f1a3a7344dac3f622ab871bdd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexRGBGradientA:
+        m_Texture: {fileID: 2800000, guid: 493b914f1a3a7344dac3f622ab871bdd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normals:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Shadermap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Alpha: 0.178
+    - _Angle: 0
+    - _AngleSpeed: 1
+    - _AtmosphereThickness: 2.68
+    - _BlendMode: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _Depth: 30
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 10
+    - _ENABLE_VC: 0
+    - _EdgeFade: 0.2448298
+    - _Exposure: 1.3
+    - _FoamOpacity: 0.05
+    - _FoamSize: 0
+    - _FoamSpeed: 0.1
+    - _FoamTiling: 0.05
+    - _GlossMapScale: 1
+    - _Glossiness: 1
+    - _GlossyReflections: 1
+    - _GradientValue: 1
+    - _InitRotate: 0
+    - _InitScale: 1
+    - _InitUOffset: 0
+    - _InitVOffset: 0
+    - _LIGHTING: 0
+    - _Metallic: 0
+    - _Mode: 3
+    - _Multiplier: 1
+    - _NORMAL_MAP: 0
+    - _NormalStrength: 0.25
+    - _NormalTiling: 0.9
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _RimSize: 5
+    - _Rimfalloff: 3
+    - _Rimtiling: 0.5
+    - _RotateSpeed: 0
+    - _Scale: 1
+    - _ScaleSpeed: 0
+    - _ScrollX: 0
+    - _ScrollY: 0
+    - _Shininess: 0.03
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SunDisk: 2
+    - _SunSize: 0.129
+    - _SunSizeConvergence: 3.75
+    - _Transparency: 0.75
+    - _USE_VC_INTERSECTION: 0
+    - _USpeed: -0.005
+    - _UVSec: 0
+    - _Unlit: 0
+    - _UseIntersectionFoam: 0
+    - _VSpeed: 0
+    - _WaveFoam: 0
+    - _WaveHeight: 0.05
+    - _WaveSize: 0.1
+    - _Wavesspeed: 0.75
+    - _Wavetint: 0
+    - _Worldspacetiling: 1
+    - _ZWrite: 0
+    - __dirty: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _GroundColor: {r: 0.369, g: 0.349, b: 0.341, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    - _SkyTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 1}
+    - _WaterColor: {r: 0.1176471, g: 0.6348885, b: 1, a: 0}
+    - _WaterShallowColor: {r: 0.4191176, g: 0.7596349, b: 1, a: 0}
+    - _WaveDirection: {r: 1, g: 0, b: 0, a: 0}
+    - __Color: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

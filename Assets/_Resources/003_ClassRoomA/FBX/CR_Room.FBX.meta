@@ -1,0 +1,183 @@
+fileFormatVersion: 2
+guid: 7f99a28ae2720e647904661fb4e519fe
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: CR_RoomCeiling_001
+    100004: CR_RoomFloor_001
+    100006: CR_RoomFloor_002
+    100008: CR_RoomGroup_001
+    100010: CR_RoomLight_white_001
+    100012: CR_RoomLouver_001
+    100014: CR_RoomWall_001
+    100016: CR_RoomWindowA_001
+    100018: DellWin
+    100020: CR_RoomWindow
+    400000: //RootNode
+    400002: CR_RoomCeiling_001
+    400004: CR_RoomFloor_001
+    400006: CR_RoomFloor_002
+    400008: CR_RoomGroup_001
+    400010: CR_RoomLight_white_001
+    400012: CR_RoomLouver_001
+    400014: CR_RoomWall_001
+    400016: CR_RoomWindowA_001
+    400018: DellWin
+    400020: CR_RoomWindow
+    2100000: 'Material #4'
+    2100002: 01 - Default
+    2100004: 'Material #3'
+    2100006: 'Material #63'
+    2100008: 'Material #33'
+    2100010: 'Material #47'
+    2100012: 'Material #48'
+    2100014: CR_woodtile_001
+    2100016: texturemap
+    2100018: CR_tile_001
+    2100020: CR_tile_002
+    2100022: CR_tile_003
+    2100024: 'Material #68'
+    2300000: CR_RoomCeiling_001
+    2300002: CR_RoomFloor_001
+    2300004: CR_RoomFloor_002
+    2300006: CR_RoomGroup_001
+    2300008: CR_RoomLight_white_001
+    2300010: CR_RoomLouver_001
+    2300012: CR_RoomWall_001
+    2300014: CR_RoomWindowA_001
+    2300016: DellWin
+    2300018: CR_RoomWindow
+    3300000: CR_RoomCeiling_001
+    3300002: CR_RoomFloor_001
+    3300004: CR_RoomFloor_002
+    3300006: CR_RoomGroup_001
+    3300008: CR_RoomLight_white_001
+    3300010: CR_RoomLouver_001
+    3300012: CR_RoomWall_001
+    3300014: CR_RoomWindowA_001
+    3300016: DellWin
+    3300018: CR_RoomWindow
+    4300000: CR_RoomFloor_001
+    4300002: CR_RoomLouver_001
+    4300004: DellWin
+    4300006: CR_RoomLight_white_001
+    4300008: CR_RoomCeiling_001
+    4300010: CR_RoomWall_001
+    4300012: CR_RoomFloor_002
+    4300014: CR_RoomWindowA_001
+    4300016: CR_RoomGroup_001
+    4300018: CR_RoomWindow
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CR_tile_001
+    second: {fileID: 2100000, guid: 28bac687a109895418fc8a0235772e9a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CR_tile_002
+    second: {fileID: 2100000, guid: 39eea4a19faa0984e9ecc432d45bdf58, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CR_tile_003
+    second: {fileID: 2100000, guid: 950ad43084c75b54cbaeb32e86658780, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CR_woodtile_001
+    second: {fileID: 2100000, guid: 597d8f2d1818e514e85d3d4e417dac04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #68'
+    second: {fileID: 2100000, guid: 952e6b31d8b0ca44e8670b785601a825, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: texturemap
+    second: {fileID: 2100000, guid: 6dd07da24f2e8454681970250471c5c7, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
