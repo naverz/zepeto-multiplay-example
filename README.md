@@ -1,4 +1,5 @@
-# zepeto-script-sample
+# zepeto-multiplay-example
+
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/preview.gif)
 
 
@@ -16,6 +17,13 @@
 - 모바일기기로 접속할 경우, QR코드 생성 항목을 참고하세요. 
  [템플릿으로 시작하기](https://wiki.navercorp.com/pages/viewpage.action?pageId=615610112)
 
+
+## Scenes
+- Sample Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/SampleScene.unity
+
+- Theme Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/001_Desert.unity
+		https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/002_Sakura.unity
+		https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/003_ClassRoom.unity
 
 <br/><br/>
 
