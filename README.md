@@ -24,9 +24,12 @@
 https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/SampleScene.unity
 
 - Theme Scene <br/>
-https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/001_Desert.unity<br/> 
-https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/002_Sakura.unity<br/>
-https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/003_ClassRoom.unity<br/>
+1. https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/001_Desert.unity<br/><br/>
+![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Desert.JPG)<br/><br/><br/><br/>
+2. https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/002_Sakura.unity<br/><br/>
+![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Sakura.JPG)<br/><br/><br/><br/>
+3. https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/003_ClassRoom.unity<br/><br/>
+![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/ClassRoom.JPG)<br/><br/><br/><br/>
 
 <br/><br/>
 
