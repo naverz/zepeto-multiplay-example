@@ -20,19 +20,21 @@
 <br/><br/>
 
 ## Scenes
-- Sample Scene <br/>
-https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/SampleScene.unity<br/><br/>
-![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Sample.png)<br/><br/><br/><br/>
 
-- Theme Scene <br/>
-1. 사막 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/001_Desert.unity<br/><br/>
-![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Desert.JPG)<br/><br/><br/><br/>
-2. 벚꽃 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/002_Sakura.unity<br/><br/>
-![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Sakura.JPG)<br/><br/><br/><br/>
-3. 교실 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/003_ClassRoom.unity<br/><br/>
-![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/ClassRoom.JPG)<br/><br/><br/><br/>
+- Sample Scene <br/><br/>
+![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Sample.png)<br/>
+https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/SampleScene.unity<br/><br/><br/><br/>
 
-<br/><br/>
+- Theme Scene <br/><br/>
+![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Desert.JPG)<br/>
+1. 사막 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/001_Desert.unity<br/><br/><br/><br/>
+![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Sakura.JPG)<br/>
+2. 벚꽃 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/002_Sakura.unity<br/><br/><br/><br/>
+![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/ClassRoom.JPG)<br/>
+3. 교실 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/003_ClassRoom.unity<br/><br/><br/><br/>
+
+
+<br/>
 
 ## Room State 정의하기
 State는 접속 중인 Room의 플레이어 정보, 플레이어 또는 오브젝트의 위치 등을 관리하기 위한 data structure 입니다. 
