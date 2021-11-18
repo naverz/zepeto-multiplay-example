@@ -21,14 +21,15 @@
 
 ## Scenes
 - Sample Scene <br/>
-https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/SampleScene.unity
+https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/SampleScene.unity<br/><br/>
+![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Sample.png)<br/><br/><br/><br/>
 
 - Theme Scene <br/>
-1. https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/001_Desert.unity<br/><br/>
+1. 사막 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/001_Desert.unity<br/><br/>
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Desert.JPG)<br/><br/><br/><br/>
-2. https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/002_Sakura.unity<br/><br/>
+2. 벚꽃 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/002_Sakura.unity<br/><br/>
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Sakura.JPG)<br/><br/><br/><br/>
-3. https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/003_ClassRoom.unity<br/><br/>
+3. 교실 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/003_ClassRoom.unity<br/><br/>
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/ClassRoom.JPG)<br/><br/><br/><br/>
 
 <br/><br/>
