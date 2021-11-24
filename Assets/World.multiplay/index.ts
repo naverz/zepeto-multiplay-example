@@ -51,7 +51,7 @@ export default class extends Sandbox {
             player.zepetoUserId = client.userId;
         }
 
-        // 입장 Player Storage Load
+        // [DataStorage] 입장한 Player의 DataStorage Load
         const storage: DataStorage = client.loadDataStorage();
 
         let visit_cnt = await storage.get("VisitCount") as number;
@@ -59,7 +59,7 @@ export default class extends Sandbox {
 
         console.log(`[OnJoin] ${client.sessionId}'s visiting count : ${visit_cnt}`)
 
-        // Player의 방문 횟수를 갱신한다음 Storage에 저장
+        // [DataStorage] Player의 방문 횟수를 갱신한다음 Storage Save
         await storage.set("VisitCount", ++visit_cnt);
 
         // client 객체의 고유 키값인 sessionId 를 사용해서 Player 객체를 관리.
