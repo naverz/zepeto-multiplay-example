@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 1426285970, guid: 944713d6c9caf4609ae4f76569420317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxClients: 8
   orientation: 0

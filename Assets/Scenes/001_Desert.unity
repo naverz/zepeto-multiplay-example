@@ -18959,6 +18959,7 @@ MonoBehaviour:
   m_Script: {fileID: -432950004, guid: 957e5ae0cab0aa3429ff6d5097822ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomOptions: 0
   roomType: 0
   applicationId: standard
   host: 127.0.0.1
@@ -32149,6 +32150,9 @@ MonoBehaviour:
     offset: {x: 0, y: 1, z: 0}
     speed: 20
     sensitivity: 5
+    layer:
+      serializedVersion: 2
+      m_Bits: 4294967295
   characterData:
     slopeLimit: 45
     stepOffset: 0.3
@@ -32165,6 +32169,7 @@ MonoBehaviour:
       m_Bits: 0
     animatorController: {fileID: 9100000, guid: 019901d3486cc411abc6c84594c03743, type: 2}
     shadow: {fileID: 1025544020809228, guid: 4512418b2a1844f42961867ad8421ab8, type: 3}
+    useMiniProfileOnApp: 1
   controllerData:
     inputAsset: {fileID: -944628639613478452, guid: 090135bc9e5ee4c89b1642240eb723fe, type: 3}
     eventSystem: {fileID: 7328100774219155841, guid: 67971ba158b48401988f9aad07940d6f, type: 3}

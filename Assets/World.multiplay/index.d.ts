@@ -715,7 +715,7 @@ declare module "ZEPETO.Multiplay" {
         readonly userId: string;
         readonly hashCode?: string;
         
-        send(type: string | number, message?: number | boolean | string | Schema): void;
+        send<T>(type: string | number, message?: T): void;
         send(message: Schema): void;
         error(code: number, message?: string): void;
         leave(code?: number, data?: string): void;
@@ -736,6 +736,8 @@ declare module "ZEPETO.Multiplay" {
         readonly applicationId: string;
         readonly isSandbox: boolean;
         readonly tickInterval: number;
+        readonly isPrivate: boolean;
+        readonly matchMakingValue: {[key: string]: any};
     }
     
     abstract class Sandbox {
@@ -751,9 +753,13 @@ declare module "ZEPETO.Multiplay" {
         readonly state: State;
         readonly clients: SandboxPlayer[];
         readonly allowReconnectionTime: number;
+        readonly matchMakeOption: string;
+        readonly private: boolean;
         abstract onCreate?(options: SandboxOptions): void | Promise<void>;
         abstract onJoin?(client: SandboxPlayer): void | Promise<void>;
         abstract onLeave?(client: SandboxPlayer, consented?: boolean): void | Promise<void>;
+        lock(): Promise<void>;
+        unlock(): Promise<void>;
         onTick?(deltaTime: number): void;
         onDispose?(): void | Promise<any>;
         onMessage?<T = any>(messageType: '*', callback: (client: SandboxPlayer, type: string | number, message: T) => void): any;
@@ -763,6 +769,7 @@ declare module "ZEPETO.Multiplay" {
         loadPlayer?(sessionId: string): SandboxPlayer;
     }
 }
+
 
 declare module 'ZEPETO.Multiplay.DataStorage' {    
     interface DataStorage {
@@ -781,12 +788,12 @@ declare module 'ZEPETO.Multiplay' {
 
 
 declare module "ZEPETO.Multiplay.HttpService" {
-    enum HttpContentType {
-        ApplicationJson = 0,
-        ApplicationXml = 1,
-        ApplicationUrlEncoded = 2,
-        TextPlain = 3,
-        TextXml = 4
+    const enum HttpContentType {
+        ApplicationJson = 'application/json',
+        ApplicationXml = 'application/xml',
+        ApplicationUrlEncoded = 'application/x-www-form-urlencoded',
+        TextPlain = 'text/plain',
+        TextXml = 'text/xml'
     }
     interface HttpResponse {
         readonly statusCode: number;
@@ -794,14 +801,9 @@ declare module "ZEPETO.Multiplay.HttpService" {
         readonly response: string;
     }
     interface HttpService {
-        getAsync(url: string, headers?: {
-            [key: string]: string;
-        }): Promise<HttpResponse>;
-        postAsync(url: string, body: {
-            [key: string]: string | number | bigint;
-        }, headers?: {
-            [key: string]: string;
-        }): Promise<HttpResponse>;
+        getAsync(url: string, headers?: { [key: string]: string; }): Promise<HttpResponse>;
+        postAsync(url: string, body: string | { [key: string]: any; }, headers?: { [key: string]: string; }): Promise<HttpResponse>;
+        postAsync(url: string, body: string | { [key: string]: any; }, httpContentType: HttpContentType, headers?: { [key: string]: string; }): Promise<HttpResponse>;
     }
     const HttpService: HttpService;
 }
@@ -836,43 +838,37 @@ declare module 'ZEPETO.Multiplay.Leaderboard' {
         SUNDAY: string;
     };
     type LeaderboardWeekDayType = typeof LeaderboardWeekDayType[keyof typeof LeaderboardWeekDayType];
-    const LeaderboardResetType: {
-        readonly INFINITE: "INFINITE";
-        readonly DAY: "DAY";
-        readonly WEEK: "WEEK";
-        readonly MONTH: "MONTH";
-        readonly CUSTOM: "CUSTOM";
-    };
-    type LeaderboardResetType = typeof LeaderboardResetType[keyof typeof LeaderboardResetType];
-    const LeaderboardSortType: {
-        readonly DESC: "DESC";
-        readonly ASC: "ASC";
-    };
-    type LeaderboardSortType = typeof LeaderboardSortType[keyof typeof LeaderboardSortType];
-    const LeaderboardSubSortType: {
-        NONE: string;
-        SEQ_FIRST: string;
-        SEQ_LAST: string;
-        TIME_FIRST: string;
-        TIME_LAST: string;
-        CUSTOM: string;
-    };
-    type LeaderboardSubSortType = typeof LeaderboardSubSortType[keyof typeof LeaderboardSubSortType];
-    
+
+    enum ResetRule
+    {
+        none = 0,
+        day = 1,
+        week = 2,
+        month = 3,
+    }
+
+    enum UpdateRule
+    {
+        max_score = 0,
+        min_score = 1,
+        accumulate_score = 2,
+    }
+
     interface ResetInfo {
         customResetStartTimestamp: number;
         day: number;
         hour: number;
         min: number;
-        resetType: LeaderboardResetType;
+        resetRule: ResetRule;
         sec: number;
         weekDay: LeaderboardWeekDayType;
     }
 
     interface Leaderboard {
-        createTimestamp: number;
         id: string;
         name: string;
+        resetInfoList: ResetInfo[];
+        updateRule: UpdateRule;
     }
 
     interface ResponseBase {
@@ -892,7 +888,6 @@ declare module 'ZEPETO.Multiplay.Leaderboard' {
     }
 
     interface RankInfo {
-        myRank: Rank;
         rankList: Rank[];
         totalRankCount: number;
     }
@@ -912,9 +907,10 @@ declare module 'ZEPETO.Multiplay.Leaderboard' {
     interface Leaderboard {
         getAllLeaderboards(): Promise<GetAllLeaderboardsResponse>;
         getLeaderboard(leaderboardId: string): Promise<GetLeaderboardResponse>;
-        getRank(leaderboardId: string, myUserId: string, userIds: string[], resetType?: LeaderboardResetType, prevRanking?: boolean, sortType?: LeaderboardSortType): Promise<GetLeaderboardRankResponse>;
-        getRankRange(leaderboardId: string, myUserId: string, startRank: number, endRank: number, resetType?: LeaderboardResetType, prevRanking?: boolean, sortType?: LeaderboardSortType): Promise<GetLeaderboardRankResponse>;
-        setScore(leaderboardId: string, userId: string, score: number): any;
+        getRank(leaderboardId: string, userIds: string[], resetRule: ResetRule, prevRanking?: boolean): Promise<GetLeaderboardRankResponse>;
+        getRankRange(leaderboardId: string, startRank: number, endRank: number, resetRule: ResetRule, prevRanking?: boolean): Promise<GetLeaderboardRankResponse>;
+        setScore(leaderboardId: string, userId: string, score: number, prevRanking?: boolean): Promise<LeaderboardResponse>;
+        deleteRank(leaderboardId: string, userId: string, prevRanking?: boolean): Promise<LeaderboardResponse>;
     }
     const Leaderboard: Leaderboard;
 }
