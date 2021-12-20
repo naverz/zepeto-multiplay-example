@@ -1,0 +1,214 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Fall_PinkMuhly_00
+  m_Shader: {fileID: 4800000, guid: e6c86e2af3a2d7e408a65a10c7f5c704, type: 3}
+  m_ShaderKeywords: GEOM_TYPE_LEAF _SCREEN_POSITION_ON _SPECULARHIGHLIGHTS_OFF _WIND_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 2800000, guid: 04ba4797711493343b64211105682e1a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BackgroundTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BridgeTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LogLut:
+        m_Texture: {fileID: 2800000, guid: 03ac8a3fe58c148deaeaedb6213c4167, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 04ba4797711493343b64211105682e1a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Main_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowOffset:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SparkleTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecularTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TranslucencyMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _U:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _V:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Y:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Alpha: 1
+    - _Bias: 0
+    - _BlendMode: 0
+    - _BrightAmount: 1.05
+    - _BrightPower: 1
+    - _BumpScale: 1
+    - _ColorShift: 5
+    - _Cull: 0
+    - _CullMode: 0
+    - _Cutoff: 0.99
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _Fixthebaseoffoliage: 0
+    - _GlobalWindInfluence: 0.165
+    - _GlossMapScale: 1
+    - _Glossiness: 0
+    - _GlossyReflections: 1
+    - _InnerAOAmount: 4.78
+    - _InnerAOLength: 4.03
+    - _InnerAOPower: 4.21
+    - _Intensity: 1
+    - _LightvectorX: -0.48
+    - _LightvectorY: 1
+    - _LightvectorZ: -0.22
+    - _Metallic: 0
+    - _Mode: 0
+    - _NormalPower: 0.75
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Power: 2.047
+    - _PrimaryShift: -0.01
+    - _Reverse: 0
+    - _RimPower: 9.28
+    - _SSSLength: 4.28
+    - _SSSPower: 5.76
+    - _Scale: 1
+    - _Screen_Position: 1
+    - _SecondaryShift: -0.28
+    - _ShiftRange: 0.1
+    - _Shininess: 0.03
+    - _SmoothnessTextureChannel: 0
+    - _SparkleRange: 0.1
+    - _SpecularHighlights: 0
+    - _SpecularMultiplier: 10
+    - _SpecularMultiplier2: 10
+    - _SquashAmount: 1
+    - _SrcBlend: 1
+    - _TintPower: 0.292
+    - _UVSec: 0
+    - _U_Panning: 0
+    - _U_Tiling: 1
+    - _V_Panning: -0.2
+    - _V_Tiling: 1
+    - _WIND: 1
+    - _WindFoliageAmplitude: 0.03
+    - _WindFoliageSpeed: 0.24
+    - _WindForce: 0.293
+    - _WindQuality: 3
+    - _WindSpeed: 0.274
+    - _WindTrunkAmplitude: 0
+    - _WindTrunkSpeed: 0
+    - _WindWavesScale: 0.2
+    - _WorldYPosition: 1.12
+    - _ZWrite: 1
+    - __dirty: 1
+    - _b_influence: 1
+    - _branches_disp: 0.3
+    - _leaves_wiggle_disp: 0.07
+    - _leaves_wiggle_speed: 0.01
+    - _r_influence: 1
+    - _tree_sway_disp: 0.3
+    - _tree_sway_speed: 1
+    - _tree_sway_stutter: 1.5
+    - _tree_sway_stutter_influence: 0.2
+    - _wind_size: 15
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
+    - _InnerAOColor: {r: 0.8638305, g: 0.8638882, b: 0.8679245, a: 1}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SSSColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
+    - _SparkleColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecularColor: {r: 0.2784314, g: 0.1921569, b: 0.1960784, a: 1}
+    - _SpecularColor2: {r: 0.1333333, g: 0.09019608, b: 0.09411765, a: 1}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _TintColor: {r: 0.4156863, g: 0.2980392, b: 0.1921569, a: 1}
+    - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}
+    - _wind_dir: {r: 0.5, g: 0.05, b: 0.5, a: 0}
+  m_BuildTextureStacks: []
