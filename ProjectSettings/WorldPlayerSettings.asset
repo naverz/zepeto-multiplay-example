@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxClients: 8
+  canInvite: 1
   orientation: 0
