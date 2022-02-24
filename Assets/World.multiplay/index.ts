@@ -4,6 +4,9 @@ import {Player, Transform, Vector3} from "ZEPETO.Multiplay.Schema";
 
 export default class extends Sandbox {
 
+
+    storageMap:Map<string,DataStorage> = new Map<string, DataStorage>();
+    
     constructor() {
         super();
     }
@@ -35,7 +38,9 @@ export default class extends Sandbox {
             player.state = message.state;
         });
     }
-
+    
+   
+    
     async onJoin(client: SandboxPlayer) {
 
         // schemas.json 에서 정의한 player 객체를 생성 후 초기값 설정.
@@ -53,6 +58,8 @@ export default class extends Sandbox {
 
         // [DataStorage] 입장한 Player의 DataStorage Load
         const storage: DataStorage = client.loadDataStorage();
+
+        this.storageMap.set(client.sessionId,storage);
 
         let visit_cnt = await storage.get("VisitCount") as number;
         if (visit_cnt == null) visit_cnt = 0;

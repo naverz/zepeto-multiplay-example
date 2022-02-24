@@ -1,0 +1,96 @@
+fileFormatVersion: 2
+guid: 96d23dd00996d474ebe24a05a1a1a1a6
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Character_Controller_1 = require(\\\"ZEPETO.Character.Controller\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst IKController_1 =
+    require(\\\"./IKController\\\");\\r\\nconst ScreenShotController_1 = require(\\\"./ScreenShotController\\\");\\r\\nconst
+    SelfieCamera_1 = require(\\\"./SelfieCamera\\\");\\r\\nclass ScreenShotModeManager
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor() {\\r\\n       
+    super(...arguments);\\r\\n        // Data\\r\\n        this.playerLayer = 21;\\r\\n       
+    this.rightHandBone = \\\"hand_R\\\";\\r\\n    }\\r\\n    Start() {\\r\\n       
+    this.screenShot = this.screenShotController.GetComponent($typeof(ScreenShotController_1.default));\\r\\n       
+    // Zepeto Local player \uAD00\uB828 \uAC1D\uCCB4 \uCE90\uC2F1\\r\\n        ZEPETO_Character_Controller_1.ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(()
+    => {\\r\\n            this.localPlayer = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer;\\r\\n           
+    this.zepetoCamera = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoCamera.camera;\\r\\n           
+    if (this.localPlayer.character.gameObject.layer != this.playerLayer) {\\r\\n               
+    this.localPlayer.character.GetComponentsInChildren($typeof(UnityEngine_1.Transform)).forEach((characterObj)
+    => {\\r\\n                    characterObj.gameObject.layer = this.playerLayer;\\r\\n               
+    });\\r\\n            }\\r\\n        });\\r\\n    }\\r\\n    // \uC2A4\uD06C\uB9B0\uC0F7
+    \uBAA8\uB4DC \uC2DC\uC791 \uC2DC \uAD00\uB828 \uC124\uC815 \uC9C4\uD589\\r\\n   
+    StartScreenShotMode() {\\r\\n        // 1. IK \uC124\uC815\\r\\n        this.selfieCamera
+    = UnityEngine_1.GameObject.Instantiate(this.selfieCameraPrefab).GetComponent($typeof(UnityEngine_1.Camera));\\r\\n       
+    let character = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;\\r\\n       
+    let target = this.selfieCamera;\\r\\n        // 2. SelfieCamera setting\\r\\n       
+    let selfieCamera = target.GetComponent($typeof(SelfieCamera_1.default));\\r\\n       
+    selfieCamera.InitSetting(character.gameObject.transform);\\r\\n        let grip
+    = selfieCamera.GetGripObject();\\r\\n        let playerAnimator = this.localPlayer.character.gameObject.GetComponentInChildren($typeof(UnityEngine_1.Animator));\\r\\n       
+    this.iKController = playerAnimator.gameObject.AddComponent($typeof(IKController_1.default));\\r\\n       
+    this.iKController.SetTargetAndGrip(target.transform, grip.transform);\\r\\n       
+    // 3. selfie stick\uC744 \uCE90\uB9AD\uD130\uC758 \uC624\uB978\uC190\uC5D0 \uACE0\uC815\\r\\n       
+    this.selfieStick = UnityEngine_1.GameObject.Instantiate(this.selfieStickPrefab);\\r\\n       
+    this.localPlayer.character.GetComponentsInChildren($typeof(UnityEngine_1.Transform)).forEach((characterObj)
+    => {\\r\\n            if (characterObj.name == this.rightHandBone) {\\r\\n               
+    this.selfieStick.transform.parent = characterObj;\\r\\n                this.selfieStick.transform.localPosition
+    = UnityEngine_1.Vector3.zero;\\r\\n                this.selfieStick.transform.localRotation
+    = UnityEngine_1.Quaternion.Euler(UnityEngine_1.Vector3.zero);\\r\\n               
+    this.selfieStick.GetComponentInChildren($typeof(UnityEngine_1.Renderer)).gameObject.layer
+    = this.playerLayer;\\r\\n            }\\r\\n        });\\r\\n        //4. \uCC98\uC74C\uC5D0\uB294
+    zepetoCamera\uB85C \uC124\uC815\\r\\n        this.SetZepetoCameraMode();\\r\\n   
+    }\\r\\n    // \uC2A4\uD06C\uB9B0\uC0F7 \uBAA8\uB4DC\uC5D0\uC11C \uB098\uAC08\uB54C
+    \uCE74\uBA54\uB77C \uC124\uC815\uC744 \uCD08\uAE30\uD654\uD569\uB2C8\uB2E4.\\r\\n   
+    ExitScreenShotMode(isThirdPersonView) {\\r\\n        if (this.selfieCamera !=
+    null) {\\r\\n            UnityEngine_1.GameObject.Destroy(this.selfieCamera.gameObject);\\r\\n       
+    }\\r\\n        if (!isThirdPersonView) {\\r\\n            // \uC140\uD53C \uCE74\uBA54\uB77C
+    \uC0AD\uC81C\\r\\n            // IK Pass \uC801\uC6A9 \uD574\uC81C\\r\\n           
+    this.SetIKPassActive(false);\\r\\n            // \uC81C\uD398\uD1A0 \uCE74\uBA54\uB77C
+    \uD65C\uC131\uD654\\r\\n            this.zepetoCamera.gameObject.SetActive(true);\\r\\n       
+    }\\r\\n    }\\r\\n    GetPlayerLayer() {\\r\\n        return this.playerLayer;\\r\\n   
+    }\\r\\n    // \uC140\uD53C \uCE74\uBA54\uB77C \uBC18\uD658\\r\\n    GetSelfieCamera()
+    {\\r\\n        return this.selfieCamera;\\r\\n    }\\r\\n    // \uC81C\uD398\uD1A0
+    \uCE74\uBA54\uB77C \uBC18\uD658\\r\\n    GetZepetoCamera() {\\r\\n        return
+    this.zepetoCamera;\\r\\n    }\\r\\n    // \uC140\uD53C \uCE74\uBA54\uB77C \uD65C\uC131\uD654
+    \uC5EC\uBD80\uB97C \uACB0\uC815\\r\\n    SetSelfieCameraActive(active) {\\r\\n       
+    this.selfieCamera.gameObject.SetActive(active);\\r\\n    }\\r\\n    // IKPass\uB97C
+    \uC801\uC6A9\uD560\uC9C0 \uC5EC\uBD80\uB97C \uACB0\uC815\\r\\n    SetIKPassActive(active)
+    {\\r\\n        this.iKController.SetIKWeightActive(active);\\r\\n        // iKController\uB97C
+    \uC0AC\uC6A9\uD558\uB294 \uC2DC\uC810\uC774 \uC140\uD53C\uBAA8\uB4DC\uC778 \uC2DC\uC810\uC774\uBBC0\uB85C
+    selfie stick\uB3C4 \uC774\uC5D0 \uB530\uB77C \uD65C\uC131/\uBE44\uD65C\uC131\\r\\n       
+    this.selfieStick.SetActive(active);\\r\\n    }\\r\\n    // \uCE74\uBA54\uB77C
+    \uC124\uC815\uC744 \uC704\uD55C \uD568\uC218\\r\\n    SetSelfieCameraMode() {\\r\\n       
+    // \uAE30\uC874 \uC81C\uD398\uD1A0\uCE74\uBA54\uB77C \uBE44\uD65C\uC131\uD654\\r\\n       
+    this.zepetoCamera.gameObject.SetActive(false);\\r\\n        // \uC140\uD53C \uCE74\uBA54\uB77C
+    \uD65C\uC131\uD654\\r\\n        this.SetSelfieCameraActive(true);\\r\\n       
+    // \uC140\uCE74 \uD3EC\uC988 \uC124\uC815\uC744 \uC704\uD574 IKPass \uD65C\uC131\uD654\\r\\n       
+    this.SetIKPassActive(true);\\r\\n        // \uC2A4\uD06C\uB9B0\uC0F7 \uCC0D\uC744
+    \uCE74\uBA54\uB77C\uB97C \uC140\uD53C \uCE74\uBA54\uB77C\uB85C \uBCC0\uACBD\\r\\n       
+    this.screenShot.SetScreenShotCamera(this.selfieCamera);\\r\\n        // \uC140\uCE74\uBD09
+    \uD65C\uC131\uD654\\r\\n        this.selfieStick.SetActive(true);\\r\\n    }\\r\\n   
+    SetZepetoCameraMode() {\\r\\n        // \uAE30\uC874 \uC81C\uD398\uD1A0 \uCE74\uBA54\uB77C
+    \uD65C\uC131\uD654\\r\\n        this.zepetoCamera.gameObject.SetActive(true);\\r\\n       
+    // \uC140\uD53C \uCE74\uBA54\uB77C \uBE44\uD65C\uC131\uD654\\r\\n        this.SetSelfieCameraActive(false);\\r\\n       
+    // \uC140\uCE74 \uD3EC\uC988 \uD574\uC81C\uB97C \uC704\uD574 IKPass \uBE44\uD65C\uC131\uD654\\r\\n       
+    this.SetIKPassActive(false);\\r\\n        // \uC2A4\uD06C\uB9B0\uC0F7 \uCC0D\uC744
+    \uCE74\uBA54\uB77C\uB97C \uC81C\uD398\uD1A0 \uCE74\uBA54\uB77C\uB85C \uBCC0\uACBD\\r\\n       
+    this.screenShot.SetScreenShotCamera(this.zepetoCamera);\\r\\n        // \uC140\uCE74\uBD09
+    \uBE44\uD65C\uC131\uD654\\r\\n        this.selfieStick.SetActive(false);\\r\\n   
+    }\\r\\n}\\r\\nexports.default = ScreenShotModeManager;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2NyZWVuU2hvdE1vZGVNYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2NyZWVuU2hvdE1vZGVNYW5hZ2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQXFHO0FBQ3JHLDZFQUEwRTtBQUMxRSxpREFBcUQ7QUFDckQsaURBQTBDO0FBQzFDLGlFQUEwRDtBQUMxRCxpREFBMEM7QUFFMUMsTUFBcUIscUJBQXNCLFNBQVEscUNBQXFCO0lBQXhFOztRQWVJLE9BQU87UUFDQyxnQkFBVyxHQUFXLEVBQUUsQ0FBQztRQUN6QixrQkFBYSxHQUFXLFFBQVEsQ0FBQztJQW1IN0MsQ0FBQztJQWpIRyxLQUFLO1FBQ0QsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsb0JBQW9CLENBQUMsWUFBWSxTQUFDLDhCQUFvQixFQUFHLENBQUM7UUFFakYsK0JBQStCO1FBQy9CLDJDQUFhLENBQUMsUUFBUSxDQUFDLGtCQUFrQixDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDdkQsSUFBSSxDQUFDLFdBQVcsR0FBRywyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsWUFBWSxDQUFDO1lBQ25FLElBQUksQ0FBQyxZQUFZLEdBQUcsMkNBQWEsQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDLFlBQVksQ0FBQyxNQUFNLENBQUM7WUFFM0UsSUFBRyxJQUFJLENBQUMsV0FBVyxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsS0FBSyxJQUFJLElBQUksQ0FBQyxXQUFXLEVBQUU7Z0JBQ2hFLElBQUksQ0FBQyxXQUFXLENBQUMsU0FBUyxDQUFDLHVCQUF1QixTQUFDLHVCQUFTLEdBQUksT0FBTyxDQUFDLENBQUMsWUFBWSxFQUFFLEVBQUU7b0JBQ3JGLFlBQVksQ0FBQyxVQUFVLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxXQUFXLENBQUM7Z0JBQ3JELENBQUMsQ0FBQyxDQUFDO2FBQ047UUFDTCxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFRCx3QkFBd0I7SUFDakIsbUJBQW1CO1FBQ3RCLFdBQVc7UUFDWCxJQUFJLENBQUMsWUFBWSxHQUFHLHdCQUFVLENBQUMsV0FBVyxDQUFhLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDLFlBQVksU0FBQyxvQkFBTSxFQUFHLENBQUM7UUFFdkcsSUFBSSxTQUFTLEdBQUcsMkNBQWEsQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUM7UUFDMUUsSUFBSSxNQUFNLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQztRQUUvQiwwQkFBMEI7UUFDMUIsSUFBSSxZQUFZLEdBQWlCLE1BQU0sQ0FBQyxZQUFZLFNBQUMsc0JBQVksRUFBRyxDQUFDO1FBQ3JFLFlBQVksQ0FBQyxXQUFXLENBQUMsU0FBUyxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUV6RCxJQUFJLElBQUksR0FBRyxZQUFZLENBQUMsYUFBYSxFQUFFLENBQUM7UUFDeEMsSUFBSSxjQUFjLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUFDLHNCQUFzQixTQUFDLHNCQUFRLEVBQUcsQ0FBQztRQUM5RixJQUFJLENBQUMsWUFBWSxHQUFHLGNBQWMsQ0FBQyxVQUFVLENBQUMsWUFBWSxTQUFDLHNCQUFZLEVBQUcsQ0FBQztRQUMzRSxJQUFJLENBQUMsWUFBWSxDQUFDLGdCQUFnQixDQUFDLE1BQU0sQ0FBQyxTQUFTLEVBQUUsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO1FBRXJFLGdDQUFnQztRQUNoQyxJQUFJLENBQUMsV0FBVyxHQUFHLHdCQUFVLENBQUMsV0FBVyxDQUFhLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDO1FBQzlFLElBQUksQ0FBQyxXQUFXLENBQUMsU0FBUyxDQUFDLHVCQUF1QixTQUFDLHVCQUFTLEdBQUksT0FBTyxDQUFDLENBQUMsWUFBWSxFQUFFLEVBQUU7WUFDckYsSUFBRyxZQUFZLENBQUMsSUFBSSxJQUFJLElBQUksQ0FBQyxhQUFhLEVBQUU7Z0JBQ3hDLElBQUksQ0FBQyxXQUFXLENBQUMsU0FBUyxDQUFDLE1BQU0sR0FBRyxZQUFZLENBQUM7Z0JBQ2pELElBQUksQ0FBQyxXQUFXLENBQUMsU0FBUyxDQUFDLGFBQWEsR0FBRyxxQkFBTyxDQUFDLElBQUksQ0FBQztnQkFDeEQsSUFBSSxDQUFDLFdBQVcsQ0FBQyxTQUFTLENBQUMsYUFBYSxHQUFHLHdCQUFVLENBQUMsS0FBSyxDQUFDLHFCQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7Z0JBQzFFLElBQUksQ0FBQyxXQUFXLENBQUMsc0JBQXNCLFNBQUMsc0JBQVEsR0FBSSxVQUFVLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxXQUFXLENBQUM7YUFDM0Y7UUFDTCxDQUFDLENBQUMsQ0FBQztRQUNILDBCQUEwQjtRQUMxQixJQUFJLENBQUMsbUJBQW1CLEVBQUUsQ0FBQztJQUMvQixDQUFDO0lBR0QsZ0NBQWdDO0lBQ3pCLGtCQUFrQixDQUFDLGlCQUEwQjtRQUNoRCxJQUFHLElBQUksQ0FBQyxZQUFZLElBQUksSUFBSSxFQUFFO1lBQzFCLHdCQUFVLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsVUFBVSxDQUFDLENBQUM7U0FDcEQ7UUFFRCxJQUFHLENBQUMsaUJBQWlCLEVBQUU7WUFDbkIsWUFBWTtZQUNaLGdCQUFnQjtZQUNoQixJQUFJLENBQUMsZUFBZSxDQUFDLEtBQUssQ0FBQyxDQUFDO1lBQzVCLGNBQWM7WUFDZCxJQUFJLENBQUMsWUFBWSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7U0FDaEQ7SUFDTCxDQUFDO0lBRU0sY0FBYztRQUNqQixPQUFPLElBQUksQ0FBQyxXQUFXLENBQUM7SUFDNUIsQ0FBQztJQUNELFlBQVk7SUFDTCxlQUFlO1FBQ2xCLE9BQU8sSUFBSSxDQUFDLFlBQVksQ0FBQztJQUM3QixDQUFDO0lBQ0QsYUFBYTtJQUNOLGVBQWU7UUFDbEIsT0FBTyxJQUFJLENBQUMsWUFBWSxDQUFDO0lBQzdCLENBQUM7SUFFRCxvQkFBb0I7SUFDYixxQkFBcUIsQ0FBQyxNQUFlO1FBQ3hDLElBQUksQ0FBQyxZQUFZLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxNQUFNLENBQUMsQ0FBQztJQUNuRCxDQUFDO0lBRUQsc0JBQXNCO0lBQ2YsZUFBZSxDQUFDLE1BQWU7UUFDbEMsSUFBSSxDQUFDLFlBQVksQ0FBQyxpQkFBaUIsQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUM1QyxnRUFBZ0U7UUFDaEUsSUFBSSxDQUFDLFdBQVcsQ0FBQyxTQUFTLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDdkMsQ0FBQztJQUVELGdCQUFnQjtJQUNoQixtQkFBbUI7UUFDZixpQkFBaUI7UUFDakIsSUFBSSxDQUFDLFlBQVksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQzlDLGFBQWE7UUFDYixJQUFJLENBQUMscUJBQXFCLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDakMsMEJBQTBCO1FBQzFCLElBQUksQ0FBQyxlQUFlLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDM0IsMEJBQTBCO1FBQzFCLElBQUksQ0FBQyxVQUFVLENBQUMsbUJBQW1CLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDO1FBQ3ZELFVBQVU7UUFDVixJQUFJLENBQUMsV0FBVyxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNyQyxDQUFDO0lBRUQsbUJBQW1CO1FBQ2YsaUJBQWlCO1FBQ2pCLElBQUksQ0FBQyxZQUFZLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUM3QyxjQUFjO1FBQ2QsSUFBSSxDQUFDLHFCQUFxQixDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQ2xDLDJCQUEyQjtRQUMzQixJQUFJLENBQUMsZUFBZSxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQzVCLDJCQUEyQjtRQUMzQixJQUFJLENBQUMsVUFBVSxDQUFDLG1CQUFtQixDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsQ0FBQztRQUN2RCxXQUFXO1FBQ1gsSUFBSSxDQUFDLFdBQVcsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDdEMsQ0FBQztDQUNKO0FBcElELHdDQW9JQyJ9\",\"assetPath\":\"Assets/ZepetoScripts/ScreenShotScripts/ScreenShotModeManager.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"screenShotController\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"selfieCameraPrefab\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"selfieStickPrefab\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"ScreenShotModeManager\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 7f30ac844a058526346218b864f29d11

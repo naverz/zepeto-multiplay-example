@@ -1,0 +1,34 @@
+fileFormatVersion: 2
+guid: 68f0c6a528c2618438e5a6291abaea0c
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass GestureController extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n        for (let
+    i = 0; i < this.gestureClips.length; ++i) {\r\n            this.gestureListButtons[i].onClick.AddListener(()
+    => {\r\n                const character = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;\r\n               
+    character.SetGesture(this.gestureClips[i]);\r\n                this.StartCoroutine(this.StopCharacterGesture(this.gestureClips[i].length
+    - 0.3));\r\n            });\r\n        }\r\n    }\r\n    *StopCharacterGesture(length)
+    {\r\n        yield new UnityEngine_1.WaitForSeconds(length);\r\n        const
+    character = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;\r\n       
+    character.CancelGesture();\r\n    }\r\n}\r\nexports.default = GestureController;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2VzdHVyZUNvbnRyb2xsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJHZXN0dXJlQ29udHJvbGxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUE0RDtBQUU1RCw2RUFBNEQ7QUFDNUQsaURBQXFEO0FBRXJELE1BQXFCLGlCQUFrQixTQUFRLHFDQUFxQjtJQUtoRSxLQUFLO1FBQ0QsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxZQUFZLENBQUMsTUFBTSxFQUFFLEVBQUUsQ0FBQyxFQUFFO1lBQy9DLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtnQkFDaEQsTUFBTSxTQUFTLEdBQUcsMkNBQWEsQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUM7Z0JBQzVFLFNBQVMsQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO2dCQUMzQyxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxvQkFBb0IsQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLENBQUMsQ0FBQyxDQUFDLE1BQU0sR0FBRyxHQUFHLENBQUMsQ0FBQyxDQUFDO1lBQ3RGLENBQUMsQ0FBQyxDQUFDO1NBQ047SUFDTCxDQUFDO0lBRUQsQ0FBQyxvQkFBb0IsQ0FBQyxNQUFhO1FBQy9CLE1BQU0sSUFBSSw0QkFBYyxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBQ2pDLE1BQU0sU0FBUyxHQUFHLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUFDO1FBQzVFLFNBQVMsQ0FBQyxhQUFhLEVBQUUsQ0FBQztJQUM5QixDQUFDO0NBQ0o7QUFwQkQsb0NBb0JDIn0=","assetPath":"Assets/ZepetoScripts/ScreenShotScripts/GestureController.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"gestureListButtons","type":"UnityEngine.UI.Button[]","isArray":true,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.AnimationModule","name":"gestureClips","type":"UnityEngine.AnimationClip[]","isArray":true,"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"GestureController","description":""},"isCompiled":true}'
+  typescriptHash: 5341a4b8889df1c3fa9c3919c72c17d6

@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: a9ac256edc37c8540b21382aa4f91c40
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nclass
+    PlayerCreator extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start()
+    {\r\n        $extension(\"ZEPETO.Character.Controller.ZepetoPlayersExtension\").CreatePlayerWithUserId(ZEPETO_Character_Controller_1.ZepetoPlayers.instance,
+    \"\", ZEPETO_World_1.WorldService.userId, new ZEPETO_Character_Controller_1.SpawnInfo(),
+    true);\r\n    }\r\n}\r\nexports.default = PlayerCreator;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGxheWVyQ3JlYXRvci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlBsYXllckNyZWF0b3IudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2RUFBdUU7QUFDdkUsaURBQXFEO0FBQ3JELCtDQUE0QztBQUU1QyxNQUFxQixhQUFjLFNBQVEscUNBQXFCO0lBRTVELEtBQUs7UUFDRCxpRUFBdUIsc0JBQXNCLENBQTdDLDJDQUFhLENBQUMsUUFBUSxFQUF3QixFQUFFLEVBQUUsMkJBQVksQ0FBQyxNQUFNLEVBQUUsSUFBSSx1Q0FBUyxFQUFFLEVBQUUsSUFBSSxFQUFFO0lBQ2xHLENBQUM7Q0FFSjtBQU5ELGdDQU1DIn0=","assetPath":"Assets/ZepetoScripts/ScreenShotScripts/PlayerCreator.ts","manifest":{"properties":[],"name":"PlayerCreator","description":""},"isCompiled":true}'
+  typescriptHash: 0464e823d55886fe1c0eef64a1195cc7

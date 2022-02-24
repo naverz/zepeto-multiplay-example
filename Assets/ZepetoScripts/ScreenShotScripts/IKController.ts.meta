@@ -1,0 +1,52 @@
+fileFormatVersion: 2
+guid: e2fb2ea499cb545fea08a6739dd8333a
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nclass IKController extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor() {\\r\\n       
+    super(...arguments);\\r\\n        // target\uC5D0 \uB300\uD55C body\uC640 head\uC758
+    weight \uC124\uC815\\r\\n        // - head\uAC00 target\uC758 \uC6C0\uC9C1\uC784\uC5D0
+    \uB354 \uD06C\uAC8C \uBC18\uC751\uD558\uB3C4\uB85D \uD568 \\r\\n        this.bodyWeight
+    = 0.3;\\r\\n        this.headWeight = 0.7;\\r\\n        // IK \uC801\uC6A9 \uC5EC\uBD80\\r\\n       
+    this.useIKWeight = false;\\r\\n    }\\r\\n    Start() {\\r\\n        this.animator
+    = this.GetComponent($typeof(UnityEngine_1.Animator));\\r\\n        // \uCC98\uC74C\uC5D0\uB294
+    IK Weight\uB97C \uC0AC\uC6A9\uD558\uC9C0 \uC54A\uACE0 \uC140\uCE74\uBAA8\uB4DC\uB85C
+    \uBCC0\uACBD\uC2DC\uC5D0\uB9CC \uC0AC\uC6A9\uD558\uB3C4\uB85D \uD568\\r\\n       
+    this.SetIKWeightActive(false);\\r\\n    }\\r\\n    // IK Weight \uC801\uC6A9
+    \uC5EC\uBD80\uB97C \uC124\uC815\\r\\n    SetIKWeightActive(active) {\\r\\n       
+    this.useIKWeight = active;\\r\\n    }\\r\\n    // \uBC14\uB77C\uBCFC Target\uACFC
+    \uC190\uC744 \uBED7\uC744 \uC704\uCE58 Grip \uC124\uC815\\r\\n    SetTargetAndGrip(lookAtTarget,
+    gripTarget) {\\r\\n        this.lookAtTarget = lookAtTarget;\\r\\n        this.gripTarget
+    = gripTarget;\\r\\n    }\\r\\n    OnAnimatorIK(layerIndex) {\\r\\n        //
+    IK\uB97C \uC0AC\uC6A9\uD558\uC9C0 \uC54A\uB294 \uACBD\uC6B0 - 3\uC778\uCE6D \uBAA8\uB4DC\\r\\n       
+    if (!this.useIKWeight) {\\r\\n            return;\\r\\n        }\\r\\n       
+    // IK\uB97C \uC0AC\uC6A9\uD558\uB294 \uACBD\uC6B0 - \uC140\uD53C\uBAA8\uB4DC\\r\\n       
+    if (this.animator == null ||\\r\\n            this.lookAtTarget == null ||\\r\\n           
+    this.gripTarget == null)\\r\\n            return;\\r\\n        // body\uC640
+    head\uAC00 target\uC744 \uBC14\uB77C\uBCF4\uB294 lookAt weight\uB97C \uC124\uC815\\r\\n       
+    this.animator.SetLookAtWeight(1, this.bodyWeight, this.headWeight);\\r\\n       
+    // lookAt target \uC124\uC815\\r\\n        this.animator.SetLookAtPosition(this.lookAtTarget.position);\\r\\n       
+    // rightHand\uC758 target weight \uC124\uC815\\r\\n        this.animator.SetIKPositionWeight(UnityEngine_1.AvatarIKGoal.RightHand,
+    1);\\r\\n        // rightHand\uAC00 \uBED7\uC744 \uC704\uCE58\uB97C Grip\uC73C\uB85C
+    \uC124\uC815\\r\\n        this.animator.SetIKPosition(UnityEngine_1.AvatarIKGoal.RightHand,
+    this.gripTarget.position);\\r\\n    }\\r\\n}\\r\\nexports.default = IKController;\\r\\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSUtDb250cm9sbGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiSUtDb250cm9sbGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUErRDtBQUUvRCxNQUFxQixZQUFhLFNBQVEscUNBQXFCO0lBQS9EOztRQU9JLG1DQUFtQztRQUNuQyxxQ0FBcUM7UUFDN0IsZUFBVSxHQUFXLEdBQUcsQ0FBQztRQUN6QixlQUFVLEdBQVcsR0FBRyxDQUFDO1FBRWpDLFdBQVc7UUFDSCxnQkFBVyxHQUFZLEtBQUssQ0FBQztJQTJDekMsQ0FBQztJQXhDRyxLQUFLO1FBQ0QsSUFBSSxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsWUFBWSxTQUFDLHNCQUFRLEVBQUcsQ0FBQztRQUM5Qyw4Q0FBOEM7UUFDOUMsSUFBSSxDQUFDLGlCQUFpQixDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ2xDLENBQUM7SUFFRCxzQkFBc0I7SUFDZixpQkFBaUIsQ0FBQyxNQUFlO1FBQ3BDLElBQUksQ0FBQyxXQUFXLEdBQUcsTUFBTSxDQUFDO0lBQzlCLENBQUM7SUFFRCwrQkFBK0I7SUFDeEIsZ0JBQWdCLENBQUMsWUFBdUIsRUFBRSxVQUFxQjtRQUNsRSxJQUFJLENBQUMsWUFBWSxHQUFHLFlBQVksQ0FBQztRQUNqQyxJQUFJLENBQUMsVUFBVSxHQUFHLFVBQVUsQ0FBQztJQUNqQyxDQUFDO0lBRUQsWUFBWSxDQUFDLFVBQWtCO1FBRTNCLDBCQUEwQjtRQUMxQixJQUFHLENBQUMsSUFBSSxDQUFDLFdBQVcsRUFBRTtZQUNsQixPQUFPO1NBQ1Y7UUFFRCxxQkFBcUI7UUFDckIsSUFBSSxJQUFJLENBQUMsUUFBUSxJQUFJLElBQUk7WUFDckIsSUFBSSxDQUFDLFlBQVksSUFBSSxJQUFJO1lBQ3pCLElBQUksQ0FBQyxVQUFVLElBQUksSUFBSTtZQUN2QixPQUFPO1FBRVgsNkNBQTZDO1FBQzdDLElBQUksQ0FBQyxRQUFRLENBQUMsZUFBZSxDQUFDLENBQUMsRUFBRSxJQUFJLENBQUMsVUFBVSxFQUFFLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztRQUNuRSxtQkFBbUI7UUFDbkIsSUFBSSxDQUFDLFFBQVEsQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBRTVELDhCQUE4QjtRQUM5QixJQUFJLENBQUMsUUFBUSxDQUFDLG1CQUFtQixDQUFDLDBCQUFZLENBQUMsU0FBUyxFQUFFLENBQUMsQ0FBQyxDQUFDO1FBQzdELDhCQUE4QjtRQUM5QixJQUFJLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQywwQkFBWSxDQUFDLFNBQVMsRUFBRSxJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQ2xGLENBQUM7Q0FDSjtBQXhERCwrQkF3REMifQ==\",\"assetPath\":\"Assets/ZepetoScripts/ScreenShotScripts/IKController.ts\",\"manifest\":{\"properties\":[],\"name\":\"IKController\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 4aaf65814df01a91e1c7059fb4748634
