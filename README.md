@@ -27,15 +27,15 @@ https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/SampleScene.
 
 - Theme Scene <br/><br/>
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Desert.JPG)<br/>
-1. 사막 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/001_Desert.unity<br/><br/><br/><br/>
+1. 사막 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/ThemeScenes/001_Desert.unity<br/><br/><br/><br/>
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Sakura.JPG)<br/>
-2. 벚꽃 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/002_Sakura.unity<br/><br/><br/><br/>
+2. 벚꽃 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/ThemeScenes/002_Sakura.unity<br/><br/><br/><br/>
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/ClassRoom.JPG)<br/>
-3. 교실 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/003_ClassRoom.unity<br/><br/><br/><br/>
+3. 교실 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/ThemeScenes/003_ClassRoom.unity<br/><br/><br/><br/>
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Camping.JPG)<br/>
-4. 캠핑 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/004_Camping.unity<br/><br/><br/><br/>
+4. 캠핑 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/ThemeScenes/004_Camping.unity<br/><br/><br/><br/>
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Fall.JPG)<br/>
-5. 가을 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/005_Fall.unity<br/><br/><br/><br/>
+5. 가을 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/ThemeScenes/005_Fall.unity<br/><br/><br/><br/>
 
 
 <br/>
