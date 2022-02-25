@@ -284,3 +284,9 @@ OnLeavePlayer(sessionId: string, player: Player) {
     ZepetoPlayers.instance.RemovePlayer(sessionId);
 }
 ```
+
+<br/><br/>
+
+## additional samples
+
+[ScreenShotSample](https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Resources/ScreenShot/doc/README.md)
