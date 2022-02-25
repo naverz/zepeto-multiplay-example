@@ -3,19 +3,19 @@
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/preview.gif)
 
 
-개발 서버를 이용한 멀티플레이 데모 프로젝트입니다. 프로젝트를 실행하려면 사전에 [ZEPETO 로그인](https://wiki.navercorp.com/pages/viewpage.action?pageId=635965635)을 진행해야 합니다.
+개발 서버를 이용한 멀티플레이 데모 프로젝트입니다. 프로젝트를 실행하려면 사전에 [ZEPETO 로그인](https://studio.zepeto.me/kr/guides/preparing-for-world-creating)을 진행해야 합니다.
 
 
 <br/><br/>
 
 ## Overview
-[ZEPETO Multiplay](https://wiki.navercorp.com/display/WIT/4.+Multiplay)와  [Character Controller](https://wiki.navercorp.com/display/WIT/2.+Character+Control) 기반으로 작성된 예제입니다. 현재 접속중인 Room의 상태 (각 플레이어의 캐릭터 정보와 위치등)는 ZEPETO Multiplay 패키지내에 [Schema file](https://wiki.navercorp.com/display/WIT/4-3.+Multiplay+Room+State)에 정의되어 있으며 이를 각 클라이언트에 onStateChange 이벤트 콜백으로 전달하는 구조입니다. 
+[ZEPETO Multiplay](https://studio.zepeto.me/kr/guides/multiplay)와  [Character Controller](https://studio.zepeto.me/kr/guides/character-control) 기반으로 작성된 예제입니다. 현재 접속중인 Room의 상태 (각 플레이어의 캐릭터 정보와 위치등)는 ZEPETO Multiplay 패키지내에 [Schema file](https://studio.zepeto.me/kr/guides/multiplay-room-state)에 정의되어 있으며 이를 각 클라이언트에 onStateChange 이벤트 콜백으로 전달하는 구조입니다. 
 
 - 다른 개발 pc에서 접속할 경우, IP 주소로 서버 환경 설정 항목을 참고하세요.
-[Multiplay IP 주소로 접속하기](https://wiki.navercorp.com/pages/viewpage.action?pageId=658580057)
+[Multiplay IP 주소로 접속하기](https://studio.zepeto.me/kr/guides/accessing-to-multiplay-ip-addresses)
 
 - 모바일기기로 접속할 경우, QR코드 생성 항목을 참고하세요. 
- [템플릿으로 시작하기](https://wiki.navercorp.com/pages/viewpage.action?pageId=615610112)
+ [템플릿으로 시작하기](https://studio.zepeto.me/kr/guides/getting-started-with-templates)
 
 <br/><br/>
 
@@ -287,6 +287,6 @@ OnLeavePlayer(sessionId: string, player: Player) {
 
 <br/><br/>
 
-## additional samples
+## Additional samples
 
 [ScreenShotSample](https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Resources/ScreenShot/doc/README.md)
