@@ -3,7 +3,7 @@
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Resources/ScreenShot/doc/ScreenShotSample.png)
 
 
-ZepetoWorldContent API의 이미지 관련 함수를 이용한 뉴월드 스크린샷 예제 프로젝트입니다. 프로젝트를 실행하려면 사전에 [ZEPETO 로그인](https://wiki.navercorp.com/pages/viewpage.action?pageId=635965635)을 진행해야 합니다.
+ZepetoWorldContent API의 이미지 관련 함수를 이용한 뉴월드 스크린샷 예제 프로젝트입니다. 프로젝트를 실행하려면 사전에 [ZEPETO 로그인](https://studio.zepeto.me/kr/guides/preparing-for-world-creating)을 진행해야 합니다.
 
 
 <br/><br/>
