@@ -9,7 +9,7 @@ ZepetoWorldContent API의 이미지 관련 함수를 이용한 뉴월드 스크�
 <br/><br/>
 
 ## Overview
-[이미지 저장/공유/피드 올리기](https://studio.zepeto.me/guides/image-save-share-upload)를 기반으로 작성된 예제입니다. 셀피 모드와 ZepetoCamera 모드로 구성되어 있으며 이미지를 RenderTexture로 저장하거나 공유하고, 이미지를 활용하여 피드를 작성합니다.
+[이미지 저장/공유/피드 올리기](https://studio.zepeto.me/kr/guides/image-save-share-upload)를 기반으로 작성된 예제입니다. 셀피 모드와 ZepetoCamera 모드로 구성되어 있으며 이미지를 RenderTexture로 저장하거나 공유하고, 이미지를 활용하여 피드를 작성합니다.
 
 
 <br/><br/>
