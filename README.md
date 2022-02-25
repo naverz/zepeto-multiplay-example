@@ -287,6 +287,6 @@ OnLeavePlayer(sessionId: string, player: Player) {
 
 <br/><br/>
 
-## Additional samples
+## Additional Samples
 
 [ScreenShotSample](https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Resources/ScreenShot/doc/README.md)
