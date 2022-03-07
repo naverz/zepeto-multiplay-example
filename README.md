@@ -38,7 +38,50 @@ https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/SampleScene.
 5. 가을 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/ThemeScenes/005_Fall.unity<br/><br/><br/><br/>
 
 
-<br/>
+<br/><br/>
+
+## 멀티플레이 가이드 영상
+[ 1편 : 멀티플레이 설정하기 ]
+- 멀티플레이 서버 생성부터 클라이언트 생성까지, 멀티플레이 월드 개발을 위한 환경 설정을 진행합니다.
+- 월드 세팅, 서버 실행 등 멀티플레이 월드 개발 시 꼭 해야 할 설정들을 살펴봅니다.
+- 🎥 영상 보기 : https://youtu.be/S68B1TMa-A8
+
+
+[ 2편 : 월드 로직 작성하기 1 ]
+- 서버, 클라이언트 간 통신을 위해 필요한 Schema에 대해 알아보고, Schema Types와 Room State를 정의합니다.
+- Room Lifecycle을 통해 서버에서 기본적인 이벤트 처리 코드를 작성합니다.
+- 또한 서버에 데이터를 저장하는 방법을 알아봅니다.
+- 클라이언트에서 Room 생성 및 입장 시의 이벤트 처리 코드를 작성합니다.
+- 또한 Room State를 통해 서버의 변경사항을 처리하는 코드를 작성합니다.
+- Room message를 통해 클라이언트에서 서버로 State를 전송하는 방법을 알아봅니다.
+- 서버에서 message를 수신받아 State를 관리하는 방법을 알아봅니다.
+- 🎥 영상 보기 : https://youtu.be/k-Vi8XVXGCY
+
+[ 3편 : 월드 로직 작성하기 2 ] 
+- 플레이어의 위치 동기화부터 플레이어의 퇴장까지를 진행합니다.
+- 클라이언트의 현재 위치를 일정 시간 마다 서버로 전송합니다.
+- 그리고 서버에서 수신 받은 다른 플레이어의 위치를 동기화합니다.
+- 마지막으로 플레이어의 퇴장에 대한 처리도 진행해 월드 로직을 마무리합니다.
+- 🎥 영상 보기 : https://youtu.be/_PL7gEKgm_Q
+
+[ 4편 : 서버 구동 및 멀티플레이 접속하기 ] 
+- 이번 편에서는 서버를 구동하고 접속하여 멀티플레이를 진행합니다.
+- 먼저 서버를 구동하고 접속하는 방법을 알아봅니다.
+- 그리고 QR코드 접속과 IP주소로 접속 할 수 있는 custom environment 방식으로
+- 멀티플레이 환경에 접속해봅니다.
+-  🎥 영상 보기 : https://youtu.be/FmK6JNlSjJA
+
+[ 5편 : 멀티플레이 심화:IWP 서버 연동과 서버 DataStorage ]
+- 멀티플레이에서 사용 가능한 IWP와 DataStorage를 활용해봅니다.
+- 월드 상품을 구매할 수 있는 IWP 기능을 통해 월드에 물약을 만들고
+- 구매 시 플레이어 이동 속도가 증가하도록 구현해 봅니다.
+- 그리고 플레이어의 데이터를 서버에 저장해주는 DataStorage를 통해
+- 플레이어의 이동 속도를 저장하고 이후 입장 시에 데이터를 불러오는 과정을 진행해봅니다.
+-  🎥 영상 보기 : https://youtu.be/d-MaqjP-vjA
+
+
+
+<br/><br/>
 
 ## Room State 정의하기
 State는 접속 중인 Room의 플레이어 정보, 플레이어 또는 오브젝트의 위치 등을 관리하기 위한 data structure 입니다. 
