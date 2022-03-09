@@ -51,8 +51,8 @@ export default class Starter extends ZepetoScriptBehaviour {
             ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(() => {
                 const myPlayer = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer;
 
-                myPlayer.character.OnChangedState.AddListener((cur, next) => {
-                    this.SendState(next);
+                myPlayer.character.OnChangedState.AddListener((cur, prev) => {
+                    this.SendState(cur);
                 });
             });
 
