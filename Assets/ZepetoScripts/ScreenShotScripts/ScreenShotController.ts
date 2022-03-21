@@ -1,4 +1,4 @@
-import { Camera, CameraClearFlags, Color, GameObject, RenderTexture } from 'UnityEngine';
+import { Camera, CameraClearFlags, Color, GameObject, RenderTexture, WaitForEndOfFrame } from 'UnityEngine';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { ZepetoWorldContent } from 'ZEPETO.World';
 import UIController from './UIController';
@@ -7,6 +7,9 @@ export default class ScreenShotController extends ZepetoScriptBehaviour {
     
     // 스크린샷 촬영에 사용되는 카메라
     private camera: Camera;
+
+    private preClearFlags:CameraClearFlags;
+    private preBackgroundColor:Color
 
     // Render Texture에 설정된 1920 x 1080 size 사용 
     public renderTexture: RenderTexture;
@@ -51,36 +54,49 @@ export default class ScreenShotController extends ZepetoScriptBehaviour {
         });
     }
 
-    TakeScreenShotWithBackground() {
-        // 1. 타겟 텍스처를 지정하고 카메라를 렌더합니다.
-        this.camera.targetTexture = this.renderTexture;
+    *RenderTargetTextureWithBackground()
+    {
+        yield new WaitForEndOfFrame();
         this.camera.Render();
-        // 2.기존 설정으로 돌려놓습니다.
         this.camera.targetTexture = null;
     }
 
-    TakeScreenShotWithoutBackground() {
-        // 백그라운드 캔버스를 스크린샷을 찍는 동안 비활성화 시킵니다. 
+    *RenderTargetTextureWithoutBackground()
+    {
+        yield new WaitForEndOfFrame();
+        this.camera.Render();
+
+        // 4. 기존 설정을 되돌림      
+        this.camera.targetTexture = null;
+        this.camera.backgroundColor = this.preBackgroundColor;
+        this.camera.clearFlags = this.preClearFlags;
+
+        // 5. 백그라운드 캔버스를 스크린샷을 찍는 동안 다시 활성화
+        this.backgroundCanvas.gameObject.SetActive(true);
+    }
+
+    private TakeScreenShotWithBackground() {
+        // 타겟 텍스처를 지정하고 카메라 렌더
+        this.camera.targetTexture = this.renderTexture;
+        this.StartCoroutine(this.RenderTargetTextureWithBackground());
+
+    }
+
+    private TakeScreenShotWithoutBackground() {
+        // 백그라운드 캔버스를 스크린샷을 찍는 동안 비활성화 
         this.backgroundCanvas.gameObject.SetActive(false);
 
-        // 1. 타겟 텍스처를 지정하고 스크린샷 이전 카메라 FLag,Color값을 저장합니다.
+        // 1. 타겟 텍스처를 지정하고 스크린샷 이전 카메라 FLag, Color값을 저장
         this.camera.targetTexture = this.renderTexture;
-        let preClearFlags: CameraClearFlags = this.camera.clearFlags;
-        let preBackgroundColor: Color = this.camera.backgroundColor;
+        this.preClearFlags = this.camera.clearFlags;
+        this.preBackgroundColor = this.camera.backgroundColor;
 
-        // 2. 카메라의 배경을 solidColor로 채우고, background Color를 투명하게 만듭니다.
+        // 2. 카메라의 배경을 solidColor로 채우고, background Color를 투명하게 만듦
         this.camera.clearFlags = CameraClearFlags.SolidColor;
         this.camera.backgroundColor = new Color(0, 0, 0, 0);
 
-        // 3. 카메라를 렌더합니다.
-        this.camera.Render();
+        // 3. 카메라 렌더
+        this.StartCoroutine(this.RenderTargetTextureWithoutBackground());
 
-        // 4. 기존 설정을 되돌립니다.        
-        this.camera.backgroundColor = preBackgroundColor;
-        this.camera.clearFlags = preClearFlags;
-        this.camera.targetTexture = null;
-
-        // 백그라운드 캔버스를 스크린샷을 찍는 동안 다시 활성화 시킵니다. 
-        this.backgroundCanvas.gameObject.SetActive(true);
     }
 }
