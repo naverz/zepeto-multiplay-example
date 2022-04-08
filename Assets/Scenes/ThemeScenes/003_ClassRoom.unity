@@ -1045,23 +1045,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 1857858736}
-  - {fileID: 87692407}
-  - {fileID: 427714388}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1001 &91310128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3064,23 +3047,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 1496649024}
-  - {fileID: 1283846501}
-  - {fileID: 1359429649}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &235318649
 GameObject:
   m_ObjectHideFlags: 0
@@ -3517,23 +3483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 1726305322}
-  - {fileID: 418043298}
-  - {fileID: 849399943}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &260068654
 GameObject:
   m_ObjectHideFlags: 0
@@ -3594,23 +3543,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 1912898491}
-  - {fileID: 174050945}
-  - {fileID: 1039844426}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1001 &270120634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3758,8 +3690,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b35e963bbadd4c4090633cdd4e2298a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axis: {x: 0, y: -360, z: 0}
-  speed: 0.06
 --- !u!23 &273092793
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4740,23 +4670,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 1121101149}
-  - {fileID: 1436611677}
-  - {fileID: 1985474941}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1001 &345920999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5106,23 +5019,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 1715552791}
-  - {fileID: 881935053}
-  - {fileID: 2097451010}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!135 &358389924
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6612,23 +6508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: adcf4e2833337804dabbaec2bb1c2f4d, type: 2}
-  exitPoints:
-  - {fileID: 1800469770}
-  - {fileID: 146617260}
-  - {fileID: 1674700802}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1001 &521590655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6745,9 +6624,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1cb84483aa8ed44ba43b502de45179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: CameraCheck_Soccerball
-  collider: {fileID: 521590658}
-  cameraDistance: 5
 --- !u!1001 &526323676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7069,23 +6945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.7, z: 0}
-  actionObjectSetting: {fileID: 11400000, guid: 0e301c0bfe066ce43a11b2775ff50f4b, type: 2}
-  exitPoints:
-  - {fileID: 1283859209}
-  - {fileID: 1488230072}
-  - {fileID: 1609929580}
-  exitToGround: 1
-  ignoreShoesHeight: 1
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 0
-  container: 7
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &558878762
 GameObject:
   m_ObjectHideFlags: 0
@@ -7146,23 +7005,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.7, z: 0}
-  actionObjectSetting: {fileID: 11400000, guid: 1847c2e0b634458429e96017cf19342c, type: 2}
-  exitPoints:
-  - {fileID: 1608294460}
-  - {fileID: 1124954406}
-  - {fileID: 752048122}
-  exitToGround: 1
-  ignoreShoesHeight: 1
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 0
-  container: 7
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1001 &565743239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7674,23 +7516,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: d0c51b2e86e34904795c44d5433e3b0b, type: 2}
-  exitPoints:
-  - {fileID: 164078249}
-  - {fileID: 322316171}
-  - {fileID: 1968435681}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &588819319
 GameObject:
   m_ObjectHideFlags: 0
@@ -8778,8 +8603,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b35e963bbadd4c4090633cdd4e2298a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axis: {x: 0, y: -360, z: 0}
-  speed: 0.6
 --- !u!23 &709120041
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9474,23 +9297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 1172299833}
-  - {fileID: 492902540}
-  - {fileID: 1547183345}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &752048121
 GameObject:
   m_ObjectHideFlags: 0
@@ -9925,23 +9731,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: d0c51b2e86e34904795c44d5433e3b0b, type: 2}
-  exitPoints:
-  - {fileID: 168785391}
-  - {fileID: 960807860}
-  - {fileID: 1884807633}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &774483226 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 0db5fe951fca0ea4b9167c2d1d865b9a, type: 3}
@@ -11311,23 +11100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.7, z: 0}
-  actionObjectSetting: {fileID: 11400000, guid: f3a60898832b46c47a83b9a2e1a7a199, type: 2}
-  exitPoints:
-  - {fileID: 1227627970}
-  - {fileID: 730158467}
-  - {fileID: 1053675023}
-  exitToGround: 1
-  ignoreShoesHeight: 1
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 0
-  container: 7
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &812420207
 GameObject:
   m_ObjectHideFlags: 0
@@ -11808,25 +11580,45 @@ MonoBehaviour:
     radius: 0.23
     height: 1.2
     walkSpeed: 2
-    runSpeed: 5
-    jumpPower: 5
+    runSpeed: 4
+    jumpPower: 13
     layer:
       serializedVersion: 2
       m_Bits: 0
-    animatorController: {fileID: 9100000, guid: 019901d3486cc411abc6c84594c03743, type: 2}
+    animatorController: {fileID: 9100000, guid: d45416f714b4fe74d9ddc118caf5f7c9, type: 2}
     shadow: {fileID: 1025544020809228, guid: 4512418b2a1844f42961867ad8421ab8, type: 3}
+    motionController: 1
   controllerData:
     inputAsset: {fileID: -944628639613478452, guid: 090135bc9e5ee4c89b1642240eb723fe, type: 3}
     eventSystem: {fileID: 7328100774219155841, guid: 67971ba158b48401988f9aad07940d6f, type: 3}
     useDefaultVirtualController: 1
-    verticalController: {fileID: 8523051459139762370, guid: 33446b9369e354b00a7ab43885afbe88, type: 3}
-    horizontalController: {fileID: 2787167779785370926, guid: 9b7a03709461140b4b3fc85aa8c5d741, type: 3}
+    controlMode: 0
+    verticalController: {fileID: 8523051459139762370, guid: 94b12a3ac04f847b3b97a3f2f3ada18c, type: 3}
+    horizontalController: {fileID: 2787167779785370926, guid: 3ab0e77a21c9b4013b1f6931717f766a, type: 3}
+    verticalDefaultController: {fileID: 8523051459139762370, guid: 33446b9369e354b00a7ab43885afbe88, type: 3}
+    horizontalDefaultController: {fileID: 2787167779785370926, guid: 9b7a03709461140b4b3fc85aa8c5d741, type: 3}
   floatingUIData:
     showNickNameLocalPlayer: 0
     showNickNameOtherPlayers: 1
     showBubbleChatLocalPlayer: 1
     showBubbleChatOtherPlayers: 1
     useMiniProfileOnApp: 1
+  motionV1Data:
+    walkSpeed: 2
+    runSpeed: 5
+    jumpPower: 5
+    animatorController: {fileID: 9100000, guid: 019901d3486cc411abc6c84594c03743, type: 2}
+  motionV2Data:
+    walkSpeed: 2
+    runSpeed: 4
+    jumpPower: 13
+    animatorController: {fileID: 0}
+    useDoubleJump: 1
+    doubleJumpPower: 13
+    useLandingRoll: 1
+    landingRollSpeed: 4
+    useMoveTurn: 1
+    Gravity: 50
   OnAddedLocalPlayer:
     m_PersistentCalls:
       m_Calls: []
@@ -13180,23 +12972,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 404195240}
-  - {fileID: 49837356}
-  - {fileID: 883819968}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1001 &967557085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15161,23 +14936,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 156106204}
-  - {fileID: 618372895}
-  - {fileID: 2032781178}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!4 &1151793627 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 521808dfc577a46448d88a889513f08e, type: 3}
@@ -15627,23 +15385,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 1912756231}
-  - {fileID: 667840814}
-  - {fileID: 1306579774}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!135 &1167886839
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -16094,7 +15835,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b34c0c5dd2344468eb945c47b011cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setting: {fileID: 11400000, guid: 03ccba96eec5c3944a500121c0d48d42, type: 2}
 --- !u!65 &1186646481
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17634,9 +17374,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1cb84483aa8ed44ba43b502de45179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: CameraCheck_Fireextinguisher
-  collider: {fileID: 1271749591}
-  cameraDistance: 7
 --- !u!1001 &1283651983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18482,23 +18219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 195934202}
-  - {fileID: 2138201434}
-  - {fileID: 348195589}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &1385518246
 GameObject:
   m_ObjectHideFlags: 0
@@ -18559,23 +18279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 759768359}
-  - {fileID: 205410772}
-  - {fileID: 1984328244}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1001 &1388863419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18841,9 +18544,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1cb84483aa8ed44ba43b502de45179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: CameraCheck_Fireextinguisher
-  collider: {fileID: 1402355097}
-  cameraDistance: 7
 --- !u!1001 &1405859949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19951,23 +19651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 1781517416}
-  - {fileID: 202018179}
-  - {fileID: 1957083092}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &1479686128 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 0db5fe951fca0ea4b9167c2d1d865b9a, type: 3}
@@ -21224,23 +20907,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.7, z: 0}
-  actionObjectSetting: {fileID: 11400000, guid: 7b07a39a3af72544bbc999c50c47dcda, type: 2}
-  exitPoints:
-  - {fileID: 162973298}
-  - {fileID: 235318650}
-  - {fileID: 1082572232}
-  exitToGround: 1
-  ignoreShoesHeight: 1
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 0
-  container: 7
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1001 &1563795632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21943,23 +21609,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 495281287}
-  - {fileID: 588819320}
-  - {fileID: 1913735334}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &1608294459
 GameObject:
   m_ObjectHideFlags: 0
@@ -23664,14 +23313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e4d6528ae863044587c5bdb5bf309e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0.1, y: 0, z: 0.1}
-  attachObjectSettings:
-  - {fileID: 11400000, guid: ddb0bc2fadf21434cb6cb52c6d6447bc, type: 2}
-  - {fileID: 11400000, guid: ad4f5be347295d845a32da287e26bdba, type: 2}
-  - {fileID: 11400000, guid: e66ba8a8bea665541892d5ada7c2ac01, type: 2}
-  attachObjectSettingsChina: []
 --- !u!1001 &1734333585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24546,23 +24187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: d0c51b2e86e34904795c44d5433e3b0b, type: 2}
-  exitPoints:
-  - {fileID: 1120411437}
-  - {fileID: 2003008303}
-  - {fileID: 1633738651}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &1781517415
 GameObject:
   m_ObjectHideFlags: 0
@@ -25179,23 +24803,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: d0c51b2e86e34904795c44d5433e3b0b, type: 2}
-  exitPoints:
-  - {fileID: 1109412414}
-  - {fileID: 1619536850}
-  - {fileID: 180225944}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &1846920049 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 0db5fe951fca0ea4b9167c2d1d865b9a, type: 3}
@@ -26391,7 +25998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b34c0c5dd2344468eb945c47b011cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setting: {fileID: 11400000, guid: 03ccba96eec5c3944a500121c0d48d42, type: 2}
 --- !u!65 &1883368999
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28181,23 +27787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 39678704}
-  - {fileID: 535046379}
-  - {fileID: 2033524134}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &1968435680
 GameObject:
   m_ObjectHideFlags: 0
@@ -29802,15 +29391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e4d6528ae863044587c5bdb5bf309e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.9, z: 0.5}
-  attachObjectSettings:
-  - {fileID: 11400000, guid: 98f3c85975d132240a9ac300f7a262d8, type: 2}
-  - {fileID: 11400000, guid: da5fe6cdfe5f2824cb5df4b12391ea8e, type: 2}
-  - {fileID: 11400000, guid: 4f7150150d542b04e8a6a299e20de0bc, type: 2}
-  - {fileID: 11400000, guid: 29a8d82de5147e84a8a6cf10ab9f6de3, type: 2}
-  attachObjectSettingsChina: []
 --- !u!1001 &2055308485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30119,23 +29699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 298597896}
-  - {fileID: 2068634885}
-  - {fileID: 601402853}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1001 &2085897956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30548,23 +30111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 1445248882}
-  - {fileID: 678085479}
-  - {fileID: 1836638993}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1 &2119011075 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 0db5fe951fca0ea4b9167c2d1d865b9a, type: 3}
@@ -30644,23 +30190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showIcon: 1
-  fixArea: 0
-  iconOffset: {x: 0, y: 0.3, z: -0.15}
-  actionObjectSetting: {fileID: 11400000, guid: df79a5f89d79b4f40b4173b8c93940f6, type: 2}
-  exitPoints:
-  - {fileID: 1875961900}
-  - {fileID: 567895661}
-  - {fileID: 365539508}
-  exitToGround: 1
-  ignoreShoesHeight: 0
-  ignoreZepetoScale: 1
-  childCameraMode: 0
-  useBoneTransform: 1
-  container: 3
-  offset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  combiner: {fileID: 0}
 --- !u!1001 &2135610676
 PrefabInstance:
   m_ObjectHideFlags: 0

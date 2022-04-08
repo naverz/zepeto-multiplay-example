@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ScreenShotSampleScene.unity
-    guid: adef4219952e56c418ca27996292dba5
+    path: Assets/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 09cac3b0e41604dacab6217291fdc87b, type: 2}
