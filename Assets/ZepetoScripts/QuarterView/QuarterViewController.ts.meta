@@ -1,0 +1,55 @@
+fileFormatVersion: 2
+guid: 3ad501dd383f446e189d71c5893a972a
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_InputSystem_1 = require(\"UnityEngine.InputSystem\");\r\nconst ZEPETO_Character_Controller_1
+    = require(\"ZEPETO.Character.Controller\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine = require(\"UnityEngine\");\r\nclass QuarterViewController extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n        super(...arguments);\r\n       
+    this.startPos = UnityEngine_1.Vector2.zero;\r\n        this.curPos = UnityEngine_1.Vector2.zero;\r\n       
+    this.isTriggered = false;\r\n        this.isTouchDown = false;\r\n    }\r\n   
+    CanMove() {\r\n        return this.isTouchDown && !this.isTriggered;\r\n    }\r\n   
+    OnEnable() {\r\n        this.playerInput = this.gameObject.GetComponent($typeof(UnityEngine_InputSystem_1.PlayerInput));\r\n   
+    }\r\n    Start() {\r\n        this.touchTriggerAction = this.playerInput.actions.FindAction(\"MoveTrigger\");\r\n       
+    this.touchPositionAction = this.playerInput.actions.FindAction(\"Move\");\r\n       
+    this.touchTriggerAction.add_started((context) => {\r\n            this.isTriggered
+    = true;\r\n            this.isTouchDown = true;\r\n        });\r\n        this.touchTriggerAction.add_canceled((context)
+    => {\r\n            this.isTriggered = false;\r\n            this.isTouchDown
+    = false;\r\n        });\r\n        this.touchPositionAction.add_performed((context)
+    => {\r\n            if (this.isTouchDown) {\r\n                this.curPos =
+    context.ReadValueAsObject();\r\n                if (this.isTriggered) {\r\n                   
+    this.isTriggered = false;\r\n                    this.startPos = this.curPos;\r\n               
+    }\r\n            }\r\n        });\r\n        ZEPETO_Character_Controller_1.ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(()
+    => {\r\n            ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoCamera.gameObject.SetActive(false);\r\n           
+    this.myCharacter = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;\r\n           
+    this.StartCoroutine(this.InputControlLoop());\r\n        });\r\n    }\r\n   
+    *InputControlLoop() {\r\n        while (true) {\r\n            yield new UnityEngine.WaitForEndOfFrame();\r\n           
+    if (this.myCharacter && this.CanMove()) {\r\n                var camRot = UnityEngine_1.Quaternion.Euler(0,
+    UnityEngine.Camera.main.transform.rotation.eulerAngles.y, 0);\r\n               
+    var moveDir = UnityEngine_1.Vector2.op_Subtraction(this.curPos, this.startPos);\r\n               
+    moveDir = UnityEngine_1.Vector2.op_Division(moveDir, 100);\r\n               
+    if (moveDir.magnitude > 0) {\r\n                    if (moveDir.magnitude > 1)\r\n                       
+    moveDir.Normalize();\r\n                    var optMoveDir = new UnityEngine_1.Vector3(moveDir.x,
+    0, moveDir.y);\r\n                    optMoveDir = UnityEngine_1.Vector3.op_Multiply(optMoveDir,
+    UnityEngine_1.Time.deltaTime * 80);\r\n                    this.myCharacter.Move(UnityEngine_1.Quaternion.op_Multiply(camRot,
+    optMoveDir));\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\nexports.default
+    = QuarterViewController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUXVhcnRlclZpZXdDb250cm9sbGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiUXVhcnRlclZpZXdDb250cm9sbGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQW1EO0FBQ25ELHFFQUErRDtBQUUvRCw2RUFBd0c7QUFDeEcsNkNBQStEO0FBQy9ELDJDQUEyQztBQUczQyxNQUFxQixxQkFBc0IsU0FBUSxxQ0FBcUI7SUFBeEU7O1FBR1ksYUFBUSxHQUFZLHFCQUFPLENBQUMsSUFBSSxDQUFDO1FBQ2pDLFdBQU0sR0FBWSxxQkFBTyxDQUFDLElBQUksQ0FBQztRQU0vQixnQkFBVyxHQUFZLEtBQUssQ0FBQztRQUM3QixnQkFBVyxHQUFZLEtBQUssQ0FBQztJQXdFekMsQ0FBQztJQXRFVyxPQUFPO1FBQ1gsT0FBTyxJQUFJLENBQUMsV0FBVyxJQUFJLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQztJQUNqRCxDQUFDO0lBR0QsUUFBUTtRQUNKLElBQUksQ0FBQyxXQUFXLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLFNBQUMscUNBQVcsRUFBRyxDQUFDO0lBQ25FLENBQUM7SUFFRCxLQUFLO1FBRUQsSUFBSSxDQUFDLGtCQUFrQixHQUFHLElBQUksQ0FBQyxXQUFXLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxhQUFhLENBQUMsQ0FBQztRQUM3RSxJQUFJLENBQUMsbUJBQW1CLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQyxPQUFPLENBQUMsVUFBVSxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBRXZFLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxXQUFXLENBQUMsQ0FBQyxPQUFPLEVBQUMsRUFBRTtZQUMzQyxJQUFJLENBQUMsV0FBVyxHQUFHLElBQUksQ0FBQztZQUN4QixJQUFJLENBQUMsV0FBVyxHQUFHLElBQUksQ0FBQztRQUM1QixDQUFDLENBQUMsQ0FBQztRQUVILElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxZQUFZLENBQUMsQ0FBQyxPQUFPLEVBQUMsRUFBRTtZQUM1QyxJQUFJLENBQUMsV0FBVyxHQUFHLEtBQUssQ0FBQztZQUN6QixJQUFJLENBQUMsV0FBVyxHQUFHLEtBQUssQ0FBQztRQUM3QixDQUFDLENBQUMsQ0FBQztRQUVILElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxhQUFhLENBQUMsQ0FBQyxPQUFPLEVBQUMsRUFBRTtZQUU5QyxJQUFHLElBQUksQ0FBQyxXQUFXLEVBQ25CO2dCQUNJLElBQUksQ0FBQyxNQUFNLEdBQUcsT0FBTyxDQUFDLGlCQUFpQixFQUFhLENBQUM7Z0JBRXJELElBQUcsSUFBSSxDQUFDLFdBQVcsRUFBRTtvQkFDakIsSUFBSSxDQUFDLFdBQVcsR0FBRyxLQUFLLENBQUM7b0JBQ3pCLElBQUksQ0FBQyxRQUFRLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQztpQkFDL0I7YUFDSjtRQUNMLENBQUMsQ0FBQyxDQUFDO1FBR0gsMkNBQWEsQ0FBQyxRQUFRLENBQUMsa0JBQWtCLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUN2RCwyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsWUFBWSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDNUUsSUFBSSxDQUFDLFdBQVcsR0FBRywyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQztZQUU3RSxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxnQkFBZ0IsRUFBRSxDQUFDLENBQUM7UUFDakQsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBRU8sQ0FBQyxnQkFBZ0I7UUFDckIsT0FBTSxJQUFJLEVBQ1Y7WUFDSSxNQUFNLElBQUksV0FBVyxDQUFDLGlCQUFpQixFQUFFLENBQUM7WUFFMUMsSUFBSSxJQUFJLENBQUMsV0FBVyxJQUFJLElBQUksQ0FBQyxPQUFPLEVBQUUsRUFBRTtnQkFFcEMsSUFBSSxNQUFNLEdBQUcsd0JBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLFdBQVcsQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztnQkFDOUYsSUFBSSxPQUFPLEdBQUcscUJBQU8sQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUM7Z0JBQ2pFLE9BQU8sR0FBRyxxQkFBTyxDQUFDLFdBQVcsQ0FBQyxPQUFPLEVBQUUsR0FBRyxDQUFDLENBQUM7Z0JBRzVDLElBQUksT0FBTyxDQUFDLFNBQVMsR0FBRyxDQUFDLEVBQUU7b0JBRXZCLElBQUcsT0FBTyxDQUFDLFNBQVMsR0FBRyxDQUFDO3dCQUNwQixPQUFPLENBQUMsU0FBUyxFQUFFLENBQUM7b0JBRXhCLElBQUksVUFBVSxHQUFHLElBQUkscUJBQU8sQ0FBQyxPQUFPLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUM7b0JBQ3RELFVBQVUsR0FBRyxxQkFBTyxDQUFDLFdBQVcsQ0FBQyxVQUFVLEVBQUUsa0JBQUksQ0FBQyxTQUFTLEdBQUcsRUFBRSxDQUFFLENBQUM7b0JBQ25FLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxDQWxGakMsd0JBQVUsQ0F1RjAzd0IsV0FBWSxDQUw5MndCLE1BQU0sRUFBRyxVQUFVLEVBQUMsQ0FBQztpQkFDOUM7YUFDSjtTQUNKO0lBQ0wsQ0FBQztDQUNKO0FBbkZELHdDQW1GQyJ9","assetPath":"Assets/ZepetoScripts/QuarterView/QuarterViewController.ts","manifest":{"properties":[],"name":"QuarterViewController","description":""},"isCompiled":true}'
+  typescriptHash: 39ed6a2c84644a3291b4c9b1e0bd7d86

@@ -1,0 +1,43 @@
+fileFormatVersion: 2
+guid: d832fa9cff9ce4604a589b3c47c029ff
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst RootNamespace_1 = require(\"RootNamespace\");\r\nclass
+    TPSController extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Awake()
+    {\r\n        this.myInputControl = new RootNamespace_1.ZepetoInputControl();\r\n   
+    }\r\n    Start() {\r\n        this.myInputControl.Enable();\r\n        ZEPETO_Character_Controller_1.ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(()
+    => {\r\n            this.myCamera = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoCamera;\r\n           
+    this.myCharacter = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;\r\n           
+    this.zepetoScreenPad = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.gameObject.GetComponentInChildren($typeof(ZEPETO_Character_Controller_1.ZepetoScreenTouchpad));\r\n           
+    this.zepetoScreenPad.OnDragEvent.AddListener((deltaVector) => {\r\n               
+    console.log(`[OnDragEvent] : ${deltaVector.ToString()}`);\r\n               
+    //The rotation of the camera is corrected according to the rotation of the character.\r\n               
+    ZEPETO_Character_Controller_1.ZepetoPlayers.instance.ZepetoCamera.transform.RotateAround(this.myCharacter.transform.position,
+    UnityEngine_1.Vector3.up, deltaVector.x * UnityEngine_1.Time.deltaTime * 80);\r\n           
+    });\r\n        });\r\n    }\r\n    Update() {\r\n        if (null == this.myCharacter
+    || null == this.myCamera) {\r\n            return;\r\n        }\r\n        var
+    lookAxisRot = UnityEngine_1.Quaternion.LookRotation(this.myCamera.cameraParent.forward);\r\n       
+    var projRot = UnityEngine_1.Vector3.ProjectOnPlane(lookAxisRot.eulerAngles, UnityEngine_1.Vector3.right);\r\n       
+    // Match the rotation of the character with the forward direction of the camera.\r\n       
+    this.myCharacter.gameObject.transform.rotation = UnityEngine_1.Quaternion.Euler(projRot);\r\n   
+    }\r\n}\r\nexports.default = TPSController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFBTQ29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlRQU0NvbnRyb2xsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBc0Q7QUFDdEQsNkVBQWlIO0FBQ2pILDZDQUF1RDtBQUN2RCxpREFBaUQ7QUFFakQsTUFBcUIsYUFBYyxTQUFRLHFDQUFxQjtJQU01RCxLQUFLO1FBQ0QsSUFBSSxDQUFDLGNBQWMsR0FBRyxJQUFJLGtDQUFrQixFQUFFLENBQUM7SUFDbkQsQ0FBQztJQUVELEtBQUs7UUFDRCxJQUFJLENBQUMsY0FBYyxDQUFDLE1BQU0sRUFBRSxDQUFDO1FBQzdCLDJDQUFhLENBQUMsUUFBUSxDQUFDLGtCQUFrQixDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDdkQsSUFBSSxDQUFDLFFBQVEsR0FBRywyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsWUFBWSxDQUFDO1lBQ2hFLElBQUksQ0FBQyxXQUFXLEdBQUcsMkNBQWEsQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUM7WUFDN0UsSUFBSSxDQUFDLGVBQWUsR0FBRywyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsc0JBQXNCLFNBQUMsa0RBQW9CLEVBQUcsQ0FBQztZQUN4RyxJQUFJLENBQUMsZUFBZSxDQUFDLFdBQVcsQ0FBQyxXQUFXLENBQUMsQ0FBQyxXQUFXLEVBQUMsRUFBRTtnQkFDeEQsT0FBTyxDQUFDLEdBQUcsQ0FBQyxtQkFBbUIsV0FBVyxDQUFDLFFBQVEsRUFBRSxFQUFFLENBQUMsQ0FBQztnQkFDekQscUZBQXFGO2dCQUNyRiwyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUFDLFlBQVksQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLFNBQVMsQ0FBQyxRQUFRLEVBQzFGLHFCQUFPLENBQUMsRUFBRSxFQUFFLFdBQVcsQ0FBQyxDQUFDLEdBQUcsa0JBQUksQ0FBQyxTQUFTLEdBQUcsRUFBRSxDQUFDLENBQUM7WUFDekQsQ0FBQyxDQUFDLENBQUM7UUFDUCxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFRCxNQUFNO1FBQ0YsSUFBRyxJQUFJLElBQUksSUFBSSxDQUFDLFdBQVcsSUFBSSxJQUFJLElBQUksSUFBSSxDQUFDLFFBQVEsRUFDcEQ7WUFDSSxPQUFPO1NBQ1Y7UUFDRCxJQUFJLFdBQVcsR0FBRyx3QkFBVSxDQUFDLFlBQVksQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLFlBQVksQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUM5RSxJQUFJLE9BQU8sR0FBRyxxQkFBTyxDQUFDLGNBQWMsQ0FBQyxXQUFXLENBQUMsV0FBVyxFQUFFLHFCQUFPLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDN0UsZ0ZBQWdGO1FBQ2hGLElBQUksQ0FBQyxXQUFXLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxRQUFRLEdBQUcsd0JBQVUsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLENBQUM7SUFDL0UsQ0FBQztDQUNKO0FBbkNELGdDQW1DQyJ9","assetPath":"Assets/ZepetoScripts/TPS/TPSController.ts","manifest":{"properties":[],"name":"TPSController","description":""},"isCompiled":true}'
+  typescriptHash: 651a8a1b782b238a7d7411429aaf067c
