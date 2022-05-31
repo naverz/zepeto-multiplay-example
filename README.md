@@ -6,6 +6,7 @@
 개발 서버를 이용한 멀티플레이 데모 프로젝트입니다. 프로젝트를 실행하려면 사전에 [ZEPETO 로그인](https://studio.zepeto.me/kr/guides/preparing-for-world-creating)을 진행해야 합니다.
 
 
+
 <br/><br/>
 
 ## Overview
@@ -23,7 +24,7 @@
 
 - Sample Scene <br/><br/>
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Sample.png)<br/>
-https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/SampleScene.unity<br/><br/><br/><br/>
+[https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/SampleScene.unity](https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/SampleScene.unity)<br/><br/><br/><br/>
 
 - Theme Scene <br/><br/>
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Desert.JPG)<br/>
@@ -36,6 +37,22 @@ https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/SampleScene.
 4. 캠핑 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/ThemeScenes/004_Camping.unity<br/><br/><br/><br/>
 ![Image of preview](https://github.com/naverz/zepeto-multiplay-example/blob/main/doc/Fall.JPG)<br/>
 5. 가을 테마 Scene : https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Scenes/ThemeScenes/005_Fall.unity<br/><br/><br/><br/>
+
+
+<br/><br/>
+
+
+
+## Additional Samples
+
+[ScreenShotSample](https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Resources/ScreenShot/doc/README.md)
+
+[TPS View](https://github.com/naverz/zepeto-multiplay-example/tree/main/Assets/Scenes/TPSView)
+
+[Quearter View](https://github.com/naverz/zepeto-multiplay-example/tree/main/Assets/Scenes/QuarterView)
+
+[Side View](https://github.com/naverz/zepeto-multiplay-example/tree/main/Assets/Scenes/SideView)
+
 
 
 <br/><br/>
@@ -324,8 +341,3 @@ OnLeavePlayer(sessionId: string, player: Player) {
 }
 ```
 
-<br/><br/>
-
-## Additional Samples
-
-[ScreenShotSample](https://github.com/naverz/zepeto-multiplay-example/blob/main/Assets/Resources/ScreenShot/doc/README.md)
