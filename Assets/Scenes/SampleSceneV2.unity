@@ -270,14 +270,14 @@ MonoBehaviour:
     radius: 0.23
     height: 1.2
     walkSpeed: 2
-    runSpeed: 5
-    jumpPower: 5
+    runSpeed: 4
+    jumpPower: 13
     layer:
       serializedVersion: 2
       m_Bits: 0
-    animatorController: {fileID: 9100000, guid: 019901d3486cc411abc6c84594c03743, type: 2}
+    animatorController: {fileID: 9100000, guid: d45416f714b4fe74d9ddc118caf5f7c9, type: 2}
     shadow: {fileID: 1025544020809228, guid: 4512418b2a1844f42961867ad8421ab8, type: 3}
-    motionController: 0
+    motionController: 1
   controllerData:
     inputAsset: {fileID: -944628639613478452, guid: 090135bc9e5ee4c89b1642240eb723fe, type: 3}
     eventSystem: {fileID: 7328100774219155841, guid: 67971ba158b48401988f9aad07940d6f, type: 3}
@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 1852733226}
   - component: {fileID: 1852733225}
   m_Layer: 0
-  m_Name: ClientStarter
+  m_Name: ClientStarterV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -507,7 +507,7 @@ MonoBehaviour:
     - 
     unityArrayValues: []
     arrayValues: []
-    script: {fileID: 4458252877524076426, guid: fb07876dbe0ca47bd8b0ac901bcb2066, type: 3}
+    script: {fileID: 4458252877524076426, guid: e248fb9f5511dfc4396249d9b2eaf7cd, type: 3}
     isExpaned: 0
 --- !u!4 &1852733226
 Transform:

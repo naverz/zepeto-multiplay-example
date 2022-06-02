@@ -36,6 +36,7 @@ export default class extends Sandbox {
         this.onMessage("onChangedState", (client, message) => {
             const player = this.state.players.get(client.sessionId);
             player.state = message.state;
+            player.subState = message.subState; // Character Controller V2
         });
     }
     
