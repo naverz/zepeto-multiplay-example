@@ -28,7 +28,7 @@ export default class ClientStarterV2 extends ZepetoScriptBehaviour {
         this.StartCoroutine(this.SendMessageLoop(0.04));
     }
 
-    // 일정 Interval Time으로 내(local)캐릭터 transform을 server로 전송합니다.
+    // Send the local character transform to the server at the scheduled Interval Time.
     private* SendMessageLoop(tick: number) {
         while (true) {
             yield new UnityEngine.WaitForSeconds(tick);
@@ -46,7 +46,7 @@ export default class ClientStarterV2 extends ZepetoScriptBehaviour {
 
     private OnStateChange(state: State, isFirst: boolean) {
 
-        // 첫 OnStateChange 이벤트 수신 시, State 전체 스냅샷을 수신합니다.
+        // When the first OnStateChange event is received, a state full snapshot is received.
         if (isFirst) {
 
             // [CharacterController] (Local)Player 인스턴스가 Scene에 완전히 로드되었을 때 호출
@@ -55,13 +55,13 @@ export default class ClientStarterV2 extends ZepetoScriptBehaviour {
                 this.zepetoPlayer = myPlayer;
             });
 
-            // [CharacterController] Player 인스턴스가 Scene에 완전히 로드되었을 때 호출
+            // [CharacterController] (Local) Called when the Player instance is fully loaded in Scene
             ZepetoPlayers.instance.OnAddedPlayer.AddListener((sessionId: string) => {
                 const isLocal = this.room.SessionId === sessionId;
                 if (!isLocal) {
                     const player: Player = this.currentPlayers.get(sessionId);
 
-                    // [RoomState] player 인스턴스의 state가 갱신될 때마다 호출됩니다.
+                    // Called whenever the state of the [RoomState] player instance is updated.
                     player.OnChange += (changeValues) => this.OnUpdatePlayer(sessionId, player);
                 }
             });
@@ -77,10 +77,10 @@ export default class ClientStarterV2 extends ZepetoScriptBehaviour {
             leave.delete(sessionId);
         });
 
-        // [RoomState] Room에 입장한 player 인스턴스 생성
+        // [RoomState] Create a player instance that entered the Room
         join.forEach((player: Player, sessionId: string) => this.OnJoinPlayer(sessionId, player));
 
-        // [RoomState] Room에서 퇴장한 player 인스턴스 제거
+        // [RoomState] Remove exited player instance from Room
         leave.forEach((player: Player, sessionId: string) => this.OnLeavePlayer(sessionId, player));
     }
 
