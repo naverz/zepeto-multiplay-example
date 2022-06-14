@@ -101,7 +101,7 @@ export default class UIController extends ZepetoScriptBehaviour {
 
     Start() {
 
-        // SafeArea 설정
+        // SafeArea Settings
         let safeArea: Rect = Screen.safeArea;
         let newAnchorMin = safeArea.position;
         let newAnchorMax = safeArea.position + safeArea.size;
@@ -115,26 +115,26 @@ export default class UIController extends ZepetoScriptBehaviour {
         rect.anchorMax = newAnchorMax;
 
         /** Screenshot mode 
-         *  1. Btn: 스크린샷 모드 선택 - 스크린샷 모드로 설정하고, 제페토 카메라를 디폴트로 활성화합니다.
-         *  2. Btn: 뷰 전환 - 현재 설정에 따라 1인칭/3인칭 카메라를 전환합니다.
-         *  3. Btn: 백그라운드 ON/OFF - 백그라운드를 ON/OFF하는 버튼입니다.
-         *  4. Btn: 스크린샷 모드 종료 - 스크린샷 모드를 나갑니다.
-         *  5. Btn: 스크린샷 촬영 - 스크린샷을 촬영하고 스크린샷 결과 화면을 띄웁니다.
+         *  1. Btn: Select Screenshot Mode - Set to Screenshot Mode and enable ZEPETO Camera by default.
+         *  2. Btn: Switch view - Switch first-person/third-person camera according to current settings.
+         *  3. Btn: Background ON/OFF - Button to turn on/off the background.
+         *  4. Btn: Exit Screenshot Mode - Exits Screenshot Mode.
+         *  5. Btn: Take a screenshot - Take a screenshot and display the screenshot results.
          */
         
-        // 1. Btn: 스크린샷 모드 선택
+        // 1. Btn: Select Screenshot Mode
         this.screenShotModeButton.onClick.AddListener(() => {
             this.screenShotModeButton.gameObject.SetActive(false);
             this.screenShotPanel.gameObject.SetActive(true);
 
-            // 처음에는 기본 제페토 카메라 뷰로 설정
+            // Set to default ZEPETO camera view initially
             this.isThirdPersonView = true;
             this.backgroundCanvas.worldCamera = this.screenShotModeManager.GetZepetoCamera();
             this.screenShotModeManager.StartScreenShotMode();
         });
 
 
-        // 2. Btn: 뷰 전환
+        // 2. Btn: Switch Views
         this.viewChangeButton.onClick.AddListener(() => {
             if (this.isThirdPersonView) {
                 this.viewChangeImage.sprite = this.selfiViewSprite;
@@ -153,7 +153,7 @@ export default class UIController extends ZepetoScriptBehaviour {
         });
 
 
-        // 3. Btn: 백그라운드 ON/OFF
+        // 3. Btn: Background ON/OFF
         this.backgroundOnOffButton.onClick.AddListener(() => {
             if (this.isBackgroundOn) {
                 this.backgroundOnOffImage.sprite = this.backgroundOffSprite;
@@ -166,7 +166,7 @@ export default class UIController extends ZepetoScriptBehaviour {
             }
         });
 
-        // 4. Btn: 스크린샷 모드 종료
+        // 4. Btn: Exit Screenshot Mode
         this.screenShotModeExitButton.onClick.AddListener(() => {
             if (!this.isBackgroundOn) {
                 this.SetBackgroundActive(true);
@@ -178,50 +178,50 @@ export default class UIController extends ZepetoScriptBehaviour {
             this.screenShotModeManager.ExitScreenShotMode(this.isThirdPersonView);
         });
 
-        // 5. Btn: 스크린샷 촬영
+        // 5. Btn: Take a screenshot
         this.shootScreenShotButton.onClick.AddListener(() => {
-            // 스크린샷 촬영 
+            // Take a screenshot
             this.screenShot.TakeScreenShot(this.isBackgroundOn);
-            // 스크린샷 결과 화면 활성화
+            // Activating the Screenshot Results Screen
             this.screenShotResultBackground.gameObject.SetActive(true);
             this.screenShotResultPanel.gameObject.SetActive(true);
-            // 스크린샷 피드 버튼 활성화
+            // Activating the Screenshot Feed Button
             this.createFeedButton.gameObject.SetActive(true);
         });
 
         /** Screenshot Result 
-         *  1. Btn: 스크린샷 저장 - 스크린샷을 갤러리에 저장합니다. 
-         *  2. Btn: 스크린샷 공유 - 스크린샷을 공유할 수 있는 기능입니다.
-         *  3. Btn: 피드 올리기 - 피드에 올리는 기능입니다.
-         *  4. Btn: 스크린샷 결과 화면 종료 - 스크린샷 결과 화면을 닫습니다.
+         *  1. Btn: Save Screenshot - to save the screenshot to the gallery.
+         *  2. Btn: Screenshot sharing - the ability to share screenshots.
+         *  3. Btn: Upload Feed - The ability to upload to a feed.
+         *  4. Btn: Exit Screenshot Results Screen - Close the Screenshot Results screen.
         */
 
-        // 1. Btn: 스크린샷 저장 
+        // 1. Btn: Save Screenshot
         this.saveButton.onClick.AddListener(() => {
             this.screenShot.SaveScreenShot();
             this.StartCoroutine(this.ShowToastMessage(this.TOAST_MESSAGE.screenShotSaveCompleted));
         });
 
-        // 2. Btn: 스크린샷 공유
+        // 2. Btn: Share Screenshots
         this.shareButton.onClick.AddListener(() => {
             this.screenShot.ShareScreenShot();
         });
 
-        // 3. Btn: 피드 올리기
+        // 3. Btn: Upload Feed
         this.createFeedButton.onClick.AddListener(() => {
             this.screenShot.CreateFeedScreenShot();
             this.StartCoroutine(this.ShowToastMessage(this.TOAST_MESSAGE.feedUploading));
         });
 
-        // 4. Btn: 스크린샷 결과 화면 종료
+        // 4. Btn: Close the Screenshot Results Screen
         this.screenShotResultExitButton.onClick.AddListener(() => {
             this.screenShotResultBackground.gameObject.SetActive(false);
             this.screenShotResultPanel.gameObject.SetActive(false);
         });
 
         /** Gesture 
-         *  1. Btn: Gesture - 제스처 리스트뷰를 엽니다.
-         *  2. Btn: Gesture Exit - 제스처 리스트뷰를 닫습니다.
+         *  1. Btn: Gesture - Opens the gesture list view.
+         *  2. Btn: Gesture Exit - Close the gesture list view.
          */
 
         // 1. Btn: Gesture
@@ -234,7 +234,7 @@ export default class UIController extends ZepetoScriptBehaviour {
         })
 
     }
-    // 스크린샷 결과 화면을 띄웁니다
+    // Displays the screenshot results screen.
     public ShowCreateFeedResult(result: Boolean) {
         if (result) {
             this.createFeedButton.gameObject.SetActive(false);
@@ -245,7 +245,7 @@ export default class UIController extends ZepetoScriptBehaviour {
         }
     }
 
-    // 스크린샷 결과 화면에서 저장, 피드 올리기 시 토스트 메시지를 띄웁니다.
+    // The screenshot results screen shows a toast message when saving and upload feeds.
     *ShowToastMessage(text: string) {
         yield this.waitForSecond;
         let toastMessage: GameObject = null;
@@ -259,17 +259,17 @@ export default class UIController extends ZepetoScriptBehaviour {
         GameObject.Destroy(toastMessage, 1);
     }
 
-    //백그라운드 게임오브젝트의 MeshRenderer를 활성화/비활성화 합니다.
+    //Enables/disables MeshRender for background gameobjects.
     SetBackgroundActive(active: boolean) {
-        // 백그라운드 캔버스(체크무늬)는 비활성화/활성화
+        // Background canvas (check pattern) disabled/enabled
         if (active) {
             this.backgroundCanvas.gameObject.SetActive(!active);
-            //Layer 설정 Everything
+            //Layer Settings to Everything
             this.screenShotModeManager.GetSelfieCamera().cullingMask = this.LAYER.everything;
             this.screenShotModeManager.GetZepetoCamera().cullingMask = this.LAYER.everything;
         } else {
             this.backgroundCanvas.gameObject.SetActive(!active);
-            //Layer 설정을 Nothing으로 바꾼 후 Player,UI Layer만 포함
+            //Change the Layer setting to Nothing and include Player, UI Layer only
             this.screenShotModeManager.GetSelfieCamera().cullingMask = this.LAYER.nothing | 1 << this.playerLayer | 1 << this.LAYER.UI;
             this.screenShotModeManager.GetZepetoCamera().cullingMask = this.LAYER.nothing | 1 << this.playerLayer | 1 << this.LAYER.UI;
         }
