@@ -49,7 +49,7 @@ export default class ClientStarterV2 extends ZepetoScriptBehaviour {
         // When the first OnStateChange event is received, a state full snapshot is received.
         if (isFirst) {
 
-            // [CharacterController] (Local)Player 인스턴스가 Scene에 완전히 로드되었을 때 호출
+            // [CharacterController] (Local) When the first OnStateChange event is received, a snapshot of the game state is received.
             ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(() => {
                 const myPlayer = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer;
                 this.zepetoPlayer = myPlayer;
@@ -77,10 +77,10 @@ export default class ClientStarterV2 extends ZepetoScriptBehaviour {
             leave.delete(sessionId);
         });
 
-        // [RoomState] Create a player instance that entered the Room
+        // [RoomState] Create a player instance for players that enter the Room
         join.forEach((player: Player, sessionId: string) => this.OnJoinPlayer(sessionId, player));
 
-        // [RoomState] Remove exited player instance from Room
+        // [RoomState] Remove player instance for players that exit the Room
         leave.forEach((player: Player, sessionId: string) => this.OnLeavePlayer(sessionId, player));
     }
 
