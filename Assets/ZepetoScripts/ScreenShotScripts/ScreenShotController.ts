@@ -5,16 +5,16 @@ import UIController from './UIController';
 
 export default class ScreenShotController extends ZepetoScriptBehaviour {
     
-    // 스크린샷 촬영에 사용되는 카메라
+    // Camera used to take screenshots
     private camera: Camera;
 
     private preClearFlags:CameraClearFlags;
     private preBackgroundColor:Color
 
-    // Render Texture에 설정된 1920 x 1080 size 사용 
+    // Use 1920 x 1080 size set in Render Texture
     public renderTexture: RenderTexture;
 
-    // 투명 배경 촬영용 background canvas
+    // Background canvas for transparent background shooting
     public backgroundCanvas: GameObject;
     public uiControllerObject:GameObject;
     private uiController:UIController;
@@ -23,12 +23,12 @@ export default class ScreenShotController extends ZepetoScriptBehaviour {
         this.uiController = this.uiControllerObject.GetComponent<UIController>();
     }
 
-    // 스크린샷을 촬영할 카메라를 변경하는 함수
+    // Function to change the camera to take a screenshot
     public SetScreenShotCamera(camera: Camera) {
         this.camera = camera;
     }
 
-    // onclick 함수 - 스크린샷 촬영 버튼
+    // Onclick Function - Take Screenshot Button
     public TakeScreenShot(isBackgroundOn: boolean) {
         if (isBackgroundOn) {
             this.TakeScreenShotWithBackground();
@@ -37,17 +37,17 @@ export default class ScreenShotController extends ZepetoScriptBehaviour {
         }
     }
 
-    // onClick 함수 - 스크린샷 결과화면의 저장 버튼
+    // onClick function - Save button on screenshot result screen
     public SaveScreenShot() {
-        //스크린샷 저장
+        //Save Screenshot
         ZepetoWorldContent.SaveToCameraRoll(this.renderTexture, (result: boolean) => { console.log(`${result}`) });
     }
-    // onClick 함수 - 스크린샷 결과화면의 공유 버튼 
+    // onClick function - Share button on screenshot result screen
     public ShareScreenShot() {
         ZepetoWorldContent.Share(this.renderTexture, (result: boolean) => { console.log(`${result}`) });
     }
 
-    // onClick 함수 - 스크린샷 결과화면의 피드생성 버튼
+    // onClick function - Create feed button on screenshot result screen
     public CreateFeedScreenShot() {
         ZepetoWorldContent.CreateFeed(this.renderTexture, this.feedMessage, (result: boolean) => {
             this.uiController.ShowCreateFeedResult(result);
@@ -66,36 +66,36 @@ export default class ScreenShotController extends ZepetoScriptBehaviour {
         yield new WaitForEndOfFrame();
         this.camera.Render();
 
-        // 4. 기존 설정을 되돌림      
+        // 4. Revert existing settings 
         this.camera.targetTexture = null;
         this.camera.backgroundColor = this.preBackgroundColor;
         this.camera.clearFlags = this.preClearFlags;
 
-        // 5. 백그라운드 캔버스를 스크린샷을 찍는 동안 다시 활성화
+        // 5. Reactivate the background canvas while taking a screenshot
         this.backgroundCanvas.gameObject.SetActive(true);
     }
 
     private TakeScreenShotWithBackground() {
-        // 타겟 텍스처를 지정하고 카메라 렌더
+        // Specify the target texture and render the camera
         this.camera.targetTexture = this.renderTexture;
         this.StartCoroutine(this.RenderTargetTextureWithBackground());
 
     }
 
     private TakeScreenShotWithoutBackground() {
-        // 백그라운드 캔버스를 스크린샷을 찍는 동안 비활성화 
+        // Disable background canvas while taking screenshots
         this.backgroundCanvas.gameObject.SetActive(false);
 
-        // 1. 타겟 텍스처를 지정하고 스크린샷 이전 카메라 FLag, Color값을 저장
+        // 1. Specify the target texture and save the camera FLag and color values before the screenshot
         this.camera.targetTexture = this.renderTexture;
         this.preClearFlags = this.camera.clearFlags;
         this.preBackgroundColor = this.camera.backgroundColor;
 
-        // 2. 카메라의 배경을 solidColor로 채우고, background Color를 투명하게 만듦
+        // 2. Fill the background of the camera with solid color and make the background color transparent
         this.camera.clearFlags = CameraClearFlags.SolidColor;
         this.camera.backgroundColor = new Color(0, 0, 0, 0);
 
-        // 3. 카메라 렌더
+        // 3. Camera Render
         this.StartCoroutine(this.RenderTargetTextureWithoutBackground());
 
     }
