@@ -27,7 +27,7 @@ export default class ScreenShotModeManager extends ZepetoScriptBehaviour {
     Start() {
         this.screenShot = this.screenShotController.GetComponent<ScreenShotController>();
         
-        // Zepeto Local player 관련 객체 캐싱
+        // Caching objects related to the Zepeto Local player
         ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(() => {
             this.localPlayer = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer;
             this.zepetoCamera = ZepetoPlayers.instance.LocalPlayer.zepetoCamera.camera;
@@ -40,9 +40,9 @@ export default class ScreenShotModeManager extends ZepetoScriptBehaviour {
         });
     }
 
-    // 스크린샷 모드 시작 시 관련 설정 진행
+    // Proceed with the relevant settings when entering screenshot mode
     public StartScreenShotMode() {
-        // 1. IK 설정
+        // 1. IK Settings
         this.selfieCamera = GameObject.Instantiate<GameObject>(this.selfieCameraPrefab).GetComponent<Camera>();
 
         let character = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;
@@ -57,7 +57,7 @@ export default class ScreenShotModeManager extends ZepetoScriptBehaviour {
         this.iKController = playerAnimator.gameObject.AddComponent<IKController>();
         this.iKController.SetTargetAndGrip(target.transform, grip.transform);
 
-        // 3. selfie stick을 캐릭터의 오른손에 고정
+        // 3. Fix the selfie stick on the character's right hand
         this.selfieStick = GameObject.Instantiate<GameObject>(this.selfieStickPrefab);
         this.localPlayer.character.GetComponentsInChildren<Transform>().forEach((characterObj) => {
             if(characterObj.name == this.rightHandBone) {
@@ -67,22 +67,22 @@ export default class ScreenShotModeManager extends ZepetoScriptBehaviour {
                 this.selfieStick.GetComponentInChildren<Renderer>().gameObject.layer = this.playerLayer;
             }
         });
-        //4. 처음에는 zepetoCamera로 설정
+        //4. Initially set to zepetoCamera
         this.SetZepetoCameraMode();
     }
 
    
-    // 스크린샷 모드에서 나갈때 카메라 설정을 초기화합니다.
+    // Initialize the camera settings when exiting the screenshot mode.
     public ExitScreenShotMode(isThirdPersonView: boolean) {
         if(this.selfieCamera != null) {
             GameObject.Destroy(this.selfieCamera.gameObject);
         }
 
         if(!isThirdPersonView) {
-            // 셀피 카메라 삭제
-            // IK Pass 적용 해제
+            // Delete the selfie camera
+            // Unapply IK Pass
             this.SetIKPassActive(false);
-            // 제페토 카메라 활성화
+            // Activate ZEPETO Camera
             this.zepetoCamera.gameObject.SetActive(true);
         }
     }
@@ -90,51 +90,51 @@ export default class ScreenShotModeManager extends ZepetoScriptBehaviour {
     public GetPlayerLayer(): number {
         return this.playerLayer;
     }
-    // 셀피 카메라 반환
+    // Return Selfie Camera
     public GetSelfieCamera(): Camera {
         return this.selfieCamera;
     }
-    // 제페토 카메라 반환
+    // Return ZEPETO Camera
     public GetZepetoCamera(): Camera {
         return this.zepetoCamera;
     }
 
-    // 셀피 카메라 활성화 여부를 결정
+    // Decide whether to enable the selfie camera
     public SetSelfieCameraActive(active: boolean) {
         this.selfieCamera.gameObject.SetActive(active);
     }
 
-    // IKPass를 적용할지 여부를 결정
+    // Decide whether to apply IKPass
     public SetIKPassActive(active: boolean) {
         this.iKController.SetIKWeightActive(active);
-        // iKController를 사용하는 시점이 셀피모드인 시점이므로 selfie stick도 이에 따라 활성/비활성
+        // Selfie stick is enabled/disabled accordingly as the time point when iK Controller is used is in selfie mode
         this.selfieStick.SetActive(active);
     }
 
-    // 카메라 설정을 위한 함수
+    // Functions for camera setup
     SetSelfieCameraMode() {
-        // 기존 제페토카메라 비활성화
+        // Disabling the Existing ZEPETO Camera
         this.zepetoCamera.gameObject.SetActive(false);
-        // 셀피 카메라 활성화
+        // Enable Selfie Camera
         this.SetSelfieCameraActive(true);
-        // 셀카 포즈 설정을 위해 IKPass 활성화
+        // Enabling IKPass for Selfie Pose Settings
         this.SetIKPassActive(true); 
-        // 스크린샷 찍을 카메라를 셀피 카메라로 변경
+        // Change the camera you want to take screenshots to a selfie camera
         this.screenShot.SetScreenShotCamera(this.selfieCamera);
-        // 셀카봉 활성화
+        // Enable Selfie Stick
         this.selfieStick.SetActive(true);
     }
 
     SetZepetoCameraMode() {
-        // 기존 제페토 카메라 활성화
+        // Activating an Existing ZEPETO Camera
         this.zepetoCamera.gameObject.SetActive(true);
-        // 셀피 카메라 비활성화
+        // Disable Selfie Camera
         this.SetSelfieCameraActive(false);
-        // 셀카 포즈 해제를 위해 IKPass 비활성화
+        // Disable IKPass to Unpose Selfies
         this.SetIKPassActive(false);
-        // 스크린샷 찍을 카메라를 제페토 카메라로 변경
+        // Change the camera for screenshot to ZEPETO camera
         this.screenShot.SetScreenShotCamera(this.zepetoCamera);
-        // 셀카봉 비활성화
+        // Disable the selfie stick
         this.selfieStick.SetActive(false);
     }
 }
