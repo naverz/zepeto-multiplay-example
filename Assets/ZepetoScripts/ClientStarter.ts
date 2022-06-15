@@ -44,7 +44,7 @@ export default class Starter extends ZepetoScriptBehaviour {
 
     private OnStateChange(state: State, isFirst: boolean) {
 
-        // When the first OnStateChange event is received, a state full snapshot is received.
+        // When the first OnStateChange event is received, a full state snapshot is recorded.
         if (isFirst) {
 
             // [CharacterController] (Local) Called when the Player instance is fully loaded in Scene
@@ -78,10 +78,10 @@ export default class Starter extends ZepetoScriptBehaviour {
             leave.delete(sessionId);
         });
 
-        // [RoomState] Create a player instance that entered the Room
+        // [RoomState] Create a player instance for players that enter the room
         join.forEach((player: Player, sessionId: string) => this.OnJoinPlayer(sessionId, player));
 
-        // [RoomState] Remove exited player instance from Room
+        // [RoomState] Remove Player instance for players that exit the room
         leave.forEach((player: Player, sessionId: string) => this.OnLeavePlayer(sessionId, player));
     }
 
