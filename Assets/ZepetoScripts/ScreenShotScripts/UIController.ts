@@ -117,7 +117,7 @@ export default class UIController extends ZepetoScriptBehaviour {
         /** Screenshot mode 
          *  1. Btn: Select Screenshot Mode - Set to Screenshot Mode and enable ZEPETO Camera by default.
          *  2. Btn: Switch view - Switch first-person/third-person camera according to current settings.
-         *  3. Btn: Background ON/OFF - Button to turn on/off the background.
+         *  3. Btn: Background ON/OFF - Button to turn the background on/off .
          *  4. Btn: Exit Screenshot Mode - Exits Screenshot Mode.
          *  5. Btn: Take a screenshot - Take a screenshot and display the screenshot results.
          */
@@ -127,7 +127,7 @@ export default class UIController extends ZepetoScriptBehaviour {
             this.screenShotModeButton.gameObject.SetActive(false);
             this.screenShotPanel.gameObject.SetActive(true);
 
-            // Set to default ZEPETO camera view initially
+            //Initialize the camera view to the default ZEPETO camera
             this.isThirdPersonView = true;
             this.backgroundCanvas.worldCamera = this.screenShotModeManager.GetZepetoCamera();
             this.screenShotModeManager.StartScreenShotMode();
@@ -190,8 +190,8 @@ export default class UIController extends ZepetoScriptBehaviour {
         });
 
         /** Screenshot Result 
-         *  1. Btn: Save Screenshot - to save the screenshot to the gallery.
-         *  2. Btn: Screenshot sharing - the ability to share screenshots.
+         *  1. Btn: Save Screenshot - Save the screenshot to the gallery.
+         *  2. Btn: Screenshot sharing - The ability to share screenshots.
          *  3. Btn: Upload Feed - The ability to upload to a feed.
          *  4. Btn: Exit Screenshot Results Screen - Close the Screenshot Results screen.
         */
@@ -245,7 +245,7 @@ export default class UIController extends ZepetoScriptBehaviour {
         }
     }
 
-    // The screenshot results screen shows a toast message when saving and upload feeds.
+    // The screenshot results screen shows a toast message when saving and uploading feeds.
     *ShowToastMessage(text: string) {
         yield this.waitForSecond;
         let toastMessage: GameObject = null;
@@ -261,7 +261,7 @@ export default class UIController extends ZepetoScriptBehaviour {
 
     //Enables/disables MeshRender for background gameobjects.
     SetBackgroundActive(active: boolean) {
-        // Background canvas (check pattern) disabled/enabled
+        // Background canvas (checkered pattern) disabled/enabled
         if (active) {
             this.backgroundCanvas.gameObject.SetActive(!active);
             //Layer Settings to Everything
@@ -269,7 +269,7 @@ export default class UIController extends ZepetoScriptBehaviour {
             this.screenShotModeManager.GetZepetoCamera().cullingMask = this.LAYER.everything;
         } else {
             this.backgroundCanvas.gameObject.SetActive(!active);
-            //Change the Layer setting to Nothing and include Player, UI Layer only
+            //Change the Layer setting to only include nothing, player, and UI Layers
             this.screenShotModeManager.GetSelfieCamera().cullingMask = this.LAYER.nothing | 1 << this.playerLayer | 1 << this.LAYER.UI;
             this.screenShotModeManager.GetZepetoCamera().cullingMask = this.LAYER.nothing | 1 << this.playerLayer | 1 << this.LAYER.UI;
         }

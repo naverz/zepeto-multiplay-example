@@ -9,21 +9,21 @@ export default class IKController extends ZepetoScriptBehaviour {
     private gripTarget: Transform;
 
     // Body and head weight setting for target
-    // - Make the head react more loudly to the movement of the target
+    // Controls how strongly the body reacts to the movement of the target
     private bodyWeight: number = 0.3;
     private headWeight: number = 0.7; 
 
-    // IK application status
+    //Whether or not to apply IK
     private useIKWeight: boolean = false;
     private animator: Animator;
 
     Start() {
         this.animator = this.GetComponent<Animator>();
-        // Initially, do not use IK Weight but only use it when changing to selfie mode
+        //Disable IK weight initially, and use it when changing to selfie mode
         this.SetIKWeightActive(false);
     }
 
-    // Set whether to apply IK Weight
+    //Toggle IK weight on/off
     public SetIKWeightActive(active: boolean) {
         this.useIKWeight = active;
     }
@@ -47,7 +47,7 @@ export default class IKController extends ZepetoScriptBehaviour {
             this.gripTarget == null)
             return;
 
-        // Set the look at weight when the body and head look at the target
+        // Set the look weight when the body and head looks at the target. 
         this.animator.SetLookAtWeight(1, this.bodyWeight, this.headWeight);
         // set lookAt target
         this.animator.SetLookAtPosition(this.lookAtTarget.position);

@@ -23,7 +23,7 @@ export default class ScreenShotController extends ZepetoScriptBehaviour {
         this.uiController = this.uiControllerObject.GetComponent<UIController>();
     }
 
-    // Function to change the camera to take a screenshot
+    // Set the camera used to take a screenshot. 
     public SetScreenShotCamera(camera: Camera) {
         this.camera = camera;
     }
@@ -86,12 +86,12 @@ export default class ScreenShotController extends ZepetoScriptBehaviour {
         // Disable background canvas while taking screenshots
         this.backgroundCanvas.gameObject.SetActive(false);
 
-        // 1. Specify the target texture and save the camera FLag and color values before the screenshot
+        // 1. Specify the target texture and save the camera flag/color values before the screenshot
         this.camera.targetTexture = this.renderTexture;
         this.preClearFlags = this.camera.clearFlags;
         this.preBackgroundColor = this.camera.backgroundColor;
 
-        // 2. Fill the background of the camera with solid color and make the background color transparent
+        // 2. Fill the background of the camera with a solid color and make the background color transparent. 
         this.camera.clearFlags = CameraClearFlags.SolidColor;
         this.camera.backgroundColor = new Color(0, 0, 0, 0);
 
