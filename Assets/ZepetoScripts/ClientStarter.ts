@@ -26,7 +26,7 @@ export default class Starter extends ZepetoScriptBehaviour {
         this.StartCoroutine(this.SendMessageLoop(0.1));
     }
 
-    // Send the local character transform to the server at the scheduled Interval Time.
+    // Send the local character transform to the server at the scheduled Interval Time..
     private* SendMessageLoop(tick: number) {
         while (true) {
             yield new UnityEngine.WaitForSeconds(tick);
