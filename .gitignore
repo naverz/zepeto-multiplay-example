@@ -69,7 +69,3 @@ crashlytics-build.properties
 
 # NODE
 node_modules/
-
-package-lock.json
-tsconfig.json
-Packages/packages-lock.json
