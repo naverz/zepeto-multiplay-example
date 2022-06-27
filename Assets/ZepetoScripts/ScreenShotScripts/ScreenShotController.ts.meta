@@ -18,51 +18,5 @@ ScriptedImporter:
   wrapperTypes: []
   WrapperFilters: []
   wrapperOutputDirectory: Generated
-  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
-    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
-    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst ZEPETO_World_1 =
-    require(\\\"ZEPETO.World\\\");\\r\\nconst UIController_1 = require(\\\"./UIController\\\");\\r\\nclass
-    ScreenShotController extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n   
-    Awake() {\\r\\n        this.uiController = this.uiControllerObject.GetComponent($typeof(UIController_1.default));\\r\\n   
-    }\\r\\n    // \uC2A4\uD06C\uB9B0\uC0F7\uC744 \uCD2C\uC601\uD560 \uCE74\uBA54\uB77C\uB97C
-    \uBCC0\uACBD\uD558\uB294 \uD568\uC218\\r\\n    SetScreenShotCamera(camera) {\\r\\n       
-    this.camera = camera;\\r\\n    }\\r\\n    // onclick \uD568\uC218 - \uC2A4\uD06C\uB9B0\uC0F7
-    \uCD2C\uC601 \uBC84\uD2BC\\r\\n    TakeScreenShot(isBackgroundOn) {\\r\\n       
-    if (isBackgroundOn) {\\r\\n            this.TakeScreenShotWithBackground();\\r\\n       
-    }\\r\\n        else {\\r\\n            this.TakeScreenShotWithoutBackground();\\r\\n       
-    }\\r\\n    }\\r\\n    // onClick \uD568\uC218 - \uC2A4\uD06C\uB9B0\uC0F7 \uACB0\uACFC\uD654\uBA74\uC758
-    \uC800\uC7A5 \uBC84\uD2BC\\r\\n    SaveScreenShot() {\\r\\n        //\uC2A4\uD06C\uB9B0\uC0F7
-    \uC800\uC7A5\\r\\n        ZEPETO_World_1.ZepetoWorldContent.SaveToCameraRoll(this.renderTexture,
-    (result) => { console.log(`${result}`); });\\r\\n    }\\r\\n    // onClick \uD568\uC218
-    - \uC2A4\uD06C\uB9B0\uC0F7 \uACB0\uACFC\uD654\uBA74\uC758 \uACF5\uC720 \uBC84\uD2BC
-    \\r\\n    ShareScreenShot() {\\r\\n        ZEPETO_World_1.ZepetoWorldContent.Share(this.renderTexture,
-    (result) => { console.log(`${result}`); });\\r\\n    }\\r\\n    // onClick \uD568\uC218
-    - \uC2A4\uD06C\uB9B0\uC0F7 \uACB0\uACFC\uD654\uBA74\uC758 \uD53C\uB4DC\uC0DD\uC131
-    \uBC84\uD2BC\\r\\n    CreateFeedScreenShot() {\\r\\n        ZEPETO_World_1.ZepetoWorldContent.CreateFeed(this.renderTexture,
-    this.feedMessage, (result) => {\\r\\n            this.uiController.ShowCreateFeedResult(result);\\r\\n       
-    });\\r\\n    }\\r\\n    *RenderTargetTextureWithBackground() {\\r\\n        yield
-    new UnityEngine_1.WaitForEndOfFrame();\\r\\n        this.camera.Render();\\r\\n       
-    this.camera.targetTexture = null;\\r\\n    }\\r\\n    *RenderTargetTextureWithoutBackground()
-    {\\r\\n        yield new UnityEngine_1.WaitForEndOfFrame();\\r\\n        this.camera.Render();\\r\\n       
-    // 4. \uAE30\uC874 \uC124\uC815\uC744 \uB418\uB3CC\uB9BC      \\r\\n        this.camera.targetTexture
-    = null;\\r\\n        this.camera.backgroundColor = this.preBackgroundColor;\\r\\n       
-    this.camera.clearFlags = this.preClearFlags;\\r\\n        // 5. \uBC31\uADF8\uB77C\uC6B4\uB4DC
-    \uCE94\uBC84\uC2A4\uB97C \uC2A4\uD06C\uB9B0\uC0F7\uC744 \uCC0D\uB294 \uB3D9\uC548
-    \uB2E4\uC2DC \uD65C\uC131\uD654\\r\\n        this.backgroundCanvas.gameObject.SetActive(true);\\r\\n   
-    }\\r\\n    TakeScreenShotWithBackground() {\\r\\n        // \uD0C0\uAC9F \uD14D\uC2A4\uCC98\uB97C
-    \uC9C0\uC815\uD558\uACE0 \uCE74\uBA54\uB77C \uB80C\uB354\\r\\n        this.camera.targetTexture
-    = this.renderTexture;\\r\\n        this.StartCoroutine(this.RenderTargetTextureWithBackground());\\r\\n   
-    }\\r\\n    TakeScreenShotWithoutBackground() {\\r\\n        // \uBC31\uADF8\uB77C\uC6B4\uB4DC
-    \uCE94\uBC84\uC2A4\uB97C \uC2A4\uD06C\uB9B0\uC0F7\uC744 \uCC0D\uB294 \uB3D9\uC548
-    \uBE44\uD65C\uC131\uD654 \\r\\n        this.backgroundCanvas.gameObject.SetActive(false);\\r\\n       
-    // 1. \uD0C0\uAC9F \uD14D\uC2A4\uCC98\uB97C \uC9C0\uC815\uD558\uACE0 \uC2A4\uD06C\uB9B0\uC0F7
-    \uC774\uC804 \uCE74\uBA54\uB77C FLag, Color\uAC12\uC744 \uC800\uC7A5\\r\\n       
-    this.camera.targetTexture = this.renderTexture;\\r\\n        this.preClearFlags
-    = this.camera.clearFlags;\\r\\n        this.preBackgroundColor = this.camera.backgroundColor;\\r\\n       
-    // 2. \uCE74\uBA54\uB77C\uC758 \uBC30\uACBD\uC744 solidColor\uB85C \uCC44\uC6B0\uACE0,
-    background Color\uB97C \uD22C\uBA85\uD558\uAC8C \uB9CC\uB4E6\\r\\n        this.camera.clearFlags
-    = UnityEngine_1.CameraClearFlags.SolidColor;\\r\\n        this.camera.backgroundColor
-    = new UnityEngine_1.Color(0, 0, 0, 0);\\r\\n        // 3. \uCE74\uBA54\uB77C
-    \uB80C\uB354\\r\\n        this.StartCoroutine(this.RenderTargetTextureWithoutBackground());\\r\\n   
-    }\\r\\n}\\r\\nexports.default = ScreenShotController;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2NyZWVuU2hvdENvbnRyb2xsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTY3JlZW5TaG90Q29udHJvbGxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUE0RztBQUM1RyxpREFBcUQ7QUFDckQsK0NBQWtEO0FBQ2xELGlEQUEwQztBQUUxQyxNQUFxQixvQkFBcUIsU0FBUSxxQ0FBcUI7SUFnQm5FLEtBQUs7UUFDRCxJQUFJLENBQUMsWUFBWSxHQUFHLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxZQUFZLFNBQUMsc0JBQVksRUFBRyxDQUFDO0lBQzdFLENBQUM7SUFFRCx5QkFBeUI7SUFDbEIsbUJBQW1CLENBQUMsTUFBYztRQUNyQyxJQUFJLENBQUMsTUFBTSxHQUFHLE1BQU0sQ0FBQztJQUN6QixDQUFDO0lBRUQsMEJBQTBCO0lBQ25CLGNBQWMsQ0FBQyxjQUF1QjtRQUN6QyxJQUFJLGNBQWMsRUFBRTtZQUNoQixJQUFJLENBQUMsNEJBQTRCLEVBQUUsQ0FBQztTQUN2QzthQUFNO1lBQ0gsSUFBSSxDQUFDLCtCQUErQixFQUFFLENBQUM7U0FDMUM7SUFDTCxDQUFDO0lBRUQsZ0NBQWdDO0lBQ3pCLGNBQWM7UUFDakIsU0FBUztRQUNULGlDQUFrQixDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxhQUFhLEVBQUUsQ0FBQyxNQUFlLEVBQUUsRUFBRSxHQUFHLE9BQU8sQ0FBQyxHQUFHLENBQUMsR0FBRyxNQUFNLEVBQUUsQ0FBQyxDQUFBLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDL0csQ0FBQztJQUNELGlDQUFpQztJQUMxQixlQUFlO1FBQ2xCLGlDQUFrQixDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsYUFBYSxFQUFFLENBQUMsTUFBZSxFQUFFLEVBQUUsR0FBRyxPQUFPLENBQUMsR0FBRyxDQUFDLEdBQUcsTUFBTSxFQUFFLENBQUMsQ0FBQSxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ3BHLENBQUM7SUFFRCxrQ0FBa0M7SUFDM0Isb0JBQW9CO1FBQ3ZCLGlDQUFrQixDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsYUFBYSxFQUFFLElBQUksQ0FBQyxXQUFXLEVBQUUsQ0FBQyxNQUFlLEVBQUUsRUFBRTtZQUNwRixJQUFJLENBQUMsWUFBWSxDQUFDLG9CQUFvQixDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBQ25ELENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVELENBQUMsaUNBQWlDO1FBRTlCLE1BQU0sSUFBSSwrQkFBaUIsRUFBRSxDQUFDO1FBQzlCLElBQUksQ0FBQyxNQUFNLENBQUMsTUFBTSxFQUFFLENBQUM7UUFDckIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxhQUFhLEdBQUcsSUFBSSxDQUFDO0lBQ3JDLENBQUM7SUFFRCxDQUFDLG9DQUFvQztRQUVqQyxNQUFNLElBQUksK0JBQWlCLEVBQUUsQ0FBQztRQUM5QixJQUFJLENBQUMsTUFBTSxDQUFDLE1BQU0sRUFBRSxDQUFDO1FBRXJCLHNCQUFzQjtRQUN0QixJQUFJLENBQUMsTUFBTSxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUM7UUFDakMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxlQUFlLEdBQUcsSUFBSSxDQUFDLGtCQUFrQixDQUFDO1FBQ3RELElBQUksQ0FBQyxNQUFNLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQyxhQUFhLENBQUM7UUFFNUMsbUNBQW1DO1FBQ25DLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3JELENBQUM7SUFFTyw0QkFBNEI7UUFDaEMsc0JBQXNCO1FBQ3RCLElBQUksQ0FBQyxNQUFNLENBQUMsYUFBYSxHQUFHLElBQUksQ0FBQyxhQUFhLENBQUM7UUFDL0MsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsaUNBQWlDLEVBQUUsQ0FBQyxDQUFDO0lBRWxFLENBQUM7SUFFTywrQkFBK0I7UUFDbkMsK0JBQStCO1FBQy9CLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBRWxELCtDQUErQztRQUMvQyxJQUFJLENBQUMsTUFBTSxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDO1FBQy9DLElBQUksQ0FBQyxhQUFhLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQyxVQUFVLENBQUM7UUFDNUMsSUFBSSxDQUFDLGtCQUFrQixHQUFHLElBQUksQ0FBQyxNQUFNLENBQUMsZUFBZSxDQUFDO1FBRXRELHlEQUF5RDtRQUN6RCxJQUFJLENBQUMsTUFBTSxDQUFDLFVBQVUsR0FBRyw4QkFBZ0IsQ0FBQyxVQUFVLENBQUM7UUFDckQsSUFBSSxDQUFDLE1BQU0sQ0FBQyxlQUFlLEdBQUcsSUFBSSxtQkFBSyxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDO1FBRXBELFlBQVk7UUFDWixJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxvQ0FBb0MsRUFBRSxDQUFDLENBQUM7SUFFckUsQ0FBQztDQUNKO0FBaEdELHVDQWdHQyJ9\",\"assetPath\":\"Assets/ZepetoScripts/ScreenShotScripts/ScreenShotController.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"renderTexture\",\"type\":\"UnityEngine.RenderTexture\",\"isArray\":false,\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"backgroundCanvas\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"uiControllerObject\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"feedMessage\",\"type\":\"System.String\",\"isArray\":false,\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"ScreenShotController\",\"description\":\"\"},\"isCompiled\":true}"
-  typescriptHash: 0012a9749dde79dc2dfa7ea2bea420e0
+  compiledResult: '{"source":"","assetPath":"Assets/ZepetoScripts/ScreenShotScripts/ScreenShotController.ts","manifest":{"properties":[],"name":"","description":""},"isCompiled":false}'
+  typescriptHash: 436b3ae709a7283f9bb50a4ca3f074c3

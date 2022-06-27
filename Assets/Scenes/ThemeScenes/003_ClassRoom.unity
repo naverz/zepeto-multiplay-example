@@ -994,7 +994,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 88137733}
-  - component: {fileID: 88137735}
   - component: {fileID: 88137734}
   m_Layer: 12
   m_Name: PoseFrame_Bench (15)
@@ -1033,18 +1032,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &88137735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 88137732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &91310128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2996,7 +2983,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 221301798}
-  - component: {fileID: 221301800}
   - component: {fileID: 221301799}
   m_Layer: 12
   m_Name: PoseFrame_Bench (9)
@@ -3035,18 +3021,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &221301800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221301797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &235318649
 GameObject:
   m_ObjectHideFlags: 0
@@ -3432,7 +3406,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 253271643}
-  - component: {fileID: 253271645}
   - component: {fileID: 253271644}
   m_Layer: 12
   m_Name: PoseFrame_Bench
@@ -3471,18 +3444,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &253271645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253271642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &260068654
 GameObject:
   m_ObjectHideFlags: 0
@@ -3492,7 +3453,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 260068655}
-  - component: {fileID: 260068657}
   - component: {fileID: 260068656}
   m_Layer: 12
   m_Name: PoseFrame_Bench (3)
@@ -3531,18 +3491,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &260068657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 260068654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &270120634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3656,7 +3604,6 @@ GameObject:
   - component: {fileID: 273092791}
   - component: {fileID: 273092794}
   - component: {fileID: 273092793}
-  - component: {fileID: 273092792}
   m_Layer: 12
   m_Name: Ourhand
   m_TagString: Untagged
@@ -3678,18 +3625,6 @@ Transform:
   m_Father: {fileID: 2068309150}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &273092792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 273092790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b35e963bbadd4c4090633cdd4e2298a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &273092793
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3938,7 +3873,8 @@ PrefabInstance:
       propertyPath: m_ReflectionProbeUsage
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114406807495162928, guid: 05d97bc5533990a4d8a99646ccd8b75a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 05d97bc5533990a4d8a99646ccd8b75a, type: 3}
 --- !u!4 &273304834 stripped
 Transform:
@@ -4619,7 +4555,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 341624787}
-  - component: {fileID: 341624789}
   - component: {fileID: 341624788}
   m_Layer: 12
   m_Name: PoseFrame_Bench (14)
@@ -4658,18 +4593,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &341624789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341624786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &345920999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4981,7 +4904,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 358389922}
-  - component: {fileID: 358389923}
   - component: {fileID: 358389924}
   m_Layer: 12
   m_Name: PoseFrame_Bench (8)
@@ -5007,18 +4929,6 @@ Transform:
   m_Father: {fileID: 2054838892}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &358389923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 358389921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &358389924
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6457,7 +6367,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 517065531}
-  - component: {fileID: 517065533}
   - component: {fileID: 517065532}
   m_Layer: 14
   m_Name: PoseFrame_SakuraChair2
@@ -6496,18 +6405,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &517065533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 517065530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &521590655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6612,18 +6509,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.08415861
   m_Center: {x: -0.0000014305115, y: -0.00000047683716, z: 0.00000024586916}
---- !u!114 &521590659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 521590657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e1cb84483aa8ed44ba43b502de45179, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &526323676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6894,7 +6779,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 551315226}
-  - component: {fileID: 551315228}
   - component: {fileID: 551315227}
   m_Layer: 12
   m_Name: PoseFrame_Sorry
@@ -6933,18 +6817,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &551315228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 551315225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &558878762
 GameObject:
   m_ObjectHideFlags: 0
@@ -6954,7 +6826,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 558878763}
-  - component: {fileID: 558878765}
   - component: {fileID: 558878764}
   m_Layer: 12
   m_Name: PoseFrame_Suprise
@@ -6993,18 +6864,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &558878765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558878762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &565743239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7465,7 +7324,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 585399461}
-  - component: {fileID: 585399463}
   - component: {fileID: 585399462}
   m_Layer: 12
   m_Name: PoseFrame_SakuraChair1 (1)
@@ -7504,18 +7362,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &585399463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 585399460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &588819319
 GameObject:
   m_ObjectHideFlags: 0
@@ -8569,7 +8415,6 @@ GameObject:
   - component: {fileID: 709120039}
   - component: {fileID: 709120042}
   - component: {fileID: 709120041}
-  - component: {fileID: 709120040}
   m_Layer: 12
   m_Name: Minutehand
   m_TagString: Untagged
@@ -8591,18 +8436,6 @@ Transform:
   m_Father: {fileID: 2068309150}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &709120040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709120038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b35e963bbadd4c4090633cdd4e2298a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &709120041
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9246,7 +9079,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 750876199}
-  - component: {fileID: 750876201}
   - component: {fileID: 750876200}
   m_Layer: 12
   m_Name: PoseFrame_Bench (10)
@@ -9285,18 +9117,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &750876201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 750876198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &752048121
 GameObject:
   m_ObjectHideFlags: 0
@@ -9680,7 +9500,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 769762699}
-  - component: {fileID: 769762701}
   - component: {fileID: 769762700}
   m_Layer: 12
   m_Name: PoseFrame_SakuraChair1 (3)
@@ -9719,18 +9538,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &769762701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 769762698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &774483226 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 0db5fe951fca0ea4b9167c2d1d865b9a, type: 3}
@@ -11049,7 +10856,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 810014382}
-  - component: {fileID: 810014384}
   - component: {fileID: 810014383}
   m_Layer: 12
   m_Name: PoseFrame_Watch
@@ -11088,18 +10894,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &810014384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 810014381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &812420207
 GameObject:
   m_ObjectHideFlags: 0
@@ -11608,6 +11402,7 @@ MonoBehaviour:
     runSpeed: 5
     jumpPower: 5
     animatorController: {fileID: 9100000, guid: 019901d3486cc411abc6c84594c03743, type: 2}
+    runThreshold: 0.8
   motionV2Data:
     walkSpeed: 2
     runSpeed: 4
@@ -11619,6 +11414,34 @@ MonoBehaviour:
     landingRollSpeed: 4
     useMoveTurn: 1
     Gravity: 50
+    GravityRestoreRate: 1.018
+    walkThreshold: 0.3
+    runThreshold: 0.5
+    fallingTimeThreshold: 0.08
+    fallingSpeedThreshold: 18
+    landingSpeedThreshold: 30
+    landingImpactSpeedThreshold: 40
+    landingRollSpeedThreshold: 0.1
+    moveTurnAngleThreshold: 0.5
+    moveTurnSpeedThreshold: 0.5
+    moveTurnTimeThreshold: 0.3
+    moveTurnReleaseTime: 0.6
+    moveTurnReverseSpeed: 0.56
+    jumpInputDelayTime: 0.008
+    jumpDashSpeedThreshold: 0.95
+    walkClipBaseSpeed: 0.01
+    firstJumpCurveTime: 0.4
+    secondJumpCurveTime: 0.764
+    firstDoubleJumpCurveTime: 0.4
+    secondDoubleJumpCurveTime: 0.7
+    stampClipPlayTime: 1
+    landingClipPlayTime: 1
+    landingRollClipPlayTime: 0.8
+    moveTurnClipPlayTime: 0.591
+    jumpEaseSpeedThreshold: 2
+    jumpEaseSpeedRate: 0.1
+    jumpDoubleAvailableTimeUp: 1
+    jumpDoubleAvailableTimeDown: 1
   OnAddedLocalPlayer:
     m_PersistentCalls:
       m_Calls: []
@@ -12921,7 +12744,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 965143147}
-  - component: {fileID: 965143149}
   - component: {fileID: 965143148}
   m_Layer: 14
   m_Name: PoseFrame_Bench (17)
@@ -12960,18 +12782,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &965143149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 965143146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &967557085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14885,7 +14695,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1151465903}
-  - component: {fileID: 1151465905}
   - component: {fileID: 1151465904}
   m_Layer: 12
   m_Name: PoseFrame_Bench (4)
@@ -14924,18 +14733,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1151465905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151465902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1151793627 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 521808dfc577a46448d88a889513f08e, type: 3}
@@ -15347,7 +15144,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1167886837}
-  - component: {fileID: 1167886838}
   - component: {fileID: 1167886839}
   m_Layer: 12
   m_Name: PoseFrame_Bench (6)
@@ -15373,18 +15169,6 @@ Transform:
   m_Father: {fileID: 1300480553}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1167886838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1167886836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &1167886839
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15801,7 +15585,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1186646479}
   - component: {fileID: 1186646481}
-  - component: {fileID: 1186646480}
   m_Layer: 12
   m_Name: Label_RedLockerTop_1
   m_TagString: Untagged
@@ -15823,18 +15606,6 @@ Transform:
   m_Father: {fileID: 755461192}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1186646480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186646478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3b34c0c5dd2344468eb945c47b011cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1186646481
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17362,18 +17133,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2081762, y: 0.10486466, z: 0.39125812}
   m_Center: {x: 0.034834977, y: 0.0000019031307, z: 0.1956626}
---- !u!114 &1271749592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1271749590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e1cb84483aa8ed44ba43b502de45179, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1283651983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18168,7 +17927,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1376508351}
-  - component: {fileID: 1376508353}
   - component: {fileID: 1376508352}
   m_Layer: 12
   m_Name: PoseFrame_Bench (13)
@@ -18207,18 +17965,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1376508353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1376508350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1385518246
 GameObject:
   m_ObjectHideFlags: 0
@@ -18228,7 +17974,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1385518247}
-  - component: {fileID: 1385518249}
   - component: {fileID: 1385518248}
   m_Layer: 12
   m_Name: PoseFrame_Bench (5)
@@ -18267,18 +18012,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1385518249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385518246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1388863419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18532,18 +18265,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.20817623, y: 0.10486474, z: 0.39125812}
   m_Center: {x: 0.03483547, y: 0.0000056761487, z: 0.1956626}
---- !u!114 &1402355098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1402355096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e1cb84483aa8ed44ba43b502de45179, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1405859949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19600,7 +19321,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1478629592}
-  - component: {fileID: 1478629594}
   - component: {fileID: 1478629593}
   m_Layer: 12
   m_Name: PoseFrame_Bench (11)
@@ -19639,18 +19359,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1478629594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478629591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1479686128 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 0db5fe951fca0ea4b9167c2d1d865b9a, type: 3}
@@ -20856,7 +20564,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1557588524}
-  - component: {fileID: 1557588526}
   - component: {fileID: 1557588525}
   m_Layer: 12
   m_Name: PoseFrame_Heart
@@ -20895,18 +20602,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1557588526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1557588523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1563795632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21558,7 +21253,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1605357557}
-  - component: {fileID: 1605357559}
   - component: {fileID: 1605357558}
   m_Layer: 12
   m_Name: PoseFrame_Bench (12)
@@ -21597,18 +21291,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1605357559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605357556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1608294459
 GameObject:
   m_ObjectHideFlags: 0
@@ -23265,7 +22947,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1732567999}
-  - component: {fileID: 1732568001}
   - component: {fileID: 1732568000}
   m_Layer: 12
   m_Name: AttachObject
@@ -23301,18 +22982,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1732568001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732567998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e4d6528ae863044587c5bdb5bf309e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1734333585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24136,7 +23805,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1775959285}
-  - component: {fileID: 1775959287}
   - component: {fileID: 1775959286}
   m_Layer: 12
   m_Name: PoseFrame_SakuraChair1 (2)
@@ -24175,18 +23843,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1775959287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775959284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1781517415
 GameObject:
   m_ObjectHideFlags: 0
@@ -24752,7 +24408,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1841280633}
-  - component: {fileID: 1841280635}
   - component: {fileID: 1841280634}
   m_Layer: 12
   m_Name: PoseFrame_SakuraChair1
@@ -24791,18 +24446,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1841280635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1841280632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1846920049 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 0db5fe951fca0ea4b9167c2d1d865b9a, type: 3}
@@ -25964,7 +25607,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1883368997}
   - component: {fileID: 1883368999}
-  - component: {fileID: 1883368998}
   m_Layer: 12
   m_Name: Label_RedLockerTop_2
   m_TagString: Untagged
@@ -25986,18 +25628,6 @@ Transform:
   m_Father: {fileID: 755461192}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1883368998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883368996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3b34c0c5dd2344468eb945c47b011cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1883368999
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27736,7 +27366,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1967019649}
-  - component: {fileID: 1967019651}
   - component: {fileID: 1967019650}
   m_Layer: 12
   m_Name: PoseFrame_Bench (7)
@@ -27775,18 +27404,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1967019651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1967019648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1968435680
 GameObject:
   m_ObjectHideFlags: 0
@@ -29343,7 +28960,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2055042074}
-  - component: {fileID: 2055042076}
   - component: {fileID: 2055042075}
   m_Layer: 12
   m_Name: AttachObject
@@ -29379,18 +28995,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2055042076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2055042073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e4d6528ae863044587c5bdb5bf309e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2055308485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29648,7 +29252,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2083654019}
-  - component: {fileID: 2083654021}
   - component: {fileID: 2083654020}
   m_Layer: 12
   m_Name: PoseFrame_Bench (2)
@@ -29687,18 +29290,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2083654021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2083654018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2085897956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30060,7 +29651,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2106111087}
-  - component: {fileID: 2106111089}
   - component: {fileID: 2106111088}
   m_Layer: 12
   m_Name: PoseFrame_Bench (16)
@@ -30099,18 +29689,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2106111089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2106111086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2119011075 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 0db5fe951fca0ea4b9167c2d1d865b9a, type: 3}
@@ -30139,7 +29717,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2121307785}
-  - component: {fileID: 2121307787}
   - component: {fileID: 2121307786}
   m_Layer: 12
   m_Name: PoseFrame_Bench (1)
@@ -30178,18 +29755,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2121307787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2121307784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2135610676
 PrefabInstance:
   m_ObjectHideFlags: 0

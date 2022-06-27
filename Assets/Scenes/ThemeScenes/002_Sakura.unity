@@ -633,7 +633,6 @@ GameObject:
   m_Component:
   - component: {fileID: 71565657}
   - component: {fileID: 71565659}
-  - component: {fileID: 71565658}
   m_Layer: 12
   m_Name: Label_BathHouseSecondFloor
   m_TagString: Untagged
@@ -655,18 +654,6 @@ Transform:
   m_Father: {fileID: 1703541681}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &71565658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 71565656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3b34c0c5dd2344468eb945c47b011cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &71565659
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1782,18 +1769,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.4, z: 0.4}
   m_Center: {x: 0.000000018626451, y: -0.00009461308, z: -0.7}
---- !u!114 &135027226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135027224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e1cb84483aa8ed44ba43b502de45179, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &143661939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3099,7 +3074,6 @@ GameObject:
   m_Component:
   - component: {fileID: 211468465}
   - component: {fileID: 211468467}
-  - component: {fileID: 211468466}
   m_Layer: 0
   m_Name: PoseFrame_SakuraBench
   m_TagString: ObjectArea
@@ -3124,18 +3098,6 @@ Transform:
   m_Father: {fileID: 684873029}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 270, y: 90, z: 90}
---- !u!114 &211468466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211468464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &211468467
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5372,18 +5334,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 5bae35a85a613464ab4bab441839095c, type: 3}
   m_PrefabInstance: {fileID: 322114038}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &322114041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322114040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e1cb84483aa8ed44ba43b502de45179, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &322114042
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6639,7 +6589,6 @@ GameObject:
   m_Component:
   - component: {fileID: 417307419}
   - component: {fileID: 417307421}
-  - component: {fileID: 417307420}
   m_Layer: 2
   m_Name: FishingFrame (1)
   m_TagString: ObjectArea
@@ -6665,18 +6614,6 @@ Transform:
   m_Father: {fileID: 518907792}
   m_RootOrder: 59
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &417307420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417307418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ba4758d68daf794e8d9d991120921ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &417307421
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10281,7 +10218,6 @@ GameObject:
   m_Component:
   - component: {fileID: 606214686}
   - component: {fileID: 606214688}
-  - component: {fileID: 606214687}
   m_Layer: 2
   m_Name: FishingFrame (3)
   m_TagString: ObjectArea
@@ -10307,18 +10243,6 @@ Transform:
   m_Father: {fileID: 518907792}
   m_RootOrder: 61
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &606214687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 606214685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ba4758d68daf794e8d9d991120921ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &606214688
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11388,7 +11312,6 @@ GameObject:
   m_Component:
   - component: {fileID: 668510314}
   - component: {fileID: 668510316}
-  - component: {fileID: 668510315}
   m_Layer: 0
   m_Name: PoseFrame_Bench (2)
   m_TagString: ObjectArea
@@ -11413,18 +11336,6 @@ Transform:
   m_Father: {fileID: 1288966509}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 180, y: 180, z: 180}
---- !u!114 &668510315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 668510313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &668510316
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11925,7 +11836,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 710166701}
-  - component: {fileID: 710166703}
   - component: {fileID: 710166702}
   m_Layer: 12
   m_Name: AttachObject
@@ -11961,18 +11871,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &710166703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710166700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e4d6528ae863044587c5bdb5bf309e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &716696157
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12069,7 +11967,6 @@ GameObject:
   m_Component:
   - component: {fileID: 719280952}
   - component: {fileID: 719280954}
-  - component: {fileID: 719280953}
   m_Layer: 2
   m_Name: FishingFrame (2)
   m_TagString: ObjectArea
@@ -12095,18 +11992,6 @@ Transform:
   m_Father: {fileID: 518907792}
   m_RootOrder: 60
   m_LocalEulerAnglesHint: {x: -15.382001, y: -107.100006, z: 6.1010003}
---- !u!114 &719280953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 719280951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ba4758d68daf794e8d9d991120921ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &719280954
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15360,7 +15245,6 @@ GameObject:
   - component: {fileID: 858686861}
   - component: {fileID: 858686860}
   - component: {fileID: 858686859}
-  - component: {fileID: 858686862}
   m_Layer: 12
   m_Name: SK_Manekineko_001
   m_TagString: Untagged
@@ -15444,18 +15328,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 858686857}
   m_Mesh: {fileID: 4300000, guid: 9c18238b866ffa846908f90404288f85, type: 3}
---- !u!114 &858686862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858686857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e1cb84483aa8ed44ba43b502de45179, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &860682842
 GameObject:
   m_ObjectHideFlags: 0
@@ -16381,7 +16253,6 @@ GameObject:
   m_Component:
   - component: {fileID: 901772361}
   - component: {fileID: 901772363}
-  - component: {fileID: 901772362}
   m_Layer: 0
   m_Name: PoseFrame_SakuraChair1 (2)
   m_TagString: ObjectArea
@@ -16406,18 +16277,6 @@ Transform:
   m_Father: {fileID: 1288966509}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 180, y: 90, z: 180}
---- !u!114 &901772362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 901772360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &901772363
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -21085,7 +20944,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1244940634}
   - component: {fileID: 1244940636}
-  - component: {fileID: 1244940635}
   m_Layer: 14
   m_Name: Label_RedParasolTop
   m_TagString: Untagged
@@ -21107,18 +20965,6 @@ Transform:
   m_Father: {fileID: 624028301}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1244940635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1244940633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3b34c0c5dd2344468eb945c47b011cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1244940636
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25604,7 +25450,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1422788471}
   - component: {fileID: 1422788473}
-  - component: {fileID: 1422788472}
   m_Layer: 0
   m_Name: PoseFrame_SakuraChair1 (1)
   m_TagString: ObjectArea
@@ -25629,18 +25474,6 @@ Transform:
   m_Father: {fileID: 650539496}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 90}
---- !u!114 &1422788472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1422788470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &1422788473
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -26064,7 +25897,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1430483250}
-  - component: {fileID: 1430483252}
   - component: {fileID: 1430483251}
   m_Layer: 14
   m_Name: GroundVehicleBlockArea
@@ -26101,18 +25933,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 12663642784c5eb45a76037aad385789, type: 3}
---- !u!114 &1430483252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1430483249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e0458cc4419f43f4956cf61525a0945, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1435402283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27045,7 +26865,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1487625539}
   - component: {fileID: 1487625541}
-  - component: {fileID: 1487625540}
   m_Layer: 2
   m_Name: FishingFrame (5)
   m_TagString: ObjectArea
@@ -27071,18 +26890,6 @@ Transform:
   m_Father: {fileID: 518907792}
   m_RootOrder: 63
   m_LocalEulerAnglesHint: {x: 0, y: 219.319, z: 0}
---- !u!114 &1487625540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1487625538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ba4758d68daf794e8d9d991120921ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &1487625541
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -27566,7 +27373,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1548910148}
   - component: {fileID: 1548910150}
-  - component: {fileID: 1548910149}
   m_Layer: 0
   m_Name: PoseFrame_Bench (1)
   m_TagString: ObjectArea
@@ -27591,18 +27397,6 @@ Transform:
   m_Father: {fileID: 1288966509}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 180, y: 180, z: 180}
---- !u!114 &1548910149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1548910147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &1548910150
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -28013,7 +27807,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1563826998}
   - component: {fileID: 1563827000}
-  - component: {fileID: 1563826999}
   m_Layer: 2
   m_Name: FishingFrame (4)
   m_TagString: ObjectArea
@@ -28039,18 +27832,6 @@ Transform:
   m_Father: {fileID: 518907792}
   m_RootOrder: 62
   m_LocalEulerAnglesHint: {x: 0, y: -156.91301, z: 0}
---- !u!114 &1563826999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563826997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ba4758d68daf794e8d9d991120921ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &1563827000
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -30690,6 +30471,7 @@ MonoBehaviour:
     runSpeed: 5
     jumpPower: 5
     animatorController: {fileID: 9100000, guid: 019901d3486cc411abc6c84594c03743, type: 2}
+    runThreshold: 0.8
   motionV2Data:
     walkSpeed: 2
     runSpeed: 4
@@ -30701,6 +30483,34 @@ MonoBehaviour:
     landingRollSpeed: 4
     useMoveTurn: 1
     Gravity: 50
+    GravityRestoreRate: 1.018
+    walkThreshold: 0.3
+    runThreshold: 0.5
+    fallingTimeThreshold: 0.08
+    fallingSpeedThreshold: 18
+    landingSpeedThreshold: 30
+    landingImpactSpeedThreshold: 40
+    landingRollSpeedThreshold: 0.1
+    moveTurnAngleThreshold: 0.5
+    moveTurnSpeedThreshold: 0.5
+    moveTurnTimeThreshold: 0.3
+    moveTurnReleaseTime: 0.6
+    moveTurnReverseSpeed: 0.56
+    jumpInputDelayTime: 0.008
+    jumpDashSpeedThreshold: 0.95
+    walkClipBaseSpeed: 0.01
+    firstJumpCurveTime: 0.4
+    secondJumpCurveTime: 0.764
+    firstDoubleJumpCurveTime: 0.4
+    secondDoubleJumpCurveTime: 0.7
+    stampClipPlayTime: 1
+    landingClipPlayTime: 1
+    landingRollClipPlayTime: 0.8
+    moveTurnClipPlayTime: 0.591
+    jumpEaseSpeedThreshold: 2
+    jumpEaseSpeedRate: 0.1
+    jumpDoubleAvailableTimeUp: 1
+    jumpDoubleAvailableTimeDown: 1
   OnAddedLocalPlayer:
     m_PersistentCalls:
       m_Calls: []
@@ -36423,7 +36233,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1891661047}
   - component: {fileID: 1891661049}
-  - component: {fileID: 1891661048}
   m_Layer: 2
   m_Name: FishingFrame
   m_TagString: ObjectArea
@@ -36449,18 +36258,6 @@ Transform:
   m_Father: {fileID: 518907792}
   m_RootOrder: 58
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1891661048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1891661046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ba4758d68daf794e8d9d991120921ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &1891661049
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -39560,7 +39357,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2031904775}
   - component: {fileID: 2031904777}
-  - component: {fileID: 2031904776}
   m_Layer: 0
   m_Name: PoseFrame_Bench (3)
   m_TagString: ObjectArea
@@ -39585,18 +39381,6 @@ Transform:
   m_Father: {fileID: 650539496}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 270, y: 90, z: 90}
---- !u!114 &2031904776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2031904774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d736dfa2b2bf0439e8241adfe70600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &2031904777
 SphereCollider:
   m_ObjectHideFlags: 0
