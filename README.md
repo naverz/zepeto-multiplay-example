@@ -143,12 +143,12 @@ Schema > Player class indicates the current state of the user connected to the W
 Room creation / entry / character creation processing code.
 >Room 생성 / 입장 / 캐릭터 생성 처리 코드입니다.
 
-- [Server](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/World.multiplay/index.ts#L11)<br/>
-When the player connects to the server for the first time, a Room object is created and the onCreate event is called.
->Server에 처음 Player가 접속할 때 Room객체가 생성되고 onCreate 이벤트가 호출됩니다. 
+[Server](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/World.multiplay/index.ts#L11)<br/>
+- When the player connects to the server for the first time, a Room object is created and the onCreate event is called.
+>- Server에 처음 Player가 접속할 때 Room객체가 생성되고 onCreate 이벤트가 호출됩니다. 
 
-The onJoin event is called whenever a new player enters the room. Create a StateObject for the new Player in the event and add it to the State.
->onJoin 이벤트는 Room에 새로운 Player가 입장할 때 마다 호출됩니다. 해당 이벤트에 새로운 Player의 StateObject를 생성해 State에 추가 합니다. 
+- The onJoin event is called whenever a new player enters the room. Create a StateObject for the new Player in the event and add it to the State.
+>- onJoin 이벤트는 Room에 새로운 Player가 입장할 때 마다 호출됩니다. 해당 이벤트에 새로운 Player의 StateObject를 생성해 State에 추가 합니다. 
 
 ```typescript
 onCreate(options: SandboxOptions) {
@@ -176,11 +176,11 @@ async onJoin(client: SandboxPlayer) {
 }
 ```
 
-- [Client](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L14) </br>
-When a Player enters a Room, the RoomCreated and RoomJoined events are called.
->Player가 Room에 입장하면 RoomCreated와 RoomJoined 이벤트가 호출됩니다.
-Register an event in OnStateChage(State, isFirst:true) to receive server state changes upon room entry. 
->Room에 입장이 완료되면 서버 상태 변경을 수신하기 위해서 OnStateChage(State, isFirst:true)에 이벤트를 등록합니다. 
+[Client](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L14) </br>
+- When a Player enters a Room, the RoomCreated and RoomJoined events are called.
+>- Player가 Room에 입장하면 RoomCreated와 RoomJoined 이벤트가 호출됩니다.
+- Register an event in OnStateChage(State, isFirst:true) to receive server state changes upon room entry. 
+>- Room에 입장이 완료되면 서버 상태 변경을 수신하기 위해서 OnStateChage(State, isFirst:true)에 이벤트를 등록합니다. 
 
 ```typescript
 Start()
@@ -214,10 +214,10 @@ OnStateChange(state: State, isFirst: boolean) {
     join.forEach((player: Player, sessionId: string) => this.OnJoinPlayer(sessionId, player));
 }
 ```
-Connect the OnJoinPlayer event to the player object so that it can receive events when a new player enters the room.
->Room에 새로운 플레이가 입장할때 에벤트를 수신 할 수 있도록 player 객체에 OnJoinPlayer 이벤트를 연결합니다. 
-When OnJoinPlayer is called, a CharacterController instance for the player is created and the character loading event (OnAddedPlayer / OnAddedLocalPlayer) is initialized.
->OnJoinPlayer 호출시 해당 플레이어용 CharacterController instance를 생성하고, 캐릭터 로딩 이벤트(OnAddedPlayer / OnAddedLocalPlayer)를 연결합니다.
+- Connect the OnJoinPlayer event to the player object so that it can receive events when a new player enters the room.
+>- Room에 새로운 플레이가 입장할때 에벤트를 수신 할 수 있도록 player 객체에 OnJoinPlayer 이벤트를 연결합니다. 
+- When OnJoinPlayer is called, a CharacterController instance for the player is created and the character loading event (OnAddedPlayer / OnAddedLocalPlayer) is initialized.
+>- OnJoinPlayer 호출시 해당 플레이어용 CharacterController instance를 생성하고, 캐릭터 로딩 이벤트(OnAddedPlayer / OnAddedLocalPlayer)를 연결합니다.
 
 ```typescript
 OnJoinPlayer(sessionId: string, player: Player) {
@@ -250,8 +250,8 @@ This is the logic to synchronize the location and status of players in the room.
 >Room내에 Player들의 위치와 상태를  Sync 하는 로직입니다. 
 
 - Server<br/>
-Create an 'onChangedTransform' message listener to receive the location of individual clients. Add logic to change the server's player state when the onChangedTransform message is received. The changed server state is then passed to the client's onStateChange.
->개별 클라이언트의 위치를 수신 받을수 있도록 'onChangedTransform' 메시지 리스너를 생성합니다. onChangedTransform 메시지가 수신되면, 서버의 player state를 변경하도록 로직을 추가합니다. 이때 변경된 서버 상태는 클라이언트의 onStateChange로 전달됩니다. 
+- Create an 'onChangedTransform' message listener to receive the location of individual clients. Add logic to change the server's player state when the onChangedTransform message is received. The changed server state is then passed to the client's onStateChange.
+>- 개별 클라이언트의 위치를 수신 받을수 있도록 'onChangedTransform' 메시지 리스너를 생성합니다. onChangedTransform 메시지가 수신되면, 서버의 player state를 변경하도록 로직을 추가합니다. 이때 변경된 서버 상태는 클라이언트의 onStateChange로 전달됩니다. 
 
 ```typescript
 onCreate(options: SandboxOptions) {
@@ -268,10 +268,10 @@ onCreate(options: SandboxOptions) {
 ```
 
 - Client<br/>
-1. [Send Character location information](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L108) </br>
+- 1. [Send Character location information](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L108) </br>
 
-To update the position of my character (local player) to the server, after updating the position of the character in the `RoomData` object, pass `"onChangedTransform"` as a keyword. Information such as character status and inventory settings can also be freely defined and delivered.
->내 캐릭터(local player)의 위치를 서버에 업데이트 하려면, RoomData 객체에 캐릭터 위치를 업데이트 한 후, onChangedTransform를 키워드로 전달합니다. 캐릭터의 상태나 인벤토리 설정등과 같은 정보도 자유롭게 정의하여 전달 할 수 있습니다.
+- To update the position of my character (local player) to the server, after updating the position of the character in the `RoomData` object, pass `"onChangedTransform"` as a keyword. Information such as character status and inventory settings can also be freely defined and delivered.
+>- 내 캐릭터(local player)의 위치를 서버에 업데이트 하려면, RoomData 객체에 캐릭터 위치를 업데이트 한 후, onChangedTransform를 키워드로 전달합니다. 캐릭터의 상태나 인벤토리 설정등과 같은 정보도 자유롭게 정의하여 전달 할 수 있습니다.
 
 ```typescript
 private SendTransform(transform: UnityEngine.Transform) {
@@ -293,9 +293,9 @@ private SendTransform(transform: UnityEngine.Transform) {
     }
 ```
 
-2. [Sync other players location information](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L74)</br>
-The OnStateChange event function is called when the State (character state or position) changes on the server. Update the received character's State to the locally created CharacterController instance.
->OnStateChange 이벤트 함수는 서버에서 State (캐릭터 상태 또는 위치)가 변경시 호출됩니다. 수신된 캐릭터의 State를 로컬에 생성된 CharacterController instance에 업데이트 합니다. 
+- 2. [Sync other players location information](https://github.com/naverz/zepeto-multiplay-example/blob/77128679e86dcee15816b060b9809033dc2a8bc0/Assets/ZepetoScripts/ClientStarter.ts#L74)</br>
+- The OnStateChange event function is called when the State (character state or position) changes on the server. Update the received character's State to the locally created CharacterController instance.
+>- OnStateChange 이벤트 함수는 서버에서 State (캐릭터 상태 또는 위치)가 변경시 호출됩니다. 수신된 캐릭터의 State를 로컬에 생성된 CharacterController instance에 업데이트 합니다. 
 
 ```typescript
  playerState.OnChange += (changedValues) => {
@@ -315,8 +315,8 @@ The OnStateChange event function is called when the State (character state or po
 Logic for when the player leaves the room.
 >Room에서 Player가 퇴장할 때 필요한 로직을 삽입합니다.
 - [Server](https://github.com/naverz/zepeto-multiplay-example/blob/774ec92ccc3cca7ceb6ccbf5d6ee6ac2c15363c4/Assets/World.multiplay/index.ts#L92) </br>
-The onLeave event is called when the player leaves the room and removes the player from the State>players list.
->Player가 Room을 떠날때 onLeave이벤트가 호출됩니다. 이때 해당 player를 State>players 목록에서 제거합니다. 
+- The onLeave event is called when the player leaves the room and removes the player from the State>players list.
+>- Player가 Room을 떠날때 onLeave이벤트가 호출됩니다. 이때 해당 player를 State>players 목록에서 제거합니다. 
 
 ```typescript
 async onLeave(client: SandboxPlayer, consented ?: boolean) {
@@ -340,10 +340,10 @@ async onLeave(client: SandboxPlayer, consented ?: boolean) {
 ```
 
 - [Client](https://github.com/naverz/zepeto-multiplay-example/blob/774ec92ccc3cca7ceb6ccbf5d6ee6ac2c15363c4/Assets/ZepetoScripts/ClientStarter.ts#L85) </br>
-When the player leaves the room, the server logic changes the player state. The changed state information is called with the onStateChange event registered in the client.
->Player가 Room을 떠나면 서버 로직에서 player state를 변경합니다. 변경된 state정보는 클라이언트에 등록된 onStateChange 이벤트로 호출됩니다. 
+- When the player leaves the room, the server logic changes the player state. The changed state information is called with the onStateChange event registered in the client.
+>- Player가 Room을 떠나면 서버 로직에서 player state를 변경합니다. 변경된 state정보는 클라이언트에 등록된 onStateChange 이벤트로 호출됩니다. 
 We then delete the disconnected character from the ZepetoPlayers instance in the client code.
->이때 클라이언트 코드내에 ZepetoPlayers instance에서도 퇴장된 캐릭터를 삭제합니다. 
+>- 이때 클라이언트 코드내에 ZepetoPlayers instance에서도 퇴장된 캐릭터를 삭제합니다. 
 
 ```typescript
 OnStateChange(state: State, isFirst: boolean) {
