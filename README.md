@@ -60,7 +60,7 @@ This is an example written based on [ZEPETO Multiplay](https://studio.zepeto.me/
 
 <br/><br/>
 
-## 멀티플레이 가이드 영상
+## Multiplay Guide Video Tutorials
 [ Part 1 : Setting up multiplayer ]
 - Learn to set up the environment for multiplayer development for both client and server. 
 >멀티플레이 서버 생성부터 클라이언트 생성까지, 멀티플레이 월드 개발을 위한 환경 설정을 진행합니다.
