@@ -1,0 +1,32 @@
+fileFormatVersion: 2
+guid: 7f8029d1df5b7474eadb3b4720b3ca19
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst PlayerSync_1 = require(\"../Player/PlayerSync\");\r\nconst
+    MultiplayManager_1 = require(\"../Common/MultiplayManager\");\r\nclass InstantiateGhost
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    OnTriggerEnter(coll) {\r\n       
+    if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal) {\r\n           
+    return;\r\n        }\r\n        MultiplayManager_1.default.instance.Instantiate(\"Ghost(TransformSync)\",
+    \"\", UnityEngine_1.Vector3.zero, UnityEngine_1.Quaternion.identity);\r\n   
+    }\r\n}\r\nexports.default = InstantiateGhost;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSW5zdGFudGlhdGVHaG9zdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkluc3RhbnRpYXRlR2hvc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBbUQ7QUFDbkQsNkNBQTREO0FBQzVELHFEQUE4QztBQUM5QyxpRUFBMEQ7QUFFMUQsTUFBcUIsZ0JBQWlCLFNBQVEscUNBQXFCO0lBRXZELGNBQWMsQ0FBQyxJQUFjO1FBQ2pDLElBQUcsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFlBQVksU0FBQyxvQkFBVSxFQUFHLEVBQUUsT0FBTyxFQUFDO1lBQ25ELE9BQU87U0FDVjtRQUNELDBCQUFnQixDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsc0JBQXNCLEVBQUMsRUFBRSxFQUFDLHFCQUFPLENBQUMsSUFBSSxFQUFFLHdCQUFVLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDdkcsQ0FBQztDQUNKO0FBUkQsbUNBUUMifQ==","assetPath":"Assets/ZepetoScripts/MultiplaySync/Sample
+    Code/InstantiateGhost.ts","manifest":{"properties":[],"name":"InstantiateGhost","description":""},"isCompiled":true}'
+  typescriptHash: c739fa8e125a05b2a741a4e865941f48
+  onlyWriteTrigger: 0

@@ -1,0 +1,39 @@
+fileFormatVersion: 2
+guid: 3ded7a597d35444c49dcefb49818531b
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst TransformSyncHelper_1 = require(\"../Transform/TransformSyncHelper\");\r\nclass
+    GhostMove extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        //It''s a random-moving Ghost npc script.\r\n        super(...arguments);\r\n       
+    this.moveSpeed = 5;\r\n        this.m_targetPos = UnityEngine_1.Vector3.zero;\r\n   
+    }\r\n    Start() {\r\n        this.m_tfHelper = this.GetComponent($typeof(TransformSyncHelper_1.default));\r\n       
+    this.m_tfHelper.moveSpeed = this.moveSpeed;\r\n        this.StartCoroutine(this.NewGetTargetPos());\r\n   
+    }\r\n    Update() {\r\n        if (!this.m_tfHelper.isOwner)\r\n            return;\r\n       
+    this.transform.position = UnityEngine_1.Vector3.MoveTowards(this.transform.position,
+    this.m_targetPos, this.moveSpeed * UnityEngine_1.Time.deltaTime);\r\n    }\r\n   
+    *NewGetTargetPos() {\r\n        while (true) {\r\n            if (this.m_tfHelper.isOwner)
+    {\r\n                this.m_targetPos = new UnityEngine_1.Vector3(UnityEngine_1.Random.Range(-10,
+    10), 0.5, UnityEngine_1.Random.Range(-10, 10));\r\n                this.transform.LookAt(this.m_targetPos);\r\n           
+    }\r\n            yield new UnityEngine_1.WaitForSeconds(5);\r\n        }\r\n   
+    }\r\n}\r\nexports.default = GhostMove;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2hvc3RNb3ZlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiR2hvc3RNb3ZlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXNEO0FBQ3RELDZDQUEwRTtBQUcxRSwwRUFBbUU7QUFFbkUsTUFBcUIsU0FBVSxTQUFRLHFDQUFxQjtJQUE1RDtRQUNJLHdDQUF3Qzs7UUFFZCxjQUFTLEdBQVUsQ0FBQyxDQUFDO1FBRXZDLGdCQUFXLEdBQVcscUJBQU8sQ0FBQyxJQUFJLENBQUM7SUF3Qi9DLENBQUM7SUF0QlcsS0FBSztRQUNULElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFlBQVksU0FBQyw2QkFBbUIsRUFBRyxDQUFDO1FBQzNELElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUM7UUFDM0MsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsZUFBZSxFQUFFLENBQUMsQ0FBQztJQUNoRCxDQUFDO0lBRU8sTUFBTTtRQUNYLElBQUcsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLE9BQU87WUFDdkIsT0FBTztRQUNYLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxHQUFHLHFCQUFPLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxFQUFFLElBQUksQ0FBQyxXQUFXLEVBQUUsSUFBSSxDQUFDLFNBQVMsR0FBRyxrQkFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO0lBQzdILENBQUM7SUFFTyxDQUFDLGVBQWU7UUFDcEIsT0FBTSxJQUFJLEVBQUM7WUFDUCxJQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsT0FBTyxFQUFFO2dCQUN4QixJQUFJLENBQUMsV0FBVyxHQUFHLElBQUkscUJBQU8sQ0FBQyxvQkFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUUsRUFBRSxFQUFFLENBQUMsRUFBRSxHQUFHLEVBQUUsb0JBQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQTtnQkFDakYsSUFBSSxDQUFDLFNBQVMsQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxDQUFDO2FBQzNDO1lBQ0QsTUFBTSxJQUFJLDRCQUFjLENBQUMsQ0FBQyxDQUFDLENBQUM7U0FDL0I7SUFDTCxDQUFDO0NBRUo7QUE3QkQsNEJBNkJDIn0=","assetPath":"Assets/ZepetoScripts/MultiplaySync/Sample
+    Code/GhostMove.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"moveSpeed","type":"System.Single","isArray":false,"initValue":["5"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"GhostMove","description":""},"isCompiled":true}'
+  typescriptHash: 19b62f1254c26dd86ee2c3a8ff97c5fe
+  onlyWriteTrigger: 0
