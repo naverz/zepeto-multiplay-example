@@ -235,7 +235,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
             case(PositionInterpolationType.Lerp):
                 this.transform.position = Vector3.Lerp(this.transform.position, targetPos, extraSpeed * Time.fixedDeltaTime);
                 break;
-            case(PositionInterpolationType.MoveToWard):
+            case(PositionInterpolationType.MoveToward):
                 this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, extraSpeed * Time.fixedDeltaTime );
                 break;
             case(PositionInterpolationType.Estimate):
@@ -252,7 +252,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
             case(RotationInterpolationType.Lerp):
                 this.transform.rotation = Quaternion.Lerp(this.transform.rotation, this.newGet().rotation, this.rotateSpeed * Time.fixedDeltaTime);
                 break;
-            case(RotationInterpolationType.MoveToWard):
+            case(RotationInterpolationType.MoveToward):
                 this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, this.newGet().rotation, this.rotateSpeed * Time.fixedDeltaTime);
                 break;
         }
@@ -266,7 +266,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
             case(ScaleInterpolationType.Lerp):
                 this.transform.localScale = Vector3.Lerp(this.transform.localScale, this.newGet().scale, this.scaleUpSpeed * Time.fixedDeltaTime);
                 break;
-            case(ScaleInterpolationType.MoveToWard):
+            case(ScaleInterpolationType.MoveToward):
                 this.transform.localScale = Vector3.MoveTowards(this.transform.localScale, this.newGet().scale, this.scaleUpSpeed * Time.fixedDeltaTime);
                 break;
         }
@@ -402,7 +402,7 @@ export enum UpdateOwner {
 export enum PositionInterpolationType {
     None = 0,
     Lerp,
-    MoveToWard,
+    MoveToward,
     Estimate, // Estimate the speed with each received position and speed conversion value
 }
 
@@ -415,13 +415,13 @@ export enum PositionExtrapolationType {
 export enum RotationInterpolationType {
     None = 0,
     Lerp,
-    MoveToWard,
+    MoveToward,
 }
 
 export enum ScaleInterpolationType {
     None = 0,
     Lerp,
-    MoveToWard,
+    MoveToward,
 }
 
 interface SyncState {

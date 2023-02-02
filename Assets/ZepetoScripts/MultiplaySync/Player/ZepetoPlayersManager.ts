@@ -1,9 +1,9 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
-import {WorldService, ZepetoWorldMultiplay} from "ZEPETO.World";
+import {WorldService, ZepetoWorldMultiplay, Content, OfficialContentType, ZepetoWorldContent} from "ZEPETO.World";
 import {Room} from "ZEPETO.Multiplay";
 import {SpawnInfo, ZepetoPlayer, ZepetoPlayers} from 'ZEPETO.Character.Controller';
 import {State, Player} from "ZEPETO.Multiplay.Schema";
-import {Object, Quaternion, Vector3, WaitForSeconds} from "UnityEngine";
+import {GameObject, Object, Quaternion, Vector3, WaitForSeconds} from "UnityEngine";
 import PlayerSync from './PlayerSync';
 import TransformSyncHelper,{PositionExtrapolationType, PositionInterpolationType} from '../Transform/TransformSyncHelper';
 
@@ -14,32 +14,42 @@ export enum ZepetoPlayerSpawnType {
     MultiplayerSpawnLater,// When you calling "ZepetoPlayers.instance.CreatePlayerWithUserId()" to another script
 }
 export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
-    public static instance: ZepetoPlayersManager;
-    
     /** Options **/
     @Header("SpawnOption")
     public readonly ZepetoPlayerSpawnType : ZepetoPlayerSpawnType = ZepetoPlayerSpawnType.MultiplayerSpawnOnJoinRoom;
 
     @Header("Position")
     public readonly UseHardSnap: boolean = true;
-    @Tooltip("Force the position to be modified if it is farther than this number.") @SerializeField() private HardSnapIfDistanceGreaterThan: number = 10;
-    public readonly InterpolationType: PositionInterpolationType = PositionInterpolationType.MoveToWard;
+    @Tooltip("Force the position to be modified if it is farther than this number.") @SerializeField() private readonly HardSnapIfDistanceGreaterThan: number = 10;
+    public readonly InterpolationType: PositionInterpolationType = PositionInterpolationType.MoveToward;
     public readonly ExtrapolationType: PositionExtrapolationType = PositionExtrapolationType.Disable;
-    @Tooltip("The creditworthiness of the offset figure of the extrapolation.") @SerializeField() private extraMultipler: number = 1;
-    @Header("Gesture")
-    public readonly syncGesture: boolean = true; // You can synchronize gestures within a resource folder.
+    @Tooltip("The creditworthiness of the offset figure of the extrapolation.") @SerializeField() private readonly extraMultipler: number = 1;
+    @Header("Gesture Sync")
+    public readonly GetAnimationClipFromResources: boolean = true; // You can synchronize gestures within a resource folder.
+    public readonly UseZepetoGestureAPI: boolean = false; // Synchronize the Zepeto World Gesture API animation.
 
     private multiplay: ZepetoWorldMultiplay;
     private room: Room;
     private currentPlayers: Map<string, Player> = new Map<string, Player>();
 
+    
     /* Singleton */
+    private static m_instance: ZepetoPlayersManager = null;
+    public static get instance(): ZepetoPlayersManager {
+        if (this.m_instance === null) {
+            this.m_instance = GameObject.FindObjectOfType<ZepetoPlayersManager>();
+            if (this.m_instance === null) {
+                this.m_instance = new GameObject(ZepetoPlayersManager.name).AddComponent<ZepetoPlayersManager>();
+            }
+        }
+        return this.m_instance;
+    }
     private Awake() {
-        if (ZepetoPlayersManager.instance == null) {
-            ZepetoPlayersManager.instance = this;
-            Object.DontDestroyOnLoad(this.gameObject);
+        if (ZepetoPlayersManager.m_instance !== null && ZepetoPlayersManager.m_instance !== this) {
+            GameObject.Destroy(this.gameObject);
         } else {
-            return;
+            ZepetoPlayersManager.m_instance = this;
+            GameObject.DontDestroyOnLoad(this.gameObject);
         }
     }
 
@@ -60,6 +70,9 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
                 ZepetoPlayers.instance.OnAddedPlayer.AddListener((sessionId: string) => {
                     this.AddPlayerSync(sessionId);
                 });
+                if(this.UseZepetoGestureAPI) {
+                    this.ContentRequest();
+                }
                 break;
         }
     }
@@ -106,16 +119,27 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
         playerStateSync.isLocal = isLocal;
         playerStateSync.player = player;
         playerStateSync.zepetoPlayer = zepetoPlayer;
-        playerStateSync.syncGesture = this.syncGesture;
-        playerStateSync.m_tfHelper = tfHelper;
+        playerStateSync.GetAnimationClipFromResources = this.GetAnimationClipFromResources;
+        playerStateSync.UseZepetoGestureAPI = this.UseZepetoGestureAPI;
+        playerStateSync.tfHelper = tfHelper;
 
-        const isUseInjectSpeed:boolean = this.InterpolationType == PositionInterpolationType.MoveToWard 
+        const isUseInjectSpeed:boolean = this.InterpolationType == PositionInterpolationType.MoveToward 
             || this.InterpolationType == PositionInterpolationType.Lerp 
             || this.ExtrapolationType == PositionExtrapolationType.FixedSpeed;
         
         if(isUseInjectSpeed) {
             playerStateSync.isUseInjectSpeed= true;
         }
+    }
+    
+    public GestureAPIContents:Map<string,Content> =  new Map<string, Content>();
+    private ContentRequest() {
+        //Gesture Type Request
+        ZepetoWorldContent.RequestOfficialContentList(OfficialContentType.All, contents => {
+            for(let i=0; i<contents.length; i++) {
+                this.GestureAPIContents.set(contents[i].Id, contents[i]);
+            }
+        });
     }
     
     private OnJoinPlayer(sessionId: string, player: Player) {

@@ -1,0 +1,52 @@
+fileFormatVersion: 2
+guid: 956de2558fee74a0fa08a9adb2f63a37
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nconst
+    ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst Thumbnail_1 = require(\"./Thumbnail\");\r\nclass
+    GestureLoader extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        super(...arguments);\r\n        this.contents = [];\r\n        this.thumbnails
+    = [];\r\n        this._count = 50;\r\n    }\r\n    Start() {\r\n        ZEPETO_Character_Controller_1.ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(()
+    => {\r\n            this._myCharacter = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;\r\n           
+    // In order to take a thumbnail with my character, You need to request the content
+    after the character is created.\r\n            this.ContentRequest();\r\n       
+    });\r\n    }\r\n    // 1. Receive content from the server\r\n    ContentRequest()
+    {\r\n        // All Type Request\r\n        ZEPETO_World_1.ZepetoWorldContent.RequestOfficialContentList(ZEPETO_World_1.OfficialContentType.All,
+    contents => {\r\n            this.contents = contents;\r\n            for (let
+    i = 0; i < this._count; i++) {\r\n                if (!this.contents[i].IsDownloadedThumbnail)
+    {\r\n                    // Take a thumbnail photo using my character\r\n                   
+    this.contents[i].DownloadThumbnail(this._myCharacter, () => {\r\n                       
+    this.CreateThumbnailObjcet(this.contents[i]);\r\n                    });\r\n               
+    }\r\n                else {\r\n                    this.CreateThumbnailObjcet(this.contents[i]);\r\n               
+    }\r\n            }\r\n        });\r\n    }\r\n    // 2. Creating Thumbnail Objects\r\n   
+    CreateThumbnailObjcet(content) {\r\n        const newThumb = UnityEngine_1.GameObject.Instantiate(this._prefThumb,
+    this._contentsParent);\r\n        newThumb.GetComponent($typeof(Thumbnail_1.default)).content
+    = content;\r\n        // Button Listener for each thumbnail\r\n        newThumb.GetComponent($typeof(UnityEngine_UI_1.Button)).onClick.AddListener(()
+    => {\r\n            this.LoadAnimation(content);\r\n        });\r\n        this.thumbnails.push(newThumb);\r\n   
+    }\r\n    // 3. Loading Animation\r\n    LoadAnimation(content) {\r\n        //
+    Verify animation load\r\n        if (!content.IsDownloadedAnimation) {\r\n           
+    // If the animation has not been downloaded, download it.\r\n            content.DownloadAnimation(()
+    => {\r\n                // play animation clip\r\n                this._myCharacter.SetGesture(content.AnimationClip);\r\n           
+    });\r\n        }\r\n        else {\r\n            this._myCharacter.SetGesture(content.AnimationClip);\r\n       
+    }\r\n    }\r\n}\r\nexports.default = GestureLoader;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2VzdHVyZUxvZGFlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkdlc3R1cmVMb2RhZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBc0Q7QUFDdEQsNkVBQXFHO0FBQ3JHLCtDQUE4RjtBQUM5RixtREFBd0Q7QUFDeEQsNkNBQTBFO0FBQzFFLDJDQUFvQztBQUVwQyxNQUFxQixhQUFjLFNBQVEscUNBQXFCO0lBQWhFOztRQUU4QixhQUFRLEdBQWMsRUFBRSxDQUFDO1FBQ3pCLGVBQVUsR0FBaUIsRUFBRSxDQUFDO1FBRTlCLFdBQU0sR0FBVyxFQUFFLENBQUM7SUE2RGxELENBQUM7SUF2REcsS0FBSztRQUNELDJDQUFhLENBQUMsUUFBUSxDQUFDLGtCQUFrQixDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDdkQsSUFBSSxDQUFDLFlBQVksR0FBRywyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQztZQUU5RSxrSEFBa0g7WUFDbEgsSUFBSSxDQUFDLGNBQWMsRUFBRSxDQUFDO1FBQzFCLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUdELHFDQUFxQztJQUM3QixjQUFjO1FBQ2xCLG1CQUFtQjtRQUNuQixpQ0FBa0IsQ0FBQywwQkFBMEIsQ0FBQyxrQ0FBbUIsQ0FBQyxHQUFHLEVBQUUsUUFBUSxDQUFDLEVBQUU7WUFDOUUsSUFBSSxDQUFDLFFBQVEsR0FBRyxRQUFRLENBQUM7WUFDekIsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7Z0JBQ2xDLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDLHFCQUFxQixFQUFFO29CQUN6Qyw0Q0FBNEM7b0JBQzVDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUMsaUJBQWlCLENBQUMsSUFBSSxDQUFDLFlBQVksRUFBQyxHQUFHLEVBQUU7d0JBQ3RELElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7b0JBQ2pELENBQUMsQ0FBQyxDQUFDO2lCQUNOO3FCQUFNO29CQUNILElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7aUJBQ2hEO2FBQ0o7UUFDTCxDQUFDLENBQUMsQ0FBQztJQUVQLENBQUM7SUFFRCxnQ0FBZ0M7SUFDeEIscUJBQXFCLENBQUMsT0FBZ0I7UUFDMUMsTUFBTSxRQUFRLEdBQWUsd0JBQVUsQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLFVBQVUsRUFBRSxJQUFJLENBQUMsZUFBZSxDQUFlLENBQUM7UUFDekcsUUFBUSxDQUFDLFlBQVksU0FBQyxtQkFBUyxHQUFJLE9BQU8sR0FBRyxPQUFPLENBQUM7UUFFckQscUNBQXFDO1FBQ3JDLFFBQVEsQ0FBQyxZQUFZLFNBQUMsdUJBQU0sR0FBSSxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNyRCxJQUFJLENBQUMsYUFBYSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1FBQ2hDLENBQUMsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDbkMsQ0FBQztJQUVELHVCQUF1QjtJQUNmLGFBQWEsQ0FBQyxPQUFnQjtRQUNsQyx3QkFBd0I7UUFDeEIsSUFBSSxDQUFDLE9BQU8sQ0FBQyxxQkFBcUIsRUFBRTtZQUNoQyx5REFBeUQ7WUFDekQsT0FBTyxDQUFDLGlCQUFpQixDQUFDLEdBQUcsRUFBRTtnQkFDM0Isc0JBQXNCO2dCQUN0QixJQUFJLENBQUMsWUFBWSxDQUFDLFVBQVUsQ0FBQyxPQUFPLENBQUMsYUFBYSxDQUFDLENBQUM7WUFDeEQsQ0FBQyxDQUFDLENBQUM7U0FDTjthQUFNO1lBQ0gsSUFBSSxDQUFDLFlBQVksQ0FBQyxVQUFVLENBQUMsT0FBTyxDQUFDLGFBQWEsQ0FBQyxDQUFDO1NBQ3ZEO0lBQ0wsQ0FBQztDQUNKO0FBbEVELGdDQWtFQyJ9","assetPath":"Assets/ZepetoGestureAPI/GestureLodaer.ts","manifest":{"properties":[{"assembly":"ZEPETO.World","name":"contents","type":"ZEPETO.World.Content[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"thumbnails","type":"UnityEngine.GameObject[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"mscorlib","name":"_count","type":"System.Single","isArray":false,"initValue":["50"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"_contentsParent","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"_prefThumb","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"GestureLoader","description":""},"isCompiled":true}'
+  typescriptHash: e83568a30c61e473c75fcc43ad4a354b
+  onlyWriteTrigger: 0
