@@ -12077,60 +12077,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -632984290874289097, guid: c1f4802bdfdc18041972e0fbba469fc8, type: 3}
---- !u!1 &1180022184
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1180022186}
-  - component: {fileID: 1180022185}
-  m_Layer: 0
-  m_Name: ClientStarter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1180022185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180022184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1673316429, guid: 921f0445823004a16a499d629dd566a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  script:
-    keys:
-    - multiplay
-    unityValues:
-    - {fileID: 2139547152}
-    values:
-    - 
-    unityArrayValues: []
-    arrayValues: []
-    script: {fileID: 4458252877524076426, guid: fb07876dbe0ca47bd8b0ac901bcb2066, type: 3}
-    isExpaned: 0
---- !u!4 &1180022186
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180022184}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1186265931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12508,6 +12454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1220436004}
   - component: {fileID: 1220436003}
+  - component: {fileID: 1220436005}
   m_Layer: 0
   m_Name: ZepetoPlayers
   m_TagString: Untagged
@@ -12527,6 +12474,15 @@ MonoBehaviour:
   m_Script: {fileID: -206261123, guid: d328479d06a874cd1bda7a86f9cdd3a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnAddedLocalPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAddedPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRemovedPlayer:
+    m_PersistentCalls:
+      m_Calls: []
   setting: {fileID: 0}
   cameraData:
     cameraPrefab: {fileID: 5806182858035002866, guid: 5be4eddc5b02f4ec0a07a69db26df962, type: 3}
@@ -12535,11 +12491,22 @@ MonoBehaviour:
     maxPitch: 80
     minPitch: -80
     offset: {x: 0, y: 1, z: 0}
-    speed: 20
-    sensitivity: 5
+    lockXAxis: 0
     layer:
       serializedVersion: 2
       m_Bits: 4294967295
+    speed: 20
+    sensitivity: 5
+    useEnhancedOption: 0
+    enhancedOptionData:
+      zoomSpeed: 2
+      zoomDampSpeed: 5
+      rotationSpeed: 4
+      rotationDampSpeed: 15
+      viewportMargin: 3
+      characterCulling: 1
+      targetScaleWeight: 1
+    collisionTimeThreshold: 0.1
   characterData:
     slopeLimit: 45
     stepOffset: 0.3
@@ -12561,6 +12528,7 @@ MonoBehaviour:
     inputAsset: {fileID: -944628639613478452, guid: 090135bc9e5ee4c89b1642240eb723fe, type: 3}
     eventSystem: {fileID: 7328100774219155841, guid: 67971ba158b48401988f9aad07940d6f, type: 3}
     useDefaultVirtualController: 1
+    useDefaultInputController: 1
     controlMode: 0
     verticalController: {fileID: 8523051459139762370, guid: 94b12a3ac04f847b3b97a3f2f3ada18c, type: 3}
     horizontalController: {fileID: 2787167779785370926, guid: 3ab0e77a21c9b4013b1f6931717f766a, type: 3}
@@ -12590,19 +12558,21 @@ MonoBehaviour:
     useMoveTurn: 1
     Gravity: 50
     GravityRestoreRate: 1.018
+    GravityHorizontalWeight: 0.08
     walkThreshold: 0.3
     runThreshold: 0.5
     fallingTimeThreshold: 0.08
     fallingSpeedThreshold: 18
+    landingTimeThreshold: 0.038
     landingSpeedThreshold: 30
     landingImpactSpeedThreshold: 40
     landingRollSpeedThreshold: 0.1
+    landingCastScaleWeight: 0.1
     moveTurnAngleThreshold: 0.5
     moveTurnSpeedThreshold: 0.5
     moveTurnTimeThreshold: 0.3
     moveTurnReleaseTime: 0.6
     moveTurnReverseSpeed: 0.56
-    jumpInputDelayTime: 0.008
     jumpDashSpeedThreshold: 0.95
     walkClipBaseSpeed: 0.01
     firstJumpCurveTime: 0.4
@@ -12617,15 +12587,6 @@ MonoBehaviour:
     jumpEaseSpeedRate: 0.1
     jumpDoubleAvailableTimeUp: 1
     jumpDoubleAvailableTimeDown: 1
-  OnAddedLocalPlayer:
-    m_PersistentCalls:
-      m_Calls: []
-  OnAddedPlayer:
-    m_PersistentCalls:
-      m_Calls: []
-  OnRemovedPlayer:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &1220436004
 Transform:
   m_ObjectHideFlags: 0
@@ -12638,8 +12599,49 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1220436005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220436002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1673316429, guid: 921f0445823004a16a499d629dd566a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script:
+    keys:
+    - ZepetoPlayerSpawnType
+    - UseHardSnap
+    - HardSnapIfDistanceGreaterThan
+    - InterpolationType
+    - ExtrapolationType
+    - extraMultipler
+    - syncGesture
+    unityValues:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    values:
+    - '{"type":"System.String, mscorlib","value":"2"}'
+    - '{"type":"System.Boolean, mscorlib","value":"False"}'
+    - '{"type":"System.Single, mscorlib","value":"10"}'
+    - '{"type":"System.String, mscorlib","value":"2"}'
+    - '{"type":"System.String, mscorlib","value":"0"}'
+    - '{"type":"System.Single, mscorlib","value":"1"}'
+    - '{"type":"System.Boolean, mscorlib","value":"False"}'
+    unityArrayValues: []
+    arrayValues: []
+    script: {fileID: 4458252877524076426, guid: 6d846a38c15014273bd5ba91998e261d, type: 3}
+    isExpaned: 0
 --- !u!1 &1227495127
 GameObject:
   m_ObjectHideFlags: 0
@@ -21759,6 +21761,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2139547153}
   - component: {fileID: 2139547152}
+  - component: {fileID: 2139547154}
   m_Layer: 0
   m_Name: WorldMultiplay
   m_TagString: Untagged
@@ -21784,8 +21787,10 @@ MonoBehaviour:
   host: 127.0.0.1
   port: 10080
   isSecure: 0
+  matchMakeHost: 
   authToken: 
   detectWeakSignalTerm: 5
+  uniqueId: 
 --- !u!4 &2139547153
 Transform:
   m_ObjectHideFlags: 0
@@ -21798,8 +21803,43 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2139547154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139547151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1673316429, guid: 921f0445823004a16a499d629dd566a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script:
+    keys:
+    - multiplay
+    - room
+    - pingCheckCount
+    - diffServerTime
+    - latency
+    unityValues:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    values:
+    - 
+    - 
+    - '{"type":"System.Single, mscorlib","value":"0"}'
+    - '{"type":"System.Single, mscorlib","value":"0"}'
+    - '{"type":"System.Single, mscorlib","value":"0"}'
+    unityArrayValues: []
+    arrayValues: []
+    script: {fileID: 4458252877524076426, guid: daa5246585831481aabbf61fcc5114da, type: 3}
+    isExpaned: 0
 --- !u!1 &2146575268
 GameObject:
   m_ObjectHideFlags: 0

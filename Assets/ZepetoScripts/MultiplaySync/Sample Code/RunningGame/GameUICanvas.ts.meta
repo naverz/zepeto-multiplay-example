@@ -1,0 +1,56 @@
+fileFormatVersion: 2
+guid: c73a84e0618f84d4391b73f5c51e4b08
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst
+    ReportItems_1 = require(\"../../Sample Code/RunningGame/ReportItems\");\r\nconst
+    ZepetoPlayersManager_1 = require(\"../../Player/ZepetoPlayersManager\");\r\nconst
+    TransformSyncHelper_1 = require(\"../../Transform/TransformSyncHelper\");\r\nclass
+    GameUICanvas extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n       
+    this.multiplay = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\r\n       
+    this.Init();\r\n        this.multiplay.add_RoomJoined((room) => {\r\n           
+    this.room = room;\r\n            this.startButton.onClick.AddListener(() => {\r\n               
+    this.room.Send(\"StartRunningRequest\");\r\n                this.startButton.interactable
+    = false;\r\n            });\r\n            this.room.AddMessageHandler(\"InitRunningGame\",
+    (enteredSessionId) => {\r\n                this.Init();\r\n            });\r\n       
+    });\r\n    }\r\n    Init() {\r\n        this.startButton.gameObject.SetActive(true);\r\n       
+    this.startButton.interactable = true;\r\n        this.timerText.gameObject.SetActive(true);\r\n       
+    this.reportView.GetComponentsInChildren($typeof(ReportItems_1.default)).forEach((ri)
+    => {\r\n            UnityEngine_1.Object.Destroy(ri.gameObject);\r\n        });\r\n       
+    this.timerText.text = \"Wait...\";\r\n        this.interpolationOptionText.text
+    = TransformSyncHelper_1.PositionInterpolationType[ZepetoPlayersManager_1.default.instance.InterpolationType];\r\n       
+    this.extrapolationOptionText.text = TransformSyncHelper_1.PositionExtrapolationType[ZepetoPlayersManager_1.default.instance.ExtrapolationType];\r\n   
+    }\r\n    SetCountUI(num) {\r\n        this.startButton.gameObject.SetActive(false);\r\n       
+    if (num == 0) {\r\n            this.timerText.gameObject.SetActive(false);\r\n       
+    }\r\n        else {\r\n            this.timerText.gameObject.SetActive(true);\r\n           
+    this.timerText.text = num.toString();\r\n        }\r\n    }\r\n    SetNewReport(userId,
+    lapTime) {\r\n        let usersID = [];\r\n        usersID.push(userId);\r\n       
+    ZEPETO_World_1.ZepetoWorldHelper.GetUserInfo(usersID, (info) => {\r\n           
+    const newReport = UnityEngine_1.Object.Instantiate(this.reportItemPref, this.reportView);\r\n           
+    newReport.GetComponent($typeof(ReportItems_1.default)).sessionIdText.text = info[0].name;\r\n           
+    newReport.GetComponent($typeof(ReportItems_1.default)).lapTimeText.text = lapTime.toString();\r\n       
+    }, () => { console.log(\"err\"); });\r\n    }\r\n    DeleteReport() {\r\n       
+    this.reportView.GetComponentsInChildren($typeof(ReportItems_1.default)).forEach((ri)
+    => UnityEngine_1.Object.Destroy(ri.gameObject));\r\n    }\r\n}\r\nexports.default
+    = GameUICanvas;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2FtZVVJQ2FudmFzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiR2FtZVVJQ2FudmFzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUFrRjtBQUdsRiwrQ0FBMkU7QUFDM0UsMkVBQW9FO0FBQ3BFLDRFQUFxRTtBQUNyRSw2RUFBeUc7QUFFekcsTUFBcUIsWUFBYSxTQUFRLHFDQUFxQjtJQVduRCxLQUFLO1FBQ1QsSUFBSSxDQUFDLFNBQVMsR0FBRyxvQkFBTSxDQUFDLGdCQUFnQixTQUFDLG1DQUFvQixFQUFHLENBQUM7UUFDakUsSUFBSSxDQUFDLElBQUksRUFBRSxDQUFDO1FBRVosSUFBSSxDQUFDLFNBQVMsZ0JBQWUsQ0FBQyxJQUFVLEVBQUUsRUFBRTtZQUN4QyxJQUFJLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztZQUNqQixJQUFJLENBQUMsV0FBVyxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRSxFQUFFO2dCQUNyQyxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxDQUFDO2dCQUN0QyxJQUFJLENBQUMsV0FBVyxDQUFDLFlBQVksR0FBRyxLQUFLLENBQUM7WUFDMUMsQ0FBQyxDQUFDLENBQUM7WUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDLGlCQUFpQixDQUFDLGlCQUFpQixFQUFFLENBQUMsZ0JBQWdCLEVBQUUsRUFBRTtnQkFDaEUsSUFBSSxDQUFDLElBQUksRUFBRSxDQUFDO1lBQ2hCLENBQUMsQ0FBQyxDQUFDO1FBQ1AsQ0FBQyxFQUFBO0lBQ0wsQ0FBQztJQUVNLElBQUk7UUFDUCxJQUFJLENBQUMsV0FBVyxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDNUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxZQUFZLEdBQUcsSUFBSSxDQUFDO1FBQ3JDLElBQUksQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUMxQyxJQUFJLENBQUMsVUFBVSxDQUFDLHVCQUF1QixTQUFDLHFCQUFXLEdBQUksT0FBTyxDQUFDLENBQUMsRUFBRSxFQUFDLEVBQUU7WUFDakUsb0JBQU0sQ0FBQyxPQUFPLENBQUMsRUFBRSxDQUFDLFVBQVUsQ0FBQyxDQUFDO1FBQ2xDLENBQUMsQ0FBQyxDQUFDO1FBQ0gsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLEdBQUcsU0FBUyxDQUFDO1FBQ2hDLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxJQUFJLEdBQUcsK0NBQXlCLENBQUMsOEJBQW9CLENBQUMsUUFBUSxDQUFDLGlCQUFpQixDQUFDLENBQUM7UUFDL0csSUFBSSxDQUFDLHVCQUF1QixDQUFDLElBQUksR0FBRywrQ0FBeUIsQ0FBQyw4QkFBb0IsQ0FBQyxRQUFRLENBQUMsaUJBQWlCLENBQUMsQ0FBQztJQUNuSCxDQUFDO0lBRU0sVUFBVSxDQUFDLEdBQVc7UUFDekIsSUFBSSxDQUFDLFdBQVcsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQzdDLElBQUcsR0FBRyxJQUFJLENBQUMsRUFBRTtZQUNULElBQUksQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztTQUM5QzthQUFJO1lBQ0QsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQzFDLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxHQUFHLEdBQUcsQ0FBQyxRQUFRLEVBQUUsQ0FBQztTQUN4QztJQUNMLENBQUM7SUFFTSxZQUFZLENBQUMsTUFBYSxFQUFFLE9BQWM7UUFDN0MsSUFBSSxPQUFPLEdBQVksRUFBRSxDQUFDO1FBQzFCLE9BQU8sQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUM7UUFDckIsZ0NBQWlCLENBQUMsV0FBVyxDQUFDLE9BQU8sRUFBRSxDQUFDLElBQWEsRUFBRSxFQUFFO1lBQ3JELE1BQU0sU0FBUyxHQUFHLG9CQUFNLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxjQUFjLEVBQUUsSUFBSSxDQUFDLFVBQVUsQ0FBZSxDQUFDO1lBQ3pGLFNBQVMsQ0FBQyxZQUFZLFNBQUMscUJBQVcsR0FBSSxhQUFhLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUM7WUFDeEUsU0FBUyxDQUFDLFlBQVksU0FBQyxxQkFBVyxHQUFJLFdBQVcsQ0FBQyxJQUFJLEdBQUcsT0FBTyxDQUFDLFFBQVEsRUFBRSxDQUFDO1FBQ2hGLENBQUMsRUFBQyxHQUFFLEVBQUUsR0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FBQyxDQUFBLENBQUEsQ0FBQyxDQUFDLENBQUM7SUFDaEMsQ0FBQztJQUVNLFlBQVk7UUFDZixJQUFJLENBQUMsVUFBVSxDQUFDLHVCQUF1QixTQUFDLHFCQUFXLEdBQUksT0FBTyxDQUFDLENBQUMsRUFBRSxFQUFDLEVBQUUsQ0FBRSxvQkFBTSxDQUFDLE9BQU8sQ0FBQyxFQUFFLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQztJQUMxRyxDQUFDO0NBQ0o7QUEvREQsK0JBK0RDIn0=","assetPath":"Assets/ZepetoScripts/MultiplaySync/Sample
+    Code/RunningGame/GameUICanvas.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"startButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"timerText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"reportView","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"reportItemPref","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"interpolationOptionText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"extrapolationOptionText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"GameUICanvas","description":""},"isCompiled":true}'
+  typescriptHash: a35a58ec47708cdff55b5e9643d57559
+  onlyWriteTrigger: 0

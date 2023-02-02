@@ -1,88 +1,258 @@
 import {Sandbox, SandboxOptions, SandboxPlayer} from "ZEPETO.Multiplay";
-import {DataStorage} from "ZEPETO.Multiplay.DataStorage";
-import {Player, Transform, Vector3} from "ZEPETO.Multiplay.Schema";
+import {Player, sVector3, sQuaternion, SyncTransform, PlayerAdditionalValue, ZepetoAnimationParam} from "ZEPETO.Multiplay.Schema";
 
 export default class extends Sandbox {
-
-
-    storageMap:Map<string,DataStorage> = new Map<string, DataStorage>();
-    
-    constructor() {
-        super();
-    }
+    private sessionIdQueue: string[] = [];
+    private InstantiateObjs : InstantiateObj[] = [];
+    private masterClient = () => this.loadPlayer(this.sessionIdQueue[0]);
 
     onCreate(options: SandboxOptions) {
-
-        // Room 객체가 생성될 때 호출됩니다.
-        // Room 객체의 상태나 데이터 초기화를 처리 한다.
-
-        this.onMessage("onChangedTransform", (client, message) => {
+        /**Zepeto Player Sync**/
+        this.onMessage(MESSAGE.SyncPlayer, (client, message) => {
             const player = this.state.players.get(client.sessionId);
+            /** State **/
+            //animation param
+            const animationParam = new ZepetoAnimationParam();
+            animationParam.State = message.animationParam.State;
+            animationParam.MoveState = message.animationParam.MoveState;
+            animationParam.JumpState = message.animationParam.JumpState;
+            animationParam.LandingState = message.animationParam.LandingState;
+            animationParam.MotionSpeed = message.animationParam.MotionSpeed;
+            animationParam.FallSpeed = message.animationParam.FallSpeed;
+            animationParam.Acceleration = message.animationParam.Acceleration;
+            animationParam.MoveProgress = message.animationParam.MoveProgress;
+            player.animationParam = animationParam;
 
-            const transform = new Transform();
-            transform.position = new Vector3();
-            transform.position.x = message.position.x;
-            transform.position.y = message.position.y;
-            transform.position.z = message.position.z;
+            player.gestureName = message.gestureName; // Gesture
 
-            transform.rotation = new Vector3();
-            transform.rotation.x = message.rotation.x;
-            transform.rotation.y = message.rotation.y;
-            transform.rotation.z = message.rotation.z;
-
-            player.transform = transform;
+            //additional Value
+            if(message.playerAdditionalValue != null) {
+                const pAdditionalValue = new PlayerAdditionalValue();
+                pAdditionalValue.additionalWalkSpeed = message.playerAdditionalValue.additionalWalkSpeed;
+                pAdditionalValue.additionalRunSpeed = message.playerAdditionalValue.additionalRunSpeed;
+                pAdditionalValue.additionalJumpPower = message.playerAdditionalValue.additionalJumpPower;
+                player.playerAdditionalValue = pAdditionalValue;
+            }
         });
 
-        this.onMessage("onChangedState", (client, message) => {
-            const player = this.state.players.get(client.sessionId);
-            player.state = message.state;
-            player.subState = message.subState; // Character Controller V2
+        /**Transform Sync**/
+        this.onMessage(MESSAGE.SyncTransform, (client, message) => {
+            if (!this.state.SyncTransforms.has(message.Id)) {
+                const syncTransform = new SyncTransform();
+                this.state.SyncTransforms.set(message.Id.toString(), syncTransform);
+            }
+            const syncTransform:SyncTransform = this.state.SyncTransforms.get(message.Id);
+            syncTransform.Id = message.Id;
+            syncTransform.position = new sVector3();
+            syncTransform.position.x = message.position.x;
+            syncTransform.position.y = message.position.y;
+            syncTransform.position.z = message.position.z;
+
+            syncTransform.localPosition = new sVector3();
+            syncTransform.localPosition.x = message.localPosition.x;
+            syncTransform.localPosition.y = message.localPosition.y;
+            syncTransform.localPosition.z = message.localPosition.z;
+            
+            syncTransform.rotation = new sQuaternion();
+            syncTransform.rotation.x = message.rotation.x;
+            syncTransform.rotation.y = message.rotation.y;
+            syncTransform.rotation.z = message.rotation.z;
+            syncTransform.rotation.w = message.rotation.w;
+            
+            syncTransform.scale = new sVector3();
+            syncTransform.scale.x = message.scale.x;
+            syncTransform.scale.y = message.scale.y;
+            syncTransform.scale.z = message.scale.z;
+            
+            syncTransform.sendTime = message.sendTime;
+        });
+        this.onMessage(MESSAGE.SyncTransformStatus, (client, message) => {
+            const syncTransform:SyncTransform = this.state.SyncTransforms.get(message.Id);
+            syncTransform.status = message.Status;
+        });
+
+        this.onMessage(MESSAGE.ChangeOwner, (client,message:string) => {
+            this.broadcast(MESSAGE.ChangeOwner+message, client.sessionId);
+        });
+        this.onMessage(MESSAGE.Instantiate, (client,message:InstantiateObj) => {
+            const InstantiateObj: InstantiateObj = {
+                Id: message.Id,
+                prefabName: message.prefabName,
+                ownerSessionId: message.ownerSessionId,
+                spawnPosition: message.spawnPosition,
+                spawnRotation: message.spawnRotation,
+            };
+            this.InstantiateObjs.push(InstantiateObj);
+            this.broadcast(MESSAGE.Instantiate, InstantiateObj);
+        });
+        this.onMessage(MESSAGE.RequestInstantiateCache, (client) => {
+            this.InstantiateObjs.forEach((obj)=>{
+                client.send(MESSAGE.Instantiate, obj);
+            });
+        });
+
+        /**SyncDOTween**/
+        this.onMessage(MESSAGE.SyncDOTween, (client, message: syncTween) => {
+            const tween: syncTween = {
+                Id: message.Id,
+                position: message.position,
+                nextIndex: message.nextIndex,
+                loopCount: message.loopCount,
+                sendTime: message.sendTime,
+            };
+            this.broadcast(MESSAGE.ResponsePosition + message.Id, tween, {except: this.masterClient()});
+        });
+
+        /**Common**/
+        this.onMessage(MESSAGE.CheckServerTimeRequest, (client, message) => {
+            let Timestamp = +new Date();
+            client.send(MESSAGE.CheckServerTimeResponse, Timestamp);
+        });
+        this.onMessage(MESSAGE.CheckMaster, (client, message) => {
+            console.log(`master->, ${this.sessionIdQueue[0]}`);
+            this.broadcast(MESSAGE.MasterResponse, this.sessionIdQueue[0]);
+        });
+        this.onMessage(MESSAGE.PauseUser, (client) => {
+            if(this.sessionIdQueue.includes(client.sessionId)) {
+                const pausePlayerIndex = this.sessionIdQueue.indexOf(client.sessionId);
+                this.sessionIdQueue.splice(pausePlayerIndex, 1);
+                
+                if (pausePlayerIndex == 0) {
+                    console.log(`master->, ${this.sessionIdQueue[0]}`);
+                    this.broadcast(MESSAGE.MasterResponse, this.sessionIdQueue[0]);
+                }
+            }
+        });
+        this.onMessage(MESSAGE.UnPauseUser, (client) => {
+            if(!this.sessionIdQueue.includes(client.sessionId)) {
+                this.sessionIdQueue.push(client.sessionId);
+                this.broadcast(MESSAGE.MasterResponse, this.sessionIdQueue[0]);
+            }
+        });
+        
+        /** Sample Code **/
+        this.onMessage(MESSAGE.BlockEnter, (client,transformId:string) => {
+            this.broadcast(MESSAGE.BlockEnter+transformId, client.sessionId);
+        });
+        this.onMessage(MESSAGE.BlockExit, (client,transformId:string) => {
+            this.broadcast(MESSAGE.BlockExit+transformId, client.sessionId);
+        });
+        this.onMessage(MESSAGE.SendBlockEnterCache, (client,blockCache) => {
+            this.loadPlayer(blockCache.newJoinSessionId)?.send(MESSAGE.BlockEnter+blockCache.transformId, client.sessionId);
+        });
+        
+        this.onMessage(MESSAGE.CoinAcquired, (client,transformId:string) => {
+            this.masterClient()?.send(MESSAGE.CoinAcquired+transformId, client.sessionId);
+        });
+        
+        /** Racing Game **/
+        let isStartGame:boolean = false;
+        let startServerTime:number;
+        this.onMessage(MESSAGE.StartRunningRequest, (client) => {
+            if(!isStartGame) {
+                isStartGame = true;
+                startServerTime = +new Date();
+
+                this.broadcast(MESSAGE.CountDownStart, startServerTime);
+            }
+        });
+        this.onMessage(MESSAGE.FinishPlayer, (client,finishTime:number) => {
+            let playerLapTime = (finishTime-startServerTime)/1000;
+            console.log(`${client.sessionId}is enter! ${playerLapTime}`);
+            const gameReport: GameReport = {
+                playerUserId: client.userId,
+                playerLapTime: playerLapTime,
+            };
+            this.broadcast(MESSAGE.ResponseGameReport, gameReport);
+            if(isStartGame) {
+                isStartGame = false;
+                let gameEndTime:number = +new Date();
+                this.broadcast(MESSAGE.FirstPlayerGetIn, gameEndTime);
+            }
         });
     }
-    
-   
-    
-    async onJoin(client: SandboxPlayer) {
 
-        // schemas.json 에서 정의한 player 객체를 생성 후 초기값 설정.
-        console.log(`[OnJoin] sessionId : ${client.sessionId}, HashCode : ${client.hashCode}, userId : ${client.userId}`)
-
+    onJoin(client: SandboxPlayer) {
         const player = new Player();
         player.sessionId = client.sessionId;
-
         if (client.hashCode) {
             player.zepetoHash = client.hashCode;
         }
         if (client.userId) {
             player.zepetoUserId = client.userId;
         }
-
-        // [DataStorage] 입장한 Player의 DataStorage Load
-        const storage: DataStorage = client.loadDataStorage();
-
-        this.storageMap.set(client.sessionId,storage);
-
-        let visit_cnt = await storage.get("VisitCount") as number;
-        if (visit_cnt == null) visit_cnt = 0;
-
-        console.log(`[OnJoin] ${client.sessionId}'s visiting count : ${visit_cnt}`)
-
-        // [DataStorage] Player의 방문 횟수를 갱신한다음 Storage Save
-        await storage.set("VisitCount", ++visit_cnt);
-
-        // client 객체의 고유 키값인 sessionId 를 사용해서 Player 객체를 관리.
-        // set 으로 추가된 player 객체에 대한 정보를 클라이언트에서는 players 객체에 add_OnAdd 이벤트를 추가하여 확인 할 수 있음.
-        this.state.players.set(client.sessionId, player);
+        var players = this.state.players;
+        players.set(client.sessionId, player);
+        if(!this.sessionIdQueue.includes(client.sessionId)) {
+            this.sessionIdQueue.push(client.sessionId.toString());
+        }
+        console.log(`join player, ${client.sessionId}`);
     }
 
-    onTick(deltaTime: number): void {
-        //  서버에서 설정된 타임마다 반복적으로 호출되며 deltaTime 을 이용하여 일정한 interval 이벤트를 관리할 수 있음.
-    }
+    onLeave(client: SandboxPlayer, consented?: boolean) {
+        console.log(`leave player, ${client.sessionId}`);
 
-    async onLeave(client: SandboxPlayer, consented?: boolean) {
-
-        // allowReconnection 설정을 통해 순단에 대한 connection 유지 처리등을 할 수 있으나 기본 가이드에서는 즉시 정리.
-        // delete 된 player 객체에 대한 정보를 클라이언트에서는 players 객체에 add_OnRemove 이벤트를 추가하여 확인 할 수 있음.
         this.state.players.delete(client.sessionId);
+        if(this.sessionIdQueue.includes(client.sessionId)) {
+            const leavePlayerIndex = this.sessionIdQueue.indexOf(client.sessionId);
+            this.sessionIdQueue.splice(leavePlayerIndex, 1);
+            if (leavePlayerIndex == 0) {
+                console.log(`master->, ${this.sessionIdQueue[0]}`);
+                this.broadcast(MESSAGE.MasterResponse, this.sessionIdQueue[0]);
+            }
+        }
     }
 }
+
+interface syncTween {
+    Id: string,
+    position: sVector3,
+    nextIndex: number,
+    loopCount: number,
+    sendTime: number,
+}
+
+interface InstantiateObj{
+    Id:string;
+    prefabName:string;
+    ownerSessionId?:string;
+    spawnPosition?:sVector3;
+    spawnRotation?:sQuaternion;
+}
+
+/** racing game **/
+interface GameReport{
+    playerUserId : string;
+    playerLapTime : number;
+}
+
+enum MESSAGE {
+    SyncPlayer = "SyncPlayer",
+    SyncTransform = "SyncTransform",
+    SyncTransformStatus = "SyncTransformStatus",
+    ChangeOwner = "ChangeOwner",
+    Instantiate = "Instantiate",
+    RequestInstantiateCache = "RequestInstantiateCache",
+    ResponsePosition = "ResponsePosition",
+    SyncDOTween = "SyncDOTween",
+    CheckServerTimeRequest = "CheckServerTimeRequest",
+    CheckServerTimeResponse = "CheckServerTimeResponse",
+    CheckMaster = "CheckMaster",
+    MasterResponse = "MasterResponse",
+    PauseUser = "PauseUser",
+    UnPauseUser = "UnPauseUser",
+
+    /** Sample Code **/
+    BlockEnter = "BlockEnter",
+    BlockExit = "BlockExit",
+    SendBlockEnterCache = "SendBlockEnterCache",
+    CoinAcquired = "CoinAcquired",
+
+    /** Racing Game **/
+    StartRunningRequest = "StartRunningRequest",
+    FinishPlayer = "FinishPlayer",
+    FirstPlayerGetIn = "FirstPlayerGetIn",
+    CountDownStart = "CountDownStart",
+    ResponseGameReport = "ResponseGameReport"
+}
+

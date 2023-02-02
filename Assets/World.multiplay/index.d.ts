@@ -708,7 +708,7 @@ declare module "@colyseus/schema" {
 
 declare module "ZEPETO.Multiplay" {
 
-    import { State, Schema } from 'ZEPETO.Multiplay.Schema'
+    import { State, Schema } from 'ZEPETO.Multiplay.Schema';
 
     interface SandboxPlayer {
         readonly sessionId: string;
@@ -717,9 +717,6 @@ declare module "ZEPETO.Multiplay" {
         
         send<T>(type: string | number, message?: T): void;
         send(message: Schema): void;
-        error(code: number, message?: string): void;
-        leave(code?: number, data?: string): void;
-        close(code?: number, data?: string): void;
     }
 
     class BroadcastMessage {
@@ -747,13 +744,13 @@ declare module "ZEPETO.Multiplay" {
         readonly clock: any;
         readonly roomId: string;
         readonly roomType: string;
+        readonly uniqueId?: string;
         readonly maxClients: number;
         readonly patchRate: number;
         readonly autoDispose: boolean;
         readonly state: State;
-        readonly clients: SandboxPlayer[];
+        readonly clients: IterableIterator<SandboxPlayer>;
         readonly allowReconnectionTime: number;
-        readonly matchMakeOption: string;
         readonly private: boolean;
         abstract onCreate?(options: SandboxOptions): void | Promise<void>;
         abstract onJoin?(client: SandboxPlayer): void | Promise<void>;
@@ -765,18 +762,20 @@ declare module "ZEPETO.Multiplay" {
         onMessage?<T = any>(messageType: '*', callback: (client: SandboxPlayer, type: string | number, message: T) => void): any;
         onMessage?<T = any>(messageType: string | number, callback: (client: SandboxPlayer, message: T) => void): any;
         broadcast?(type: string | number, message?: any, options?: IBroadcastOptions): any;
-        registerRPC?(method: Function): void;
         loadPlayer?(sessionId: string): SandboxPlayer;
+        setPrivate(isPrivate: boolean): Promise<void>;
+        kick(client: SandboxPlayer, reason?: string): Promise<void>;
     }
 }
 
 
 declare module 'ZEPETO.Multiplay.DataStorage' {    
     interface DataStorage {
-        set(key: string, value: string | number | bigint | boolean): Promise<boolean>;
-        get(key: string): Promise<string | number | bigint | boolean>;
+        set<T>(key: string, value: T) : Promise<boolean>;
+        get<T>(key: string): Promise<T>;
         remove(key: string): Promise<boolean>;
     }
+    function loadDataStorage(userId: string): Promise<DataStorage>;
 }
 
 declare module 'ZEPETO.Multiplay' {
@@ -795,15 +794,24 @@ declare module "ZEPETO.Multiplay.HttpService" {
         TextPlain = 'text/plain',
         TextXml = 'text/xml'
     }
+    type HttpBodyType = string | { [key: string]: any; };
+    type HttpHeader = { [key: string]: string | number; };
+    const enum HttpErrorType {
+        ERR_ACCESS_DENIED = 'ERR_ACCESS_DENIED'
+    }
+    interface HttpError extends Error {
+        message: string;
+        code?: string;
+    }
     interface HttpResponse {
         readonly statusCode: number;
         readonly statusText: string;
         readonly response: string;
     }
     interface HttpService {
-        getAsync(url: string, headers?: { [key: string]: string; }): Promise<HttpResponse>;
-        postAsync(url: string, body: string | { [key: string]: any; }, headers?: { [key: string]: string; }): Promise<HttpResponse>;
-        postAsync(url: string, body: string | { [key: string]: any; }, httpContentType: HttpContentType, headers?: { [key: string]: string; }): Promise<HttpResponse>;
+        getAsync(url: string, headers?: HttpHeader): Promise<HttpResponse>;
+        postAsync(url: string, body: HttpBodyType, headers?: HttpHeader): Promise<HttpResponse>;
+        postAsync(url: string, body: HttpBodyType, httpContentType: HttpContentType, headers?: HttpHeader): Promise<HttpResponse>;
     }
     const HttpService: HttpService;
 }

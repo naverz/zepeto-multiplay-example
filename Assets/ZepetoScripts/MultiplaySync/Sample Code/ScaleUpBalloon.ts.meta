@@ -1,0 +1,51 @@
+fileFormatVersion: 2
+guid: c96bd45b61046474e89d45f0844ad0d3
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst
+    PlayerSync_1 = require(\"../Player/PlayerSync\");\r\nconst TransformSyncHelper_1
+    = require(\"../Transform/TransformSyncHelper\");\r\nclass ScaleUpBalloon extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n        super(...arguments);\r\n       
+    // Sample of increasing balloon size when triggered enter\r\n        this.targetScaleMultipler
+    = 1.5;\r\n        this.scaleUpSpeed = 2;\r\n        this.resetSizeOnOtherPlayer
+    = true;\r\n        this.TargetScale = UnityEngine_1.Vector3.one;\r\n    }\r\n   
+    Start() {\r\n        this.m_tfHelper = this.GetComponent($typeof(TransformSyncHelper_1.default));\r\n       
+    this.m_tfHelper.scaleUpSpeed = this.scaleUpSpeed;\r\n        this.multiplay =
+    UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\r\n       
+    this.multiplay.add_RoomJoined((room) => {\r\n            this.room = room;\r\n           
+    this.room.AddMessageHandler(\"ChangeOwner\" + this.m_tfHelper.Id, (OwnerSessionId)
+    => {\r\n                this.m_tfHelper.ChangeOwner(OwnerSessionId.toString());\r\n               
+    if (this.resetSizeOnOtherPlayer) {\r\n                    this.TargetScale =
+    UnityEngine_1.Vector3.one;\r\n                    this.transform.localScale =
+    this.TargetScale;\r\n                }\r\n            });\r\n        });\r\n   
+    }\r\n    Update() {\r\n        if (!this.m_tfHelper.isOwner)\r\n            return;\r\n       
+    if (UnityEngine_1.Vector3.op_Inequality(this.transform.localScale, this.TargetScale))\r\n           
+    this.transform.localScale = UnityEngine_1.Vector3.MoveTowards(this.transform.localScale,
+    this.TargetScale, UnityEngine_1.Time.deltaTime * this.scaleUpSpeed);\r\n    }\r\n   
+    OnTriggerEnter(coll) {\r\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)
+    {\r\n            return;\r\n        }\r\n        if (!this.m_tfHelper?.isOwner)
+    {\r\n            this.room.Send(\"ChangeOwner\", this.m_tfHelper.Id);\r\n       
+    }\r\n        this.TargetScale = UnityEngine_1.Vector3.op_Multiply(this.transform.localScale,
+    this.targetScaleMultipler);\r\n    }\r\n}\r\nexports.default = ScaleUpBalloon;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2NhbGVVcEJhbGxvb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTY2FsZVVwQmFsbG9vbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUF3RTtBQUN4RSxpREFBcUQ7QUFFckQsK0NBQWtEO0FBRWxELHFEQUE4QztBQUM5QywwRUFBbUU7QUFFbkUsTUFBcUIsY0FBZSxTQUFRLHFDQUFxQjtJQUFqRTs7UUFDSSx5REFBeUQ7UUFDL0IseUJBQW9CLEdBQVUsR0FBRyxDQUFDO1FBQ2xDLGlCQUFZLEdBQVUsQ0FBQyxDQUFDO1FBQ3hCLDJCQUFzQixHQUFZLElBQUksQ0FBQztRQUt6RCxnQkFBVyxHQUFXLHFCQUFPLENBQUMsR0FBRyxDQUFDO0lBc0M5QyxDQUFDO0lBcENXLEtBQUs7UUFDVCxJQUFJLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQyxZQUFZLFNBQUMsNkJBQW1CLEVBQUcsQ0FBQztRQUMzRCxJQUFJLENBQUMsVUFBVSxDQUFDLFlBQVksR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDO1FBRWpELElBQUksQ0FBQyxTQUFTLEdBQUcsb0JBQU0sQ0FBQyxnQkFBZ0IsU0FBQyxtQ0FBb0IsRUFBRyxDQUFDO1FBQ2pFLElBQUksQ0FBQyxTQUFTLGdCQUFlLENBQUMsSUFBVSxFQUFFLEVBQUU7WUFDeEMsSUFBSSxDQUFDLElBQUksR0FBRSxJQUFJLENBQUM7WUFDaEIsSUFBSSxDQUFDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxhQUFhLEdBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxjQUFjLEVBQUUsRUFBRTtnQkFDN0UsSUFBSSxDQUFDLFVBQVUsQ0FBQyxXQUFXLENBQUMsY0FBYyxDQUFDLFFBQVEsRUFBRSxDQUFDLENBQUM7Z0JBQ3ZELElBQUcsSUFBSSxDQUFDLHNCQUFzQixFQUFDO29CQUMzQixJQUFJLENBQUMsV0FBVyxHQUFHLHFCQUFPLENBQUMsR0FBRyxDQUFDO29CQUMvQixJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsV0FBVyxDQUFDO2lCQUNoRDtZQUNMLENBQUMsQ0FBQyxDQUFDO1FBQ1AsQ0FBQyxFQUFBO0lBQ0wsQ0FBQztJQUVPLE1BQU07UUFDVixJQUFHLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxPQUFPO1lBQ3ZCLE9BQU87UUFFWCxJQXhDVyxxQkFBTyxDQXVENnBvQixhQUFjLENBZjFyb0IsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLEVBQUksSUFBSSxDQUFDLFdBQVc7WUFDNUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLEdBQUcscUJBQU8sQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLEVBQUUsSUFBSSxDQUFDLFdBQVcsRUFBRSxrQkFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDLENBQUM7SUFDekksQ0FBQztJQUVPLGNBQWMsQ0FBQyxJQUFjO1FBQ2pDLElBQUcsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFlBQVksU0FBQyxvQkFBVSxFQUFHLEVBQUUsT0FBTyxFQUFDO1lBQ25ELE9BQU87U0FDVjtRQUNELElBQUcsQ0FBQyxJQUFJLENBQUMsVUFBVSxFQUFFLE9BQU8sRUFBQztZQUN6QixJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxhQUFhLEVBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxFQUFFLENBQUMsQ0FBQztTQUNwRDtRQUVELElBQUksQ0FBQyxXQUFXLEdBcERMLHFCQUFPLENBdUR5eW5CLFdBQVksQ0FIcHpuQixJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsRUFBRyxJQUFJLENBQUMsb0JBQW9CLENBQUEsQ0FBQztJQUM3RSxDQUFDO0NBRUo7QUEvQ0QsaUNBK0NDIn0=","assetPath":"Assets/ZepetoScripts/MultiplaySync/Sample
+    Code/ScaleUpBalloon.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"targetScaleMultipler","type":"System.Single","isArray":false,"initValue":["1.5"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"mscorlib","name":"scaleUpSpeed","type":"System.Single","isArray":false,"initValue":["2"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"mscorlib","name":"resetSizeOnOtherPlayer","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"ScaleUpBalloon","description":""},"isCompiled":true}'
+  typescriptHash: 8cba2585061a8e17f98efbdb60ab268d
+  onlyWriteTrigger: 0
