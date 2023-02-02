@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44763172, g: 0.49760616, b: 0.57536626, a: 1}
+  m_IndirectSpecularColor: {r: 0.44763196, g: 0.49760652, b: 0.57536715, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9804,8 +9804,10 @@ MonoBehaviour:
     - InterpolationType
     - ExtrapolationType
     - extraMultipler
-    - syncGesture
+    - GetAnimationClipFromResources
+    - UseZepetoGestureAPI
     unityValues:
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -9820,7 +9822,8 @@ MonoBehaviour:
     - '{"type":"System.String, mscorlib","value":"2"}'
     - '{"type":"System.String, mscorlib","value":"0"}'
     - '{"type":"System.Single, mscorlib","value":"1"}'
-    - '{"type":"System.Boolean, mscorlib","value":"True"}'
+    - '{"type":"System.Boolean, mscorlib","value":"False"}'
+    - '{"type":"System.Boolean, mscorlib","value":"False"}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: 6d846a38c15014273bd5ba91998e261d, type: 3}
