@@ -145,6 +145,13 @@
       },
       "url": "https://upm.zepeto.run"
     },
+    "zepeto.buildit.loader": {
+      "version": "0.0.3",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://upm.zepeto.run"
+    },
     "zepeto.character": {
       "version": "3.1.13",
       "depth": 1,
