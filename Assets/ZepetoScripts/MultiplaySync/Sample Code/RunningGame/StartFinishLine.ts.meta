@@ -1,0 +1,41 @@
+fileFormatVersion: 2
+guid: f1a40fa71bd534e6297196b2f9031c24
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst
+    PlayerSync_1 = require(\"../../Player/PlayerSync\");\r\nconst MultiplayManager_1
+    = require(\"../../Common/MultiplayManager\");\r\nclass StartFinishLine extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n        this.m_collider
+    = this.GetComponent($typeof(UnityEngine_1.BoxCollider));\r\n        this.Init();\r\n       
+    this.multiplay = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\r\n       
+    this.multiplay.add_RoomJoined((room) => {\r\n            this.room = room;\r\n       
+    });\r\n    }\r\n    Init() {\r\n        this.m_collider.isTrigger = false;\r\n       
+    this.m_isStartCheck = false;\r\n        this.m_isFinish = false;\r\n    }\r\n   
+    StartGame() {\r\n        this.m_collider.isTrigger = true;\r\n    }\r\n    OnTriggerEnter(coll)
+    {\r\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)
+    {\r\n            return;\r\n        }\r\n        if (!this.m_isStartCheck) {\r\n           
+    this.m_isStartCheck = true;\r\n            return;\r\n        }\r\n        if
+    (!this.m_isFinish) {\r\n            this.room.Send(\"FinishPlayer\", MultiplayManager_1.default.instance.GetServerTime());\r\n           
+    this.m_isFinish = true;\r\n        }\r\n    }\r\n}\r\nexports.default = StartFinishLine;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU3RhcnRGaW5pc2hMaW5lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU3RhcnRGaW5pc2hMaW5lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUEwRDtBQUMxRCwrQ0FBa0Q7QUFHbEQsd0RBQWlEO0FBQ2pELG9FQUE2RDtBQUU3RCxNQUFxQixlQUFnQixTQUFRLHFDQUFxQjtJQU90RCxLQUFLO1FBQ1QsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsWUFBWSxTQUFDLHlCQUFXLEVBQUcsQ0FBQztRQUNuRCxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUM7UUFFWixJQUFJLENBQUMsU0FBUyxHQUFHLG9CQUFNLENBQUMsZ0JBQWdCLFNBQUMsbUNBQW9CLEVBQUcsQ0FBQztRQUNqRSxJQUFJLENBQUMsU0FBUyxnQkFBZSxDQUFDLElBQVUsRUFBRSxFQUFFO1lBQ3hDLElBQUksQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDO1FBQ3JCLENBQUMsRUFBQztJQUNOLENBQUM7SUFFTSxJQUFJO1FBQ1AsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLEdBQUcsS0FBSyxDQUFDO1FBQ2xDLElBQUksQ0FBQyxjQUFjLEdBQUcsS0FBSyxDQUFDO1FBQzVCLElBQUksQ0FBQyxVQUFVLEdBQUcsS0FBSyxDQUFDO0lBQzVCLENBQUM7SUFFTSxTQUFTO1FBQ1osSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO0lBQ3JDLENBQUM7SUFFTyxjQUFjLENBQUMsSUFBYztRQUNqQyxJQUFHLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxZQUFZLFNBQUMsb0JBQVUsRUFBRyxFQUFFLE9BQU8sRUFBQztZQUNuRCxPQUFPO1NBQ1Y7UUFDRCxJQUFHLENBQUMsSUFBSSxDQUFDLGNBQWMsRUFBRTtZQUNyQixJQUFJLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQztZQUMzQixPQUFPO1NBQ1Y7UUFDRCxJQUFHLENBQUMsSUFBSSxDQUFDLFVBQVUsRUFBRTtZQUNqQixJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxjQUFjLEVBQUUsMEJBQWdCLENBQUMsUUFBUSxDQUFDLGFBQWEsRUFBRSxDQUFDLENBQUM7WUFDMUUsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUM7U0FDMUI7SUFDTCxDQUFDO0NBRUo7QUF6Q0Qsa0NBeUNDIn0=","assetPath":"Assets/ZepetoScripts/MultiplaySync/Sample
+    Code/RunningGame/StartFinishLine.ts","manifest":{"properties":[],"name":"StartFinishLine","description":""},"isCompiled":true}'
+  typescriptHash: 09d9e957853c2a8a27f9e53b2b097e28
+  onlyWriteTrigger: 0

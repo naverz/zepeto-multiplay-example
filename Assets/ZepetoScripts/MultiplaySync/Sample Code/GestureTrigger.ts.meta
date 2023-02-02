@@ -1,0 +1,39 @@
+fileFormatVersion: 2
+guid: 572a2baae1df24f338c4cb58c4ef8129
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst UnityEngine = require(\"UnityEngine\");\r\nconst
+    PlayerSync_1 = require(\"../Player/PlayerSync\");\r\nclass GestureTrigger extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n        //A
+    script that plays gestures when a Zepeto character is triggered.\r\n        super(...arguments);\r\n       
+    this.m_exGestures = [];\r\n    }\r\n    //Gesture testcode\r\n    OnTriggerEnter(coll)
+    {\r\n        if (!coll.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\r\n           
+    return;\r\n        this.m_gestureCoroutine = this.StartCoroutine(this.gesture(coll.GetComponent($typeof(PlayerSync_1.default)).zepetoPlayer));\r\n   
+    }\r\n    OnTriggerExit(coll) {\r\n        if (!coll.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\r\n           
+    return;\r\n        this.StopCoroutine(this.m_gestureCoroutine);\r\n    }\r\n   
+    *gesture(zepetoPlayer) {\r\n        let i = 0;\r\n        while (true) {\r\n           
+    i = i >= this.m_exGestures.length - 1 ? 0 : i + 1;\r\n            zepetoPlayer.character.SetGesture(this.m_exGestures[i]);\r\n           
+    yield new UnityEngine.WaitForSeconds(this.m_exGestures[i].length);\r\n           
+    yield new UnityEngine.WaitForSeconds(3);\r\n        }\r\n    }\r\n}\r\nexports.default
+    = GestureTrigger;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2VzdHVyZVRyaWdnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJHZXN0dXJlVHJpZ2dlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCw2Q0FBdUQ7QUFDdkQsMkNBQTJDO0FBRTNDLHFEQUE4QztBQUU5QyxNQUFxQixjQUFlLFNBQVEscUNBQXFCO0lBQWpFO1FBQ0ksb0VBQW9FOztRQUUxQyxpQkFBWSxHQUFnQyxFQUFFLENBQUM7SUEwQjdFLENBQUM7SUF2Qkcsa0JBQWtCO0lBQ1YsY0FBYyxDQUFDLElBQWM7UUFDakMsSUFBRyxDQUFDLElBQUksQ0FBQyxZQUFZLFNBQUMsb0JBQVUsRUFBRyxFQUFFLE9BQU87WUFDeEMsT0FBTztRQUNYLElBQUksQ0FBQyxrQkFBa0IsR0FBRyxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLFlBQVksU0FBQyxvQkFBVSxHQUFJLFlBQVksQ0FBQyxDQUFDLENBQUM7SUFDOUcsQ0FBQztJQUVPLGFBQWEsQ0FBQyxJQUFjO1FBQ2hDLElBQUcsQ0FBQyxJQUFJLENBQUMsWUFBWSxTQUFDLG9CQUFVLEVBQUcsRUFBRSxPQUFPO1lBQ3hDLE9BQU87UUFDWCxJQUFJLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDO0lBQ2hELENBQUM7SUFFTSxDQUFFLE9BQU8sQ0FBQyxZQUEwQjtRQUN2QyxJQUFJLENBQUMsR0FBQyxDQUFDLENBQUM7UUFDUixPQUFNLElBQUksRUFBRTtZQUNSLENBQUMsR0FBRyxDQUFDLElBQUksSUFBSSxDQUFDLFlBQVksQ0FBQyxNQUFNLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUM7WUFDbEQsWUFBWSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ3hELE1BQU0sSUFBSSxXQUFXLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUM7WUFDbEUsTUFBTSxJQUFJLFdBQVcsQ0FBQyxjQUFjLENBQUMsQ0FBQyxDQUFDLENBQUM7U0FDM0M7SUFDTCxDQUFDO0NBRUo7QUE3QkQsaUNBNkJDIn0=","assetPath":"Assets/ZepetoScripts/MultiplaySync/Sample
+    Code/GestureTrigger.ts","manifest":{"properties":[{"assembly":"UnityEngine.AnimationModule","name":"m_exGestures","type":"UnityEngine.AnimationClip[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"GestureTrigger","description":""},"isCompiled":true}'
+  typescriptHash: 40a7ab672406b7959d614d283e5f898f
+  onlyWriteTrigger: 0

@@ -26,3 +26,4 @@ ScriptedImporter:
     \"\", ZEPETO_World_1.WorldService.userId, new ZEPETO_Character_Controller_1.SpawnInfo(),
     true);\r\n    }\r\n}\r\nexports.default = PlayerCreator;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGxheWVyQ3JlYXRvci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlBsYXllckNyZWF0b3IudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2RUFBdUU7QUFDdkUsaURBQXFEO0FBQ3JELCtDQUE0QztBQUU1QyxNQUFxQixhQUFjLFNBQVEscUNBQXFCO0lBRTVELEtBQUs7UUFDRCxpRUFBdUIsc0JBQXNCLENBQTdDLDJDQUFhLENBQUMsUUFBUSxFQUF3QixFQUFFLEVBQUUsMkJBQVksQ0FBQyxNQUFNLEVBQUUsSUFBSSx1Q0FBUyxFQUFFLEVBQUUsSUFBSSxFQUFFO0lBQ2xHLENBQUM7Q0FFSjtBQU5ELGdDQU1DIn0=","assetPath":"Assets/ZepetoScripts/ScreenShotScripts/PlayerCreator.ts","manifest":{"properties":[],"name":"PlayerCreator","description":""},"isCompiled":true}'
   typescriptHash: 0464e823d55886fe1c0eef64a1195cc7
+  onlyWriteTrigger: 0

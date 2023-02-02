@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxClients: 8
   orientation: 1
+  useVoiceChat: 0
   disableInvite: 0
   disableRoomList: 0
   disablePrivateRoom: 0
+  uniqueRoom: 0
+  launcherMediaUrl: 

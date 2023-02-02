@@ -1,0 +1,59 @@
+fileFormatVersion: 2
+guid: 5178a113a505d42c1865c83da0bf2237
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst ZEPETO_Multiplay_1 = require(\"ZEPETO.Multiplay\");\r\nconst
+    ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst ZEPETO_Character_Controller_1
+    = require(\"ZEPETO.Character.Controller\");\r\nconst PlayerSync_1 = require(\"../Player/PlayerSync\");\r\nconst
+    DOTWeenSyncHelper_1 = require(\"../DOTween/DOTWeenSyncHelper\");\r\nclass BlockPacking
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n       
+    //A script in which the Zepeto character is moved the same as the block on a
+    DOTween moving block.\r\n        super(...arguments);\r\n        this.isLocalCharacterOnBlock
+    = false;\r\n    }\r\n    Start() {\r\n        this.m_dtHelper = this.GetComponent($typeof(DOTWeenSyncHelper_1.default));\r\n       
+    this.multiplay = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\r\n       
+    this.multiplay.add_RoomJoined((room) => {\r\n            this.room = room;\r\n           
+    //When a new player comes in, send the player information about the currently
+    up blocks.\r\n            ZEPETO_Character_Controller_1.ZepetoPlayers.instance.OnAddedPlayer.AddListener((sessionId)
+    => {\r\n                if (this.isLocalCharacterOnBlock) {\r\n                   
+    const data = new ZEPETO_Multiplay_1.RoomData();\r\n                    data.Add(\"transformId\",
+    this.m_dtHelper.Id);\r\n                    data.Add(\"newJoinSessionId\", sessionId);\r\n                   
+    this.room.Send(\"SendBlockEnterCache\", data.GetObject());\r\n               
+    }\r\n            });\r\n            this.room.AddMessageHandler(\"BlockEnter\"
+    + this.m_dtHelper.Id, (enteredSessionId) => {\r\n                this.StartCoroutine(this.PlayerPacking(enteredSessionId.toString()));\r\n           
+    });\r\n            this.room.AddMessageHandler(\"BlockExit\" + this.m_dtHelper.Id,
+    (exitedSessionId) => {\r\n                this.StartCoroutine(this.PlayerUnPacking(exitedSessionId.toString()));\r\n           
+    });\r\n        });\r\n    }\r\n    OnTriggerEnter(coll) {\r\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)
+    {\r\n            return;\r\n        }\r\n        if (this.isLocalCharacterOnBlock)\r\n           
+    return;\r\n        this.isLocalCharacterOnBlock = true;\r\n        this.room.Send(\"BlockEnter\",
+    this.m_dtHelper.Id);\r\n    }\r\n    OnTriggerExit(coll) {\r\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)
+    {\r\n            return;\r\n        }\r\n        this.isLocalCharacterOnBlock
+    = false;\r\n        this.room.Send(\"BlockExit\", this.m_dtHelper.Id);\r\n   
+    }\r\n    *PlayerPacking(enteredSessionId) {\r\n        //Wait until the player
+    is fully loaded.\r\n        yield new UnityEngine_1.WaitUntil(() => ZEPETO_Character_Controller_1.ZepetoPlayers.instance.HasPlayer(enteredSessionId));\r\n       
+    const player = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.GetPlayer(enteredSessionId).character;\r\n       
+    player.transform.parent = this.transform;\r\n    }\r\n    *PlayerUnPacking(exitedSessionId)
+    {\r\n        yield new UnityEngine_1.WaitUntil(() => ZEPETO_Character_Controller_1.ZepetoPlayers.instance.HasPlayer(exitedSessionId));\r\n       
+    const player = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.GetPlayer(exitedSessionId).character;\r\n       
+    player.transform.parent = null;\r\n    }\r\n}\r\nexports.default = BlockPacking;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQmxvY2tQYWNraW5nLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQmxvY2tQYWNraW5nLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQW1EO0FBQ25ELDZDQUFtRztBQUNuRyx1REFBZ0Q7QUFDaEQsK0NBQWtEO0FBQ2xELDZFQUF5RjtBQUV6RixxREFBOEM7QUFDOUMsb0VBQTZEO0FBRTdELE1BQXFCLFlBQWEsU0FBUSxxQ0FBcUI7SUFBL0Q7UUFDSSxrR0FBa0c7O1FBSzFGLDRCQUF1QixHQUFZLEtBQUssQ0FBQztJQTREckQsQ0FBQztJQTFEVyxLQUFLO1FBQ1QsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsWUFBWSxTQUFDLDJCQUFpQixFQUFHLENBQUM7UUFDekQsSUFBSSxDQUFDLFNBQVMsR0FBRyxvQkFBTSxDQUFDLGdCQUFnQixTQUFDLG1DQUFvQixFQUFHLENBQUM7UUFDakUsSUFBSSxDQUFDLFNBQVMsZ0JBQWUsQ0FBQyxJQUFVLEVBQUUsRUFBRTtZQUN4QyxJQUFJLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztZQUVqQix3RkFBd0Y7WUFDeEYsMkNBQWEsQ0FBQyxRQUFRLENBQUMsYUFBYSxDQUFDLFdBQVcsQ0FBQyxDQUFDLFNBQWlCLEVBQUUsRUFBRTtnQkFDbkUsSUFBRyxJQUFJLENBQUMsdUJBQXVCLEVBQUU7b0JBQzdCLE1BQU0sSUFBSSxHQUFHLElBQUksMkJBQVEsRUFBRSxDQUFDO29CQUM1QixJQUFJLENBQUMsR0FBRyxDQUFDLGFBQWEsRUFBRSxJQUFJLENBQUMsVUFBVSxDQUFDLEVBQUUsQ0FBQyxDQUFDO29CQUM1QyxJQUFJLENBQUMsR0FBRyxDQUFDLGtCQUFrQixFQUFFLFNBQVMsQ0FBQyxDQUFDO29CQUV4QyxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxxQkFBcUIsRUFBRSxJQUFJLENBQUMsU0FBUyxFQUFFLENBQUMsQ0FBQztpQkFDM0Q7WUFDTCxDQUFDLENBQUMsQ0FBQztZQUVILElBQUksQ0FBQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsWUFBWSxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsRUFBRSxFQUFFLENBQUMsZ0JBQWdCLEVBQUUsRUFBRTtnQkFDaEYsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDLGdCQUFnQixDQUFDLFFBQVEsRUFBRSxDQUFDLENBQUMsQ0FBQztZQUN6RSxDQUFDLENBQUMsQ0FBQztZQUNILElBQUksQ0FBQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsV0FBVyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsRUFBRSxFQUFFLENBQUMsZUFBZSxFQUFFLEVBQUU7Z0JBQzlFLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxlQUFlLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQyxDQUFDO1lBQzFFLENBQUMsQ0FBQyxDQUFDO1FBQ1AsQ0FBQyxFQUFDO0lBQ04sQ0FBQztJQUVPLGNBQWMsQ0FBQyxJQUFjO1FBQ2pDLElBQUcsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFlBQVksU0FBQyxvQkFBVSxFQUFHLEVBQUUsT0FBTyxFQUFDO1lBQ25ELE9BQU87U0FDVjtRQUVELElBQUcsSUFBSSxDQUFDLHVCQUF1QjtZQUMzQixPQUFPO1FBRVgsSUFBSSxDQUFDLHVCQUF1QixHQUFHLElBQUksQ0FBQztRQUNwQyxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxZQUFZLEVBQUUsSUFBSSxDQUFDLFVBQVUsQ0FBQyxFQUFFLENBQUMsQ0FBQztJQUNyRCxDQUFDO0lBRU8sYUFBYSxDQUFDLElBQWM7UUFDaEMsSUFBRyxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsWUFBWSxTQUFDLG9CQUFVLEVBQUcsRUFBRSxPQUFPLEVBQUM7WUFDbkQsT0FBTztTQUNWO1FBQ0QsSUFBSSxDQUFDLHVCQUF1QixHQUFHLEtBQUssQ0FBQztRQUNyQyxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxXQUFXLEVBQUUsSUFBSSxDQUFDLFVBQVUsQ0FBQyxFQUFFLENBQUMsQ0FBQztJQUNwRCxDQUFDO0lBRU8sQ0FBQyxhQUFhLENBQUMsZ0JBQXVCO1FBQzFDLHdDQUF3QztRQUN4QyxNQUFNLElBQUksdUJBQVMsQ0FBQyxHQUFFLEVBQUUsQ0FBQSwyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsZ0JBQWdCLENBQUMsQ0FBQyxDQUFDO1FBQzVFLE1BQU0sTUFBTSxHQUFHLDJDQUFhLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDLFNBQVMsQ0FBQztRQUM1RSxNQUFNLENBQUMsU0FBUyxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDO0lBQzdDLENBQUM7SUFFTyxDQUFDLGVBQWUsQ0FBQyxlQUFzQjtRQUMzQyxNQUFNLElBQUksdUJBQVMsQ0FBQyxHQUFFLEVBQUUsQ0FBQSwyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsZUFBZSxDQUFDLENBQUMsQ0FBQztRQUMzRSxNQUFNLE1BQU0sR0FBRywyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsZUFBZSxDQUFDLENBQUMsU0FBUyxDQUFBO1FBQzFFLE1BQU0sQ0FBQyxTQUFTLENBQUMsTUFBTSxHQUFHLElBQUksQ0FBQztJQUNuQyxDQUFDO0NBQ0o7QUFsRUQsK0JBa0VDIn0=","assetPath":"Assets/ZepetoScripts/MultiplaySync/Sample
+    Code/BlockPacking.ts","manifest":{"properties":[],"name":"BlockPacking","description":""},"isCompiled":true}'
+  typescriptHash: baab2edf3555ec1b3d7be6ab789a33bb
+  onlyWriteTrigger: 0
