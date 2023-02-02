@@ -7,33 +7,39 @@ import DOTWeenSyncHelper from '../DOTween/DOTWeenSyncHelper';
 import { ZepetoPlayers } from 'ZEPETO.Character.Controller';
 
 export default class MultiplayManager extends ZepetoScriptBehaviour {
+
     public multiplay: ZepetoWorldMultiplay;
     public room: Room;
 
     @Header("Server connection status (View Only)")
     @SerializeField() private m_pingCheckCount:number = 0;
-    get pingCheckCount(){
-        return this.m_pingCheckCount;
-    }
     @SerializeField() private m_latency:number = 0;
-    get latency(){
-        return this.m_latency;
-    }
     @SerializeField() private m_diffServerTime:number = 0;
 
     private masterSessionId:string;
-    private tfHelper: TransformSyncHelper[] = [];
-    private dtHelper: DOTWeenSyncHelper[] = [];
+    private tfHelpers: TransformSyncHelper[] = [];
+    private dtHelpers: DOTWeenSyncHelper[] = [];
 
+    get pingCheckCount(){ return this.m_pingCheckCount; }
+    get latency(){ return this.m_latency; }
 
-    public static instance: MultiplayManager;
     /* Singleton */
+    private static m_instance: MultiplayManager = null;
+    public static get instance(): MultiplayManager {
+        if (this.m_instance === null) {
+            this.m_instance = GameObject.FindObjectOfType<MultiplayManager>();
+            if (this.m_instance === null) {
+                this.m_instance = new GameObject(MultiplayManager.name).AddComponent<MultiplayManager>();
+            }
+        }
+        return this.m_instance;
+    }
     private Awake() {
-        if (MultiplayManager.instance == null) {
-            MultiplayManager.instance = this;
-            Object.DontDestroyOnLoad(this.gameObject);
+        if (MultiplayManager.m_instance !== null && MultiplayManager.m_instance !== this) {
+            GameObject.Destroy(this.gameObject);
         } else {
-            return;
+            MultiplayManager.m_instance = this;
+            GameObject.DontDestroyOnLoad(this.gameObject);
         }
     }
 
@@ -47,7 +53,7 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
             this.CheckMaster();
             this.GetInstantiate();
         }
-        this.dtHelper = Object.FindObjectsOfType<DOTWeenSyncHelper>();
+        this.dtHelpers = Object.FindObjectsOfType<DOTWeenSyncHelper>();
     }
 
     /**Util**/
@@ -56,13 +62,13 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
 
         this.room.AddMessageHandler(MESSAGE.MasterResponse, (masterSessionId :string) => {
             this.masterSessionId = masterSessionId;
-            this.tfHelper = Object.FindObjectsOfType<TransformSyncHelper>();
-            this.tfHelper.forEach((tf)=>{
+            this.tfHelpers = Object.FindObjectsOfType<TransformSyncHelper>();
+            this.tfHelpers.forEach((tf)=>{
                 if(tf.UpdateOwnerType == UpdateOwner.Master){
                     tf.ChangeOwner(this.masterSessionId);
                 }
             });
-            this.dtHelper.forEach((dt)=>{
+            this.dtHelpers.forEach((dt)=>{
                 dt.ChangeOwner(this.masterSessionId);
             });
         });
@@ -81,7 +87,7 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
 
             const newObj:GameObject = Object.Instantiate(prefabObj, spawnPosition, spawnRotation) as GameObject;
             const tf = newObj?.GetComponent<TransformSyncHelper>();
-            if(null == tf) {
+            if(null == tf) { //Creates an none-sync object.
                 //console.warn(`${tf.name} does not have a TransformSyncHelper script.`);
                 return;
             }
@@ -154,8 +160,8 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
 
         this.bPaused = true;
         this.m_pingCheckCount = 0;
-        this.tfHelper = Object.FindObjectsOfType<TransformSyncHelper>();
-        this.tfHelper.forEach((tf)=> {
+        this.tfHelpers = Object.FindObjectsOfType<TransformSyncHelper>();
+        this.tfHelpers.forEach((tf)=> {
             if(tf.UpdateOwnerType == UpdateOwner.Master) {
                 tf.ChangeOwner("");
             }
@@ -163,7 +169,7 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
                 this.SendStatus(tf.Id,GameObjectStatus.Pause);
             }
         });
-        this.dtHelper.forEach((dt)=> {
+        this.dtHelpers.forEach((dt)=> {
             dt.ChangeOwner("");
         });
     }
@@ -172,8 +178,8 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
         this.room?.Send(MESSAGE.UnPauseUser);
 
         this.bPaused = false;
-        this.tfHelper = Object.FindObjectsOfType<TransformSyncHelper>();
-        this.tfHelper.forEach((tf)=>{
+        this.tfHelpers = Object.FindObjectsOfType<TransformSyncHelper>();
+        this.tfHelpers.forEach((tf)=>{
             if(tf.isOwner){
                 this.SendStatus(tf.Id,GameObjectStatus.Enable);
             }

@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 06e97c7be21f34ff7aad3f689044cbbf
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nclass Thumbnail extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        this.GetComponentInChildren($typeof(UnityEngine_UI_1.Text)).text
+    = this.content.Title;\r\n        this.GetComponentInChildren($typeof(UnityEngine_UI_1.RawImage)).texture
+    = this.content.Thumbnail;\r\n    }\r\n}\r\nexports.default = Thumbnail;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGh1bWJuYWlsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVGh1bWJuYWlsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXNEO0FBRXRELG1EQUFnRDtBQUdoRCxNQUFxQixTQUFVLFNBQVEscUNBQXFCO0lBSXhELEtBQUs7UUFDRCxJQUFJLENBQUMsc0JBQXNCLFNBQUMscUJBQUksR0FBSSxJQUFJLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUM7UUFDOUQsSUFBSSxDQUFDLHNCQUFzQixTQUFDLHlCQUFRLEdBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsU0FBc0IsQ0FBQztJQUMxRixDQUFDO0NBRUo7QUFURCw0QkFTQyJ9","assetPath":"Assets/ZepetoGestureAPI/Thumbnail.ts","manifest":{"properties":[{"assembly":"ZEPETO.World","name":"content","type":"ZEPETO.World.Content","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]}],"name":"Thumbnail","description":""},"isCompiled":true}'
+  typescriptHash: 5a56a4de6cc4b6d2cde4800f20704922
+  onlyWriteTrigger: 0

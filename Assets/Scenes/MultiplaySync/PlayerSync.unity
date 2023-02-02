@@ -1297,10 +1297,12 @@ MonoBehaviour:
     - InterpolationType
     - ExtrapolationType
     - extraMultipler
-    - syncGesture
+    - GetAnimationClipFromResources
     - HardSnapIfDistanceGreaterThan
     - UseHardSnap
+    - UseZepetoGestureAPI
     unityValues:
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -1315,6 +1317,7 @@ MonoBehaviour:
     - '{"type":"System.Single, mscorlib","value":"1"}'
     - '{"type":"System.Boolean, mscorlib","value":"True"}'
     - '{"type":"System.Single, mscorlib","value":"10"}'
+    - '{"type":"System.Boolean, mscorlib","value":"True"}'
     - '{"type":"System.Boolean, mscorlib","value":"True"}'
     unityArrayValues: []
     arrayValues: []
@@ -1506,7 +1509,7 @@ Transform:
   m_GameObject: {fileID: 730804769}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -20, z: 0}
-  m_LocalScale: {x: 1000, y: 1, z: 1000}
+  m_LocalScale: {x: 1000, y: 3, z: 1000}
   m_Children: []
   m_Father: {fileID: 1063089513}
   m_RootOrder: 5
@@ -1524,9 +1527,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   script:
-    keys: []
-    unityValues: []
-    values: []
+    keys:
+    - spawnPositon
+    unityValues:
+    - {fileID: 0}
+    values:
+    - '{"type":"UnityEngine.Vector3, UnityEngine.CoreModule","value":"{\"x\":0.0,\"y\":0.0,\"z\":0.0}"}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: 189ee395b505142778b3b41d069d75c5, type: 3}
@@ -2138,6 +2144,71 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928513319}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1056995899
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6580157695276867782, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: script.unityValues.Array.data[1]
+      value: 
+      objectReference: {fileID: 1864386681}
+    - target: {fileID: 7827760776698951724, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827760778206767412, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_Name
+      value: ZepetoGestureTool_Horizontal
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827760778206767413, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827760778206767413, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827760778206767413, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827760778206767413, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827760778206767413, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827760778206767413, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827760778206767413, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827760778206767413, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827760778206767413, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827760778206767413, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827760778206767413, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 983578afae44d459d92e89fe01392623, type: 3}
 --- !u!1 &1063089512
 GameObject:
   m_ObjectHideFlags: 0
@@ -2696,11 +2767,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script:
     keys:
-    - latency
-    - diffServerTime
-    - pingCheckCount
     - multiplay
     - room
+    - m_pingCheckCount
+    - m_latency
+    - m_diffServerTime
     unityValues:
     - {fileID: 0}
     - {fileID: 0}
@@ -2708,11 +2779,11 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     values:
-    - '{"type":"System.Single, mscorlib","value":"0"}'
-    - '{"type":"System.Single, mscorlib","value":"0"}'
-    - '{"type":"System.Single, mscorlib","value":"0"}'
     - 
     - 
+    - '{"type":"System.Single, mscorlib","value":"0"}'
+    - '{"type":"System.Single, mscorlib","value":"0"}'
+    - '{"type":"System.Single, mscorlib","value":"0"}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: daa5246585831481aabbf61fcc5114da, type: 3}
@@ -3158,9 +3229,9 @@ MonoBehaviour:
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":3,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
     unityArrayValues:
-    - {fileID: 7400000, guid: 395065ad4e09149b0b1e736302029543, type: 2}
-    - {fileID: 7400000, guid: 5b1e05bd327164030b235372636ad1bc, type: 2}
-    - {fileID: 7400000, guid: 0860cdd7f087d4f59b0a467ad66d0e98, type: 2}
+    - {fileID: 7400000, guid: 9c9a0645a5e6c44a181cf4b8a440d278, type: 2}
+    - {fileID: 7400000, guid: e0c82d74ac3f544adbb912ab373b11a7, type: 2}
+    - {fileID: 7400000, guid: ffcc77a915444454f920fc6a6b8cfe69, type: 2}
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: 572a2baae1df24f338c4cb58c4ef8129, type: 3}
     isExpaned: 0
@@ -3568,6 +3639,17 @@ Transform:
   m_Father: {fileID: 1063089513}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1864386681 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7827760777839997555, guid: 983578afae44d459d92e89fe01392623, type: 3}
+  m_PrefabInstance: {fileID: 1056995899}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1928749727
 GameObject:
   m_ObjectHideFlags: 0
