@@ -14,7 +14,7 @@ export default class GestureTrigger extends ZepetoScriptBehaviour {
     private OnTriggerEnter(coll: Collider) {
         if(!coll.GetComponent<PlayerSync>()?.isLocal)
             return;
-        this.m_gestureCoroutine = this.StartCoroutine(this.gesture(coll.GetComponent<PlayerSync>().zepetoPlayer));
+        this.m_gestureCoroutine = this.StartCoroutine(this.StartGesture(coll.GetComponent<PlayerSync>().zepetoPlayer));
     }
     
     private OnTriggerExit(coll: Collider) {
@@ -23,7 +23,7 @@ export default class GestureTrigger extends ZepetoScriptBehaviour {
         this.StopCoroutine(this.m_gestureCoroutine);
     }
 
-    private* gesture(zepetoPlayer: ZepetoPlayer) {
+    private* StartGesture(zepetoPlayer: ZepetoPlayer) {
         let i=0;
         while(true) {
             i = i >= this.m_exGestures.length - 1 ? 0 : i + 1;
