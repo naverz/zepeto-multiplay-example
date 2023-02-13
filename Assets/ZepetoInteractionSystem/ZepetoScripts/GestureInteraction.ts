@@ -1,22 +1,12 @@
-import {
-    AnimationClip,
-    Animator,
-    HumanBodyBones,
-    Object,
-    Physics,
-    RaycastHit,
-    Transform,
-    Vector3,
-    WaitForEndOfFrame
-} from 'UnityEngine';
+import { AnimationClip, Animator, HumanBodyBones, Physics, Transform, Vector3, WaitForEndOfFrame} from 'UnityEngine';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import InteractionIcon from './InteractionIcon'
-import {CharacterState, ZepetoPlayers, ZepetoScreenTouchpad, ZepetoCharacter} from "ZEPETO.Character.Controller";
+import {ZepetoPlayers, ZepetoCharacter} from "ZEPETO.Character.Controller";
 
 export default class GestureInteraction extends ZepetoScriptBehaviour {
     @SerializeField() private animationClip :AnimationClip;
     @SerializeField() private isSnapBone :boolean = true;
-    @SerializeField() private bodyBone: HumanBodyBones;
+    @SerializeField() private bodyBone: HumanBodyBones = HumanBodyBones.Hips;
     @SerializeField() private allowOverlap : boolean = false;
     
     private _interactionIcon :InteractionIcon;
@@ -30,13 +20,17 @@ export default class GestureInteraction extends ZepetoScriptBehaviour {
         ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(()=>{
            this._localCharacter = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;
         });
+        
         this._interactionIcon.OnClickEvent.AddListener(()=> {
+            // when onclick interaction icon
             this._interactionIcon.HideIcon();
             this.DoInteraction();
         });
     }
 
     private DoInteraction(){
+        this._outPosition = this.transform.position;
+
         if(this.isSnapBone) {        
             //is place empty
             if(this.allowOverlap || this.FindOtherPlayerNum() < 1) {
@@ -61,11 +55,10 @@ export default class GestureInteraction extends ZepetoScriptBehaviour {
         
         let idx =0;
         while(true) {
-            this._outPosition = this.transform.position;
             const distance = Vector3.op_Subtraction(bone.position, this._localCharacter.transform.position);
             const newPos: Vector3 = Vector3.op_Subtraction(this.transform.position, distance);
             
-            this._playerGesturePosition = newPos
+            this._playerGesturePosition = newPos;
             this._localCharacter.transform.position = this._playerGesturePosition;
             this._localCharacter.transform.rotation = this.transform.rotation;
             yield new WaitForEndOfFrame();
@@ -103,7 +96,7 @@ export default class GestureInteraction extends ZepetoScriptBehaviour {
                     this._interactionIcon.ShowIcon();
                     break;
                 }
-                else if(this._playerGesturePosition != this._localCharacter.transform.position){
+                else if(this.isSnapBone && this._playerGesturePosition != this._localCharacter.transform.position){
                     this._interactionIcon.ShowIcon();
                     break;
                 }
