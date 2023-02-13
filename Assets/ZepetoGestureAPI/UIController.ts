@@ -2,7 +2,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 import { Button, RawImage, Text, Toggle } from 'UnityEngine.UI';
 import { LocalPlayer, ZepetoCharacter, ZepetoPlayers, ZepetoScreenTouchpad } from 'ZEPETO.Character.Controller';
 import { OfficialContentType, Content } from 'ZEPETO.World';
-import { Object, GameObject, Transform , Physics} from 'UnityEngine';
+import { Object, GameObject, Transform } from 'UnityEngine';
 import GestureLoader from './GestureLodaer';
 import Thumbnail from './Thumbnail';
 
@@ -28,9 +28,8 @@ export default class UIController extends ZepetoScriptBehaviour {
             this._closeButton.onClick.AddListener(() => {
                 this.StopGesture();
             });
-            
         });
-
+        
         // UI Listener
         this._typeToggleGroup[0].onValueChanged.AddListener(() => {
             this.SetCategoryUI(OfficialContentType.All);

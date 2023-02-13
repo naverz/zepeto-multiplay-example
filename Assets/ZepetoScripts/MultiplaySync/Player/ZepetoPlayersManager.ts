@@ -31,7 +31,7 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
     private multiplay: ZepetoWorldMultiplay;
     private room: Room;
     private currentPlayers: Map<string, Player> = new Map<string, Player>();
-
+    
     
     /* Singleton */
     private static m_instance: ZepetoPlayersManager = null;
@@ -54,6 +54,8 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
     }
 
     private Start() {
+        this.VersionInfo();
+        
         switch (+this.ZepetoPlayerSpawnType){
             case ZepetoPlayerSpawnType.NoneSpawn:
                 break;
@@ -145,7 +147,7 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
     private OnJoinPlayer(sessionId: string, player: Player) {
         console.log(`[OnJoinPlayer] players - sessionId : ${sessionId}`);
         this.currentPlayers.set(sessionId, player);
-        
+
         if(this.ZepetoPlayerSpawnType == ZepetoPlayerSpawnType.MultiplayerSpawnOnJoinRoom) {
             const spawnInfo = new SpawnInfo();
             spawnInfo.position = this.transform.position;
@@ -187,5 +189,14 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
         
         yield new WaitForSeconds(10);
         this.CreateAllPlayers();
+    }
+    
+    @Header("Version 1.0.1")
+    @SerializeField() private seeVersionLog:boolean = false;
+    private VersionInfo(){
+        if(!this.seeVersionLog)
+            return;
+        
+        console.warn("ZepetoPlayerManager VersionInfos\n* Version 1.0.1\n* Github : https://github.com/JasperGame/zepeto-world-sync-component \n* Latest Update Date : 2023.02.13 \n");
     }
 }

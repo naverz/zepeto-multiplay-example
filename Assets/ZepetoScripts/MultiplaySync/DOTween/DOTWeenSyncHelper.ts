@@ -6,6 +6,8 @@ import SyncIndexManager from '../Common/SyncIndexManager';
 import MultiplayManager from '../Common/MultiplayManager';
 
 export default class DOTWeenSyncHelper extends ZepetoScriptBehaviour {
+    @Header("Version 1.0.1")
+
     /** It is used for game objects that move through a given path.
      * Unlike TransformSync, which updates to the server every tick, it uses optimized server resources 
      * because it synchronizes only once on the first entry and the rest is calculated by the client.
@@ -56,6 +58,8 @@ export default class DOTWeenSyncHelper extends ZepetoScriptBehaviour {
     
     private Start(){
         this.Init();
+        this.VersionInfo();
+        
         SyncIndexManager.SyncIndex++;
         this.m_Id = SyncIndexManager.SyncIndex.toString();
         if (this.syncType == SyncType.Sync) {
@@ -221,6 +225,15 @@ export default class DOTWeenSyncHelper extends ZepetoScriptBehaviour {
         data.Add("sendTime", MultiplayManager.instance.GetServerTime());
 
         this.room?.Send(MESSAGE.SyncDOTween, data.GetObject());
+    }
+
+    @Header("Version 1.0.1")
+    @SerializeField() private seeVersionLog:boolean = false;
+    private VersionInfo(){
+        if(!this.seeVersionLog)
+            return;
+
+        console.warn("DOTweenSyncHelper VersionInfos\n* Version 1.0.1\n* Github : https://github.com/JasperGame/zepeto-world-sync-component \n* Latest Update Date : 2023.02.13 \n");
     }
 }
 
