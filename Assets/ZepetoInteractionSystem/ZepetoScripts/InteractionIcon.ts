@@ -1,10 +1,8 @@
-import { Camera, Canvas, Collider, GameObject, HumanBodyBones, Quaternion, Random, Transform, Object, Vector3 } from "UnityEngine";
+import {ZepetoScriptBehaviour} from "ZEPETO.Script";
+import { Camera, Canvas, Collider, GameObject, Transform, Object } from "UnityEngine";
 import { Button } from "UnityEngine.UI";
-import { UnityAction, UnityEvent } from "UnityEngine.Events";
-import { ZepetoScriptableObject, ZepetoScriptBehaviour } from "ZEPETO.Script";
+import { UnityEvent } from "UnityEngine.Events";
 import {ZepetoPlayers} from "ZEPETO.Character.Controller";
-import {RoomData} from "ZEPETO.Multiplay";
-import {Delegate, Action$1} from "System";
 
 export default class InteractionIcon extends ZepetoScriptBehaviour {
     /* Icon */
@@ -36,6 +34,7 @@ export default class InteractionIcon extends ZepetoScriptBehaviour {
         }
         
         this.ShowIcon();
+        this.OnTriggerEnterEvent?.Invoke();
     }
 
     private OnTriggerExit(coll: Collider) {
@@ -44,6 +43,7 @@ export default class InteractionIcon extends ZepetoScriptBehaviour {
         }
         
         this.HideIcon();
+        this.OnTriggerExitEvent?.Invoke();
     }
     
     public ShowIcon(){
