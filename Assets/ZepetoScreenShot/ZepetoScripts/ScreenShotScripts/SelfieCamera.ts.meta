@@ -1,0 +1,80 @@
+fileFormatVersion: 2
+guid: fdad88fc98cff244f9806efff8493b4e
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst UnityEngine_EventSystems_1
+    = require(\"UnityEngine.EventSystems\");\r\nclass SelfieCamera extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.rightOffset
+    = 0.25;\r\n        this.distance = 0.7;\r\n        this.height = 0.893;\r\n       
+    this.xMouseSensitivity = 12;\r\n        this.yMouseSensitivity = 12;\r\n       
+    this.yMinLimit = -20;\r\n        this.yMaxLimit = 40;\r\n        this.smoothCameraRotation
+    = 10;\r\n        this.xMinLimit = -180;\r\n        this.xMaxLimit = 180;\r\n       
+    this.rotateX = 0;\r\n        this.rotateY = 0;\r\n    }\r\n    GetGripObject()
+    {\r\n        return this.grip;\r\n    }\r\n    RotateCamera(x, y) {\r\n       
+    this.SetCameraRotation(this.rotateX + x * this.xMouseSensitivity, this.rotateY
+    - y * this.yMouseSensitivity);\r\n    }\r\n    SetCameraRotation(x, y) {\r\n       
+    this.rotateX = this.ClampAngle(x, this.xMinLimit, this.xMaxLimit);\r\n       
+    this.rotateY = this.ClampAngle(y, this.yMinLimit, this.yMaxLimit);\r\n    }\r\n   
+    ClampAngle(angle, min, max) {\r\n        if (angle < -180) {\r\n            angle
+    += 360;\r\n        }\r\n        if (angle > 180) {\r\n            angle -= 360;\r\n       
+    }\r\n        return UnityEngine_1.Mathf.Clamp(angle, min, max);\r\n    }\r\n   
+    CameraMovement() {\r\n        if (this.currentTarget == null)\r\n           
+    return;\r\n        let newRot = UnityEngine_1.Quaternion.Euler(this.rotateY,
+    this.rotateX, 0);\r\n        this.targetLookAt.rotation = UnityEngine_1.Quaternion.Slerp(this.targetLookAt.rotation,
+    newRot, this.smoothCameraRotation * UnityEngine_1.Time.deltaTime);\r\n       
+    var camDir = UnityEngine_1.Vector3.op_Addition((UnityEngine_1.Vector3.op_Multiply(this.targetLookAt.forward,
+    -1)), (UnityEngine_1.Vector3.op_Multiply(this.targetLookAt.right, this.rightOffset)));\r\n       
+    camDir = camDir.normalized;\r\n        var targetPos = new UnityEngine_1.Vector3(this.currentTarget.position.x,
+    this.currentTarget.position.y, this.currentTarget.position.z);\r\n        this.currentTargetPos
+    = targetPos;\r\n        this.currentPos = UnityEngine_1.Vector3.op_Addition(this.currentTargetPos,
+    new UnityEngine_1.Vector3(0, this.height, 0));\r\n        this.targetLookAt.position
+    = this.currentPos;\r\n        this.transform.position = UnityEngine_1.Vector3.op_Addition(this.currentPos,
+    (UnityEngine_1.Vector3.op_Multiply(camDir, this.distance)));\r\n        var lookPoint
+    = UnityEngine_1.Vector3.op_Addition(this.currentPos, UnityEngine_1.Vector3.op_Multiply(this.targetLookAt.forward,
+    2));\r\n        lookPoint = UnityEngine_1.Vector3.op_Addition(lookPoint, (UnityEngine_1.Vector3.op_Multiply(this.targetLookAt.right,
+    UnityEngine_1.Vector3.Dot(UnityEngine_1.Vector3.op_Multiply(camDir, (this.distance)),
+    this.targetLookAt.right))));\r\n        let subtractionVec = new UnityEngine_1.Vector3(lookPoint.x
+    - this.transform.position.x, lookPoint.y - this.transform.position.y, lookPoint.z
+    - this.transform.position.z);\r\n        var rotation = UnityEngine_1.Quaternion.LookRotation(subtractionVec);\r\n       
+    this.transform.rotation = rotation;\r\n        this.currentTarget.LookAt(this.transform);\r\n       
+    this.currentTarget.eulerAngles = new UnityEngine_1.Vector3(0, this.currentTarget.eulerAngles.y,
+    0);\r\n    }\r\n    InitSetting(target) {\r\n        this.currentTarget = target;\r\n       
+    this.currentTargetPos = new UnityEngine_1.Vector3(this.currentTarget.position.x,
+    this.currentTarget.position.y, this.currentTarget.position.z);\r\n        if
+    (this.targetLookAt != null) {\r\n            UnityEngine_1.GameObject.Destroy(this.targetLookAt.gameObject);\r\n       
+    }\r\n        this.targetLookAt = new UnityEngine_1.GameObject(\"targetLookAt\").transform;\r\n       
+    this.targetLookAt.position = this.currentTarget.position;\r\n        this.targetLookAt.hideFlags
+    = UnityEngine_1.HideFlags.HideInHierarchy;\r\n        this.targetLookAt.rotation
+    = this.currentTarget.rotation;\r\n        this.rotateY = this.currentTarget.eulerAngles.x;\r\n       
+    this.rotateX = this.currentTarget.eulerAngles.y;\r\n    }\r\n    CameraInput()
+    {\r\n        if (!UnityEngine_1.Input.GetMouseButton(0) || UnityEngine_1.Input.touchCount
+    >= 2) {\r\n            return;\r\n        }\r\n        if (UnityEngine_EventSystems_1.EventSystem.current.IsPointerOverGameObject())\r\n           
+    return;\r\n        let X = 0;\r\n        let Y = 0;\r\n        if (!UnityEngine_1.Application.isEditor)
+    {\r\n            Y = UnityEngine_1.Input.touches[0].deltaPosition.y;\r\n           
+    ;\r\n            X = UnityEngine_1.Input.touches[0].deltaPosition.x;\r\n       
+    }\r\n        else {\r\n            Y = UnityEngine_1.Input.GetAxis(\"Mouse Y\");\r\n           
+    X = UnityEngine_1.Input.GetAxis(\"Mouse X\");\r\n        }\r\n        this.RotateCamera(X,
+    Y);\r\n    }\r\n    LateUpdate() {\r\n        if (this.currentTarget == null
+    || this.targetLookAt == null)\r\n            return;\r\n        this.CameraInput();\r\n       
+    this.CameraMovement();\r\n    }\r\n}\r\nexports.default = SelfieCamera;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2VsZmllQ2FtZXJhLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2VsZmllQ2FtZXJhLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUFvSDtBQUNwSCx1RUFBdUQ7QUFDdkQsTUFBcUIsWUFBYSxTQUFRLHFDQUFxQjtJQUEvRDs7UUFFVyxnQkFBVyxHQUFXLElBQUksQ0FBQztRQUMzQixhQUFRLEdBQVcsR0FBRyxDQUFDO1FBQ3ZCLFdBQU0sR0FBVyxLQUFLLENBQUM7UUFDdkIsc0JBQWlCLEdBQVcsRUFBRSxDQUFDO1FBQy9CLHNCQUFpQixHQUFXLEVBQUUsQ0FBQztRQUMvQixjQUFTLEdBQVcsQ0FBQyxFQUFFLENBQUM7UUFDeEIsY0FBUyxHQUFXLEVBQUUsQ0FBQztRQUN2Qix5QkFBb0IsR0FBVyxFQUFFLENBQUM7UUFPakMsY0FBUyxHQUFXLENBQUMsR0FBRyxDQUFDO1FBQ3pCLGNBQVMsR0FBVyxHQUFHLENBQUM7UUFDeEIsWUFBTyxHQUFXLENBQUMsQ0FBQztRQUNwQixZQUFPLEdBQVcsQ0FBQyxDQUFDO0lBaUhoQyxDQUFDO0lBL0dVLGFBQWE7UUFDaEIsT0FBTyxJQUFJLENBQUMsSUFBSSxDQUFDO0lBQ3JCLENBQUM7SUFFTSxZQUFZLENBQUMsQ0FBUyxFQUFFLENBQVM7UUFDcEMsSUFBSSxDQUFDLGlCQUFpQixDQUFDLElBQUksQ0FBQyxPQUFPLEdBQUcsQ0FBQyxHQUFHLElBQUksQ0FBQyxpQkFBaUIsRUFBRSxJQUFJLENBQUMsT0FBTyxHQUFHLENBQUMsR0FBRyxJQUFJLENBQUMsaUJBQWlCLENBQUMsQ0FBQztJQUNqSCxDQUFDO0lBRU0saUJBQWlCLENBQUMsQ0FBUyxFQUFFLENBQVM7UUFDekMsSUFBSSxDQUFDLE9BQU8sR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsRUFBRSxJQUFJLENBQUMsU0FBUyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUNsRSxJQUFJLENB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","assetPath":"Assets/ZepetoScreenShot/ZepetoScripts/ScreenShotScripts/SelfieCamera.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"rightOffset","type":"System.Single","isArray":false,"initValue":["0.25"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"distance","type":"System.Single","isArray":false,"initValue":["0.7"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"height","type":"System.Single","isArray":false,"initValue":["0.893"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"xMouseSensitivity","type":"System.Single","isArray":false,"initValue":["12"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"yMouseSensitivity","type":"System.Single","isArray":false,"initValue":["12"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"yMinLimit","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"yMaxLimit","type":"System.Single","isArray":false,"initValue":["40"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"smoothCameraRotation","type":"System.Single","isArray":false,"initValue":["10"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"grip","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"SelfieCamera","description":""},"isCompiled":true}'
+  typescriptHash: 46f5821712d7cd58b529070199f221a7
+  onlyWriteTrigger: 0

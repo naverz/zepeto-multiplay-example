@@ -1,0 +1,63 @@
+fileFormatVersion: 2
+guid: 4ad7232826783c34082a0b7c2afabfba
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst
+    UIController_1 = require(\"./UIController\");\r\nclass ScreenShotController extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Awake() {\r\n        this.uiController
+    = this.uiControllerObject.GetComponent($typeof(UIController_1.default));\r\n   
+    }\r\n    // Set the camera used to take a screenshot. \r\n    SetScreenShotCamera(camera)
+    {\r\n        this.camera = camera;\r\n    }\r\n    // Onclick Function - Take
+    Screenshot Button\r\n    TakeScreenShot(isBackgroundOn) {\r\n        if (isBackgroundOn)
+    {\r\n            this.TakeScreenShotWithBackground();\r\n        }\r\n       
+    else {\r\n            this.TakeScreenShotWithoutBackground();\r\n        }\r\n   
+    }\r\n    // onClick function - Save button on screenshot result screen\r\n   
+    SaveScreenShot() {\r\n        //Save Screenshot\r\n        ZEPETO_World_1.ZepetoWorldContent.SaveToCameraRoll(this.renderTexture,
+    (result) => { console.log(`${result}`); });\r\n    }\r\n    // onClick function
+    - Share button on screenshot result screen\r\n    ShareScreenShot() {\r\n       
+    ZEPETO_World_1.ZepetoWorldContent.Share(this.renderTexture, (result) => { console.log(`${result}`);
+    });\r\n    }\r\n    // onClick function - Create feed button on screenshot result
+    screen\r\n    CreateFeedScreenShot() {\r\n        ZEPETO_World_1.ZepetoWorldContent.CreateFeed(this.renderTexture,
+    this.feedMessage, (result) => {\r\n            this.uiController.ShowCreateFeedResult(result);\r\n       
+    });\r\n    }\r\n    *RenderTargetTextureWithBackground() {\r\n        yield new
+    UnityEngine_1.WaitForEndOfFrame();\r\n        this.camera.Render();\r\n       
+    this.camera.targetTexture = null;\r\n    }\r\n    *RenderTargetTextureWithoutBackground()
+    {\r\n        yield new UnityEngine_1.WaitForEndOfFrame();\r\n        this.camera.Render();\r\n       
+    // 4. Revert existing settings \r\n        this.camera.targetTexture = null;\r\n       
+    this.camera.backgroundColor = this.preBackgroundColor;\r\n        this.camera.clearFlags
+    = this.preClearFlags;\r\n        // 5. Reactivate the background canvas while
+    taking a screenshot\r\n        this.backgroundCanvas.gameObject.SetActive(true);\r\n   
+    }\r\n    TakeScreenShotWithBackground() {\r\n        // Specify the target texture
+    and render the camera\r\n        this.camera.targetTexture = this.renderTexture;\r\n       
+    this.StartCoroutine(this.RenderTargetTextureWithBackground());\r\n    }\r\n   
+    TakeScreenShotWithoutBackground() {\r\n        // Disable background canvas while
+    taking screenshots\r\n        this.backgroundCanvas.gameObject.SetActive(false);\r\n       
+    // 1. Specify the target texture and save the camera flag/color values before
+    the screenshot\r\n        this.camera.targetTexture = this.renderTexture;\r\n       
+    this.preClearFlags = this.camera.clearFlags;\r\n        this.preBackgroundColor
+    = this.camera.backgroundColor;\r\n        // 2. Fill the background of the camera
+    with a solid color and make the background color transparent. \r\n        this.camera.clearFlags
+    = UnityEngine_1.CameraClearFlags.SolidColor;\r\n        this.camera.backgroundColor
+    = new UnityEngine_1.Color(0, 0, 0, 0);\r\n        // 3. Camera Render\r\n       
+    this.StartCoroutine(this.RenderTargetTextureWithoutBackground());\r\n    }\r\n}\r\nexports.default
+    = ScreenShotController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2NyZWVuU2hvdENvbnRyb2xsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTY3JlZW5TaG90Q29udHJvbGxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUE0RztBQUM1RyxpREFBcUQ7QUFDckQsK0NBQWtEO0FBQ2xELGlEQUEwQztBQUUxQyxNQUFxQixvQkFBcUIsU0FBUSxxQ0FBcUI7SUFnQm5FLEtBQUs7UUFDRCxJQUFJLENBQUMsWUFBWSxHQUFHLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxZQUFZLFNBQUMsc0JBQVksRUFBRyxDQUFDO0lBQzdFLENBQUM7SUFFRCw2Q0FBNkM7SUFDdEMsbUJBQW1CLENBQUMsTUFBYztRQUNyQyxJQUFJLENBQUMsTUFBTSxHQUFHLE1BQU0sQ0FBQztJQUN6QixDQUFDO0lBRUQsNENBQTRDO0lBQ3JDLGNBQWMsQ0FBQyxjQUF1QjtRQUN6QyxJQUFJLGNBQWMsRUFBRTtZQUNoQixJQUFJLENBQUMsNEJBQTRCLEVBQUUsQ0FBQztTQUN2QzthQUFNO1lBQ0gsSUFBSSxDQUFDLCtCQUErQixFQUFFLENBQUM7U0FDMUM7SUFDTCxDQUFDO0lBRUQsNkRBQTZEO0lBQ3RELGNBQWM7UUFDakIsaUJBQWlCO1FBQ2pCLGlDQUFrQixDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxhQUFhLEVBQUUsQ0FBQyxNQUFlLEVBQUUsRUFBRSxHQUFHLE9BQU8sQ0FBQyxHQUFHLENBQUMsR0FBRyxNQUFNLEVBQUUsQ0FBQyxDQUFBLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDL0csQ0FBQztJQUNELDhEQUE4RDtJQUN2RCxlQUFlO1FBQ2xCLGlDQUFrQixDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsYUFBYSxFQUFFLENBQUMsTUFBZSxFQUFFLEVBQUUsR0FBRyxPQUFPLENBQUMsR0FBRyxDQUFDLEdBQUcsTUFBTSxFQUFFLENBQUMsQ0FBQSxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ3BHLENBQUM7SUFFRCxvRUFBb0U7SUFDN0Qsb0JBQW9CO1FBQ3ZCLGlDQUFrQixDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsYUFBYSxFQUFFLElBQUksQ0FBQyxXQUFXLEVBQUUsQ0FBQyxNQUFlLEVBQUUsRUFBRTtZQUNwRixJQUFJLENBQUMsWUFBWSxDQUFDLG9CQUFvQixDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBQ25ELENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVELENBQUMsaUNBQWlDO1FBRTlCLE1BQU0sSUFBSSwrQkFBaUIsRUFBRSxDQUFDO1FBQzlCLElBQUksQ0FBQyxNQUFNLENBQUMsTUFBTSxFQUFFLENBQUM7UUFDckIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxhQUFhLEdBQUcsSUFBSSxDQUFDO0lBQ3JDLENBQUM7SUFFRCxDQUFDLG9DQUFvQztRQUVqQyxNQUFNLElBQUksK0JBQWlCLEVBQUUsQ0FBQztRQUM5QixJQUFJLENBQUMsTUFBTSxDQUFDLE1BQU0sRUFBRSxDQUFDO1FBRXJCLCtCQUErQjtRQUMvQixJQUFJLENBQUMsTUFBTSxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUM7UUFDakMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxlQUFlLEdBQUcsSUFBSSxDQUFDLGtCQUFrQixDQUFDO1FBQ3RELElBQUksQ0FBQyxNQUFNLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQyxhQUFhLENBQUM7UUFFNUMsZ0VBQWdFO1FBQ2hFLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3JELENBQUM7SUFFTyw0QkFBNEI7UUFDaEMsbURBQW1EO1FBQ25ELElBQUksQ0FBQyxNQUFNLENBQUMsYUFBYSxHQUFHLElBQUksQ0FBQyxhQUFhLENBQUM7UUFDL0MsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsaUNBQWlDLEVBQUUsQ0FBQyxDQUFDO0lBRWxFLENBQUM7SUFFTywrQkFBK0I7UUFDbkMscURBQXFEO1FBQ3JELElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBRWxELDRGQUE0RjtRQUM1RixJQUFJLENBQUMsTUFBTSxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDO1FBQy9DLElBQUksQ0FBQyxhQUFhLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQyxVQUFVLENBQUM7UUFDNUMsSUFBSSxDQUFDLGtCQUFrQixHQUFHLElBQUksQ0FBQyxNQUFNLENBQUMsZUFBZSxDQUFDO1FBRXRELHNHQUFzRztRQUN0RyxJQUFJLENBQUMsTUFBTSxDQUFDLFVBQVUsR0FBRyw4QkFBZ0IsQ0FBQyxVQUFVLENBQUM7UUFDckQsSUFBSSxDQUFDLE1BQU0sQ0FBQyxlQUFlLEdBQUcsSUFBSSxtQkFBSyxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDO1FBRXBELG1CQUFtQjtRQUNuQixJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxvQ0FBb0MsRUFBRSxDQUFDLENBQUM7SUFFckUsQ0FBQztDQUNKO0FBaEdELHVDQWdHQyJ9","assetPath":"Assets/ZepetoScreenShot/ZepetoScripts/ScreenShotScripts/ScreenShotController.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"renderTexture","type":"UnityEngine.RenderTexture","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"backgroundCanvas","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"uiControllerObject","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"feedMessage","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"ScreenShotController","description":""},"isCompiled":true}'
+  typescriptHash: 436b3ae709a7283f9bb50a4ca3f074c3
+  onlyWriteTrigger: 0
