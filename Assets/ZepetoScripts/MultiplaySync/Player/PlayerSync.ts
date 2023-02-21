@@ -53,7 +53,7 @@ export default class PlayerSync extends ZepetoScriptBehaviour {
         this.m_animator.SetFloat("MoveProgress", animationParam.MoveProgress);
         
         //sync gesture
-        if (animationParam.State == CharacterState.Gesture && this.UseZepetoGestureAPI || this.GetAnimationClipFromResources ) { 
+        if (animationParam.State == CharacterState.Gesture && ( this.UseZepetoGestureAPI || this.GetAnimationClipFromResources )) { 
             const clipInfo: AnimatorClipInfo[] = this.m_animator.GetCurrentAnimatorClipInfo(0);
             const gestureName = this.player.gestureName;
             if (gestureName == null) return;

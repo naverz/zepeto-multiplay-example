@@ -29,7 +29,7 @@ export default class InteractionIcon extends ZepetoScriptBehaviour {
     }
     
     private OnTriggerEnter(coll: Collider) {
-        if(coll != ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character.GetComponent<Collider>()){
+        if(coll != ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent<Collider>()){
             return;
         }
         
@@ -38,7 +38,7 @@ export default class InteractionIcon extends ZepetoScriptBehaviour {
     }
 
     private OnTriggerExit(coll: Collider) {
-        if(coll != ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character.GetComponent<Collider>()){
+        if(coll != ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent<Collider>()){
             return;
         }
         

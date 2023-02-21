@@ -6,7 +6,7 @@ import {ZepetoPlayers, ZepetoCharacter} from "ZEPETO.Character.Controller";
 export default class GestureInteraction extends ZepetoScriptBehaviour {
     @SerializeField() private animationClip :AnimationClip;
     @SerializeField() private isSnapBone :boolean = true;
-    @SerializeField() private bodyBone: HumanBodyBones = HumanBodyBones.Hips;
+    @SerializeField() private bodyBone: HumanBodyBones;
     @SerializeField() private allowOverlap : boolean = false;
     
     private _interactionIcon :InteractionIcon;

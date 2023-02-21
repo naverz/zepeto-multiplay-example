@@ -1,0 +1,131 @@
+fileFormatVersion: 2
+guid: 48432be9f833e8246b204afb0be42355
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.LAYER = void 0;\r\nconst __UnityEngine__ = require(\"UnityEngine\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst ScreenShotController_1
+    = require(\"./ScreenShotController\");\r\nconst ScreenShotModeManager_1 = require(\"./ScreenShotModeManager\");\r\nvar
+    LAYER;\r\n(function (LAYER) {\r\n    LAYER[LAYER[\"everything\"] = -1] = \"everything\";\r\n   
+    LAYER[LAYER[\"nothing\"] = 0] = \"nothing\";\r\n    LAYER[LAYER[\"UI\"] = 5]
+    = \"UI\";\r\n})(LAYER = exports.LAYER || (exports.LAYER = {}));\r\n;\r\nclass
+    UIController extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        super(...arguments);\r\n        /* Camera mode */\r\n        this.isThirdPersonView
+    = false;\r\n        this.isBackgroundOn = true;\r\n        /*Player Layer Setting*/\r\n       
+    this.playerLayer = 0;\r\n        // Data\r\n        this.TOAST_MESSAGE = {\r\n           
+    feedUploading: \"Uploading...\",\r\n            feedCompleted: \"Done\",\r\n           
+    feedFailed: \"Failed\",\r\n            screenShotSaveCompleted: \"Saved!\"\r\n       
+    };\r\n    }\r\n    Awake() {\r\n        this.isBackgroundOn = true;\r\n       
+    this.zepetoScreenShotCanvas.sortingOrder = 1;\r\n        this.waitForSecond =
+    new UnityEngine_1.WaitForSeconds(1);\r\n        this.screenShotPanel.gameObject.SetActive(false);\r\n       
+    this.backgroundCanvas.gameObject.SetActive(false);\r\n        this.screenShotResultPanel.gameObject.SetActive(false);\r\n       
+    this.screenShotResultBackground.gameObject.SetActive(false);\r\n        this.screenShot
+    = this.screenShotModeModule.GetComponent($typeof(ScreenShotController_1.default));\r\n       
+    this.screenShotModeManager = this.screenShotModeModule.GetComponent($typeof(ScreenShotModeManager_1.default));\r\n       
+    this.playerLayer = this.screenShotModeManager.GetPlayerLayer();\r\n        this.viewChangeImage
+    = this.viewChangeButton.GetComponent($typeof(UnityEngine_UI_1.Image));\r\n       
+    this.backgroundOnOffImage = this.backgroundOnOffButton.GetComponent($typeof(UnityEngine_UI_1.Image));\r\n   
+    }\r\n    Start() {\r\n        // SafeArea Settings\r\n        let safeArea =
+    UnityEngine_1.Screen.safeArea;\r\n        let newAnchorMin = safeArea.position;\r\n       
+    let newAnchorMax = __UnityEngine__.Vector2.op_Addition(safeArea.position, safeArea.size);\r\n       
+    newAnchorMin.x /= UnityEngine_1.Screen.width;\r\n        newAnchorMax.x /= UnityEngine_1.Screen.width;\r\n       
+    newAnchorMin.y /= UnityEngine_1.Screen.height;\r\n        newAnchorMax.y /= UnityEngine_1.Screen.height;\r\n       
+    let rect = this.safeAreaObject.GetComponent($typeof(UnityEngine_1.RectTransform));\r\n       
+    rect.anchorMin = newAnchorMin;\r\n        rect.anchorMax = newAnchorMax;\r\n       
+    /** Screenshot mode\r\n         *  1. Btn: Select Screenshot Mode - Set to Screenshot
+    Mode and enable ZEPETO Camera by default.\r\n         *  2. Btn: Switch view
+    - Switch first-person/third-person camera according to current settings.\r\n        
+    *  3. Btn: Background ON/OFF - Button to turn the background on/off .\r\n        
+    *  4. Btn: Exit Screenshot Mode - Exits Screenshot Mode.\r\n         *  5. Btn:
+    Take a screenshot - Take a screenshot and display the screenshot results.\r\n        
+    */\r\n        // 1. Btn: Select Screenshot Mode\r\n        this.screenShotModeButton.onClick.AddListener(()
+    => {\r\n            this.screenShotModeButton.gameObject.SetActive(false);\r\n           
+    this.screenShotPanel.gameObject.SetActive(true);\r\n            //Initialize
+    the camera view to the default ZEPETO camera\r\n            this.isThirdPersonView
+    = true;\r\n            this.backgroundCanvas.worldCamera = this.screenShotModeManager.GetZepetoCamera();\r\n           
+    this.screenShotModeManager.StartScreenShotMode();\r\n        });\r\n        //
+    2. Btn: Switch Views\r\n        this.viewChangeButton.onClick.AddListener(()
+    => {\r\n            if (this.isThirdPersonView) {\r\n                this.viewChangeImage.sprite
+    = this.selfiViewSprite;\r\n                this.backgroundCanvas.worldCamera
+    = this.screenShotModeManager.GetSelfieCamera();\r\n                this.screenShotModeManager.SetSelfieCameraMode();\r\n               
+    this.isThirdPersonView = false;\r\n            }\r\n            else {\r\n               
+    this.viewChangeImage.sprite = this.thirdPersonViewSprite;\r\n               
+    this.backgroundCanvas.worldCamera = this.screenShotModeManager.GetZepetoCamera();\r\n               
+    this.screenShotModeManager.SetZepetoCameraMode();\r\n                this.isThirdPersonView
+    = true;\r\n            }\r\n        });\r\n        // 3. Btn: Background ON/OFF\r\n       
+    this.backgroundOnOffButton.onClick.AddListener(() => {\r\n            if (this.isBackgroundOn)
+    {\r\n                this.backgroundOnOffImage.sprite = this.backgroundOffSprite;\r\n               
+    this.SetBackgroundActive(!this.isBackgroundOn);\r\n                this.isBackgroundOn
+    = false;\r\n            }\r\n            else {\r\n                this.backgroundOnOffImage.sprite
+    = this.backgroundOnSprite;\r\n                this.SetBackgroundActive(!this.isBackgroundOn);\r\n               
+    this.isBackgroundOn = true;\r\n            }\r\n        });\r\n        // 4.
+    Btn: Exit Screenshot Mode\r\n        this.screenShotModeExitButton.onClick.AddListener(()
+    => {\r\n            if (!this.isBackgroundOn) {\r\n                this.SetBackgroundActive(true);\r\n               
+    this.isBackgroundOn = true;\r\n            }\r\n            this.screenShotModeButton.gameObject.SetActive(true);\r\n           
+    this.screenShotPanel.gameObject.SetActive(false);\r\n            this.screenShotModeManager.ExitScreenShotMode(this.isThirdPersonView);\r\n       
+    });\r\n        // 5. Btn: Take a screenshot\r\n        this.shootScreenShotButton.onClick.AddListener(()
+    => {\r\n            // Take a screenshot\r\n            this.screenShot.TakeScreenShot(this.isBackgroundOn);\r\n           
+    // Activating the Screenshot Results Screen\r\n            this.screenShotResultBackground.gameObject.SetActive(true);\r\n           
+    this.screenShotResultPanel.gameObject.SetActive(true);\r\n            // Activating
+    the Screenshot Feed Button\r\n            this.createFeedButton.gameObject.SetActive(true);\r\n       
+    });\r\n        /** Screenshot Result\r\n         *  1. Btn: Save Screenshot -
+    Save the screenshot to the gallery.\r\n         *  2. Btn: Screenshot sharing
+    - The ability to share screenshots.\r\n         *  3. Btn: Upload Feed - The
+    ability to upload to a feed.\r\n         *  4. Btn: Exit Screenshot Results Screen
+    - Close the Screenshot Results screen.\r\n        */\r\n        // 1. Btn: Save
+    Screenshot\r\n        this.saveButton.onClick.AddListener(() => {\r\n           
+    this.screenShot.SaveScreenShot();\r\n            this.StartCoroutine(this.ShowToastMessage(this.TOAST_MESSAGE.screenShotSaveCompleted));\r\n       
+    });\r\n        // 2. Btn: Share Screenshots\r\n        this.shareButton.onClick.AddListener(()
+    => {\r\n            this.screenShot.ShareScreenShot();\r\n        });\r\n       
+    // 3. Btn: Upload Feed\r\n        this.createFeedButton.onClick.AddListener(()
+    => {\r\n            this.screenShot.CreateFeedScreenShot();\r\n            this.StartCoroutine(this.ShowToastMessage(this.TOAST_MESSAGE.feedUploading));\r\n       
+    });\r\n        // 4. Btn: Close the Screenshot Results Screen\r\n        this.screenShotResultExitButton.onClick.AddListener(()
+    => {\r\n            this.screenShotResultBackground.gameObject.SetActive(false);\r\n           
+    this.screenShotResultPanel.gameObject.SetActive(false);\r\n        });\r\n   
+    }\r\n    // Displays the screenshot results screen.\r\n    ShowCreateFeedResult(result)
+    {\r\n        if (result) {\r\n            this.createFeedButton.gameObject.SetActive(false);\r\n           
+    this.StartCoroutine(this.ShowToastMessage(this.TOAST_MESSAGE.feedCompleted));\r\n       
+    }\r\n        else {\r\n            this.StartCoroutine(this.ShowToastMessage(this.TOAST_MESSAGE.feedFailed));\r\n       
+    }\r\n    }\r\n    // The screenshot results screen shows a toast message when
+    saving and uploading feeds.\r\n    *ShowToastMessage(text) {\r\n        yield
+    this.waitForSecond;\r\n        let toastMessage = null;\r\n        if (text ==
+    this.TOAST_MESSAGE.feedFailed)\r\n            toastMessage = UnityEngine_1.GameObject.Instantiate(this.toastErrorMessage);\r\n       
+    else\r\n            toastMessage = UnityEngine_1.GameObject.Instantiate(this.toastSuccessMessage);\r\n       
+    toastMessage.transform.SetParent(this.screenShotResultPanel.transform);\r\n       
+    toastMessage.GetComponentInChildren($typeof(UnityEngine_UI_1.Text)).text = text;\r\n       
+    UnityEngine_1.GameObject.Destroy(toastMessage, 1);\r\n    }\r\n    //Enables/disables
+    MeshRender for background gameobjects.\r\n    SetBackgroundActive(active) {\r\n       
+    // Background canvas (checkered pattern) disabled/enabled\r\n        if (active)
+    {\r\n            this.backgroundCanvas.gameObject.SetActive(!active);\r\n           
+    //Layer Settings to Everything\r\n            this.screenShotModeManager.GetSelfieCamera().cullingMask
+    = LAYER.everything;\r\n            this.screenShotModeManager.GetZepetoCamera().cullingMask
+    = LAYER.everything;\r\n        }\r\n        else {\r\n            this.backgroundCanvas.gameObject.SetActive(!active);\r\n           
+    //Change the Layer setting to only include nothing, player, and UI Layers\r\n           
+    this.screenShotModeManager.GetSelfieCamera().cullingMask = LAYER.nothing | 1
+    << this.playerLayer | 1 << LAYER.UI;\r\n            this.screenShotModeManager.GetZepetoCamera().cullingMask
+    = LAYER.nothing | 1 << this.playerLayer | 1 << LAYER.UI;\r\n        }\r\n   
+    }\r\n}\r\nexports.default = UIController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlDb250cm9sbGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlDb250cm9sbGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSw2Q0FBbUk7QUFDbkksbURBQW9EO0FBQ3BELGlEQUFxRDtBQUNyRCxpRUFBMEQ7QUFDMUQsbUVBQTREO0FBRTVELElBQVksS0FJWDtBQUpELFdBQVksS0FBSztJQUNiLDhDQUFlLENBQUE7SUFDZix1Q0FBVyxDQUFBO0lBQ1gsNkJBQUssQ0FBQTtBQUNULENBQUMsRUFKVyxLQUFLLEdBQUwsYUFBSyxLQUFMLGFBQUssUUFJaEI7QUFBQSxDQUFDO0FBRUYsTUFBcUIsWUFBYSxTQUFRLHFDQUFxQjtJQUEvRDs7UUFxQ0ksaUJBQWlCO1FBQ1Qsc0JBQWlCLEdBQVksS0FBSyxDQUFDO1FBS25DLG1CQUFjLEdBQVksSUFBSSxDQUFDO1FBUXZDLHdCQUF3QjtRQUNoQixnQkFBVyxHQUFXLENBQUMsQ0FBQztRQUloQyxPQUFPO1FBQ1Asa0JBQWEsR0FBRztZQUNaLGFBQWEsRUFBRSxjQUFjO1lBQzdCLGFBQWEsRUFBRSxNQUFNO1lBQ3JCLFVBQVUsRUFBRSxRQUFRO1lBQ3BCLHVCQUF1QixFQUFFLFFBQVE7U0FDcEMsQ0FBQztJQWtMTixDQUFDO0lBL0tHLEtBQUs7UUFDRCxJQUFJLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQztRQUMzQixJQUFJLENBQUMsc0JBQXNCLENBQUMsWUFBWSxHQUFHLENBQUMsQ0FBQztRQUM3QyxJQUFJLENBQUMsYUFBYSxHQUFHLElBQUksNEJBQWMsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUUzQyxJQUFJLENBQUMsZUFBZSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDakQsSUFBSSxDQUFDLGdCQUFnQixDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDbEQsSUFBSSxDQUFDLHFCQUFxQixDQUFDLFVBQVUsQ0FBQyxT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","assetPath":"Assets/ZepetoScreenShot/ZepetoScripts/ScreenShotScripts/UIController.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"safeAreaObject","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UIModule","name":"zepetoScreenShotCanvas","type":"UnityEngine.Canvas","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Panels\""]}]},{"assembly":"UnityEngine.UI","name":"screenShotPanel","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"screenShotResultPanel","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"screenShotModeButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Screenshot
+    Mode\""]}]},{"assembly":"UnityEngine.UI","name":"viewChangeButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"backgroundOnOffButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"shootScreenShotButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"screenShotModeExitButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"selfiViewSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"thirdPersonViewSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"backgroundOnSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"backgroundOffSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"saveButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Screenshot
+    Result\""]}]},{"assembly":"UnityEngine.UI","name":"shareButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"createFeedButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"screenShotResultExitButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"screenShotResultBackground","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"toastSuccessMessage","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Toast
+    Message\""]}]},{"assembly":"UnityEngine.CoreModule","name":"toastErrorMessage","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UIModule","name":"backgroundCanvas","type":"UnityEngine.Canvas","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Background
+    onoff\""]}]},{"assembly":"UnityEngine.CoreModule","name":"screenShotModeModule","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"ScreenShot
+    Mode Module\""]}]},{"assembly":"","name":"TOAST_MESSAGE","type":"__object","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIController","description":""},"isCompiled":true}'
+  typescriptHash: a68b26aefd980d35522a2ae5f2498703
+  onlyWriteTrigger: 0

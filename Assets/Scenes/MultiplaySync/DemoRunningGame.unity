@@ -491,10 +491,14 @@ MonoBehaviour:
     - InterpolationType
     - ExtrapolationType
     - extraMultipler
-    - syncGesture
+    - GetAnimationClipFromResources
     - HardSnapIfDistanceGreaterThan
     - UseHardSnap
+    - UseZepetoGestureAPI
+    - seeVersionLog
     unityValues:
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -507,9 +511,11 @@ MonoBehaviour:
     - '{"type":"System.String, mscorlib","value":"2"}'
     - '{"type":"System.String, mscorlib","value":"1"}'
     - '{"type":"System.Single, mscorlib","value":"1"}'
-    - '{"type":"System.Boolean, mscorlib","value":"True"}'
+    - '{"type":"System.Boolean, mscorlib","value":"False"}'
     - '{"type":"System.Single, mscorlib","value":"10"}'
     - '{"type":"System.Boolean, mscorlib","value":"True"}'
+    - '{"type":"System.Boolean, mscorlib","value":"False"}'
+    - '{"type":"System.Boolean, mscorlib","value":"False"}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: 6d846a38c15014273bd5ba91998e261d, type: 3}
