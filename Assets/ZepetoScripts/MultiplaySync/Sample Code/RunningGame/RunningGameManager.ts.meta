@@ -1,0 +1,57 @@
+fileFormatVersion: 2
+guid: 1105b671252ac41d49621677e36d352f
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst
+    ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nconst
+    MultiplayManager_1 = require(\"../../Common/MultiplayManager\");\r\nconst GameUICanvas_1
+    = require(\"../../Sample Code/RunningGame/GameUICanvas\");\r\nconst StartFinishLine_1
+    = require(\"../../Sample Code/RunningGame/StartFinishLine\");\r\nclass RunningGameManager
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n        this.multiplay
+    = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\r\n       
+    this.gameUICanvas = UnityEngine_1.Object.FindObjectOfType($typeof(GameUICanvas_1.default));\r\n       
+    this.startFinishLine = UnityEngine_1.Object.FindObjectOfType($typeof(StartFinishLine_1.default));\r\n       
+    this.multiplay.add_RoomJoined((room) => {\r\n            this.room = room;\r\n           
+    ZEPETO_Character_Controller_1.ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(()
+    => {\r\n                this.m_localCharacter = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;\r\n           
+    });\r\n            this.room.AddMessageHandler(\"CountDownStart\", (startServerTime)
+    => {\r\n                this.StartCoroutine(this.StartCoundDown(startServerTime));\r\n               
+    this.m_localCharacter.Teleport(UnityEngine_1.Vector3.op_Multiply(this.respawnPoint,
+    UnityEngine_1.Random.Range(0.9, 1.1)), UnityEngine_1.Quaternion.identity);\r\n           
+    });\r\n            this.room.AddMessageHandler(\"FirstPlayerGetIn\", (endServerTime)
+    => {\r\n                this.StartCoroutine(this.EndCoundDown(endServerTime));\r\n           
+    });\r\n            this.room.AddMessageHandler(\"ResponseGameReport\", (gameReport)
+    => {\r\n                this.gameUICanvas.SetNewReport(gameReport.playerUserId,
+    gameReport.playerLapTime);\r\n            });\r\n        });\r\n    }\r\n   
+    Init() {\r\n        this.gameUICanvas.DeleteReport();\r\n    }\r\n    *StartCoundDown(startServerTime)
+    {\r\n        const CountDelay = 3;\r\n        for (let i = 0; i <= CountDelay;
+    i++) {\r\n            yield new UnityEngine_1.WaitUntil(() => MultiplayManager_1.default.instance.GetServerTime()
+    - startServerTime > (i + 1) * 1000);\r\n            this.gameUICanvas.SetCountUI(CountDelay
+    - i);\r\n        }\r\n        this.startFinishLine.StartGame();\r\n    }\r\n   
+    *EndCoundDown(endServerTime) {\r\n        const CountDelay = 10;\r\n        for
+    (let i = 0; i <= CountDelay; i++) {\r\n            yield new UnityEngine_1.WaitUntil(()
+    => MultiplayManager_1.default.instance.GetServerTime() - endServerTime > (i +
+    1) * 1000);\r\n            this.gameUICanvas.SetCountUI(CountDelay - i);\r\n       
+    }\r\n        this.startFinishLine.Init();\r\n        this.gameUICanvas.Init();\r\n       
+    this.Init();\r\n    }\r\n}\r\nexports.default = RunningGameManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUnVubmluZ0dhbWVNYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiUnVubmluZ0dhbWVNYW5hZ2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUF1RjtBQUN2RiwrQ0FBa0Q7QUFFbEQsNkVBQTRFO0FBQzVFLG9FQUE2RDtBQUM3RCw2RUFBc0U7QUFDdEUsbUZBQTRFO0FBRTVFLE1BQXFCLGtCQUFtQixTQUFRLHFDQUFxQjtJQVN6RCxLQUFLO1FBQ1QsSUFBSSxDQUFDLFNBQVMsR0FBRyxvQkFBTSxDQUFDLGdCQUFnQixTQUFDLG1DQUFvQixFQUFHLENBQUM7UUFDakUsSUFBSSxDQUFDLFlBQVksR0FBRyxvQkFBTSxDQUFDLGdCQUFnQixTQUFDLHNCQUFZLEVBQUcsQ0FBQztRQUM1RCxJQUFJLENBQUMsZUFBZSxHQUFHLG9CQUFNLENBQUMsZ0JBQWdCLFNBQUMseUJBQWUsRUFBRyxDQUFDO1FBRWxFLElBQUksQ0FBQyxTQUFTLGdCQUFlLENBQUMsSUFBVSxFQUFFLEVBQUU7WUFDeEMsSUFBSSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUM7WUFFakIsMkNBQWEsQ0FBQyxRQUFRLENBQUMsa0JBQWtCLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtnQkFDdkQsSUFBSSxDQUFDLGdCQUFnQixHQUFHLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUFDO1lBQ3RGLENBQUMsQ0FBQyxDQUFDO1lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxnQkFBZ0IsRUFBRSxDQUFDLGVBQXNCLEVBQUUsRUFBRTtnQkFDckUsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLGVBQWUsQ0FBQyxDQUFDLENBQUM7Z0JBQzFELElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxRQUFRLENBL0JOLHFCQUFPLENBd0VzaG1CLFdBQVksQ0F6Q2xpbUIsSUFBSSxDQUFDLFlBQVksRUFBRyxvQkFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLEVBQUMsR0FBRyxDQUFDLEdBQUUsd0JBQVUsQ0FBQyxRQUFRLENBQUMsQ0FBQztZQUNuRyxDQUFDLENBQUMsQ0FBQztZQUNILElBQUksQ0FBQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsa0JBQWtCLEVBQUUsQ0FBQyxhQUFvQixFQUFFLEVBQUU7Z0JBQ3JFLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxhQUFhLENBQUMsQ0FBQyxDQUFDO1lBQzFELENBQUMsQ0FBQyxDQUFDO1lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxvQkFBb0IsRUFBRSxDQUFDLFVBQXFCLEVBQUUsRUFBRTtnQkFDeEUsSUFBSSxDQUFDLFlBQVksQ0FBQyxZQUFZLENBQUMsVUFBVSxDQUFDLFlBQVksRUFBQyxVQUFVLENBQUMsYUFBYSxDQUFDLENBQUM7WUFDckYsQ0FBQyxDQUFDLENBQUM7UUFDUCxDQUFDLEVBQUM7SUFDTixDQUFDO0lBRU8sSUFBSTtRQUNSLElBQUksQ0FBQyxZQUFZLENBQUMsWUFBWSxFQUFFLENBQUM7SUFDckMsQ0FBQztJQUVPLENBQUMsY0FBYyxDQUFDLGVBQXNCO1FBQzFDLE1BQU0sVUFBVSxHQUFHLENBQUMsQ0FBQztRQUNyQixLQUFJLElBQUksQ0FBQyxHQUFDLENBQUMsRUFBRSxDQUFDLElBQUUsVUFBVSxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQzdCLE1BQU0sSUFBSSx1QkFBUyxDQUFDLEdBQUcsRUFBRSxDQUFDLDBCQUFnQixDQUFDLFFBQVEsQ0FBQyxhQUFhLEVBQUUsR0FBRyxlQUFlLEdBQUcsQ0FBQyxDQUFDLEdBQUMsQ0FBQyxDQUFDLEdBQUMsSUFBSSxDQUFDLENBQUM7WUFDcEcsSUFBSSxDQUFDLFlBQVksQ0FBQyxVQUFVLENBQUMsVUFBVSxHQUFDLENBQUMsQ0FBQyxDQUFDO1NBQzlDO1FBQ0QsSUFBSSxDQUFDLGVBQWUsQ0FBQyxTQUFTLEVBQUUsQ0FBQztJQUNyQyxDQUFDO0lBRU8sQ0FBQyxZQUFZLENBQUMsYUFBb0I7UUFDdEMsTUFBTSxVQUFVLEdBQUcsRUFBRSxDQUFDO1FBQ3RCLEtBQUksSUFBSSxDQUFDLEdBQUMsQ0FBQyxFQUFFLENBQUMsSUFBRSxVQUFVLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDN0IsTUFBTSxJQUFJLHVCQUFTLENBQUMsR0FBRyxFQUFFLENBQUMsMEJBQWdCLENBQUMsUUFBUSxDQUFDLGFBQWEsRUFBRSxHQUFHLGFBQWEsR0FBRyxDQUFDLENBQUMsR0FBQyxDQUFDLENBQUMsR0FBQyxJQUFJLENBQUMsQ0FBQztZQUNsRyxJQUFJLENBQUMsWUFBWSxDQUFDLFVBQVUsQ0FBQyxVQUFVLEdBQUMsQ0FBQyxDQUFDLENBQUM7U0FDOUM7UUFDRCxJQUFJLENBQUMsZUFBZSxDQUFDLElBQUksRUFBRSxDQUFDO1FBQzVCLElBQUksQ0FBQyxZQUFZLENBQUMsSUFBSSxFQUFFLENBQUM7UUFDekIsSUFBSSxDQUFDLElBQUksRUFBRSxDQUFDO0lBQ2hCLENBQUM7Q0FFSjtBQTNERCxxQ0EyREMifQ==","assetPath":"Assets/ZepetoScripts/MultiplaySync/Sample
+    Code/RunningGame/RunningGameManager.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"respawnPoint","type":"UnityEngine.Vector3","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"RunningGameManager","description":""},"isCompiled":true}'
+  typescriptHash: 2a519575d145da5aea881b97847f453d
+  onlyWriteTrigger: 0

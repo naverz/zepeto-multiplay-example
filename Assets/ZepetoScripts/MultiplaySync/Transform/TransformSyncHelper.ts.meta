@@ -1,0 +1,245 @@
+fileFormatVersion: 2
+guid: 5419c5d1d2ede4cde844dd059edfebce
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.ScaleInterpolationType = exports.RotationInterpolationType
+    = exports.PositionExtrapolationType = exports.PositionInterpolationType = exports.UpdateOwner
+    = void 0;\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst ZEPETO_Multiplay_1
+    = require(\"ZEPETO.Multiplay\");\r\nconst ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst SyncIndexManager_1 = require(\"../Common/SyncIndexManager\");\r\nconst
+    MultiplayManager_1 = require(\"../Common/MultiplayManager\");\r\nclass TransformSyncHelper
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n       
+    super(...arguments);\r\n        this.UpdateOwnerType = UpdateOwner.Undefine;\r\n       
+    /** Sync Options **/\r\n        this.SyncPosition = true;\r\n        this.UseHardSnap
+    = true;\r\n        this.HardSnapIfDistanceGreaterThan = 10;\r\n        this.InterpolationType
+    = PositionInterpolationType.Estimate;\r\n        this.ExtrapolationType = PositionExtrapolationType.Disable;\r\n       
+    this.extraMultipler = 1;\r\n        this.moveSpeed = 10;\r\n        this.SyncRotation
+    = true;\r\n        this.RotationInterpolationType = RotationInterpolationType.Lerp;\r\n       
+    this.rotateSpeed = 100;\r\n        this.SyncScale = false;\r\n        this.ScaleInterpolationType
+    = ScaleInterpolationType.Lerp;\r\n        this.scaleUpSpeed = 100;\r\n       
+    this.m_isSteadyServerConnect = false;\r\n        this.m_isOwner = false;\r\n       
+    this.m_timeStampCount = 0;\r\n        this.tick = 0.04;\r\n        /** Interpolation
+    **/\r\n        this.m_lastGetTimeOut = 0.04; //(newGet().timeStamp - prevGet().timeStamp)
+    / 1000\r\n        this.m_bufferedState = new Array(2);\r\n        this.newGet
+    = () => this.m_bufferedState?.length > 0 ? this.m_bufferedState[0] : null;\r\n       
+    this.prevGet = () => this.m_bufferedState?.length > 1 ? this.m_bufferedState[1]
+    : null;\r\n        this.seeVersionLog = false;\r\n    }\r\n    get Id() {\r\n       
+    return this.m_Id;\r\n    }\r\n    set Id(id) {\r\n        this.m_Id = id;\r\n   
+    }\r\n    get isOwner() {\r\n        return this.m_isOwner;\r\n    }\r\n    Start()
+    {\r\n        this.VersionInfo();\r\n        if (!this.m_Id) {\r\n           
+    SyncIndexManager_1.default.SyncIndex++;\r\n            this.m_Id = SyncIndexManager_1.default.SyncIndex.toString();\r\n       
+    }\r\n        this.m_positionCache = this.transform.position;\r\n        this.SyncTransform();\r\n   
+    }\r\n    FixedUpdate() {\r\n        if (!this.newGet())\r\n            return;\r\n       
+    if (this.m_isOwner)\r\n            return;\r\n        if (this.m_objectStatus
+    != MultiplayManager_1.GameObjectStatus.Enable)\r\n            return;\r\n       
+    if (this.SyncPosition) {\r\n            this.SyncPositionUpdate();\r\n       
+    }\r\n        if (this.SyncRotation) {\r\n            this.SyncRotationUpdate();\r\n       
+    }\r\n        if (this.SyncScale) {\r\n            this.SyncScaleUpdate();\r\n       
+    }\r\n    }\r\n    SyncTransform() {\r\n        this.multiplay = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\r\n       
+    if (null != MultiplayManager_1.default.instance?.room) {\r\n            this.room
+    = MultiplayManager_1.default.instance.room;\r\n            this.room.add_OnStateChange(this.OnStateChange.bind(this));\r\n       
+    }\r\n        else {\r\n            this.multiplay.add_RoomJoined((room) => {\r\n               
+    this.room = room;\r\n                this.room.add_OnStateChange(this.OnStateChange.bind(this));\r\n           
+    });\r\n        }\r\n        this.StartCoroutine(this.SteadyServerConnect());\r\n   
+    }\r\n    OnStateChange(state, isFirst) {\r\n        if (null == this.syncTransform)
+    {\r\n            this.syncTransform = state.SyncTransforms.get_Item(this.m_Id);\r\n           
+    if (this.syncTransform) {\r\n                this.OnChangeTransform();\r\n               
+    this.ForceTarget();\r\n                this.syncTransform.add_OnChange(() =>
+    {\r\n                    this.OnChangeTransform();\r\n                });\r\n               
+    this.room.remove_OnStateChange(this.OnStateChange.bind(this));\r\n           
+    }\r\n            else {\r\n                // Initial definition if not defined
+    on the server                \r\n                this.m_objectStatus = MultiplayManager_1.GameObjectStatus.Enable;\r\n               
+    this.SendTransform();\r\n                this.SendStatus();\r\n            }\r\n       
+    }\r\n    }\r\n    // A function that changes the owner of the update.\r\n   
+    ChangeOwner(ownerSessionId) {\r\n        if (null == this.room)\r\n           
+    this.room = MultiplayManager_1.default.instance.room;\r\n        if (this.room.SessionId
+    == ownerSessionId && !this.m_isOwner) {\r\n            this.m_isOwner = true;\r\n           
+    this.m_sendCoroutine = this.StartCoroutine(this.CheckChangeTransform(this.tick));\r\n       
+    }\r\n        else if (this.room.SessionId != ownerSessionId && this.m_isOwner)
+    {\r\n            this.m_isOwner = false;\r\n            if (null != this.m_sendCoroutine)\r\n               
+    this.StopCoroutine(this.m_sendCoroutine);\r\n        }\r\n    }\r\n    OnChangeTransform()
+    {\r\n        if (this.m_isOwner)\r\n            return;\r\n        if (null !=
+    this.syncTransform.status && this.syncTransform.status != this.m_objectStatus)
+    {\r\n            this.m_objectStatus = this.syncTransform.status;\r\n           
+    this.ChangeStatus(this.syncTransform.status);\r\n        }\r\n        this.m_positionCache
+    = this.transform.position;\r\n        const pos = new UnityEngine_1.Vector3(this.syncTransform.position.x,
+    this.syncTransform.position.y, this.syncTransform.position.z);\r\n        const
+    rot = new UnityEngine_1.Quaternion(this.syncTransform.rotation.x, this.syncTransform.rotation.y,
+    this.syncTransform.rotation.z, this.syncTransform.rotation.w);\r\n        const
+    scale = new UnityEngine_1.Vector3(this.syncTransform.scale.x, this.syncTransform.scale.y,
+    this.syncTransform.scale.z);\r\n        const localPos = new UnityEngine_1.Vector3(this.syncTransform.localPosition.x,
+    this.syncTransform.localPosition.y, this.syncTransform.localPosition.z);\r\n       
+    // Shift buffer contents, oldest data erased, 0 becomes 1\r\n        this.m_bufferedState[1]
+    = this.m_bufferedState[0];\r\n        // Save currect received state as 0 in
+    the buffer, safe to overwrite after shifting\r\n        const interpolState =
+    {\r\n            timestamp: this.syncTransform.sendTime,\r\n            position:
+    pos,\r\n            localPosition: localPos,\r\n            rotation: rot,\r\n           
+    scale: scale\r\n        };\r\n        this.m_bufferedState[0] = interpolState;\r\n       
+    if (this.m_timeStampCount == 0) {\r\n            this.m_bufferedState[1] = interpolState;\r\n       
+    }\r\n        // Increment state count but never exceed buffer size\r\n       
+    this.m_timeStampCount = UnityEngine_1.Mathf.Min(this.m_timeStampCount + 1, this.m_bufferedState.length);\r\n       
+    const timeOut = (this.newGet().timestamp - this.prevGet().timestamp) / 1000;\r\n       
+    this.m_lastGetTimeOut = timeOut < this.tick ? this.m_lastGetTimeOut : timeOut;\r\n   
+    }\r\n    ChangeStatus(status) {\r\n        switch (+status) {\r\n           
+    case MultiplayManager_1.GameObjectStatus.Destroyed:\r\n                UnityEngine_1.Object.Destroy(this.gameObject);\r\n               
+    break;\r\n        }\r\n    }\r\n    ForceTarget() {\r\n        if (this.m_isOwner)\r\n           
+    return;\r\n        if (null == this.newGet())\r\n            return;\r\n       
+    if (this.SyncPosition)\r\n            this.transform.position = this.newGet().position;\r\n       
+    if (this.SyncRotation)\r\n            this.transform.rotation = this.newGet().rotation;\r\n       
+    if (this.SyncScale)\r\n            this.transform.localScale = this.newGet().scale;\r\n   
+    }\r\n    SyncPositionUpdate() {\r\n        if (this.transform.parent != null)
+    {\r\n            if (UnityEngine_1.Vector3.op_Equality(this.newGet().localPosition,
+    this.prevGet().localPosition)) {\r\n                this.transform.localPosition
+    = this.newGet().localPosition;\r\n                return;\r\n            }\r\n       
+    }\r\n        if (this.UseHardSnap) {\r\n            if (UnityEngine_1.Vector3.Distance(this.newGet().position,
+    this.transform.position) > this.HardSnapIfDistanceGreaterThan) {\r\n               
+    this.transform.position = this.newGet().position;\r\n                return;\r\n           
+    }\r\n        }\r\n        const extraOffset = this.GetExtraPolationOffset();\r\n       
+    const targetPos = UnityEngine_1.Vector3.op_Addition(this.newGet().position, extraOffset);\r\n       
+    const getDis = UnityEngine_1.Vector3.Distance(this.newGet().position, this.prevGet().position);\r\n       
+    const targetDis = UnityEngine_1.Vector3.Distance(targetPos, this.m_positionCache);\r\n       
+    let extraSpeed;\r\n        if (this.InterpolationType == PositionInterpolationType.Estimate)
+    {\r\n            extraSpeed = getDis == 0 ? this.moveSpeed : targetDis / this.m_lastGetTimeOut;\r\n       
+    }\r\n        else if (UnityEngine_1.Vector3.op_Inequality(extraOffset, UnityEngine_1.Vector3.zero))
+    {\r\n            // extra speed = originDis : originSpeed = extraDis : extraSpeed
+    \r\n            // => extraSpeed = originSpeed * extraDis / originDis\r\n           
+    extraSpeed = getDis == 0 ? this.moveSpeed : (this.moveSpeed * targetDis) / getDis;\r\n           
+    extraSpeed = UnityEngine_1.Mathf.Clamp(extraSpeed, this.moveSpeed, this.moveSpeed
+    * 2);\r\n        }\r\n        else {\r\n            extraSpeed = this.moveSpeed;\r\n       
+    }\r\n        switch (+this.InterpolationType) {\r\n            case (PositionInterpolationType.None):\r\n               
+    this.transform.position = targetPos;\r\n                break;\r\n           
+    case (PositionInterpolationType.Lerp):\r\n                this.transform.position
+    = UnityEngine_1.Vector3.Lerp(this.transform.position, targetPos, extraSpeed *
+    UnityEngine_1.Time.fixedDeltaTime);\r\n                break;\r\n           
+    case (PositionInterpolationType.MoveToward):\r\n                this.transform.position
+    = UnityEngine_1.Vector3.MoveTowards(this.transform.position, targetPos, extraSpeed
+    * UnityEngine_1.Time.fixedDeltaTime);\r\n                break;\r\n           
+    case (PositionInterpolationType.Estimate):\r\n                this.transform.position
+    = UnityEngine_1.Vector3.MoveTowards(this.transform.position, targetPos, extraSpeed
+    * UnityEngine_1.Time.fixedDeltaTime);\r\n                break;\r\n        }\r\n   
+    }\r\n    SyncRotationUpdate() {\r\n        switch (+this.RotationInterpolationType)
+    {\r\n            case (RotationInterpolationType.None):\r\n                this.transform.rotation
+    = this.newGet().rotation;\r\n                break;\r\n            case (RotationInterpolationType.Lerp):\r\n               
+    this.transform.rotation = UnityEngine_1.Quaternion.Lerp(this.transform.rotation,
+    this.newGet().rotation, this.rotateSpeed * UnityEngine_1.Time.fixedDeltaTime);\r\n               
+    break;\r\n            case (RotationInterpolationType.MoveToward):\r\n               
+    this.transform.rotation = UnityEngine_1.Quaternion.RotateTowards(this.transform.rotation,
+    this.newGet().rotation, this.rotateSpeed * UnityEngine_1.Time.fixedDeltaTime);\r\n               
+    break;\r\n        }\r\n    }\r\n    SyncScaleUpdate() {\r\n        switch (+this.ScaleInterpolationType)
+    {\r\n            case (ScaleInterpolationType.None):\r\n                this.transform.localScale
+    = this.newGet().scale;\r\n                break;\r\n            case (ScaleInterpolationType.Lerp):\r\n               
+    this.transform.localScale = UnityEngine_1.Vector3.Lerp(this.transform.localScale,
+    this.newGet().scale, this.scaleUpSpeed * UnityEngine_1.Time.fixedDeltaTime);\r\n               
+    break;\r\n            case (ScaleInterpolationType.MoveToward):\r\n               
+    this.transform.localScale = UnityEngine_1.Vector3.MoveTowards(this.transform.localScale,
+    this.newGet().scale, this.scaleUpSpeed * UnityEngine_1.Time.fixedDeltaTime);\r\n               
+    break;\r\n        }\r\n    }\r\n    GetExtraPolationOffset() {\r\n        if
+    (this.ExtrapolationType == PositionExtrapolationType.Disable) {\r\n           
+    return UnityEngine_1.Vector3.zero;\r\n        }\r\n        if (UnityEngine_1.Vector3.op_Equality(this.newGet().position,
+    this.prevGet().position)) {\r\n            return UnityEngine_1.Vector3.zero;\r\n       
+    }\r\n        const moveDirection = UnityEngine_1.Vector3.Normalize(UnityEngine_1.Vector3.op_Subtraction(this.newGet().position,
+    this.prevGet().position));\r\n        const latency = (MultiplayManager_1.default.instance.GetServerTime()
+    - this.newGet().timestamp) / 1000;\r\n        let extraPolationOffSet = UnityEngine_1.Vector3.zero;\r\n       
+    switch (+this.ExtrapolationType) {\r\n            case (PositionExtrapolationType.FixedSpeed):\r\n               
+    extraPolationOffSet = UnityEngine_1.Vector3.op_Multiply(UnityEngine_1.Vector3.op_Multiply(UnityEngine_1.Vector3.op_Multiply(moveDirection,
+    latency), this.moveSpeed), this.extraMultipler);\r\n                break;\r\n           
+    case (PositionExtrapolationType.Estimate):\r\n                const estimatedSpeed
+    = UnityEngine_1.Vector3.Distance(this.newGet().position, this.prevGet().position)
+    / this.m_lastGetTimeOut;\r\n                extraPolationOffSet = UnityEngine_1.Vector3.op_Multiply(UnityEngine_1.Vector3.op_Multiply(UnityEngine_1.Vector3.op_Multiply(moveDirection,
+    latency), estimatedSpeed), this.extraMultipler);\r\n                break;\r\n       
+    }\r\n        return extraPolationOffSet;\r\n    }\r\n    //isOwner\r\n    *CheckChangeTransform(tick)
+    {\r\n        const syncNextFrameMax = 10;\r\n        let syncNextFrameCount =
+    0;\r\n        let syncNowFrame = true;\r\n        let isFirst = true;\r\n       
+    let pastPos = this.transform.position;\r\n        let pastRot = this.transform.rotation;\r\n       
+    let pastScale = this.transform.localScale;\r\n        let pastLocalPos = this.transform.localPosition;\r\n       
+    this.m_objectStatus = MultiplayManager_1.GameObjectStatus.Enable;\r\n       
+    while (true) {\r\n            if (this.SyncPosition && UnityEngine_1.Vector3.op_Inequality(pastPos,
+    this.transform.localPosition)) {\r\n                pastPos = this.transform.localPosition;\r\n               
+    syncNowFrame = true;\r\n            }\r\n            if (this.SyncRotation &&
+    UnityEngine_1.Quaternion.op_Inequality(pastRot, this.transform.rotation)) {\r\n               
+    pastRot = this.transform.rotation;\r\n                syncNowFrame = true;\r\n           
+    }\r\n            if (this.SyncScale && UnityEngine_1.Vector3.op_Inequality(pastScale,
+    this.transform.localScale)) {\r\n                pastScale = this.transform.localScale;\r\n               
+    syncNowFrame = true;\r\n            }\r\n            //Transmit any values that
+    have changed values.\r\n            if (syncNowFrame) {\r\n                this.SendTransform();\r\n               
+    syncNowFrame = false;\r\n                syncNextFrameCount = 0;\r\n               
+    if (isFirst) {\r\n                    this.SendStatus();\r\n                   
+    isFirst = false;\r\n                }\r\n            }\r\n            //Send
+    10 more frames even if stopped\r\n            else if (syncNextFrameCount < syncNextFrameMax)
+    {\r\n                this.SendTransform();\r\n                syncNextFrameCount++;\r\n           
+    }\r\n            yield new UnityEngine_1.WaitForSeconds(tick);\r\n        }\r\n   
+    }\r\n    SendTransform() {\r\n        const data = new ZEPETO_Multiplay_1.RoomData();\r\n       
+    data.Add(\"Id\", this.m_Id);\r\n        const pos = new ZEPETO_Multiplay_1.RoomData();\r\n       
+    pos.Add(\"x\", this.transform.position.x);\r\n        pos.Add(\"y\", this.transform.position.y);\r\n       
+    pos.Add(\"z\", this.transform.position.z);\r\n        data.Add(\"position\",
+    pos.GetObject());\r\n        const localPos = new ZEPETO_Multiplay_1.RoomData();\r\n       
+    localPos.Add(\"x\", this.transform.localPosition.x);\r\n        localPos.Add(\"y\",
+    this.transform.localPosition.y);\r\n        localPos.Add(\"z\", this.transform.localPosition.z);\r\n       
+    data.Add(\"localPosition\", localPos.GetObject());\r\n        const rot = new
+    ZEPETO_Multiplay_1.RoomData();\r\n        rot.Add(\"x\", this.transform.rotation.x);\r\n       
+    rot.Add(\"y\", this.transform.rotation.y);\r\n        rot.Add(\"z\", this.transform.rotation.z);\r\n       
+    rot.Add(\"w\", this.transform.rotation.w);\r\n        data.Add(\"rotation\",
+    rot.GetObject());\r\n        const scale = new ZEPETO_Multiplay_1.RoomData();\r\n       
+    scale.Add(\"x\", this.transform.localScale.x);\r\n        scale.Add(\"y\", this.transform.localScale.y);\r\n       
+    scale.Add(\"z\", this.transform.localScale.z);\r\n        data.Add(\"scale\",
+    scale.GetObject());\r\n        data.Add(\"sendTime\", MultiplayManager_1.default.instance.GetServerTime());\r\n       
+    this.room.Send(MESSAGE.SyncTransform, data.GetObject());\r\n    }\r\n    SendStatus()
+    {\r\n        const data = new ZEPETO_Multiplay_1.RoomData();\r\n        data.Add(\"Id\",
+    this.Id);\r\n        data.Add(\"Status\", this.m_objectStatus);\r\n        this.room.Send(MESSAGE.SyncTransformStatus,
+    data.GetObject());\r\n    }\r\n    *SteadyServerConnect() {\r\n        const
+    pastPingCount = MultiplayManager_1.default.instance.pingCheckCount;\r\n       
+    yield new UnityEngine_1.WaitUntil(() => MultiplayManager_1.default.instance.pingCheckCount
+    > pastPingCount + 1);\r\n        this.m_isSteadyServerConnect = true;\r\n   
+    }\r\n    VersionInfo() {\r\n        if (!this.seeVersionLog)\r\n            return;\r\n       
+    console.warn(\"TransformSyncHelper VersionInfos\\n* Version 1.0.1\\n* Github
+    : https://github.com/JasperGame/zepeto-world-sync-component \\n* Latest Update
+    Date : 2023.02.13 \\n\");\r\n    }\r\n}\r\nexports.default = TransformSyncHelper;\r\nvar
+    UpdateOwner;\r\n(function (UpdateOwner) {\r\n    UpdateOwner[UpdateOwner[\"Master\"]
+    = 0] = \"Master\";\r\n    UpdateOwner[UpdateOwner[\"Undefine\"] = 1] = \"Undefine\";\r\n})(UpdateOwner
+    = exports.UpdateOwner || (exports.UpdateOwner = {}));\r\nvar PositionInterpolationType;\r\n(function
+    (PositionInterpolationType) {\r\n    PositionInterpolationType[PositionInterpolationType[\"None\"]
+    = 0] = \"None\";\r\n    PositionInterpolationType[PositionInterpolationType[\"Lerp\"]
+    = 1] = \"Lerp\";\r\n    PositionInterpolationType[PositionInterpolationType[\"MoveToward\"]
+    = 2] = \"MoveToward\";\r\n    PositionInterpolationType[PositionInterpolationType[\"Estimate\"]
+    = 3] = \"Estimate\";\r\n})(PositionInterpolationType = exports.PositionInterpolationType
+    || (exports.PositionInterpolationType = {}));\r\nvar PositionExtrapolationType;\r\n(function
+    (PositionExtrapolationType) {\r\n    PositionExtrapolationType[PositionExtrapolationType[\"Disable\"]
+    = 0] = \"Disable\";\r\n    PositionExtrapolationType[PositionExtrapolationType[\"FixedSpeed\"]
+    = 1] = \"FixedSpeed\";\r\n    PositionExtrapolationType[PositionExtrapolationType[\"Estimate\"]
+    = 2] = \"Estimate\";\r\n})(PositionExtrapolationType = exports.PositionExtrapolationType
+    || (exports.PositionExtrapolationType = {}));\r\nvar RotationInterpolationType;\r\n(function
+    (RotationInterpolationType) {\r\n    RotationInterpolationType[RotationInterpolationType[\"None\"]
+    = 0] = \"None\";\r\n    RotationInterpolationType[RotationInterpolationType[\"Lerp\"]
+    = 1] = \"Lerp\";\r\n    RotationInterpolationType[RotationInterpolationType[\"MoveToward\"]
+    = 2] = \"MoveToward\";\r\n})(RotationInterpolationType = exports.RotationInterpolationType
+    || (exports.RotationInterpolationType = {}));\r\nvar ScaleInterpolationType;\r\n(function
+    (ScaleInterpolationType) {\r\n    ScaleInterpolationType[ScaleInterpolationType[\"None\"]
+    = 0] = \"None\";\r\n    ScaleInterpolationType[ScaleInterpolationType[\"Lerp\"]
+    = 1] = \"Lerp\";\r\n    ScaleInterpolationType[ScaleInterpolationType[\"MoveToward\"]
+    = 2] = \"MoveToward\";\r\n})(ScaleInterpolationType = exports.ScaleInterpolationType
+    || (exports.ScaleInterpolationType = {}));\r\nvar MESSAGE;\r\n(function (MESSAGE)
+    {\r\n    MESSAGE[\"SyncTransform\"] = \"SyncTransform\";\r\n    MESSAGE[\"SyncTransformStatus\"]
+    = \"SyncTransformStatus\";\r\n})(MESSAGE || (MESSAGE = {}));\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVHJhbnNmb3JtU3luY0hlbHBlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlRyYW5zZm9ybVN5bmNIZWxwZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsaURBQW9EO0FBQ3BELHVEQUFnRDtBQUNoRCwrQ0FBa0Q7QUFDbEQsNkNBQXNIO0FBR3RILGlFQUEwRDtBQUMxRCxpRUFBZ0Y7QUFFaEYsTUFBcUIsbUJBQW9CLFNBQVEscUNBQXFCO0lBQXRFOztRQUNXLG9CQUFlLEdBQWdCLFdBQVcsQ0FBQyxRQUFRLENBQUM7UUFFM0Qsb0JBQW9CO1FBRWIsaUJBQVksR0FBWSxJQUFJLENBQUM7UUFDN0IsZ0JBQVcsR0FBWSxJQUFJLENBQUM7UUFDcUQsa0NBQTZCLEdBQVcsRUFBRSxDQUFDO1FBQzVILHNCQUFpQixHQUE4Qix5QkFBeUIsQ0FBQyxRQUFRLENBQUM7UUFDbEYsc0JBQWlCLEdBQThCLHlCQUF5QixDQUFDLE9BQU8sQ0FBQztRQUNMLG1CQUFjLEdBQVcsQ0FBQyxDQUFDO1FBQzVCLGNBQVMsR0FBVyxFQUFFLENBQUM7UUFFbEcsaUJBQVksR0FBWSxJQUFJLENBQUM7UUFDN0IsOEJBQXlCLEdBQThCLHlCQUF5QixDQUFDLElBQUksQ0FBQztRQUN0RixnQkFBVyxHQUFXLEdBQUcsQ0FBQztRQUUxQixjQUFTLEdBQVksS0FBSyxDQUFDO1FBQzNCLDJCQUFzQixHQUEyQixzQkFBc0IsQ0FBQyxJQUFJLENBQUM7UUFDN0UsaUJBQVksR0FBVyxHQUFHLENBQUM7UUFJMUIsNEJBQXVCLEdBQVcsS0FBSyxDQUFDO1FBUXhDLGNBQVMsR0FBWSxLQUFLLENBQUM7UUFPM0IscUJBQWdCLEdBQVcsQ0FBQyxDQUFDO1FBSXBCLFNBQUksR0FBVyxJQUFJLENBQUM7UUFFckMscUJBQXFCO1FBQ2IscUJBQWdCLEdBQVcsSUFBSSxDQUFDLENBQUMsbURBQW1EO1FBQ3BGLG9CQUFlLEdBQWdCLElBQUksS0FBSyxDQUFZLENBQUMsQ0FBQyxDQUFDO1FBRXZELFdBQU0sR0FBRyxHQUFHLEVBQUUsQ0FBQyxJQUFJLENBQUMsZUFBZSxFQUFFLE1BQU0sR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxlQUFlLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQztRQUNqRixZQUFPLEdBQUcsR0FBRyxFQUFFLENBQUMsSUFBSSxDQUFDLGVBQWUsRUFBRSxNQUFNLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsZUFBZSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUM7UUFtVmhFLGtCQUFhLEdBQVcsS0FBSyxDQUFDO0lBTzVELENBQUM7SUFsWEcsSUFBSSxFQUFFO1FBQ0YsT0FBTyxJQUFJLENBQUMsSUFBSSxDQUFDO0lBQ3JCLENBQUM7SUFDRCxJQUFJLEVBQUUsQ0FBQyxFQUFTO1FBQ1osSUFBSSxDQUFDLElBQUksR0FBRyxFQUFFLENBQUM7SUFDbkIsQ0FBQztJQUVELElBQUksT0FBTztRQUNQLE9BQU8sSUFBSSxDQUFDLFNBQVMsQ0FBQztJQUMxQixDQUFDO0lBaUJPLEtBQUs7UUFDVCxJQUFJLENBQUMsV0FBVyxFQUFFLENBQUM7UUFFbkIsSUFBRyxDQUFDLElBQUksQ0FBQyxJQUFJLEVBQUU7WUFDWCwwQkFBZ0IsQ0FBQyxTQUFTLEVBQUUsQ0FBQztZQUM3QixJQUFJLENBQUMsSUFBSSxHQUFHLDBCQUFnQixDQUFDLFNBQVMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztTQUNyRDtRQUNELElBQUksQ0FBQyxlQUFlLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUM7UUFFL0MsSUFBSSxDQUFDLGFBQWEsRUFBRSxDQUFDO0lBQ3pCLENBQUM7SUFFTyxXQUFXO1FBQ2YsSUFBSSxDQUFDLElBQUksQ0FBQyxNQUFNLEVBQUU7WUFDZCxPQUFPO1FBQ1gsSUFBSSxJQUFJLENBQUMsU0FBUztZQUNkLE9BQU87UUFDWCxJQUFHLElBQUksQ0FBQyxjQUFjLElBQUksbUNBQWdCLENBQUMsTUFBTTtZQUM3QyxPQUFNO1FBRVYsSUFBSSxJQUFJLENBQUMsWUFBWSxFQUFFO1lBQ25CLElBQUksQ0FBQyxrQkFBa0IsRUFBRSxDQUFDO1NBQzdCO1FBQ0QsSUFBSSxJQUFJLENBQUMsWUFBWSxFQUFFO1lBQ25CLElBQUksQ0FBQyxrQkFBa0IsRUFBRSxDQUFDO1NBQzdCO1FBQ0QsSUFBSSxJQUFJLENBQUMsU0FBUyxFQUFFO1lBQ2hCLElBQUksQ0FBQyxlQUFlLEVBQUUsQ0FBQztTQUMxQjtJQUNMLENBQUM7SUFFTyxhQUFhO1FBQ2pCLElBQUksQ0FBQyxTQUFTLEdBQUcsb0JBQU0sQ0FBQyxnQkFBZ0IsU0FBQyxtQ0FBb0IsRUFBRyxDQUFDO1FBQ2pFLElBQUksSUFBSSxJQUFJLDBCQUFnQixDQUFDLFFBQVEsRUFBRSxJQUFJLEVBQUM7WUFDeEMsSUFBSSxDQUFDLElBQUksR0FBRywwQkFBZ0IsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDO1lBQzNDLElBQUksQ0FBQyxJQUFJLG1CQUFrQixJQUFJLENBQUMsYUFBYSxhQUFDO1NBQ2pEO2FBQ0k7WUFDRCxJQUFJLENBQUMsU0FBUyxnQkFBZSxDQUFDLElBQVUsRUFBRSxFQUFFO2dCQUN4QyxJQUFJLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztnQkFDakIsSUFBSSxDQUFDLElBQUksbUJBQWtCLElBQUksQ0FBQyxhQUFhLGFBQUM7WUFDbEQsQ0FBQyxFQUFDO1NBQ0w7UUFDRCxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxtQkFBbUIsRUFBRSxDQUFDLENBQUM7SUFDcEQsQ0FBQztJQUVPLGFBQWEsQ0FBQyxLQUFZLEVBQUUsT0FBZ0I7UUFDaEQsSUFBSSxJQUFJLElBQUksSUFBSSxDQUFDLGFBQWEsRUFBRTtZQUM1QixJQUFJLENBQUMsYUFBYSxHQUFHLEtBQUssQ0FBQyxjQUFjLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUM5RCxJQUFJLElBQUksQ0FBQyxhQUFhLEVBQUU7Z0JBQ3BCLElBQUksQ0FBQyxpQkFBaUIsRUFBRSxDQUFDO2dCQUN6QixJQUFJLENBQUMsV0FBVyxFQUFFLENBQUM7Z0JBRW5CLElBQUksQ0FBQyxhQUFhLENBQUMsWUFBWSxDQUFDLEdBQUcsRUFBRTtvQkFDakMsSUFBSSxDQUFDLGlCQUFpQixFQUFFLENBQUM7Z0JBQzdCLENBQUMsQ0FBQyxDQUFDO2dCQUNILElBQUksQ0FBQyxJQUFJLHNCQUFrQixJQUFJLENBQUMsYUFBYSxhQUFDO2FBQ2pEO2lCQUNHO2dCQUNBLGtFQUFrRTtnQkFDbEUsSUFBSSxDQUFDLGNBQWMsR0FBRyxtQ0FBZ0IsQ0FBQyxNQUFNLENBQUM7Z0JBQzlDLElBQUksQ0FBQyxhQUFhLEVBQUUsQ0FBQztnQkFDckIsSUFBSSxDQUFDLFVBQVUsRUFBRSxDQUFDO2FBQ3JCO1NBQ0o7SUFDTCxDQUFDO0lBRUQsbURBQW1EO0lBQzVDLFdBQVcsQ0FBQyxjQUFxQjtRQUNwQyxJQUFHLElBQUksSUFBSSxJQUFJLENBQUMsSUFBSTtZQUNoQixJQUFJLENBQUMsSUFBSSxHQUFHLDBCQUFnQixDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUM7UUFDL0MsSUFBRyxJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsSUFBSSxjQUFjLElBQUksQ0FBQyxJQUFJLENBQUMsU0FBUyxFQUFFO1lBQ3pELElBQUksQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO1lBQ3RCLElBQUksQ0FBQyxlQUFlLEdBQUcsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsb0JBQW9CLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7U0FDcEY7YUFDSSxJQUFHLElBQUksQ0FBQyxJQUFJLENBQUMsU0FBUyxJQUFJLGNBQWMsSUFBSSxJQUFJLENBQUMsU0FBUyxFQUFFO1lBQzdELElBQUksQ0FBQyxTQUFTLEdBQUcsS0FBSyxDQUFDO1lBQ3ZCLElBQUcsSUFBSSxJQUFJLElBQUksQ0FBQyxlQUFlO2dCQUMzQixJQUFJLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxlQUFlLENBQUMsQ0FBQztTQUNoRDtJQUNMLENBQUM7SUFFTyxpQkFBaUI7UUFDckIsSUFBSSxJQUFJLENBQUMsU0FBUztZQUFFLE9BQU87UUFDM0IsSUFBRyxJQUFJLElBQUUsSUFBSSxDQUFDLGFBQWEsQ0FBQyxNQUFNLElBQUksSUFBSSxDQUFDLGFBQWEsQ0FBQyxNQUFNLElBQUcsSUFBSSxDQUFDLGNBQWMsRUFBRTtZQUNuRixJQUFJLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQyxhQUFhLENBQUMsTUFBTSxDQUFDO1lBQ2hELElBQUksQ0FBQyxZQUFZLENBQUMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxNQUFNLENBQUMsQ0FBQztTQUNoRDtRQUNELElBQUksQ0FBQyxlQUFlLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUM7UUFFL0MsTUFBTSxHQUFHLEdBQVcsSUFBSSxxQkFBTyxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLENBQUMsRUFBRSxJQUFJLENBQUMsYUFBYSxDQUFDLFFBQVEsQ0FBQyxDQUFDLEVBQUUsSUFBSSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDN0gsTUFBTSxHQUFHLEdBQWUsSUFBSSx3QkFBVSxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLENBQUMsRUFBRSxJQUFJLENBQUMsYUFBYSxDQUFDLFFBQVEsQ0FBQyxDQUFDLEVBQUUsSUFBSSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQyxFQUFFLElBQUksQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ25LLE1BQU0sS0FBSyxHQUFZLElBQUkscUJBQU8sQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUUsSUFBSSxDQUFDLGFBQWEsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLElBQUksQ0FBQyxhQUFhLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3ZILE1BQU0sUUFBUSxHQUFXLElBQUkscUJBQU8sQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDLGFBQWEsQ0FBQyxDQUFDLEVBQUUsSUFBSSxDQUFDLGFBQWEsQ0FBQyxhQUFhLENBQUMsQ0FBQyxFQUFFLElBQUksQ0FBQyxhQUFhLENBQUMsYUFBYSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBRWpKLHlEQUF5RDtRQUN6RCxJQUFJLENBQUMsZUFBZSxDQUFDLENBQUMsQ0FBQyxHQUFHLElBQUksQ0FBQyxlQUFlLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFFbEQsbUZBQW1GO1FBQ25GLE1BQU0sYUFBYSxHQUFjO1lBQzdCLFNBQVMsRUFBRSxJQUFJLENBQUMsYUFBYSxDQUFDLFFBQVE7WUFDdEMsUUFBUSxFQUFFLEdBQUc7WUFDYixhQUFhLEVBQUMsUUFBUTtZQUN0QixRQUFRLEVBQUUsR0FBRztZQUNiLEtBQUssRUFBRSxLQUFLO1NBQ2YsQ0FBQztRQUNGLElBQUksQ0FBQyxlQUFlLENBQUMsQ0FBQyxDQUFDLEdBQUcsYUFBYSxDQUFDO1FBRXhDLElBQUksSUFBSSxDQUFDLGdCQUFnQixJQUFJLENBQUMsRUFBRTtZQUM1QixJQUFJLENBQUMsZUFBZSxDQUFDLENBQUMsQ0FBQyxHQUFHLGFBQWEsQ0FBQztTQUMzQztRQUNELHFEQUFxRDtRQUNyRCxJQUFJLENBQUMsZ0JBQWdCLEdBQUcsbUJBQUssQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLGdCQUFnQixHQUFHLENBQUMsRUFBRSxJQUFJLENBQUMsZUFBZSxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBQzFGLE1BQU0sT0FBTyxHQUFHLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsT0FBTyxFQUFFLENBQUMsU0FBUyxDQUFDLEdBQUUsSUFBSSxDQUFBO1FBQzFFLElBQUksQ0FBQyxnQkFBZ0IsR0FBRyxPQUFPLEdBQUcsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLGdCQUFnQixDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUM7SUFDbEYsQ0FBQztJQUVPLFlBQVksQ0FBQyxNQUF1QjtRQUN4QyxRQUFPLENBQUMsTUFBTSxFQUFDO1lBQ1gsS0FBSyxtQ0FBZ0IsQ0FBQyxTQUFTO2dCQUMzQixvQkFBTSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7Z0JBQ2hDLE1BQU07U0FDYjtJQUNMLENBQUM7SUFFTSxXQUFXO1FBQ2QsSUFBRyxJQUFJLENBQUMsU0FBUztZQUNiLE9BQU87UUFDWCxJQUFHLElBQUksSUFBSSxJQUFJLENBQUMsTUFBTSxFQUFFO1lBQ3BCLE9BQU87UUFDWCxJQUFJLElBQUksQ0FBQyxZQUFZO1lBQ2pCLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQyxRQUFRLENBQUM7UUFDckQsSUFBSSxJQUFJLENBQUMsWUFBWTtZQUNqQixJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUMsUUFBUSxDQUFDO1FBQ3JELElBQUksSUFBSSxDQUFDLFNBQVM7WUFDZCxJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUMsS0FBSyxDQUFDO0lBQ3hELENBQUM7SUFFTyxrQkFBa0I7UUFDdEIsSUFBRyxJQUFJLENBQUMsU0FBUyxDQUFDLE1BQU0sSUFBSSxJQUFJLEVBQUM7WUFDN0IsSUFyTU8scUJBQU8sQ0E2YnV3SyxXQUFZLENBeFA5eEssSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLGFBQWEsRUFBSSxJQUFJLENBQUMsT0FBTyxFQUFFLENBQUMsYUFBYSxHQUFFO2dCQUM1RCxJQUFJLENBQUMsU0FBUyxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUMsYUFBYSxDQUFDO2dCQUMzRCxPQUFPO2FBQ1Y7U0FDSjtRQUVELElBQUksSUFBSSxDQUFDLFdBQVcsRUFBRTtZQUNsQixJQUFJLHFCQUFPLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQyxRQUFRLEVBQUUsSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsR0FBRyxJQUFJLENBQUMsNkJBQTZCLEVBQUU7Z0JBQ3hHLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQyxRQUFRLENBQUM7Z0JBQ2pELE9BQU87YUFDVjtTQUNKO1FBRUQsTUFBTSxXQUFXLEdBQUcsSUFBSSxDQUFDLHNCQUFzQixFQUFFLENBQUM7UUFDbEQsTUFBTSxTQUFTLEdBbk5KLHFCQUFPLENBNmJxc0osV0FBWSxDQTFPeHNKLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQyxRQUFRLEVBQUcsV0FBVyxDQUFBLENBQUM7UUFDaEUsTUFBTSxNQUFNLEdBQVUscUJBQU8sQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLFFBQVEsRUFBRSxJQUFJLENBQUMsT0FBTyxFQUFFLENBQUMsUUFBUSxDQUFDLENBQUM7UUFDeEYsTUFBTSxTQUFTLEdBQVUscUJBQU8sQ0FBQyxRQUFRLENBQUMsU0FBUyxFQUFFLElBQUksQ0FBQyxlQUFlLENBQUMsQ0FBQztRQUUzRSxJQUFJLFVBQWlCLENBQUM7UUFDdEIsSUFBRyxJQUFJLENBQUMsaUJBQWlCLElBQUkseUJBQXlCLENBQUMsUUFBUSxFQUFDO1lBQzVELFVBQVUsR0FBRyxNQUFNLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDLGdCQUFnQixDQUFDO1NBQ2pGO2FBQ0ksSUEzTk0scUJBQU8sQ0E2YnkxSyxhQUFjLENBbE9qM0ssV0FBVyxFQUFJLHFCQUFPLENBQUMsSUFBSSxHQUFDO1lBQ2hDLGlFQUFpRTtZQUNqRSxxREFBcUQ7WUFDckQsVUFBVSxHQUFHLE1BQU0sSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLFNBQVMsR0FBRyxTQUFTLENBQUMsR0FBRyxNQUFNLENBQUM7WUFDbEYsVUFBVSxHQUFHLG1CQUFLLENBQUMsS0FBSyxDQUFDLFVBQVUsRUFBRSxJQUFJLENBQUMsU0FBUyxFQUFFLElBQUksQ0FBQyxTQUFTLEdBQUcsQ0FBQyxDQUFDLENBQUM7U0FDNUU7YUFDRztZQUNBLFVBQVUsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDO1NBQy9CO1FBRUQsUUFBUSxDQUFDLElBQUksQ0FBQyxpQkFBaUIsRUFBRTtZQUM3QixLQUFJLENBQUMseUJBQXlCLENBQUMsSUFBSSxDQUFDO2dCQUNoQyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRyxTQUFTLENBQUM7Z0JBQ3BDLE1BQU07WUFDVixLQUFJLENBQUMseUJBQXlCLENBQUMsSUFBSSxDQUFDO2dCQUNoQyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRyxxQkFBTyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsRUFBRSxTQUFTLEVBQUUsVUFBVSxHQUFHLGtCQUFJLENBQUMsY0FBYyxDQUFDLENBQUM7Z0JBQzdHLE1BQU07WUFDVixLQUFJLENBQUMseUJBQXlCLENBQUMsVUFBVSxDQUFDO2dCQUN0QyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRyxxQkFBTyxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsRUFBRSxTQUFTLEVBQUUsVUFBVSxHQUFHLGtCQUFJLENBQUMsY0FBYyxDQUFFLENBQUM7Z0JBQ3JILE1BQU07WUFDVixLQUFJLENBQUMseUJBQXlCLENBQUMsUUFBUSxDQUFDO2dCQUNwQyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRyxxQkFBTyxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsRUFBRSxTQUFTLEVBQUUsVUFBVSxHQUFHLGtCQUFJLENBQUMsY0FBYyxDQUFFLENBQUM7Z0JBQ3JILE1BQU07U0FDYjtJQUNMLENBQUM7SUFFTyxrQkFBa0I7UUFDdEIsUUFBUSxDQUFDLElBQUksQ0FBQyx5QkFBeUIsRUFBRTtZQUNyQyxLQUFJLENBQUMseUJBQXlCLENBQUMsSUFBSSxDQUFDO2dCQUNoQyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUMsUUFBUSxDQUFDO2dCQUNqRCxNQUFNO1lBQ1YsS0FBSSxDQUFDLHlCQUF5QixDQUFDLElBQUksQ0FBQztnQkFDaEMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRLEdBQUcsd0JBQVUsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRLEVBQUUsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLFFBQVEsRUFBRSxJQUFJLENBQUMsV0FBVyxHQUFHLGtCQUFJLENBQUMsY0FBYyxDQUFDLENBQUM7Z0JBQ25JLE1BQU07WUFDVixLQUFJLENBQUMseUJBQXlCLENBQUMsVUFBVSxDQUFDO2dCQUN0QyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRyx3QkFBVSxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsRUFBRSxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUMsUUFBUSxFQUFFLElBQUksQ0FBQyxXQUFXLEdBQUcsa0JBQUksQ0FBQyxjQUFjLENBQUMsQ0FBQztnQkFDNUksTUFBTTtTQUNiO0lBQ0wsQ0FBQztJQUVPLGVBQWU7UUFDbkIsUUFBUSxDQUFDLElBQUksQ0FBQyxzQkFBc0IsRUFBRTtZQUNsQyxLQUFJLENBQUMsc0JBQXNCLENBQUMsSUFBSSxDQUFDO2dCQUM3QixJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUMsS0FBSyxDQUFDO2dCQUNoRCxNQUFNO1lBQ1YsS0FBSSxDQUFDLHNCQUFzQixDQUFDLElBQUksQ0FBQztnQkFDN0IsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLEdBQUcscUJBQU8sQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLEVBQUUsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLEtBQUssRUFBRSxJQUFJLENBQUMsWUFBWSxHQUFHLGtCQUFJLENBQUMsY0FBYyxDQUFDLENBQUM7Z0JBQ2xJLE1BQU07WUFDVixLQUFJLENBQUMsc0JBQXNCLENBQUMsVUFBVSxDQUFDO2dCQUNuQyxJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsR0FBRyxxQkFBTyxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsRUFBRSxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUMsS0FBSyxFQUFFLElBQUksQ0FBQyxZQUFZLEdBQUcsa0JBQUksQ0FBQyxjQUFjLENBQUMsQ0FBQztnQkFDekksTUFBTTtTQUNiO0lBQ0wsQ0FBQztJQUVPLHNCQUFzQjtRQUMxQixJQUFJLElBQUksQ0FBQyxpQkFBaUIsSUFBSSx5QkFBeUIsQ0FBQyxPQUFPLEVBQUU7WUFDN0QsT0FBTyxxQkFBTyxDQUFDLElBQUksQ0FBQztTQUN2QjtRQUNELElBclJXLHFCQUFPLENBNmJ1d0ssV0FBWSxDQXhLbHlLLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQyxRQUFRLEVBQUksSUFBSSxDQUFDLE9BQU8sRUFBRSxDQUFDLFFBQVEsR0FBRTtZQUNsRCxPQUFPLHFCQUFPLENBQUMsSUFBSSxDQUFDO1NBQ3ZCO1FBRUQsTUFBTSxhQUFhLEdBQXdCLHFCQUFPLENBQUMsU0FBUyxDQXpSakQscUJBQU8sQ0E2Ym14SixjQUFlLENBcEt2dkosSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLFFBQVEsRUFBRyxJQUFJLENBQUMsT0FBTyxFQUFFLENBQUMsUUFBUSxFQUFDLENBQUM7UUFDL0csTUFBTSxPQUFPLEdBQUcsQ0FBQywwQkFBZ0IsQ0FBQyxRQUFRLENBQUMsYUFBYSxFQUFFLEdBQUcsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLFNBQVMsQ0FBQyxHQUFDLElBQUksQ0FBQztRQUUzRixJQUFJLG1CQUFtQixHQUFZLHFCQUFPLENBQUMsSUFBSSxDQUFDO1FBQ2hELFFBQVEsQ0FBQyxJQUFJLENBQUMsaUJBQWlCLEVBQUU7WUFDN0IsS0FBSSxDQUFDLHlCQUF5QixDQUFDLFVBQVUsQ0FBQztnQkFDdEMsbUJBQW1CLEdBL1JoQixxQkFBTyxDQTZicStKLFdBQVksQ0E3YngvSixxQkFBTyxDQTZicStKLFdBQVksQ0E3YngvSixxQkFBTyxDQTZicStKLFdBQVksQ0E5SnIrSixhQUFhLEVBQUcsT0FBTyxHQUFHLElBQUksQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDLGNBQWMsQ0FBQSxDQUFDO2dCQUNyRixNQUFNO1lBQ1YsS0FBSSxDQUFDLHlCQUF5QixDQUFDLFFBQVEsQ0FBQztnQkFDcEMsTUFBTSxjQUFjLEdBQUcscUJBQU8sQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLFFBQVEsRUFBRSxJQUFJLENBQUMsT0FBTyxFQUFFLENBQUMsUUFBUSxDQUFDLEdBQUcsSUFBSSxDQUFDLGdCQUFnQixDQUFDO2dCQUNqSCxtQkFBbUIsR0FuU2hCLHFCQUFPLENBNmJxK0osV0FBWSxDQTdieC9KLHFCQUFPLENBNmJxK0osV0FBWSxDQTdieC9KLHFCQUFPLENBNmJxK0osV0FBWSxDQTFKcitKLGFBQWEsRUFBRyxPQUFPLEdBQUcsY0FBYyxHQUFHLElBQUksQ0FBQyxjQUFjLENBQUEsQ0FBQztnQkFDckYsTUFBTTtTQUNiO1FBQ0QsT0FBTyxtQkFBbUIsQ0FBQztJQUMvQixDQUFDO0lBRUQsU0FBUztJQUNGLENBQUUsb0JBQW9CLENBQUMsSUFBWTtRQUN0QyxNQUFNLGdCQUFnQixHQUFXLEVBQUUsQ0FBQztRQUNwQyxJQUFJLGtCQUFrQixHQUFXLENBQUMsQ0FBQztRQUNuQyxJQUFJLFlBQVksR0FBWSxJQUFJLENBQUM7UUFDakMsSUFBSSxPQUFPLEdBQUcsSUFBSSxDQUFDO1FBQ25CLElBQUksT0FBTyxHQUFZLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDO1FBQy9DLElBQUksT0FBTyxHQUFlLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDO1FBQ2xELElBQUksU0FBUyxHQUFZLElBQUksQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUFDO1FBRW5ELElBQUksWUFBWSxHQUFZLElBQUksQ0FBQyxTQUFTLENBQUMsYUFBYSxDQUFDO1FBRXpELElBQUksQ0FBQyxjQUFjLEdBQUcsbUNBQWdCLENBQUMsTUFBTSxDQUFDO1FBRTlDLE9BQU8sSUFBSSxFQUFFO1lBQ1QsSUFBSSxJQUFJLENBQUMsWUFBWSxJQXhUZCxxQkFBTyxDQTZieTFLLGFBQWMsQ0FySTUxSyxPQUFPLEVBQUksSUFBSSxDQUFDLFNBQVMsQ0FBQyxhQUFhLENBQUEsRUFBRTtnQkFDOUQsT0FBTyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsYUFBYSxDQUFDO2dCQUN2QyxZQUFZLEdBQUcsSUFBSSxDQUFDO2FBQ3ZCO1lBQ0QsSUFBSSxJQUFJLENBQUMsWUFBWSxJQTVUVyx3QkFBVSxDQTZicW1WLGFBQWMsQ0FqSXBvVixPQUFPLEVBQUksSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUEsRUFBRTtnQkFDekQsT0FBTyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDO2dCQUNsQyxZQUFZLEdBQUcsSUFBSSxDQUFDO2FBQ3ZCO1lBQ0QsSUFBSSxJQUFJLENBQUMsU0FBUyxJQWhVWCxxQkFBTyxDQTZieTFLLGFBQWMsQ0E3SC8xSyxTQUFTLEVBQUksSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUEsRUFBRTtnQkFDMUQsU0FBUyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUFDO2dCQUN0QyxZQUFZLEdBQUcsSUFBSSxDQUFDO2FBQ3ZCO1lBQ0QsK0NBQStDO1lBQy9DLElBQUksWUFBWSxFQUFFO2dCQUNkLElBQUksQ0FBQyxhQUFhLEVBQUUsQ0FBQztnQkFDckIsWUFBWSxHQUFHLEtBQUssQ0FBQztnQkFDckIsa0JBQWtCLEdBQUcsQ0FBQyxDQUFDO2dCQUV2QixJQUFHLE9BQU8sRUFBRTtvQkFDUixJQUFJLENBQUMsVUFBVSxFQUFFLENBQUM7b0JBQ2xCLE9BQU8sR0FBRyxLQUFLLENBQUM7aUJBQ25CO2FBQ0o7WUFDRCxxQ0FBcUM7aUJBQ2hDLElBQUksa0JBQWtCLEdBQUcsZ0JBQWdCLEVBQUU7Z0JBQzVDLElBQUksQ0FBQyxhQUFhLEVBQUUsQ0FBQztnQkFDckIsa0JBQWtCLEVBQUUsQ0FBQzthQUN4QjtZQUVELE1BQU0sSUFBSSw0QkFBYyxDQUFDLElBQUksQ0FBQyxDQUFDO1NBQ2xDO0lBQ0wsQ0FBQztJQUVPLGFBQWE7UUFDakIsTUFBTSxJQUFJLEdBQUcsSUFBSSwyQkFBUSxFQUFFLENBQUM7UUFDNUIsSUFBSSxDQUFDLEdBQUcsQ0FBQyxJQUFJLEVBQUUsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1FBRTFCLE1BQU0sR0FBRyxHQUFHLElBQUksMkJBQVEsRUFBRSxDQUFDO1FBQzNCLEdBQUcsQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3hDLEdBQUcsQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3hDLEdBQUcsQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3hDLElBQUksQ0FBQyxHQUFHLENBQUMsVUFBVSxFQUFFLEdBQUcsQ0FBQyxTQUFTLEVBQUUsQ0FBQyxDQUFDO1FBRXRDLE1BQU0sUUFBUSxHQUFHLElBQUksMkJBQVEsRUFBRSxDQUFDO1FBQ2hDLFFBQVEsQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsYUFBYSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ2xELFFBQVEsQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsYUFBYSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ2xELFFBQVEsQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsYUFBYSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ2xELElBQUksQ0FBQyxHQUFHLENBQUMsZUFBZSxFQUFFLFFBQVEsQ0FBQyxTQUFTLEVBQUUsQ0FBQyxDQUFDO1FBRWhELE1BQU0sR0FBRyxHQUFHLElBQUksMkJBQVEsRUFBRSxDQUFDO1FBQzNCLEdBQUcsQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3hDLEdBQUcsQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3hDLEdBQUcsQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3hDLEdBQUcsQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3hDLElBQUksQ0FBQyxHQUFHLENBQUMsVUFBVSxFQUFFLEdBQUcsQ0FBQyxTQUFTLEVBQUUsQ0FBQyxDQUFDO1FBRXRDLE1BQU0sS0FBSyxHQUFHLElBQUksMkJBQVEsRUFBRSxDQUFDO1FBQzdCLEtBQUssQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQzVDLEtBQUssQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQzVDLEtBQUssQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQzVDLElBQUksQ0FBQyxHQUFHLENBQUMsT0FBTyxFQUFFLEtBQUssQ0FBQyxTQUFTLEVBQUUsQ0FBQyxDQUFDO1FBRXJDLElBQUksQ0FBQyxHQUFHLENBQUMsVUFBVSxFQUFF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","assetPath":"Assets/ZepetoScripts/MultiplaySync/Transform/TransformSyncHelper.ts","manifest":{"properties":[{"assembly":"","name":"UpdateOwnerType","type":"UpdateOwner","isArray":false,"initValue":["Undefine"],"enumKeys":["Master","Undefine"],"enumValues":["0","1"],"attributes":[]},{"assembly":"mscorlib","name":"SyncPosition","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Position\""]}]},{"assembly":"mscorlib","name":"UseHardSnap","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"HardSnapIfDistanceGreaterThan","type":"System.Single","isArray":false,"initValue":["10"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Tooltip","args":["\"Force
+    the position to be modified if it is farther than this number.\""]}]},{"assembly":"","name":"InterpolationType","type":"PositionInterpolationType","isArray":false,"initValue":["Estimate"],"enumKeys":["None","Lerp","MoveToward","Estimate"],"enumValues":["0","1","2","3"],"attributes":[]},{"assembly":"","name":"ExtrapolationType","type":"PositionExtrapolationType","isArray":false,"initValue":["Disable"],"enumKeys":["Disable","FixedSpeed","Estimate"],"enumValues":["0","1","2"],"attributes":[]},{"assembly":"mscorlib","name":"extraMultipler","type":"System.Single","isArray":false,"initValue":["1"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Tooltip","args":["\"The
+    creditworthiness of the offset figure of the extrapolation.\""]}]},{"assembly":"mscorlib","name":"moveSpeed","type":"System.Single","isArray":false,"initValue":["10"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Tooltip","args":["\"This
+    is the given speed for lerp/movetoward/fixedspeed options.\""]}]},{"assembly":"mscorlib","name":"SyncRotation","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Rotation\""]}]},{"assembly":"","name":"RotationInterpolationType","type":"RotationInterpolationType","isArray":false,"initValue":["Lerp"],"enumKeys":["None","Lerp","MoveToward"],"enumValues":["0","1","2"],"attributes":[]},{"assembly":"mscorlib","name":"rotateSpeed","type":"System.Single","isArray":false,"initValue":["100"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"SyncScale","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Scale\""]}]},{"assembly":"","name":"ScaleInterpolationType","type":"ScaleInterpolationType","isArray":false,"initValue":["Lerp"],"enumKeys":["None","Lerp","MoveToward"],"enumValues":["0","1","2"],"attributes":[]},{"assembly":"mscorlib","name":"scaleUpSpeed","type":"System.Single","isArray":false,"initValue":["100"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"seeVersionLog","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Version
+    1.0.1\""]},{"name":"SerializeField","args":[]}]}],"name":"TransformSyncHelper","description":""},"isCompiled":true}'
+  typescriptHash: 655a1a88240a352e1cf6e3603cdb3fbb
+  onlyWriteTrigger: 0

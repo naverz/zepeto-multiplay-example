@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39cf1fcb6dc654eb696842ef0b2bfbde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useSceneSetting: 0
+  useDefaultData: 0
+  useFileSync: 0
+  language: 0
+  scenesToBuild: []
+  defaultDataType: 0
+  defaultData: []
+  defaultDataFiles:
+    clientScript: {fileID: 0}
+    serverScript: {fileID: 0}
+  scriptsToSync: []

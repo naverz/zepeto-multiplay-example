@@ -20,3 +20,4 @@ ScriptedImporter:
   wrapperOutputDirectory: Generated
   compiledResult: 
   typescriptHash: 
+  onlyWriteTrigger: 0

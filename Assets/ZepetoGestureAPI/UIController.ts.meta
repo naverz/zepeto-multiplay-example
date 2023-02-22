@@ -1,0 +1,51 @@
+fileFormatVersion: 2
+guid: 56a43ef36b1e942fc80c98bba2d073aa
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nconst
+    ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    GestureLodaer_1 = require(\"./GestureLodaer\");\r\nconst Thumbnail_1 = require(\"./Thumbnail\");\r\nclass
+    UIController extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n       
+    this._gestureLodaer = UnityEngine_1.Object.FindObjectOfType($typeof(GestureLodaer_1.default));\r\n       
+    ZEPETO_Character_Controller_1.ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(()
+    => {\r\n            this._myCharacter = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;\r\n           
+    // If click the touchpad, cancel the gesture\r\n            UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_Character_Controller_1.ZepetoScreenTouchpad)).OnPointerDownEvent.AddListener(()
+    => {\r\n                this.StopGesture();\r\n            });\r\n           
+    // If click the close button, cancel the gesture\r\n            this._closeButton.onClick.AddListener(()
+    => {\r\n                this.StopGesture();\r\n            });\r\n        });\r\n       
+    // UI Listener\r\n        this._typeToggleGroup[0].onValueChanged.AddListener(()
+    => {\r\n            this.SetCategoryUI(ZEPETO_World_1.OfficialContentType.All);\r\n       
+    });\r\n        this._typeToggleGroup[1].onValueChanged.AddListener(() => {\r\n           
+    this.SetCategoryUI(ZEPETO_World_1.OfficialContentType.Gesture);\r\n        });\r\n       
+    this._typeToggleGroup[2].onValueChanged.AddListener(() => {\r\n            this.SetCategoryUI(ZEPETO_World_1.OfficialContentType.Pose);\r\n       
+    });\r\n        this._typeToggleGroup[3].onValueChanged.AddListener(() => {\r\n           
+    this.SetCategoryUI(ZEPETO_World_1.OfficialContentType.GestureDancing);\r\n       
+    });\r\n    }\r\n    // Category Toggle UI Set\r\n    SetCategoryUI(category)
+    {\r\n        if (category == ZEPETO_World_1.OfficialContentType.All) {\r\n           
+    this._gestureLodaer.thumbnails.forEach((Obj) => {\r\n                Obj.SetActive(true);\r\n           
+    });\r\n        }\r\n        else {\r\n            for (let i = 0; i < this._gestureLodaer.thumbnails.length;
+    i++) {\r\n                const content = this._gestureLodaer.thumbnails[i].GetComponent($typeof(Thumbnail_1.default)).content;\r\n               
+    if (content.Keywords.includes(category)) {\r\n                    this._gestureLodaer.thumbnails[i].SetActive(true);\r\n               
+    }\r\n                else {\r\n                    this._gestureLodaer.thumbnails[i].SetActive(false);\r\n               
+    }\r\n            }\r\n        }\r\n    }\r\n    StopGesture() {\r\n        this._myCharacter.CancelGesture();\r\n   
+    }\r\n}\r\nexports.default = UIController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlDb250cm9sbGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlDb250cm9sbGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXNEO0FBRXRELDZFQUFnSDtBQUNoSCwrQ0FBNEQ7QUFDNUQsNkNBQTREO0FBQzVELG1EQUE0QztBQUM1QywyQ0FBb0M7QUFFcEMsTUFBcUIsWUFBYSxTQUFRLHFDQUFxQjtJQVEzRCxLQUFLO1FBQ0QsSUFBSSxDQUFDLGNBQWMsR0FBRyxvQkFBTSxDQUFDLGdCQUFnQixTQUFDLHVCQUFhLEVBQUcsQ0FBQztRQUMvRCwyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxrQkFBa0IsQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ3ZELElBQUksQ0FBQyxZQUFZLEdBQUcsMkNBQWEsQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUM7WUFFOUUsNENBQTRDO1lBQzVDLG9CQUFNLENBQUMsZ0JBQWdCLFNBQUMsa0RBQW9CLEdBQUksa0JBQWtCLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtnQkFDaEYsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFDO1lBQ3ZCLENBQUMsQ0FBQyxDQUFDO1lBRUgsZ0RBQWdEO1lBQ2hELElBQUksQ0FBQyxZQUFZLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7Z0JBQ3ZDLElBQUksQ0FBQyxXQUFXLEVBQUUsQ0FBQztZQUN2QixDQUFDLENBQUMsQ0FBQztRQUNQLENBQUMsQ0FBQyxDQUFDO1FBRUgsY0FBYztRQUNkLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDLENBQUMsQ0FBQyxjQUFjLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNyRCxJQUFJLENBQUMsYUFBYSxDQUFDLGtDQUFtQixDQUFDLEdBQUcsQ0FBQyxDQUFDO1FBQ2hELENBQUMsQ0FBQyxDQUFDO1FBQ0gsSUFBSSxDQUFDLGdCQUFnQixDQUFDLENBQUMsQ0FBQyxDQUFDLGNBQWMsQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ3JELElBQUksQ0FBQyxhQUFhLENBQUMsa0NBQW1CLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDcEQsQ0FBQyxDQUFDLENBQUM7UUFDSCxJQUFJLENBQUMsZ0JBQWdCLENBQUMsQ0FBQyxDQUFDLENBQUMsY0FBYyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDckQsSUFBSSxDQUFDLGFBQWEsQ0FBQyxrQ0FBbUIsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUNqRCxDQUFDLENBQUMsQ0FBQztRQUNILElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDLENBQUMsQ0FBQyxjQUFjLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNyRCxJQUFJLENBQUMsYUFBYSxDQUFDLGtDQUFtQixDQUFDLGNBQWMsQ0FBQyxDQUFDO1FBQzNELENBQUMsQ0FBQyxDQUFDO0lBRVAsQ0FBQztJQUVELHlCQUF5QjtJQUNqQixhQUFhLENBQUMsUUFBNkI7UUFFL0MsSUFBSSxRQUFRLElBQUksa0NBQW1CLENBQUMsR0FBRyxFQUFFO1lBQ3JDLElBQUksQ0FBQyxjQUFjLENBQUMsVUFBVSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEdBQUcsRUFBRSxFQUFFO2dCQUMzQyxHQUFHLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ3hCLENBQUMsQ0FBQyxDQUFDO1NBQ047YUFBUTtZQUNMLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsY0FBYyxDQUFDLFVBQVUsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7Z0JBQzVELE1BQU0sT0FBTyxHQUFHLElBQUksQ0FBQyxjQUFjLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDLFlBQVksU0FBQyxtQkFBUyxHQUFJLE9BQU8sQ0FBQztnQkFDcEYsSUFBSSxPQUFPLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsRUFBRTtvQkFDckMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO2lCQUNyRDtxQkFBTTtvQkFDSCxJQUFJLENBQUMsY0FBYyxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7aUJBQ3REO2FBQ0o7U0FDSjtJQUNMLENBQUM7SUFFTyxXQUFXO1FBQ2YsSUFBSSxDQUFDLFlBQVksQ0FBQyxhQUFhLEVBQUUsQ0FBQztJQUN0QyxDQUFDO0NBQ0o7QUE5REQsK0JBOERDIn0=","assetPath":"Assets/ZepetoGestureAPI/UIController.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"_closeButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"_typeToggleGroup","type":"UnityEngine.UI.Toggle[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"UIController","description":""},"isCompiled":true}'
+  typescriptHash: 6ff9536f1bacd1365c458240beca583e
+  onlyWriteTrigger: 0
