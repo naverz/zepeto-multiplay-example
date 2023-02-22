@@ -10,6 +10,13 @@ export enum LAYER  {
     UI= 5,
 };
 
+// Data
+export enum TOAST_MESSAGE {
+    feedUploading= "Uploading...",
+    feedCompleted= "Done",
+    feedFailed= "Failed",
+    screenShotSaveCompleted= "Saved!"
+};
 export default class UIController extends ZepetoScriptBehaviour {
     
     public safeAreaObject: GameObject;
@@ -66,13 +73,6 @@ export default class UIController extends ZepetoScriptBehaviour {
 
     
 
-    // Data
-    TOAST_MESSAGE = {
-        feedUploading: "Uploading...",
-        feedCompleted: "Done",
-        feedFailed: "Failed",
-        screenShotSaveCompleted: "Saved!"
-    };
 
 
     Awake() {
@@ -190,7 +190,7 @@ export default class UIController extends ZepetoScriptBehaviour {
         // 1. Btn: Save Screenshot
         this.saveButton.onClick.AddListener(() => {
             this.screenShot.SaveScreenShot();
-            this.StartCoroutine(this.ShowToastMessage(this.TOAST_MESSAGE.screenShotSaveCompleted));
+            this.StartCoroutine(this.ShowToastMessage(TOAST_MESSAGE.screenShotSaveCompleted));
         });
 
         // 2. Btn: Share Screenshots
@@ -201,7 +201,7 @@ export default class UIController extends ZepetoScriptBehaviour {
         // 3. Btn: Upload Feed
         this.createFeedButton.onClick.AddListener(() => {
             this.screenShot.CreateFeedScreenShot();
-            this.StartCoroutine(this.ShowToastMessage(this.TOAST_MESSAGE.feedUploading));
+            this.StartCoroutine(this.ShowToastMessage(TOAST_MESSAGE.feedUploading));
         });
 
         // 4. Btn: Close the Screenshot Results Screen
@@ -215,10 +215,10 @@ export default class UIController extends ZepetoScriptBehaviour {
     public ShowCreateFeedResult(result: Boolean) {
         if (result) {
             this.createFeedButton.gameObject.SetActive(false);
-            this.StartCoroutine(this.ShowToastMessage(this.TOAST_MESSAGE.feedCompleted));
+            this.StartCoroutine(this.ShowToastMessage(TOAST_MESSAGE.feedCompleted));
         }
         else {
-            this.StartCoroutine(this.ShowToastMessage(this.TOAST_MESSAGE.feedFailed));
+            this.StartCoroutine(this.ShowToastMessage(TOAST_MESSAGE.feedFailed));
         }
     }
 
@@ -226,7 +226,7 @@ export default class UIController extends ZepetoScriptBehaviour {
     *ShowToastMessage(text: string) {
         yield this.waitForSecond;
         let toastMessage: GameObject = null;
-        if (text == this.TOAST_MESSAGE.feedFailed)
+        if (text == TOAST_MESSAGE.feedFailed)
             toastMessage = GameObject.Instantiate<GameObject>(this.toastErrorMessage);
         else
             toastMessage = GameObject.Instantiate<GameObject>(this.toastSuccessMessage);
