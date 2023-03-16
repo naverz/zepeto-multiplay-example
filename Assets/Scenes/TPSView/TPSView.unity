@@ -18987,11 +18987,13 @@ MonoBehaviour:
     keys:
     - multiplay
     - room
-    - pingCheckCount
-    - diffServerTime
-    - latency
+    - m_diffServerTime
+    - m_latency
+    - m_pingCheckCount
+    - seeVersionLog
     unityValues:
     - {fileID: 582525452}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -19002,6 +19004,7 @@ MonoBehaviour:
     - '{"type":"System.Single, mscorlib","value":"0"}'
     - '{"type":"System.Single, mscorlib","value":"0"}'
     - '{"type":"System.Single, mscorlib","value":"0"}'
+    - '{"type":"System.Boolean, mscorlib","value":"False"}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: daa5246585831481aabbf61fcc5114da, type: 3}
@@ -63748,8 +63751,12 @@ MonoBehaviour:
     - InterpolationType
     - ExtrapolationType
     - extraMultipler
-    - syncGesture
+    - GetAnimationClipFromResources
+    - UseZepetoGestureAPI
+    - seeVersionLog
     unityValues:
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -63764,6 +63771,8 @@ MonoBehaviour:
     - '{"type":"System.String, mscorlib","value":"2"}'
     - '{"type":"System.String, mscorlib","value":"0"}'
     - '{"type":"System.Single, mscorlib","value":"1"}'
+    - '{"type":"System.Boolean, mscorlib","value":"False"}'
+    - '{"type":"System.Boolean, mscorlib","value":"False"}'
     - '{"type":"System.Boolean, mscorlib","value":"False"}'
     unityArrayValues: []
     arrayValues: []

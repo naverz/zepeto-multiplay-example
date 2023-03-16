@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "target": "es2020",
+        "module": "commonjs",
         "moduleResolution": "node",
         "types": [
             "./",
@@ -12,6 +13,8 @@
         "noImplicitThis": true,
         "alwaysStrict": true,
         "noUnusedLocals": true,
-        "removeComments": true
+        "removeComments": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true
     }
 }
