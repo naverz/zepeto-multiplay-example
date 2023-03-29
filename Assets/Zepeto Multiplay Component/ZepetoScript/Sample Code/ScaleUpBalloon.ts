@@ -50,8 +50,7 @@ export default class ScaleUpBalloon extends ZepetoScriptBehaviour {
             this._room.Send("ChangeOwner",this._tfHelper.Id);
         }
      
-        else
-            this._targetScale = this.transform.localScale * this._targetScaleMultipler;
+        this._targetScale = this.transform.localScale * this._targetScaleMultipler;
     }
     
 }

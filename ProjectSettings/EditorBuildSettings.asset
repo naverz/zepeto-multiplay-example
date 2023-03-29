@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ScreenShot/ScreenShotSampleScene.unity
+    path: Assets/Zepeto Sample/Zepeto Communication/Scene/ScreenShotSampleScene.unity
     guid: adef4219952e56c418ca27996292dba5
   - enabled: 1
     path: Assets/Scenes/SampleSceneV2.unity

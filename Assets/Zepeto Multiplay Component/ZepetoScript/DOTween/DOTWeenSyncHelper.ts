@@ -56,7 +56,6 @@ export default class DOTWeenSyncHelper extends ZepetoScriptBehaviour {
     
     private Start(){
         this.Init();
-        this.VersionInfo();
         
         SyncIndexManager.SyncIndex++;
         this._Id = SyncIndexManager.SyncIndex.toString();
@@ -223,15 +222,6 @@ export default class DOTWeenSyncHelper extends ZepetoScriptBehaviour {
         data.Add("sendTime", MultiplayManager.instance.GetServerTime());
 
         this._room?.Send(MESSAGE.SyncDOTween, data.GetObject());
-    }
-
-    @Header("Version 1.0.2")
-    @SerializeField() private seeVersionLog:boolean = false;
-    private VersionInfo(){
-        if(!this.seeVersionLog)
-            return;
-
-        console.warn("DOTweenSyncHelper VersionInfos\n* Version 1.0.2\n* Github : https://github.com/JasperGame/zepeto-world-sync-component \n* Latest Update Date : 2023.02.28 \n");
     }
 }
 

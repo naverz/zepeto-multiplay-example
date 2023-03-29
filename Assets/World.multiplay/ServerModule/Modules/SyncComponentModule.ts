@@ -1,84 +1,53 @@
-/* version info 1.0.2 */
-
 import { SandboxPlayer } from "ZEPETO.Multiplay";
 import { IModule } from "../IModule";
 import {sVector3, sQuaternion, SyncTransform, PlayerAdditionalValue, ZepetoAnimationParam} from "ZEPETO.Multiplay.Schema";
 
 export default class SyncComponentModule extends IModule {
     private sessionIdQueue: string[] = [];
-    private InstantiateObjCaches : InstantiateObj[] = [];
+    private instantiateObjCaches : InstantiateObj[] = [];
     private masterClient: Function = (): SandboxPlayer | undefined => this.server.loadPlayer(this.sessionIdQueue[0]);
-    
+
     async OnCreate() {
         /**Zepeto Player Sync**/
         this.server.onMessage(MESSAGE.SyncPlayer, (client, message) => {
             const player = this.server.state.players.get(client.sessionId);
-            if(player) {
-                /** State **/
-                    //animation param
+            if (player) {
                 const animationParam = new ZepetoAnimationParam();
-                animationParam.State = message.animationParam.State;
-                animationParam.MoveState = message.animationParam.MoveState;
-                animationParam.JumpState = message.animationParam.JumpState;
-                animationParam.LandingState = message.animationParam.LandingState;
-                animationParam.MotionSpeed = message.animationParam.MotionSpeed;
-                animationParam.FallSpeed = message.animationParam.FallSpeed;
-                animationParam.Acceleration = message.animationParam.Acceleration;
-                animationParam.MoveProgress = message.animationParam.MoveProgress;
-                player.animationParam = animationParam;
+                player.animationParam = Object.assign(animationParam, message.animationParam);
+                player.gestureName = message.gestureName;
 
-                player.gestureName = message.gestureName; // Gesture Sync
-
-                //additional Value
-                if (message.playerAdditionalValue != null) {
+                if (message.playerAdditionalValue) {
                     const pAdditionalValue = new PlayerAdditionalValue();
-                    pAdditionalValue.additionalWalkSpeed = message.playerAdditionalValue.additionalWalkSpeed;
-                    pAdditionalValue.additionalRunSpeed = message.playerAdditionalValue.additionalRunSpeed;
-                    pAdditionalValue.additionalJumpPower = message.playerAdditionalValue.additionalJumpPower;
-                    player.playerAdditionalValue = pAdditionalValue;
+                    player.playerAdditionalValue = Object.assign(pAdditionalValue, message.playerAdditionalValue);
                 }
             }
         });
 
         /**Transform Sync**/
         this.server.onMessage(MESSAGE.SyncTransform, (client, message) => {
-            if (!this.server.state.SyncTransforms.has(message.Id)) {
-                const syncTransform = new SyncTransform();
-                this.server.state.SyncTransforms.set(message.Id.toString(), syncTransform);
+            const { Id, position, localPosition, rotation, scale, sendTime } = message;
+            let syncTransform = this.server.state.SyncTransforms.get(Id.toString());
+
+            if (!syncTransform) {
+                syncTransform = new SyncTransform();
+                this.server.state.SyncTransforms.set(Id.toString(), syncTransform);
             }
-            const syncTransform = this.server.state.SyncTransforms.get(message.Id);
-            if(syncTransform !== undefined) {
-                syncTransform.Id = message.Id;
-                syncTransform.position = new sVector3();
-                syncTransform.position.x = message.position.x;
-                syncTransform.position.y = message.position.y;
-                syncTransform.position.z = message.position.z;
 
-                syncTransform.localPosition = new sVector3();
-                syncTransform.localPosition.x = message.localPosition.x;
-                syncTransform.localPosition.y = message.localPosition.y;
-                syncTransform.localPosition.z = message.localPosition.z;
-
-                syncTransform.rotation = new sQuaternion();
-                syncTransform.rotation.x = message.rotation.x;
-                syncTransform.rotation.y = message.rotation.y;
-                syncTransform.rotation.z = message.rotation.z;
-                syncTransform.rotation.w = message.rotation.w;
-
-                syncTransform.scale = new sVector3();
-                syncTransform.scale.x = message.scale.x;
-                syncTransform.scale.y = message.scale.y;
-                syncTransform.scale.z = message.scale.z;
-
-                syncTransform.sendTime = message.sendTime;
-            }
+            Object.assign(syncTransform.position, position);
+            Object.assign(syncTransform.localPosition, localPosition);
+            Object.assign(syncTransform.rotation, rotation);
+            Object.assign(syncTransform.scale, scale);
+            syncTransform.sendTime = sendTime;
         });
+
         this.server.onMessage(MESSAGE.SyncTransformStatus, (client, message) => {
             const syncTransform = this.server.state.SyncTransforms.get(message.Id);
-            if(syncTransform !== undefined)
+            if(syncTransform !== undefined) {
                 syncTransform.status = message.Status;
+            }
         });
 
+        /** SyncTransform Util **/
         this.server.onMessage(MESSAGE.ChangeOwner, (client,message:string) => {
             this.server.broadcast(MESSAGE.ChangeOwner+message, client.sessionId);
         });
@@ -90,13 +59,14 @@ export default class SyncComponentModule extends IModule {
                 spawnPosition: message.spawnPosition,
                 spawnRotation: message.spawnRotation,
             };
-            this.InstantiateObjCaches.push(InstantiateObj);
+            this.instantiateObjCaches.push(InstantiateObj);
             this.server.broadcast(MESSAGE.Instantiate, InstantiateObj);
         });
+
         this.server.onMessage(MESSAGE.RequestInstantiateCache, (client) => {
-            this.InstantiateObjCaches.forEach((obj)=>{
+            for (const obj of this.instantiateObjCaches) {
                 client.send(MESSAGE.Instantiate, obj);
-            });
+            }
         });
 
         /**SyncDOTween**/

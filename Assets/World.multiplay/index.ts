@@ -29,16 +29,17 @@ export default class extends Sandbox {
         if (client.userId) {
             player.zepetoUserId = client.userId;
         }
-        const players = this.state.players;
-        players.set(client.sessionId, player);
+        this.state.players.set(client.sessionId, player);
+        
         console.log(`join player, ${client.sessionId}`);
     }
+    
 
     async onLeave(client: SandboxPlayer, consented?: boolean) {
         for (const module of this._modules) {
             await module.OnLeave(client);
         }
-        this.state.players.delete(client.userId);
+        this.state.players.delete(client.sessionId);
 
         console.log(`leave player, ${client.sessionId}`);
     }

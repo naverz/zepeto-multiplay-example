@@ -54,8 +54,6 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
     }
 
     private Start() {
-        this.VersionInfo();
-        
         switch (+this.ZepetoPlayerSpawnType){
             case ZepetoPlayerSpawnType.NoneSpawn:
                 break;
@@ -189,14 +187,5 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
         
         yield new WaitForSeconds(10);
         this.CreateAllPlayers();
-    }
-    
-    @Header("Version 1.0.2")
-    @SerializeField() private seeVersionLog:boolean = false;
-    private VersionInfo(){
-        if(!this.seeVersionLog)
-            return;
-        
-        console.warn("ZepetoPlayerManager VersionInfos\n* Version 1.0.2\n* Github : https://github.com/JasperGame/zepeto-world-sync-component \n* Latest Update Date : 2023.02.28 \n");
     }
 }

@@ -27,7 +27,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
     public SyncScale: boolean = false;
     public ScaleInterpolationType: ScaleInterpolationType = ScaleInterpolationType.Lerp;
     public scaleUpSpeed: number = 100;
-    
+
     private _room: Room;
     private _multiplay: ZepetoWorldMultiplay;
     private _Id: string;
@@ -40,6 +40,10 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
     private _isOwner: boolean = false;
     get isOwner() {
         return this._isOwner;
+    }
+    private _ownerSessionId:string;
+    get OwnerSessionId(){
+        return this._ownerSessionId;
     }
 
     private _sendCoroutine: Coroutine;
@@ -58,8 +62,6 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
     private prevGet = () => this._bufferedState?.length > 1 ? this._bufferedState[1] : null;
 
     private Start() {
-        this.VersionInfo();
-        
         if(!this._Id) {
             SyncIndexManager.SyncIndex++;
             this._Id = SyncIndexManager.SyncIndex.toString();
@@ -72,11 +74,11 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
     private FixedUpdate() {
         if (!this.newGet())
             return;
-        if (this._isOwner)
+        if (this.isOwner)
             return;
         if(this._objectStatus != GameObjectStatus.Enable)
             return
-        
+
         if (this.SyncPosition) {
             this.SyncPositionUpdate();
         }
@@ -124,7 +126,8 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
     }
 
     // A function that changes the owner of the update.
-    public ChangeOwner(ownerSessionId:string){
+    public ChangeOwner(ownerSessionId: string) {
+        this._ownerSessionId = ownerSessionId;
         if(null == this._room)
             this._room = MultiplayManager.instance.room;
         if(this._room.SessionId == ownerSessionId && !this._isOwner) {
@@ -133,43 +136,46 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
         }
         else if(this._room.SessionId != ownerSessionId && this._isOwner) {
             this._isOwner = false;
-            if(null != this._sendCoroutine)
+            if (null != this._sendCoroutine)
                 this.StopCoroutine(this._sendCoroutine);
         }
     }
 
-    private OnChangeTransform() {
+    private OnChangeTransform(): void {
         if (this._isOwner) return;
-        if(null!=this._syncTransform.status && this._syncTransform.status!= this._objectStatus) {
-            this._objectStatus = this._syncTransform.status;
-            this.ChangeStatus(this._syncTransform.status);
-        }
-        this._positionCache = this.transform.position;
 
-        const pos:Vector3 = new Vector3(this._syncTransform.position.x, this._syncTransform.position.y, this._syncTransform.position.z);
-        const rot: Quaternion = new Quaternion(this._syncTransform.rotation.x, this._syncTransform.rotation.y, this._syncTransform.rotation.z, this._syncTransform.rotation.w);
-        const scale: Vector3 = new Vector3(this._syncTransform.scale.x, this._syncTransform.scale.y, this._syncTransform.scale.z);
-        const localPos:Vector3 = new Vector3(this._syncTransform.localPosition.x, this._syncTransform.localPosition.y, this._syncTransform.localPosition.z);
-        
+        const syncTransform = this._syncTransform;
+        const bufferedState = this._bufferedState;
+
+        if (syncTransform.status !== this._objectStatus) {
+            this._objectStatus = syncTransform.status;
+            this.ChangeStatus(syncTransform.status);
+        }
+
+        const { position, rotation, scale, localPosition } = syncTransform;
+
         // Shift buffer contents, oldest data erased, 0 becomes 1
-        this._bufferedState[1] = this._bufferedState[0];
+        bufferedState[1] = bufferedState[0];
 
-        // Save currect received state as 0 in the buffer, safe to overwrite after shifting
+        // Save current received state as 0 in the buffer, safe to overwrite after shifting
         const interpolState: SyncState = {
-            timestamp: this._syncTransform.sendTime,
-            position: pos,
-            localPosition:localPos,
-            rotation: rot,
-            scale: scale
+            timestamp: syncTransform.sendTime,
+            position: new Vector3(position.x, position.y, position.z),
+            localPosition: new Vector3(localPosition.x, localPosition.y, localPosition.z),
+            rotation: new Quaternion(rotation.x, rotation.y, rotation.z, rotation.w),
+            scale: new Vector3(scale.x, scale.y, scale.z),
         };
-        this._bufferedState[0] = interpolState;
+        bufferedState[0] = interpolState;
 
-        if (this._timeStampCount == 0) {
-            this._bufferedState[1] = interpolState;
+        if (this._timeStampCount === 0) {
+            bufferedState[1] = interpolState;
         }
+
         // Increment state count but never exceed buffer size
-        this._timeStampCount = Mathf.Min(this._timeStampCount + 1, this._bufferedState.length);
-        const timeOut = (this.newGet().timestamp - this.prevGet().timestamp) /1000
+        this._timeStampCount = Mathf.Min(this._timeStampCount + 1, bufferedState.length);
+
+        const timeStampDelta = syncTransform.sendTime - bufferedState[1].timestamp;
+        const timeOut = timeStampDelta / 1000;
         this._lastGetTimeOut = timeOut < this._tick ? this._lastGetTimeOut : timeOut;
     }
 
@@ -186,7 +192,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
             return;
         if(null == this.newGet())
             return;
-        if (this.SyncPosition) 
+        if (this.SyncPosition)
             this.transform.position = this.newGet().position;
         if (this.SyncRotation)
             this.transform.rotation = this.newGet().rotation;
@@ -196,12 +202,12 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
 
     private SyncPositionUpdate(){
         if(this.transform.parent != null){
-            if(this.newGet().localPosition == this.prevGet().localPosition) {
-                this.transform.localPosition = this.newGet().localPosition;
+            if(Vector3.Distance(this.newGet().localPosition, this.prevGet().localPosition) < 0.01) {
+                this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, this.newGet().localPosition, this.moveSpeed * Time.fixedDeltaTime);
                 return;
             }
         }
-        
+
         if (this.UseHardSnap) {
             if (Vector3.Distance(this.newGet().position, this.transform.position) > this.HardSnapIfDistanceGreaterThan) {
                 this.transform.position = this.newGet().position;
@@ -302,12 +308,10 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
         let syncNextFrameCount: number = 0;
         let syncNowFrame: boolean = true;
         let isFirst = true;
-        let pastPos: Vector3 = this.transform.position;
-        let pastRot: Quaternion = this.transform.rotation;
+        let pastPos: Vector3 = this.transform.localPosition;
+        let pastRot: Quaternion = this.transform.localRotation;
         let pastScale: Vector3 = this.transform.localScale;
-        
-        let pastLocalPos: Vector3 = this.transform.localPosition;
-        
+
         this._objectStatus = GameObjectStatus.Enable;
 
         while (true) {
@@ -316,7 +320,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
                 syncNowFrame = true;
             }
             if (this.SyncRotation && pastRot != this.transform.rotation) {
-                pastRot = this.transform.rotation;
+                pastRot = this.transform.localRotation;
                 syncNowFrame = true;
             }
             if (this.SyncScale && pastScale != this.transform.localScale) {
@@ -339,7 +343,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
                 this.SendTransform();
                 syncNextFrameCount++;
             }
-            
+
             yield new WaitForSeconds(tick);
         }
     }
@@ -384,15 +388,6 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
         data.Add("Id", this.Id);
         data.Add("Status", this._objectStatus);
         this._room.Send(MESSAGE.SyncTransformStatus, data.GetObject());
-    }
-    
-    @Header("Version 1.0.2")
-    @SerializeField() private seeVersionLog:boolean = false;
-    private VersionInfo(){
-        if(!this.seeVersionLog)
-            return;
-
-        console.warn("TransformSyncHelper VersionInfos\n* Version 1.0.2\n* Github : https://github.com/JasperGame/zepeto-world-sync-component \n* Latest Update Date : 2023.02.28 \n");
     }
 }
 

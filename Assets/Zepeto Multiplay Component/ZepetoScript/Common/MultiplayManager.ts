@@ -42,8 +42,6 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
     }
 
     private Start() {
-        this.VersionInfo();
-        
         if(!this.multiplay)
             this.multiplay = this.GetComponent<ZepetoWorldMultiplay>();
         if(!this.multiplay) console.warn("Add ZepetoWorldMultiplay First");
@@ -88,7 +86,7 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
             const newObj:GameObject = Object.Instantiate(prefabObj, spawnPosition, spawnRotation) as GameObject;
             const tf = newObj?.GetComponent<TransformSyncHelper>();
             if(null == tf) { //Creates an none-sync object.
-                //console.warn(`${tf.name} does not have a TransformSyncHelper script.`);
+                console.warn(`${tf.name} does not have a TransformSyncHelper script.`);
                 return;
             }
 
@@ -229,15 +227,6 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
         data.Add("Id", id);
         data.Add("Status", status);
         this.room.Send(MESSAGE.SyncTransformStatus, data.GetObject());
-    }
-    
-    @Header("Version 1.0.2")
-    @SerializeField() private seeVersionLog:boolean = false;
-    private VersionInfo(){
-        if(!this.seeVersionLog)
-            return;
-
-        console.warn("MultiplayManager VersionInfos\n* Version 1.0.2\n* Github : https://github.com/JasperGame/zepeto-world-sync-component \n* Latest Update Date : 2023.02.28 \n");
     }
 }
 
