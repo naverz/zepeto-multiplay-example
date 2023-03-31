@@ -82,7 +82,7 @@ export default class PlayerSync extends ZepetoScriptBehaviour {
         }
         
         if(animationParam.State == CharacterState.Teleport){
-            this.tfHelper.ForceTarget();
+            this.StartCoroutine(this.tfHelper.ForceTargetNextFrame());
         }
 
         const playerAdditionalValue = this.player.playerAdditionalValue;

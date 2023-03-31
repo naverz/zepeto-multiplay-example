@@ -3817,9 +3817,7 @@ MonoBehaviour:
     - HardSnapIfDistanceGreaterThan
     - UseHardSnap
     - ZepetoPlayerSpawnType
-    - seeVersionLog
     unityValues:
-    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -3835,9 +3833,8 @@ MonoBehaviour:
     - '{"type":"System.String, mscorlib","value":"0"}'
     - '{"type":"System.String, mscorlib","value":"2"}'
     - '{"type":"System.Single, mscorlib","value":"10"}'
-    - '{"type":"System.Boolean, mscorlib","value":"True"}'
-    - '{"type":"System.String, mscorlib","value":"2"}'
     - '{"type":"System.Boolean, mscorlib","value":"False"}'
+    - '{"type":"System.String, mscorlib","value":"2"}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: 6d846a38c15014273bd5ba91998e261d, type: 3}

@@ -44,7 +44,7 @@ export default class QuarterViewController extends ZepetoScriptBehaviour {
         });
 
         this.touchPositionAction.add_performed((context)=>{
-
+            
             if(this.isTouchDown)
             {
                 this.curPos = context.ReadValueAsObject() as Vector2;

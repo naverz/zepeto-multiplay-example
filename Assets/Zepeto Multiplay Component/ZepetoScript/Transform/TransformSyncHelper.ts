@@ -1,7 +1,7 @@
 import {ZepetoScriptBehaviour} from "ZEPETO.Script";
 import {Room, RoomData} from "ZEPETO.Multiplay";
 import {ZepetoWorldMultiplay} from "ZEPETO.World";
-import {Transform, Vector3, WaitForSeconds, Quaternion, Time, Object, Coroutine, Mathf, WaitUntil} from "UnityEngine";
+import {Transform, Vector3, WaitForSeconds, Quaternion, Time, Object, Coroutine, Mathf, WaitUntil, WaitForEndOfFrame} from "UnityEngine";
 import * as UnityEngine from "UnityEngine";
 import {State, SyncTransform} from "ZEPETO.Multiplay.Schema";
 import SyncIndexManager from "../Common/SyncIndexManager";
@@ -31,17 +31,18 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
     private _room: Room;
     private _multiplay: ZepetoWorldMultiplay;
     private _Id: string;
-    get Id() {
-        return this._Id;
-    }
+    private _isOwner: boolean = false;
+    private _ownerSessionId:string;
+
     set Id(id:string){
         this._Id = id;
     }
-    private _isOwner: boolean = false;
+    get Id() {
+        return this._Id;
+    }
     get isOwner() {
         return this._isOwner;
     }
-    private _ownerSessionId:string;
     get OwnerSessionId(){
         return this._ownerSessionId;
     }
@@ -147,7 +148,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
         const syncTransform = this._syncTransform;
         const bufferedState = this._bufferedState;
 
-        if (syncTransform.status !== this._objectStatus) {
+        if (syncTransform.status != this._objectStatus) {
             this._objectStatus = syncTransform.status;
             this.ChangeStatus(syncTransform.status);
         }
@@ -167,7 +168,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
         };
         bufferedState[0] = interpolState;
 
-        if (this._timeStampCount === 0) {
+        if (this._timeStampCount == 0) {
             bufferedState[1] = interpolState;
         }
 
@@ -180,11 +181,8 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
     }
 
     private ChangeStatus(status:GameObjectStatus){
-        switch(+status){
-            case GameObjectStatus.Destroyed:
-                Object.Destroy(this.gameObject);
-                break;
-        }
+        if(status == GameObjectStatus.Destroyed)
+            Object.Destroy(this.gameObject);
     }
 
     public ForceTarget() {
@@ -428,7 +426,6 @@ interface SyncState {
     rotation: Quaternion;
     scale: Vector3;
 }
-
 
 enum MESSAGE {
     SyncTransform = "SyncTransform",
