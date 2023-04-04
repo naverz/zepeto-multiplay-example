@@ -28,7 +28,7 @@ public class ModuleImporter : EditorWindow
     {
         if (!_window)
         {
-            return;
+            ShowWindow();
         }
 
         if (_contentList == null)

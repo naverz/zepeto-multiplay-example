@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Zepeto Multiplay Component/Scene/Demo.unity
     guid: 0b62b70c0a74947afa3f78db49d5de07
   - enabled: 1
-    path: Assets/Zepeto Sample/Zepeto Communication/Scene/CommunicationScene.unity
+    path: Assets/Scenes/CommunicationScene.unity
     guid: adef4219952e56c418ca27996292dba5
   - enabled: 1
     path: Assets/Scenes/SimpleMultiplay.unity

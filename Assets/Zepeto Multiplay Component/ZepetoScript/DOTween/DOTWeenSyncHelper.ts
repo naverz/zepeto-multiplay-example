@@ -57,9 +57,9 @@ export default class DOTWeenSyncHelper extends ZepetoScriptBehaviour {
     private Start(){
         this.Init();
         
-        SyncIndexManager.SyncIndex++;
-        this._Id = SyncIndexManager.SyncIndex.toString();
         if (this.syncType == SyncType.Sync) {
+            SyncIndexManager.SyncIndex++;
+            this._Id = SyncIndexManager.SyncIndex.toString();
             this._multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
             this._multiplay.RoomJoined += (room: Room) => {
                 this._room = room;
@@ -152,6 +152,7 @@ export default class DOTWeenSyncHelper extends ZepetoScriptBehaviour {
         this.CalculateExtrapolation(getPos,latency);
     }
     
+    // Predicts the current position based on the elapsed time and information about the next destination.
     private CalculateExtrapolation(getPos:Vector3, latency:number){
         const dir = Vector3.Normalize(this.TweenPosition[this._nextIndex] - getPos);
 

@@ -1,7 +1,7 @@
 import {ZepetoScriptBehaviour} from "ZEPETO.Script";
 import {Room, RoomData} from "ZEPETO.Multiplay";
 import {ZepetoWorldMultiplay} from "ZEPETO.World";
-import {Transform, Vector3, WaitForSeconds, Quaternion, Time, Object, Coroutine, Mathf, WaitUntil, WaitForEndOfFrame} from "UnityEngine";
+import {Transform, Vector3, WaitForSeconds, Quaternion, Time, Object, Coroutine, Mathf, WaitUntil} from "UnityEngine";
 import * as UnityEngine from "UnityEngine";
 import {State, SyncTransform} from "ZEPETO.Multiplay.Schema";
 import SyncIndexManager from "../Common/SyncIndexManager";
@@ -18,7 +18,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
     public InterpolationType: PositionInterpolationType = PositionInterpolationType.Estimate;
     public ExtrapolationType: PositionExtrapolationType = PositionExtrapolationType.Disable;
     @Tooltip("The creditworthiness of the offset figure of the extrapolation.") public extraMultipler: number = 1;
-    @Tooltip("This is the given speed for lerp/movetoward/fixedspeed options.")public moveSpeed: number = 10;
+    @Tooltip("This is the given speed for lerp / movetoward / fixedspeed options.")public moveSpeed: number = 10;
     @Header("Rotation")
     public SyncRotation: boolean = true;
     public RotationInterpolationType: RotationInterpolationType = RotationInterpolationType.Lerp;
@@ -45,10 +45,10 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
     }
     get OwnerSessionId(){
         return this._ownerSessionId;
-    }
+    } 
 
     private _sendCoroutine: Coroutine;
-    private _objectStatus:GameObjectStatus;
+    private _objectStatus:GameObjectStatus; // gameObjectStatus {Destroyed, Disable, Enable, Pause}
     private _timeStampCount: number = 0;
     private _positionCache:Vector3;
     private _syncTransform: SyncTransform; // this transform state
@@ -105,6 +105,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
         }
     }
 
+    // Access the entire server schema at first startup and connect the sync Id schema.
     private OnStateChange(state: State, isFirst: boolean) {
         if (null == this._syncTransform) {
             this._syncTransform = state.SyncTransforms.get_Item(this._Id);
@@ -142,7 +143,9 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
         }
     }
 
-    private OnChangeTransform(): void {
+    // when isOwner === false, Receives changed information from the server.
+    // Called when there is a change in the server schema.
+    private OnChangeTransform() {
         if (this._isOwner) return;
 
         const syncTransform = this._syncTransform;
@@ -199,6 +202,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
     }
 
     private SyncPositionUpdate(){
+        //If the object has a parent, and only the parent is moving, it is more natural to use the local coordinate system to move Lerp.
         if(this.transform.parent != null){
             if(Vector3.Distance(this.newGet().localPosition, this.prevGet().localPosition) < 0.01) {
                 this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, this.newGet().localPosition, this.moveSpeed * Time.fixedDeltaTime);
@@ -206,6 +210,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
             }
         }
 
+        //Teleport the object if it is further than a certain distance.
         if (this.UseHardSnap) {
             if (Vector3.Distance(this.newGet().position, this.transform.position) > this.HardSnapIfDistanceGreaterThan) {
                 this.transform.position = this.newGet().position;
@@ -275,7 +280,14 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
                 break;
         }
     }
-
+    
+    /**
+     * Calculates an extrapolation offset based on the difference between the current and previous positions.
+     * If the extrapolation type is set to Disable, it returns a zero vector.
+     * Calculates the move direction between the current and previous positions, and the latency between the current time and the timestamp of the current position.
+     * Uses a switch statement to determine the type of extrapolation to be used and calculates the extrapolation offset accordingly.
+     * Returns the extrapolation offset calculated.
+     */
     private GetExtraPolationOffset() {
         if (this.ExtrapolationType == PositionExtrapolationType.Disable) {
             return Vector3.zero;
@@ -300,7 +312,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
         return extraPolationOffSet;
     }
 
-    //isOwner
+    // when isOwner, Sends information to the server.
     private* CheckChangeTransform(tick: number) {
         const syncNextFrameMax: number = 10;
         let syncNextFrameCount: number = 0;
@@ -313,18 +325,22 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
         this._objectStatus = GameObjectStatus.Enable;
 
         while (true) {
+            // Check if position has changed
             if (this.SyncPosition && pastPos != this.transform.localPosition) {
                 pastPos = this.transform.localPosition;
                 syncNowFrame = true;
             }
-            if (this.SyncRotation && pastRot != this.transform.rotation) {
+            // Check if rotation has changed
+            if (this.SyncRotation && pastRot != this.transform.localRotation) {
                 pastRot = this.transform.localRotation;
                 syncNowFrame = true;
             }
+            // Check if scale has changed
             if (this.SyncScale && pastScale != this.transform.localScale) {
                 pastScale = this.transform.localScale;
                 syncNowFrame = true;
             }
+            
             //Transmit any values that have changed values.
             if (syncNowFrame) {
                 this.SendTransform();
@@ -377,6 +393,7 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
 
         data.Add("sendTime", MultiplayManager.instance.GetServerTime());
 
+        // Send data to server
         this._room.Send(MESSAGE.SyncTransform, data.GetObject());
 
     }
