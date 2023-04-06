@@ -1,0 +1,40 @@
+fileFormatVersion: 2
+guid: 572a2baae1df24f338c4cb58c4ef8129
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst UnityEngine = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nclass
+    GestureTrigger extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        //A script that plays gestures when a Zepeto character is triggered.\r\n       
+    super(...arguments);\r\n        this._exGestures = [];\r\n    }\r\n    //Gesture
+    testcode\r\n    OnTriggerEnter(coll) {\r\n        const localCharacter = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character;\r\n       
+    if (coll != localCharacter?.GetComponent($typeof(UnityEngine_1.Collider)))\r\n           
+    return;\r\n        this._gestureCoroutine = this.StartCoroutine(this.StartGesture(localCharacter));\r\n   
+    }\r\n    OnTriggerExit(coll) {\r\n        if (coll != ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent($typeof(UnityEngine_1.Collider)))\r\n           
+    return;\r\n        this.StopCoroutine(this._gestureCoroutine);\r\n    }\r\n   
+    *StartGesture(localCharacter) {\r\n        let i = 0;\r\n        while (true)
+    {\r\n            i = i >= this._exGestures.length - 1 ? 0 : i + 1;\r\n           
+    localCharacter.SetGesture(this._exGestures[i]);\r\n            yield new UnityEngine.WaitForSeconds(this._exGestures[i].length);\r\n           
+    yield new UnityEngine.WaitForSeconds(3);\r\n        }\r\n    }\r\n}\r\nexports.default
+    = GestureTrigger;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2VzdHVyZVRyaWdnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJHZXN0dXJlVHJpZ2dlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCw2Q0FBdUQ7QUFDdkQsMkNBQTJDO0FBQzNDLDZFQUEyRTtBQUUzRSxNQUFxQixjQUFlLFNBQVEscUNBQXFCO0lBQWpFO1FBQ0ksb0VBQW9FOztRQUUxQyxnQkFBVyxHQUFnQyxFQUFFLENBQUM7SUE2QjVFLENBQUM7SUExQkcsa0JBQWtCO0lBQ1YsY0FBYyxDQUFDLElBQWM7UUFDakMsTUFBTSxjQUFjLEdBQUcsMkNBQWEsQ0FBQyxRQUFRLENBQUMsV0FBVyxFQUFFLFlBQVksRUFBRSxTQUFTLENBQUM7UUFDbkYsSUFBRyxJQUFJLElBQUksY0FBYyxFQUFFLFlBQVksU0FBQyxzQkFBUSxFQUFHO1lBQy9DLE9BQU87UUFFWCxJQUFJLENBQUMsaUJBQWlCLEdBQUcsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLGNBQWMsQ0FBQyxDQUFDLENBQUM7SUFDcEYsQ0FBQztJQUVPLGFBQWEsQ0FBQyxJQUFjO1FBQ2hDLElBQUcsSUFBSSxJQUFJLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsRUFBRSxZQUFZLEVBQUUsU0FBUyxDQUFDLFlBQVksU0FBQyxzQkFBUSxFQUFHO1lBQzNGLE9BQU87UUFFWCxJQUFJLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDO0lBQy9DLENBQUM7SUFFTSxDQUFFLFlBQVksQ0FBQyxjQUErQjtRQUNqRCxJQUFJLENBQUMsR0FBQyxDQUFDLENBQUM7UUFDUixPQUFNLElBQUksRUFBRTtZQUNSLENBQUMsR0FBRyxDQUFDLElBQUksSUFBSSxDQUFDLFdBQVcsQ0FBQyxNQUFNLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUM7WUFDakQsY0FBYyxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDL0MsTUFBTSxJQUFJLFdBQVcsQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQztZQUNqRSxNQUFNLElBQUksV0FBVyxDQUFDLGNBQWMsQ0FBQyxDQUFDLENBQUMsQ0FBQztTQUMzQztJQUNMLENBQUM7Q0FFSjtBQWhDRCxpQ0FnQ0MifQ==","assetPath":"Assets/Zepeto
+    Multiplay Component/ZepetoScript/Sample Code/GestureTrigger.ts","manifest":{"properties":[{"assembly":"UnityEngine.AnimationModule","name":"_exGestures","type":"UnityEngine.AnimationClip[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"GestureTrigger","description":""},"isCompiled":true}'
+  typescriptHash: a58f51d99773fe8c05b0c892b4f693bb
+  onlyWriteTrigger: 0

@@ -1,0 +1,38 @@
+fileFormatVersion: 2
+guid: dbb4d5451e86240bca414a2afd36e8c8
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst ZEPETO_Character_Controller_1
+    = require(\"ZEPETO.Character.Controller\");\r\nconst FallChecking_1 = require(\"./FallChecking\");\r\nclass
+    SavePoint extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        //This is an example of a save point. \r\n        //This script
+    changes the savepoint to this position when my character is triggered and destroys
+    the savepoint object.\r\n        super(...arguments);\r\n        this._isDestroyable
+    = true;\r\n    }\r\n    Start() {\r\n        this._fallCheck = this._fallCheckObject?.GetComponent($typeof(FallChecking_1.default));\r\n       
+    if (!this._fallCheck)\r\n            console.warn(\"Does not have FallChecking
+    Script\");\r\n    }\r\n    OnTriggerEnter(coll) {\r\n        if (coll != ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent($typeof(UnityEngine_1.Collider)))
+    {\r\n            return;\r\n        }\r\n        this._fallCheck.spawnPositon
+    = this.transform.position;\r\n        if (this._isDestroyable)\r\n           
+    UnityEngine_1.Object.Destroy(this.gameObject);\r\n    }\r\n}\r\nexports.default
+    = SavePoint;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2F2ZVBvaW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2F2ZVBvaW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUFxRTtBQUNyRSw2RUFBMEQ7QUFDMUQsaURBQTBDO0FBRzFDLE1BQXFCLFNBQVUsU0FBUSxxQ0FBcUI7SUFBNUQ7UUFDSSxzQ0FBc0M7UUFDdEMsc0hBQXNIOztRQUc1RixtQkFBYyxHQUFhLElBQUksQ0FBQztJQW1COUQsQ0FBQztJQWhCRyxLQUFLO1FBQ0QsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsZ0JBQWdCLEVBQUUsWUFBWSxTQUFDLHNCQUFZLEVBQUcsQ0FBQztRQUN0RSxJQUFHLENBQUMsSUFBSSxDQUFDLFVBQVU7WUFDZixPQUFPLENBQUMsSUFBSSxDQUFDLG1DQUFtQyxDQUFDLENBQUM7SUFDMUQsQ0FBQztJQUVPLGNBQWMsQ0FBQyxJQUFjO1FBQ2pDLElBQUcsSUFBSSxJQUFJLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsRUFBRSxZQUFZLEVBQUUsU0FBUyxDQUFDLFlBQVksU0FBQyxzQkFBUSxFQUFHLEVBQUM7WUFDNUYsT0FBTztTQUNWO1FBRUQsSUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUM7UUFDdkQsSUFBRyxJQUFJLENBQUMsY0FBYztZQUNsQixvQkFBTSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7SUFDeEMsQ0FBQztDQUVKO0FBeEJELDRCQXdCQyJ9","assetPath":"Assets/Zepeto
+    Multiplay Component/ZepetoScript/Sample Code/SavePoint.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"_fallCheckObject","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"mscorlib","name":"_isDestroyable","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"SavePoint","description":""},"isCompiled":true}'
+  typescriptHash: ddd9c74186fa9beed9b4154001521648
+  onlyWriteTrigger: 0

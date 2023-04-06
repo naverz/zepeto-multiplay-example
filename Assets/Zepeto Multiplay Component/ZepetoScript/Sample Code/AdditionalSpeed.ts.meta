@@ -1,0 +1,40 @@
+fileFormatVersion: 2
+guid: 125be74e1ac6647d0808f862c3d262d1
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst ZEPETO_Character_Controller_1
+    = require(\"ZEPETO.Character.Controller\");\r\nclass AdditionalSpeed extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n        //Script
+    that increases the speed when the Zepeto character steps on the trigger.\r\n       
+    super(...arguments);\r\n        this.additionalRunSpeed = 10;\r\n        this.additionalWalkSpeed
+    = 10;\r\n        this.additionalJumpPower = 10;\r\n    }\r\n    OnTriggerEnter(coll)
+    {\r\n        if (coll != ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent($typeof(UnityEngine_1.Collider)))
+    {\r\n            return;\r\n        }\r\n        let zepCharacter = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;\r\n       
+    zepCharacter.additionalRunSpeed = this.additionalRunSpeed;\r\n        zepCharacter.additionalWalkSpeed
+    = this.additionalWalkSpeed;\r\n        zepCharacter.additionalJumpPower = this.additionalJumpPower;\r\n   
+    }\r\n    OnTriggerExit(coll) {\r\n        if (coll != ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent($typeof(UnityEngine_1.Collider)))
+    {\r\n            return;\r\n        }\r\n        let zepCharacter = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;\r\n       
+    zepCharacter.additionalRunSpeed = 0;\r\n        zepCharacter.additionalWalkSpeed
+    = 0;\r\n        zepCharacter.additionalJumpPower = 0;\r\n    }\r\n}\r\nexports.default
+    = AdditionalSpeed;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQWRkaXRpb25hbFNwZWVkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQWRkaXRpb25hbFNwZWVkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUE0QztBQUM1Qyw2RUFBNkU7QUFFN0UsTUFBcUIsZUFBZ0IsU0FBUSxxQ0FBcUI7SUFBbEU7UUFDSSxpRkFBaUY7O1FBRXZELHVCQUFrQixHQUFVLEVBQUUsQ0FBQztRQUMvQix3QkFBbUIsR0FBVSxFQUFFLENBQUM7UUFDaEMsd0JBQW1CLEdBQVUsRUFBRSxDQUFDO0lBcUI5RCxDQUFDO0lBbkJXLGNBQWMsQ0FBQyxJQUFjO1FBQ2pDLElBQUcsSUFBSSxJQUFJLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsRUFBRSxZQUFZLEVBQUUsU0FBUyxDQUFDLFlBQVksU0FBQyxzQkFBUSxFQUFHLEVBQUM7WUFDNUYsT0FBTztTQUNWO1FBQ0QsSUFBSSxZQUFZLEdBQUcsMkNBQWEsQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUM7UUFDN0UsWUFBWSxDQUFDLGtCQUFrQixHQUFHLElBQUksQ0FBQyxrQkFBa0IsQ0FBQztRQUMxRCxZQUFZLENBQUMsbUJBQW1CLEdBQUcsSUFBSSxDQUFDLG1CQUFtQixDQUFDO1FBQzVELFlBQVksQ0FBQyxtQkFBbUIsR0FBRyxJQUFJLENBQUMsbUJBQW1CLENBQUM7SUFDaEUsQ0FBQztJQUVPLGFBQWEsQ0FBQyxJQUFjO1FBQ2hDLElBQUcsSUFBSSxJQUFJLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsRUFBRSxZQUFZLEVBQUUsU0FBUyxDQUFDLFlBQVksU0FBQyxzQkFBUSxFQUFHLEVBQUM7WUFDNUYsT0FBTztTQUNWO1FBQ0QsSUFBSSxZQUFZLEdBQUcsMkNBQWEsQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUM7UUFDN0UsWUFBWSxDQUFDLGtCQUFrQixHQUFHLENBQUMsQ0FBQztRQUNwQyxZQUFZLENBQUMsbUJBQW1CLEdBQUcsQ0FBQyxDQUFDO1FBQ3JDLFlBQVksQ0FBQyxtQkFBbUIsR0FBRyxDQUFDLENBQUM7SUFDekMsQ0FBQztDQUNKO0FBMUJELGtDQTBCQyJ9","assetPath":"Assets/Zepeto
+    Multiplay Component/ZepetoScript/Sample Code/AdditionalSpeed.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"additionalRunSpeed","type":"System.Single","isArray":false,"initValue":["10"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"mscorlib","name":"additionalWalkSpeed","type":"System.Single","isArray":false,"initValue":["10"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"mscorlib","name":"additionalJumpPower","type":"System.Single","isArray":false,"initValue":["10"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"AdditionalSpeed","description":""},"isCompiled":true}'
+  typescriptHash: 43c9061704b6ddabbf1f61bd62ae99e8
+  onlyWriteTrigger: 0

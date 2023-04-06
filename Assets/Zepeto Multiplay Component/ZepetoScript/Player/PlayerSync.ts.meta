@@ -1,0 +1,119 @@
+fileFormatVersion: 2
+guid: 9830cf103d5314dcdab6cffce20157ca
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    ZEPETO_Multiplay_1 = require(\"ZEPETO.Multiplay\");\r\nconst ZEPETO_World_1 =
+    require(\"ZEPETO.World\");\r\nconst ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst MultiplayManager_1 = require(\"../Common/MultiplayManager\");\r\nconst
+    TransformSyncHelper_1 = require(\"../Transform/TransformSyncHelper\");\r\nconst
+    ZepetoPlayersManager_1 = require(\"./ZepetoPlayersManager\");\r\nclass PlayerSync
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n       
+    super(...arguments);\r\n        this.isLocal = false;\r\n        this.isUseInjectSpeed
+    = false;\r\n        this.GetAnimationClipFromResources = true;\r\n        this.UseZepetoGestureAPI
+    = false;\r\n        this._tick = 0.04;\r\n    }\r\n    Start() {\r\n        this._animator
+    = this.transform.GetComponentInChildren($typeof(UnityEngine_1.Animator));\r\n       
+    this._multiplay = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\r\n       
+    this._room = this._multiplay.Room;\r\n        if (this.isLocal) {\r\n           
+    this.StartCoroutine(this.SendLocalPlayer(this._tick));\r\n        }\r\n       
+    else {\r\n            this.player.add_OnChange((ChangeValue) => this.OnChangedPlayer());\r\n           
+    //If this is not a local character, do not use State Machine.\r\n           
+    this.zepetoPlayer.character.StateMachine.Stop();\r\n        }\r\n    }\r\n   
+    // !isLocal(other player)\r\n    OnChangedPlayer() {\r\n        if (this.isLocal)\r\n           
+    return;\r\n        const animationParam = this.player.animationParam;\r\n       
+    const animator = this._animator;\r\n        animator.SetInteger(''State'', animationParam.State);\r\n       
+    animator.SetInteger(''MoveState'', animationParam.MoveState);\r\n        animator.SetInteger(''JumpState'',
+    animationParam.JumpState);\r\n        animator.SetInteger(''LandingState'', animationParam.LandingState);\r\n       
+    animator.SetFloat(''MotionSpeed'', animationParam.MotionSpeed);\r\n        animator.SetFloat(''FallSpeed'',
+    animationParam.FallSpeed);\r\n        animator.SetFloat(''Acceleration'', animationParam.Acceleration);\r\n       
+    animator.SetFloat(''MoveProgress'', animationParam.MoveProgress);\r\n       
+    //sync gesture\r\n        if (animationParam.State == ZEPETO_Character_Controller_1.CharacterState.Gesture
+    && (this.UseZepetoGestureAPI || this.GetAnimationClipFromResources)) {\r\n           
+    const clipInfo = this._animator.GetCurrentAnimatorClipInfo(0);\r\n           
+    const gestureName = this.player.gestureName;\r\n            if (!gestureName
+    || clipInfo[0].clip.name === gestureName)\r\n                return;\r\n           
+    let animClip = null;\r\n            if (this.UseZepetoGestureAPI && ZepetoPlayersManager_1.default.instance.GestureAPIContents.has(gestureName))
+    {\r\n                const content = ZepetoPlayersManager_1.default.instance.GestureAPIContents.get(gestureName);\r\n               
+    if (!content.IsDownloadedAnimation) {\r\n                    // If the animation
+    has not been downloaded, download it.\r\n                    content.DownloadAnimation(()
+    => {\r\n                        // play animation clip\r\n                       
+    this.zepetoPlayer.character.SetGesture(content.AnimationClip);\r\n                   
+    });\r\n                    return;\r\n                }\r\n                else
+    {\r\n                    animClip = content.AnimationClip;\r\n               
+    }\r\n            }\r\n            else if (this.GetAnimationClipFromResources)
+    // Resources animation.\r\n                animClip = UnityEngine_1.Resources.Load(gestureName);\r\n           
+    if (null == animClip) {\r\n                // When the animation is not in the
+    /Asset/Resources file pass\r\n                console.warn(`${gestureName} is
+    null, Add animation in the Resources folder.`);\r\n            }\r\n           
+    else {\r\n                this.zepetoPlayer.character.SetGesture(animClip);\r\n           
+    }\r\n        }\r\n        if (animationParam.State === ZEPETO_Character_Controller_1.CharacterState.Teleport)
+    {\r\n            this.StartCoroutine(this.WaitTeleportFrame(5));\r\n        }\r\n       
+    const playerAdditionalValue = this.player.playerAdditionalValue;\r\n        this.zepetoPlayer.character.additionalWalkSpeed
+    = playerAdditionalValue.additionalWalkSpeed;\r\n        this.zepetoPlayer.character.additionalRunSpeed
+    = playerAdditionalValue.additionalRunSpeed;\r\n        this.zepetoPlayer.character.additionalJumpPower
+    = playerAdditionalValue.additionalJumpPower;\r\n        //sync interpolation
+    speed\r\n        if (this.isUseInjectSpeed) {\r\n            const ySpeed = UnityEngine_1.Mathf.Abs(animationParam.FallSpeed);\r\n           
+    let xzSpeed = 0;\r\n            if (animationParam.State == ZEPETO_Character_Controller_1.CharacterState.Jump
+    && animationParam.JumpState == ZEPETO_Character_Controller_1.CharacterJumpState.JumpIdle)
+    {\r\n                xzSpeed = 0;\r\n            }\r\n            else if (animationParam.MoveState
+    == ZEPETO_Character_Controller_1.CharacterMoveState.MoveRun) {\r\n               
+    //1.5 : Run Weight between actual Zepeto character and Unity.\r\n               
+    xzSpeed = this.zepetoPlayer.character.RunSpeed * 1.5 * animationParam.Acceleration;\r\n           
+    }\r\n            else if (animationParam.MoveState == ZEPETO_Character_Controller_1.CharacterMoveState.MoveWalk)
+    {\r\n                //1.25 : Walk Weight between actual Zepeto character and
+    Unity.\r\n                xzSpeed = this.zepetoPlayer.character.WalkSpeed * 1.25
+    * animationParam.Acceleration;\r\n            }\r\n            else\r\n               
+    return;\r\n            this.tfHelper.moveSpeed = xzSpeed + ySpeed;\r\n       
+    }\r\n    }\r\n    //The character''s animation synchronization and location synchronization
+    do not occur at the same time, so teleport is executed after a certain frame.\r\n   
+    *WaitTeleportFrame(waitFrame) {\r\n        for (let i = 0; i < waitFrame; i++)\r\n           
+    yield new UnityEngine_1.WaitForEndOfFrame();\r\n        this.tfHelper.ForceTarget();\r\n   
+    }\r\n    //isLocal(When it''s my character)\r\n    *SendLocalPlayer(tick) {\r\n       
+    const pastIdleCountMax = 10;\r\n        let pastIdleCount = 0;\r\n        while
+    (true) {\r\n            const state = this._animator.GetInteger(\"State\");\r\n           
+    // Idle status is sent only once.\r\n            if (state != ZEPETO_Character_Controller_1.CharacterState.Idle
+    || pastIdleCount < pastIdleCountMax) {\r\n                const data = new ZEPETO_Multiplay_1.RoomData();\r\n               
+    const animationParam = new ZEPETO_Multiplay_1.RoomData();\r\n               
+    animationParam.Add(\"State\", state);\r\n                animationParam.Add(\"MoveState\",
+    this._animator.GetInteger(\"MoveState\"));\r\n                animationParam.Add(\"JumpState\",
+    this._animator.GetInteger(\"JumpState\"));\r\n                animationParam.Add(\"LandingState\",
+    this._animator.GetInteger(\"LandingState\"));\r\n                animationParam.Add(\"MotionSpeed\",
+    this._animator.GetFloat(\"MotionSpeed\"));\r\n                animationParam.Add(\"FallSpeed\",
+    this._animator.GetFloat(\"FallSpeed\"));\r\n                animationParam.Add(\"Acceleration\",
+    this._animator.GetFloat(\"Acceleration\"));\r\n                animationParam.Add(\"MoveProgress\",
+    this._animator.GetFloat(\"MoveProgress\"));\r\n                data.Add(\"animationParam\",
+    animationParam.GetObject());\r\n                if (state === ZEPETO_Character_Controller_1.CharacterState.Gesture
+    && (this.GetAnimationClipFromResources || this.UseZepetoGestureAPI)) {\r\n                   
+    //this.runtimeAnimator.animationClips[1] is always means gesture''s clip\r\n                   
+    data.Add(\"gestureName\", this._animator.runtimeAnimatorController.animationClips[1].name);\r\n               
+    }\r\n                const playerAdditionalValue = new ZEPETO_Multiplay_1.RoomData();\r\n               
+    playerAdditionalValue.Add(\"additionalWalkSpeed\", this.zepetoPlayer.character.additionalWalkSpeed);\r\n               
+    playerAdditionalValue.Add(\"additionalRunSpeed\", this.zepetoPlayer.character.additionalRunSpeed);\r\n               
+    playerAdditionalValue.Add(\"additionalJumpPower\", this.zepetoPlayer.character.additionalJumpPower);\r\n               
+    data.Add(\"playerAdditionalValue\", playerAdditionalValue.GetObject());\r\n               
+    this._room?.Send(\"SyncPlayer\", data.GetObject());\r\n            }\r\n           
+    if (state == ZEPETO_Character_Controller_1.CharacterState.Idle) //Send 10 more
+    frames even if stopped\r\n                pastIdleCount++;\r\n            else\r\n               
+    pastIdleCount = 0;\r\n            yield new UnityEngine_1.WaitForSeconds(tick);\r\n       
+    }\r\n    }\r\n}\r\nexports.default = PlayerSync;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGxheWVyU3luYy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlBsYXllclN5bmMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBbUQ7QUFDbkQsdURBQW9EO0FBQ3BELCtDQUFrRDtBQUNsRCw2RUFBaUg7QUFDakgsNkNBQStNO0FBRS9NLGlFQUEwRDtBQUMxRCwwRUFBbUU7QUFDbkUsaUVBQTBEO0FBRTFELE1BQXFCLFVBQVcsU0FBUSxxQ0FBcUI7SUFBN0Q7O1FBQzhCLFlBQU8sR0FBWSxLQUFLLENBQUM7UUFJekIscUJBQWdCLEdBQVksS0FBSyxDQUFDO1FBQ2xDLGtDQUE2QixHQUFhLElBQUksQ0FBQztRQUMvQyx3QkFBbUIsR0FBWSxLQUFLLENBQUM7UUFFOUMsVUFBSyxHQUFXLElBQUksQ0FBQztJQTRJMUMsQ0FBQztJQXZJVyxLQUFLO1FBQ1QsSUFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLHNCQUFzQixTQUFDLHNCQUFRLEVBQUcsQ0FBQztRQUNuRSxJQUFJLENBQUMsVUFBVSxHQUFHLG9CQUFNLENBQUMsZ0JBQWdCLFNBQUMsbUNBQW9CLEVBQUcsQ0FBQztRQUNsRSxJQUFJLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDO1FBQ2xDLElBQUksSUFBSSxDQUFDLE9BQU8sRUFBRTtZQUNkLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQztTQUN6RDthQUFLO1lBQ0YsSUFBSSxDQUFDLE1BQU0sY0FBYSxDQUFDLFdBQVcsRUFBRSxFQUFFLENBQUMsSUFBSSxDQUFDLGVBQWUsRUFBRSxFQUFDO1lBRWhFLDZEQUE2RDtZQUM3RCxJQUFJLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQyxZQUFZLENBQUMsSUFBSSxFQUFFLENBQUM7U0FDbkQ7SUFDTCxDQUFDO0lBRUQseUJBQXlCO0lBQ2pCLGVB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","assetPath":"Assets/Zepeto
+    Multiplay Component/ZepetoScript/Player/PlayerSync.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"isLocal","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"","name":"player","type":"ZEPETO.Multiplay.Schema.Player","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"ZEPETO.Character.Controller","name":"zepetoPlayer","type":"ZEPETO.Character.Controller.ZepetoPlayer","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"","name":"tfHelper","type":"/Users/user/Applications/zepeto-modules/Project/zepeto-modules/Assets/Zepeto
+    Multiplay Component/ZepetoScript/Transform/TransformSyncHelper.default","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"mscorlib","name":"isUseInjectSpeed","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"mscorlib","name":"GetAnimationClipFromResources","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"mscorlib","name":"UseZepetoGestureAPI","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]}],"name":"PlayerSync","description":""},"isCompiled":true}'
+  typescriptHash: f8c385e47946eb3ca3f916c2041018c4
+  onlyWriteTrigger: 0

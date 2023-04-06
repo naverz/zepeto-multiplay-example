@@ -1,0 +1,48 @@
+fileFormatVersion: 2
+guid: 30a496b905f754e009f6760ebc36182d
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst ZEPETO_Character_Controller_1
+    = require(\"ZEPETO.Character.Controller\");\r\nconst ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst
+    ZEPETO_Multiplay_1 = require(\"ZEPETO.Multiplay\");\r\nconst TransformSyncHelper_1
+    = require(\"../Transform/TransformSyncHelper\");\r\nconst MultiplayManager_1
+    = require(\"../Common/MultiplayManager\");\r\nclass CoinAcquire extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        //A script that triggers the Zepeto character
+    to acquire coins, destroy coins, or move them to new coordinates.\r\n       
+    super(...arguments);\r\n        this.useCoinRandomRespawn = true;\r\n    }\r\n   
+    Start() {\r\n        this._tfHelper = this.GetComponent($typeof(TransformSyncHelper_1.default));\r\n       
+    this._multiplay = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\r\n       
+    this._multiplay.add_RoomJoined((room) => {\r\n            this._room = room;\r\n           
+    this._room.AddMessageHandler(\"CoinAcquired\" + this._tfHelper.Id, (AcquiredSessionId)
+    => {\r\n                if (this.useCoinRandomRespawn)\r\n                   
+    this.ChangeRandomPosition();\r\n                else\r\n                    this.DestroyCoin();\r\n           
+    });\r\n        });\r\n    }\r\n    OnTriggerEnter(coll) {\r\n        if (coll
+    != ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent($typeof(UnityEngine_1.Collider)))
+    {\r\n            return;\r\n        }\r\n        //In multi-play, if you want
+    to create a competitive game by winning coins, add the number of coins to the
+    player state.\r\n        this._multiplay.Room.Send(\"CoinAcquired\", this._tfHelper.Id);\r\n   
+    }\r\n    ChangeRandomPosition() {\r\n        this.transform.position = new UnityEngine_1.Vector3(this.GetRandomInt(10),
+    1, this.GetRandomInt(10));\r\n    }\r\n    DestroyCoin() {\r\n        MultiplayManager_1.default.instance.Destroy(this.gameObject);\r\n   
+    }\r\n    GetRandomInt(max) {\r\n        return Math.floor(Math.random() * max);\r\n   
+    }\r\n}\r\nexports.default = CoinAcquire;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29pbkFjcXVpcmUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJDb2luQWNxdWlyZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFzRDtBQUN0RCw2Q0FBNkU7QUFDN0UsNkVBQXdFO0FBQ3hFLCtDQUFrRDtBQUNsRCx1REFBc0M7QUFDdEMsMEVBQW1FO0FBQ25FLGlFQUEwRDtBQUUxRCxNQUFxQixXQUFZLFNBQVEscUNBQXFCO0lBQTlEO1FBQ0ksK0dBQStHOztRQUVyRix5QkFBb0IsR0FBVyxJQUFJLENBQUM7SUF1Q2xFLENBQUM7SUFsQ1csS0FBSztRQUNULElBQUksQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDLFlBQVksU0FBQyw2QkFBbUIsRUFBRyxDQUFDO1FBQzFELElBQUksQ0FBQyxVQUFVLEdBQUcsb0JBQU0sQ0FBQyxnQkFBZ0IsU0FBQyxtQ0FBb0IsRUFBRyxDQUFDO1FBQ2xFLElBQUksQ0FBQyxVQUFVLGdCQUFlLENBQUMsSUFBVSxFQUFFLEVBQUU7WUFDekMsSUFBSSxDQUFDLEtBQUssR0FBRSxJQUFJLENBQUM7WUFDakIsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsQ0FBQyxjQUFjLEdBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxpQkFBd0IsRUFBRSxFQUFFO2dCQUN4RixJQUFHLElBQUksQ0FBQyxvQkFBb0I7b0JBQ3hCLElBQUksQ0FBQyxvQkFBb0IsRUFBRSxDQUFDOztvQkFFNUIsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFDO1lBQzNCLENBQUMsQ0FBQyxDQUFDO1FBQ1AsQ0FBQyxFQUFBO0lBQ0wsQ0FBQztJQUVPLGNBQWMsQ0FBQyxJQUFjO1FBQ2pDLElBQUcsSUFBSSxJQUFJLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsRUFBRSxZQUFZLEVBQUUsU0FBUyxDQUFDLFlBQVksU0FBQyxzQkFBUSxFQUFHLEVBQUM7WUFDNUYsT0FBTztTQUNWO1FBRUQsd0hBQXdIO1FBQ3hILElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxjQUFjLEVBQUUsSUFBSSxDQUFDLFNBQVMsQ0FBQyxFQUFFLENBQUMsQ0FBQztJQUNqRSxDQUFDO0lBRU8sb0JBQW9CO1FBQ3hCLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxHQUFHLElBQUkscUJBQU8sQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLEVBQUUsQ0FBQyxFQUFDLENBQUMsRUFBQyxJQUFJLENBQUMsWUFBWSxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7SUFDekYsQ0FBQztJQUVPLFdBQVc7UUFDZiwwQkFBZ0IsQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUN2RCxDQUFDO0lBRU8sWUFBWSxDQUFDLEdBQVc7UUFDNUIsT0FBTyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxNQUFNLEVBQUUsR0FBRyxHQUFHLENBQUMsQ0FBQztJQUMzQyxDQUFDO0NBQ0o7QUExQ0QsOEJBMENDIn0=","assetPath":"Assets/Zepeto
+    Multiplay Component/ZepetoScript/Sample Code/CoinAcquire.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"useCoinRandomRespawn","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"CoinAcquire","description":""},"isCompiled":true}'
+  typescriptHash: 2c8ed5cee195babdf6b9b07f7bf45b68
+  onlyWriteTrigger: 0

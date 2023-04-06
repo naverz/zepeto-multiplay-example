@@ -1,0 +1,44 @@
+fileFormatVersion: 2
+guid: 55e3cc36a864f455396b0bb654b75847
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst ZEPETO_Character_Controller_1
+    = require(\"ZEPETO.Character.Controller\");\r\nconst TransformSyncHelper_1 =
+    require(\"../Transform/TransformSyncHelper\");\r\nconst MultiplayManager_1 =
+    require(\"../Common/MultiplayManager\");\r\nclass PackingObject extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.localPosition
+    = UnityEngine_1.Vector3.zero;\r\n        this.localRotation = UnityEngine_1.Vector3.zero;\r\n   
+    }\r\n    Start() {\r\n        this._tfHelper = this.transform.GetComponent($typeof(TransformSyncHelper_1.default));\r\n       
+    if (this._tfHelper.OwnerSessionId)\r\n            this.StartCoroutine(this.MountingObject(this._tfHelper.OwnerSessionId));\r\n   
+    }\r\n    *MountingObject(ownerSessiondId) {\r\n        yield new UnityEngine_1.WaitForEndOfFrame();\r\n       
+    const user = MultiplayManager_1.default.instance?.room?.State?.players?.get_Item(ownerSessiondId)
+    ?? null;\r\n        if (user !== null) {\r\n            yield new UnityEngine_1.WaitUntil(()
+    => ZEPETO_Character_Controller_1.ZepetoPlayers.instance.HasPlayer(ownerSessiondId));\r\n           
+    const player = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.GetPlayer(ownerSessiondId).character;\r\n           
+    this.transform.parent = player.ZepetoAnimator.GetBoneTransform(this.targetBone);\r\n           
+    this.transform.localPosition = this.localPosition;\r\n            this.transform.localRotation
+    = UnityEngine_1.Quaternion.Euler(this.localRotation);\r\n        }\r\n       
+    //If the user is not in the room, Destroy it.\r\n        else\r\n           
+    UnityEngine_1.Object.Destroy(this.gameObject);\r\n    }\r\n}\r\nexports.default
+    = PackingObject;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGFja2luZ09iamVjdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlBhY2tpbmdPYmplY3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsNkNBQXNHO0FBQ3RHLDZFQUEwRDtBQUMxRCwwRUFBbUU7QUFDbkUsaUVBQTBEO0FBRTFELE1BQXFCLGFBQWMsU0FBUSxxQ0FBcUI7SUFBaEU7O1FBSThCLGtCQUFhLEdBQVkscUJBQU8sQ0FBQyxJQUFJLENBQUM7UUFDdEMsa0JBQWEsR0FBWSxxQkFBTyxDQUFDLElBQUksQ0FBQztJQXlCcEUsQ0FBQztJQXRCVyxLQUFLO1FBQ1QsSUFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLFlBQVksU0FBQyw2QkFBbUIsRUFBRyxDQUFDO1FBQ3BFLElBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxjQUFjO1lBQzVCLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLGNBQWMsQ0FBQyxDQUFDLENBQUM7SUFDaEYsQ0FBQztJQUVPLENBQUMsY0FBYyxDQUFDLGVBQXVCO1FBQzNDLE1BQU0sSUFBSSwrQkFBaUIsRUFBRSxDQUFDO1FBRTlCLE1BQU0sSUFBSSxHQUFHLDBCQUFnQixDQUFDLFFBQVEsRUFBRSxJQUFJLEVBQUUsS0FBSyxFQUFFLE9BQU8sRUFBRSxRQUFRLENBQUMsZUFBZSxDQUFDLElBQUksSUFBSSxDQUFDO1FBQ2hHLElBQUcsSUFBSSxLQUFLLElBQUksRUFBRTtZQUNkLE1BQU0sSUFBSSx1QkFBUyxDQUFDLEdBQUcsRUFBRSxDQUFDLDJDQUFhLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxlQUFlLENBQUMsQ0FBQyxDQUFDO1lBQzdFLE1BQU0sTUFBTSxHQUFHLDJDQUFhLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxlQUFlLENBQUMsQ0FBQyxTQUFTLENBQUM7WUFDM0UsSUFBSSxDQUFDLFNBQVMsQ0FBQyxNQUFNLEdBQUcsTUFBTSxDQUFDLGNBQWMsQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7WUFDaEYsSUFBSSxDQUFDLFNBQVMsQ0FBQyxhQUFhLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQztZQUNsRCxJQUFJLENBQUMsU0FBUyxDQUFDLGFBQWEsR0FBRyx3QkFBVSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDLENBQUM7U0FDdkU7UUFFRCw2Q0FBNkM7O1lBRXpDLG9CQUFNLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUN4QyxDQUFDO0NBQ0o7QUE5QkQsZ0NBOEJDIn0=","assetPath":"Assets/Zepeto
+    Multiplay Component/ZepetoScript/Sample Code/PackingObject.ts","manifest":{"properties":[{"assembly":"UnityEngine.AnimationModule","name":"targetBone","type":"UnityEngine.HumanBodyBones","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"localPosition","type":"UnityEngine.Vector3","isArray":false,"initValue":["zero"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"localRotation","type":"UnityEngine.Vector3","isArray":false,"initValue":["zero"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"PackingObject","description":""},"isCompiled":true}'
+  typescriptHash: 438ed53899b74bc6141c0089034f4c25
+  onlyWriteTrigger: 0

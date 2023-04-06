@@ -1,0 +1,34 @@
+fileFormatVersion: 2
+guid: 7f8029d1df5b7474eadb3b4720b3ca19
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst ZEPETO_Character_Controller_1
+    = require(\"ZEPETO.Character.Controller\");\r\nconst MultiplayManager_1 = require(\"../Common/MultiplayManager\");\r\nclass
+    InstantiateObject extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        super(...arguments);\r\n        this._prefabName = \"Ghost(TransformSync)\";\r\n   
+    }\r\n    OnTriggerEnter(coll) {\r\n        if (coll != ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent($typeof(UnityEngine_1.Collider)))
+    {\r\n            return;\r\n        }\r\n        MultiplayManager_1.default.instance.Instantiate(this._prefabName,
+    MultiplayManager_1.default.instance?.room.SessionId, UnityEngine_1.Vector3.zero,
+    UnityEngine_1.Quaternion.identity);\r\n    }\r\n}\r\nexports.default = InstantiateObject;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSW5zdGFudGlhdGVPYmplY3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJJbnN0YW50aWF0ZU9iamVjdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFtRDtBQUNuRCw2Q0FBNEQ7QUFDNUQsNkVBQTBEO0FBQzFELGlFQUEwRDtBQUUxRCxNQUFxQixpQkFBa0IsU0FBUSxxQ0FBcUI7SUFBcEU7O1FBQzhCLGdCQUFXLEdBQVUsc0JBQXNCLENBQUM7SUFTMUUsQ0FBQztJQVBXLGNBQWMsQ0FBQyxJQUFjO1FBQ2pDLElBQUcsSUFBSSxJQUFJLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsRUFBRSxZQUFZLEVBQUUsU0FBUyxDQUFDLFlBQVksU0FBQyxzQkFBUSxFQUFHLEVBQUM7WUFDNUYsT0FBTztTQUNWO1FBRUQsMEJBQWdCLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsV0FBVyxFQUFFLDBCQUFnQixDQUFDLFFBQVEsRUFBRSxJQUFJLENBQUMsU0FBUyxFQUFDLHFCQUFPLENBQUMsSUFBSSxFQUFFLHdCQUFVLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDekksQ0FBQztDQUNKO0FBVkQsb0NBVUMifQ==","assetPath":"Assets/Zepeto
+    Multiplay Component/ZepetoScript/Sample Code/InstantiateObject.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"_prefabName","type":"System.String","isArray":false,"initValue":["Ghost(TransformSync)"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"InstantiateObject","description":""},"isCompiled":true}'
+  typescriptHash: edae484ba6307899b0fc484a6fcb8d4a
+  onlyWriteTrigger: 0

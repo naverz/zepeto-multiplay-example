@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: ad4b3e28e8a4241729aec4ffaf41ca8b
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    SyncIndexManager extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n}\r\nexports.default
+    = SyncIndexManager;\r\n/** This is used to give a unique ID to synchronization
+    objects that do not have a separate ID. */\r\nSyncIndexManager.SyncIndex = 0;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU3luY0luZGV4TWFuYWdlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlN5bmNJbmRleE1hbmFnZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFFckQsTUFBcUIsZ0JBQWlCLFNBQVEscUNBQXFCOztBQUFuRSxtQ0FJQztBQUhHLGtHQUFrRztBQUNwRiwwQkFBUyxHQUFVLENBQUMsQ0FBQyJ9","assetPath":"Assets/Zepeto
+    Multiplay Component/ZepetoScript/Common/SyncIndexManager.ts","manifest":{"properties":[],"name":"SyncIndexManager","description":""},"isCompiled":true}'
+  typescriptHash: 286713e1c9cac7b415727099cc0befaa
+  onlyWriteTrigger: 0
