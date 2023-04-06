@@ -1,0 +1,41 @@
+fileFormatVersion: 2
+guid: 3ded7a597d35444c49dcefb49818531b
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst
+    ZEPETO_Multiplay_1 = require(\"ZEPETO.Multiplay\");\r\nconst TransformSyncHelper_1
+    = require(\"../Transform/TransformSyncHelper\");\r\nclass GhostMove extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        //It''s a random-moving Ghost npc script.\r\n       
+    super(...arguments);\r\n        this.moveSpeed = 5;\r\n        this._targetPos
+    = UnityEngine_1.Vector3.zero;\r\n    }\r\n    Start() {\r\n        this._tfHelper
+    = this.GetComponent($typeof(TransformSyncHelper_1.default));\r\n        this._tfHelper.moveSpeed
+    = this.moveSpeed;\r\n        this.StartCoroutine(this.NewGetTargetPos());\r\n   
+    }\r\n    Update() {\r\n        if (!this._tfHelper.isOwner)\r\n            return;\r\n       
+    this.transform.position = UnityEngine_1.Vector3.MoveTowards(this.transform.position,
+    this._targetPos, this.moveSpeed * UnityEngine_1.Time.deltaTime);\r\n    }\r\n   
+    *NewGetTargetPos() {\r\n        while (true) {\r\n            if (this._tfHelper.isOwner)
+    {\r\n                this._targetPos = new UnityEngine_1.Vector3(UnityEngine_1.Random.Range(-10,
+    10), 0.5, UnityEngine_1.Random.Range(-10, 10));\r\n                this.transform.LookAt(this._targetPos);\r\n           
+    }\r\n            yield new UnityEngine_1.WaitForSeconds(5);\r\n        }\r\n   
+    }\r\n}\r\nexports.default = GhostMove;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2hvc3RNb3ZlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiR2hvc3RNb3ZlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXNEO0FBQ3RELDZDQUEwRTtBQUMxRSwrQ0FBa0Q7QUFDbEQsdURBQXNDO0FBQ3RDLDBFQUFtRTtBQUVuRSxNQUFxQixTQUFVLFNBQVEscUNBQXFCO0lBQTVEO1FBQ0ksd0NBQXdDOztRQUVkLGNBQVMsR0FBVSxDQUFDLENBQUM7UUFFdkMsZUFBVSxHQUFXLHFCQUFPLENBQUMsSUFBSSxDQUFDO0lBd0I5QyxDQUFDO0lBdEJXLEtBQUs7UUFDVCxJQUFJLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxZQUFZLFNBQUMsNkJBQW1CLEVBQUcsQ0FBQztRQUMxRCxJQUFJLENBQUMsU0FBUyxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDO1FBQzFDLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLGVBQWUsRUFBRSxDQUFDLENBQUM7SUFDaEQsQ0FBQztJQUVPLE1BQU07UUFDWCxJQUFHLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxPQUFPO1lBQ3RCLE9BQU87UUFDWCxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRyxxQkFBTyxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsRUFBRSxJQUFJLENBQUMsVUFBVSxFQUFFLElBQUksQ0FBQyxTQUFTLEdBQUcsa0JBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQztJQUM1SCxDQUFDO0lBRU8sQ0FBQyxlQUFlO1FBQ3BCLE9BQU0sSUFBSSxFQUFDO1lBQ1AsSUFBRyxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sRUFBRTtnQkFDdkIsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLHFCQUFPLENBQUMsb0JBQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLEVBQUUsRUFBRSxDQUFDLEVBQUUsR0FBRyxFQUFFLG9CQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRSxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUE7Z0JBQ2hGLElBQUksQ0FBQyxTQUFTLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQzthQUMxQztZQUNELE1BQU0sSUFBSSw0QkFBYyxDQUFDLENBQUMsQ0FBQyxDQUFDO1NBQy9CO0lBQ0wsQ0FBQztDQUVKO0FBN0JELDRCQTZCQyJ9","assetPath":"Assets/Zepeto
+    Multiplay Component/ZepetoScript/Sample Code/GhostMove.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"moveSpeed","type":"System.Single","isArray":false,"initValue":["5"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"GhostMove","description":""},"isCompiled":true}'
+  typescriptHash: fcd1bfb953d6981831de6bcaf38d4a78
+  onlyWriteTrigger: 0

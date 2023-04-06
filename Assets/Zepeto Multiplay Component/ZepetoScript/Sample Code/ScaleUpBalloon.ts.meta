@@ -1,0 +1,52 @@
+fileFormatVersion: 2
+guid: c96bd45b61046474e89d45f0844ad0d3
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst ZEPETO_Character_Controller_1
+    = require(\"ZEPETO.Character.Controller\");\r\nconst ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst
+    TransformSyncHelper_1 = require(\"../Transform/TransformSyncHelper\");\r\nclass
+    ScaleUpBalloon extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        super(...arguments);\r\n        // Sample of increasing balloon
+    size when triggered enter\r\n        this._targetScaleMultipler = 1.5;\r\n       
+    this._scaleUpSpeed = 2;\r\n        this._resetSizeOnOtherPlayer = true;\r\n       
+    this._targetScale = UnityEngine_1.Vector3.one;\r\n    }\r\n    Start() {\r\n       
+    this._tfHelper = this.GetComponent($typeof(TransformSyncHelper_1.default));\r\n       
+    this._tfHelper.scaleUpSpeed = this._scaleUpSpeed;\r\n        this._multiplay
+    = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\r\n       
+    this._multiplay.add_RoomJoined((room) => {\r\n            this._room = room;\r\n           
+    this._room.AddMessageHandler(\"ChangeOwner\" + this._tfHelper.Id, (ownerSessionId)
+    => {\r\n                this._tfHelper.ChangeOwner(ownerSessionId.toString());\r\n               
+    if (this._resetSizeOnOtherPlayer) {\r\n                    this.transform.localScale
+    = UnityEngine_1.Vector3.one;\r\n                    this._targetScale = UnityEngine_1.Vector3.op_Multiply(UnityEngine_1.Vector3.one,
+    this._targetScaleMultipler);\r\n                }\r\n            });\r\n       
+    });\r\n    }\r\n    Update() {\r\n        if (!this._tfHelper.isOwner)\r\n           
+    return;\r\n        if (UnityEngine_1.Vector3.op_Inequality(this.transform.localScale,
+    this._targetScale))\r\n            this.transform.localScale = UnityEngine_1.Vector3.MoveTowards(this.transform.localScale,
+    this._targetScale, UnityEngine_1.Time.deltaTime * this._scaleUpSpeed);\r\n   
+    }\r\n    OnTriggerEnter(coll) {\r\n        if (coll != ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent($typeof(UnityEngine_1.Collider)))
+    {\r\n            return;\r\n        }\r\n        if (!this._tfHelper?.isOwner)
+    {\r\n            this._room.Send(\"ChangeOwner\", this._tfHelper.Id);\r\n       
+    }\r\n        this._targetScale = UnityEngine_1.Vector3.op_Multiply(this.transform.localScale,
+    this._targetScaleMultipler);\r\n    }\r\n}\r\nexports.default = ScaleUpBalloon;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2NhbGVVcEJhbGxvb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTY2FsZVVwQmFsbG9vbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUF3RTtBQUN4RSxpREFBcUQ7QUFDckQsNkVBQXdFO0FBQ3hFLCtDQUFrRDtBQUVsRCwwRUFBbUU7QUFFbkUsTUFBcUIsY0FBZSxTQUFRLHFDQUFxQjtJQUFqRTs7UUFDSSx5REFBeUQ7UUFDL0IsMEJBQXFCLEdBQVUsR0FBRyxDQUFDO1FBQ25DLGtCQUFhLEdBQVUsQ0FBQyxDQUFDO1FBQ3pCLDRCQUF1QixHQUFZLElBQUksQ0FBQztRQUsxRCxpQkFBWSxHQUFXLHFCQUFPLENBQUMsR0FBRyxDQUFDO0lBdUMvQyxDQUFDO0lBckNXLEtBQUs7UUFDVCxJQUFJLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxZQUFZLFNBQUMsNkJBQW1CLEVBQUcsQ0FBQztRQUMxRCxJQUFJLENBQUMsU0FBUyxDQUFDLFlBQVksR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDO1FBRWpELElBQUksQ0FBQyxVQUFVLEdBQUcsb0JBQU0sQ0FBQyxnQkFBZ0IsU0FBQyxtQ0FBb0IsRUFBRyxDQUFDO1FBQ2xFLElBQUksQ0FBQyxVQUFVLGdCQUFlLENBQUMsSUFBVSxFQUFFLEVBQUU7WUFDekMsSUFBSSxDQUFDLEtBQUssR0FBRSxJQUFJLENBQUM7WUFDakIsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsQ0FBQyxhQUFhLEdBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxjQUFjLEVBQUUsRUFBRTtnQkFDN0UsSUFBSSxDQUFDLFNBQVMsQ0FBQyxXQUFXLENBQUMsY0FBYyxDQUFDLFFBQVEsRUFBRSxDQUFDLENBQUM7Z0JBQ3RELElBQUcsSUFBSSxDQUFDLHVCQUF1QixFQUFDO29CQUM1QixJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsR0FBRyxxQkFBTyxDQUFDLEdBQUcsQ0FBQztvQkFDeEMsSUFBSSxDQUFDLFlBQVksR0E3QmxCLHFCQUFPLENBdURtd25CLFdBQVksQ0ExQmp3bkIscUJBQU8sQ0FBQyxHQUFHLEVBQUcsSUFBSSxDQUFDLHFCQUFxQixDQUFBLENBQUM7aUJBQ2hFO1lBQ0wsQ0FBQyxDQUFDLENBQUM7UUFDUCxDQUFDLEVBQUE7SUFDTCxDQUFDO0lBRU8sTUFBTTtRQUNWLElBQUcsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU87WUFDdEIsT0FBTztRQUVYLElBdkNXLHFCQUFPLENBdUR1bm9CLGFBQWMsQ0FoQnBwb0IsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLEVBQUksSUFBSSxDQUFDLFlBQVk7WUFDN0MsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLEdBQUcscUJBQU8sQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLEVBQUUsSUFBSSxDQUFDLFlBQVksRUFBRSxrQkFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLENBQUM7SUFDM0ksQ0FBQztJQUVPLGNBQWMsQ0FBQyxJQUFjO1FBQ2pDLElBQUcsSUFBSSxJQUFJLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsRUFBRSxZQUFZLEVBQUUsU0FBUyxDQUFDLFlBQVksU0FBQyxzQkFBUSxFQUFHLEVBQUM7WUFDNUYsT0FBTztTQUNWO1FBRUQsSUFBRyxDQUFDLElBQUksQ0FBQyxTQUFTLEVBQUUsT0FBTyxFQUFDO1lBQ3hCLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLGFBQWEsRUFBQyxJQUFJLENBQUMsU0FBUyxDQUFDLEVBQUUsQ0FBQyxDQUFDO1NBQ3BEO1FBRUQsSUFBSSxDQUFDLFlBQVksR0FwRE4scUJBQU8sQ0F1RG13bkIsV0FBWSxDQUg3d25CLElBQUksQ0FBQyxTQUFTLENBQUMsVUFBVSxFQUFHLElBQUksQ0FBQyxxQkFBcUIsQ0FBQSxDQUFDO0lBQy9FLENBQUM7Q0FFSjtBQWhERCxpQ0FnREMifQ==","assetPath":"Assets/Zepeto
+    Multiplay Component/ZepetoScript/Sample Code/ScaleUpBalloon.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"_targetScaleMultipler","type":"System.Single","isArray":false,"initValue":["1.5"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"mscorlib","name":"_scaleUpSpeed","type":"System.Single","isArray":false,"initValue":["2"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"mscorlib","name":"_resetSizeOnOtherPlayer","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"ScaleUpBalloon","description":""},"isCompiled":true}'
+  typescriptHash: 86b059edc8c1445c871ea461b00adc9b
+  onlyWriteTrigger: 0

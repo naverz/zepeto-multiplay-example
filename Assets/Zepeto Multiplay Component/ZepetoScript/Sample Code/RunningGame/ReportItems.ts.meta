@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: ff2471e262db3479aa4cc8590f0b88b2
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nclass ReportItems extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n}\r\nexports.default = ReportItems;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVwb3J0SXRlbXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJSZXBvcnRJdGVtcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCxtREFBb0M7QUFFcEMsTUFBcUIsV0FBWSxTQUFRLHFDQUFxQjtDQUs3RDtBQUxELDhCQUtDIn0=","assetPath":"Assets/Zepeto
+    Multiplay Component/ZepetoScript/Sample Code/RunningGame/ReportItems.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"sessionIdText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"lapTimeText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"ReportItems","description":""},"isCompiled":true}'
+  typescriptHash: b764b0d5b1f05a45aa6c365d126d9cee
+  onlyWriteTrigger: 0

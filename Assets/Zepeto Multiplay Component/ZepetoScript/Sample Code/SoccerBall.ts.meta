@@ -1,0 +1,46 @@
+fileFormatVersion: 2
+guid: 04e2400307a8f426b9fff912eb1d2585
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst ZEPETO_Character_Controller_1
+    = require(\"ZEPETO.Character.Controller\");\r\nconst ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst
+    ZEPETO_Multiplay_1 = require(\"ZEPETO.Multiplay\");\r\nconst TransformSyncHelper_1
+    = require(\"../Transform/TransformSyncHelper\");\r\nclass SoccerBall extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n        this._tfHelper
+    = this.GetComponent($typeof(TransformSyncHelper_1.default));\r\n        this._rigidBody
+    = this.GetComponent($typeof(UnityEngine_1.Rigidbody));\r\n        this._multiplay
+    = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\r\n       
+    this._multiplay.add_RoomJoined((room) => {\r\n            this._room = room;\r\n           
+    this._room.AddMessageHandler(\"ChangeOwner\" + this._tfHelper.Id, (OwnerSessionId)
+    => {\r\n                //If there is a real-time physical conflict, such as
+    a soccer ball, change the update owner directly.\r\n                this._tfHelper.ChangeOwner(OwnerSessionId.toString());\r\n           
+    });\r\n        });\r\n    }\r\n    OnTriggerEnter(coll) {\r\n        if (coll
+    != ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent($typeof(UnityEngine_1.Collider)))
+    {\r\n            return;\r\n        }\r\n        if (!this._tfHelper?.isOwner)
+    {\r\n            this._room.Send(\"ChangeOwner\", this._tfHelper.Id);\r\n       
+    }\r\n        let dir = UnityEngine_1.Vector3.Normalize(UnityEngine_1.Vector3.op_Subtraction(this.transform.position,
+    coll.transform.position));\r\n        dir = new UnityEngine_1.Vector3(dir.x,
+    0, dir.z);\r\n        let power = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character.RunSpeed;\r\n       
+    this._rigidBody.AddForce(UnityEngine_1.Vector3.op_Multiply(UnityEngine_1.Vector3.op_Multiply(dir,
+    power), 100));\r\n    }\r\n}\r\nexports.default = SoccerBall;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU29jY2VyQmFsbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNvY2NlckJhbGwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBa0U7QUFDbEUsaURBQXFEO0FBQ3JELDZFQUF3RTtBQUN4RSwrQ0FBa0Q7QUFDbEQsdURBQXNDO0FBQ3RDLDBFQUFtRTtBQUVuRSxNQUFxQixVQUFXLFNBQVEscUNBQXFCO0lBUWpELEtBQUs7UUFDVCxJQUFJLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxZQUFZLFNBQUMsNkJBQW1CLEVBQUcsQ0FBQztRQUMxRCxJQUFJLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQyxZQUFZLFNBQUMsdUJBQVMsRUFBRyxDQUFDO1FBRWpELElBQUksQ0FBQyxVQUFVLEdBQUcsb0JBQU0sQ0FBQyxnQkFBZ0IsU0FBQyxtQ0FBb0IsRUFBRyxDQUFDO1FBQ2xFLElBQUksQ0FBQyxVQUFVLGdCQUFlLENBQUMsSUFBVSxFQUFFLEVBQUU7WUFDekMsSUFBSSxDQUFDLEtBQUssR0FBRSxJQUFJLENBQUM7WUFDakIsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsQ0FBQyxhQUFhLEdBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxjQUFjLEVBQUUsRUFBRTtnQkFDN0UscUdBQXFHO2dCQUNyRyxJQUFJLENBQUMsU0FBUyxDQUFDLFdBQVcsQ0FBQyxjQUFjLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQztZQUMxRCxDQUFDLENBQUMsQ0FBQztRQUNQLENBQUMsRUFBQTtJQUNMLENBQUM7SUFFTyxjQUFjLENBQUMsSUFBYztRQUNqQyxJQUFHLElBQUksSUFBSSwyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxXQUFXLEVBQUUsWUFBWSxFQUFFLFNBQVMsQ0FBQyxZQUFZLFNBQUMsc0JBQVEsRUFBRyxFQUFDO1lBQzVGLE9BQU87U0FDVjtRQUVELElBQUcsQ0FBQyxJQUFJLENBQUMsU0FBUyxFQUFFLE9BQU8sRUFBQztZQUN4QixJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxhQUFhLEVBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxFQUFFLENBQUMsQ0FBQztTQUNwRDtRQUVELElBQUksR0FBRyxHQUFXLHFCQUFPLENBQUMsU0FBUyxDQXRDeEIscUJBQU8sQ0EyQ3E4bkIsY0FBZSxDQUxsOG5CLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxFQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxFQUFDLENBQUM7UUFDckYsR0FBRyxHQUFHLElBQUkscUJBQU8sQ0FBQyxHQUFHLENBQUMsQ0FBQyxFQUFDLENBQUMsRUFBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDakMsSUFBSSxLQUFLLEdBQUcsMkNBQWEsQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDO1FBQy9FLElBQUksQ0FBQyxVQUFVLENBQUMsUUFBUSxDQXpDYixxQkFBTyxDQTJDdXBvQixXQUFZLENBM0MxcW9CLHFCQUFPLENBMkN1cG9CLFdBQVksQ0FGNXBvQixHQUFHLEVBQUMsS0FBSyxHQUFDLEdBQUcsRUFBQyxDQUFDO0lBQzVDLENBQUM7Q0FDSjtBQXBDRCw2QkFvQ0MifQ==","assetPath":"Assets/Zepeto
+    Multiplay Component/ZepetoScript/Sample Code/SoccerBall.ts","manifest":{"properties":[],"name":"SoccerBall","description":""},"isCompiled":true}'
+  typescriptHash: 2bade4e494c25692a59e861a0317ec4a
+  onlyWriteTrigger: 0
