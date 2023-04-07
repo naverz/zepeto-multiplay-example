@@ -96,19 +96,19 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
         this._room = MultiplayManager.instance?.room;
 
         if (this._room != null) {
-            this._room.OnStateChange += this.OnStateChange;
+            this.StartCoroutine(this.BindingState());
         } else {
             this._multiplay.RoomJoined += room => {
                 this._room = room;
-                this._room.OnStateChange += this.OnStateChange;
+                this.StartCoroutine(this.BindingState());
             };
         }
     }
 
     // Access the entire server schema at first startup and connect the sync Id schema.
-    private OnStateChange(state: State, isFirst: boolean) {
+    private *BindingState() {
         if (null == this._syncTransform) {
-            this._syncTransform = state.SyncTransforms.get_Item(this._Id);
+            this._syncTransform = MultiplayManager.instance?.room?.State?.SyncTransforms?.get_Item(this._Id)
             if (this._syncTransform) {
                 this.OnChangeTransform();
                 this.ForceTarget();
@@ -116,13 +116,16 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
                 this._syncTransform.add_OnChange(() => {
                     this.OnChangeTransform();
                 });
-                this._room.OnStateChange -= this.OnStateChange;
             }
             else{
-                // Initial definition if not defined on the server                
+                // Initial definition if not defined on the server        
+                // Create State 
                 this._objectStatus = GameObjectStatus.Enable;
                 this.SendTransform();
                 this.SendStatus();
+
+                yield new WaitUntil(()=>MultiplayManager.instance?.room?.State?.SyncTransforms?.get_Item(this._Id) !== null);
+                this.StartCoroutine(this.BindingState());
             }
         }
     }
