@@ -15,8 +15,11 @@ MonoBehaviour:
   _maxClients: 8
   orientation: 1
   useVoiceChat: 0
+  useProductSettings: 0
+  voiceChatMode: 0
   disableInvite: 0
   disableRoomList: 0
   disablePrivateRoom: 0
   uniqueRoom: 0
   launcherMediaUrl: 
+  launcherMediaType: 
