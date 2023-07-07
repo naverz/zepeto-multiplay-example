@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1426285970, guid: 944713d6c9caf4609ae4f76569420317, type: 3}
+  m_Script: {fileID: 1764373675, guid: c9608f3ebf82d477589e728bb3e81780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: 1
-  useVoiceChat: 0
-  useProductSettings: 0
-  voiceChatMode: 0
-  launcherMediaUrl: 
-  launcherMediaType: 
+  maxClients: 8
+  disableInvite: 0
+  disableRoomList: 0
+  disablePrivateRoom: 0
+  uniqueRoomType: 0

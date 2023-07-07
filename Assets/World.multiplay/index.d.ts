@@ -995,6 +995,22 @@ declare module 'ZEPETO.Multiplay.Leaderboard' {
 }
 
 
+declare module "ZEPETO.Multiplay.Messaging" {
+    const enum MessagingError {
+        Unknown = -1,
+        ParameterError,
+        NetworkError,
+    }
+    interface Subscriber {
+        disconnect(): void;
+    }
+    interface Messaging {
+        publish<T>(topic: string, payload: T): void;
+        subscribe<T>(topic: string, callback: (topic: string, data: T, sent: number) => void): Subscriber;
+    }
+    const Messaging: Messaging;
+}
+
 declare module "ZEPETO.Multiplay.Product" {
     const enum ProductError {
         Unknown = -1,
