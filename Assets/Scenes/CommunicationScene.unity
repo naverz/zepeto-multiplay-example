@@ -4630,13 +4630,11 @@ MonoBehaviour:
     keys:
     - multiplay
     - room
-    - m_pingCheckCount
-    - m_latency
-    - m_diffServerTime
-    - seeVersionLog
+    - _diffServerTime
+    - _latency
+    - _pingCheckCount
     unityValues:
     - {fileID: 406848603}
-    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -4647,7 +4645,6 @@ MonoBehaviour:
     - '{"type":"System.Single, mscorlib","value":"0"}'
     - '{"type":"System.Single, mscorlib","value":"0"}'
     - '{"type":"System.Single, mscorlib","value":"0"}'
-    - '{"type":"System.Boolean, mscorlib","value":"False"}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: daa5246585831481aabbf61fcc5114da, type: 3}
@@ -10066,9 +10063,7 @@ MonoBehaviour:
     - extraMultipler
     - GetAnimationClipFromResources
     - UseZepetoGestureAPI
-    - seeVersionLog
     unityValues:
-    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -10086,7 +10081,6 @@ MonoBehaviour:
     - '{"type":"System.Single, mscorlib","value":"1"}'
     - '{"type":"System.Boolean, mscorlib","value":"True"}'
     - '{"type":"System.Boolean, mscorlib","value":"True"}'
-    - '{"type":"System.Boolean, mscorlib","value":"False"}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: 6d846a38c15014273bd5ba91998e261d, type: 3}

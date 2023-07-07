@@ -14,7 +14,7 @@ export default class SyncComponentModule extends IModule {
             if (player) {
                 const animationParam = new ZepetoAnimationParam();
                 player.animationParam = Object.assign(animationParam, message.animationParam);
-                player.gestureName = message.gestureName;
+                player.gestureName = message.gestureName ?? null;
 
                 if (message.playerAdditionalValue) {
                     const pAdditionalValue = new PlayerAdditionalValue();

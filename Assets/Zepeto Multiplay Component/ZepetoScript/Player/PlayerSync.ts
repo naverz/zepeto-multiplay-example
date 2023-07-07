@@ -136,11 +136,8 @@ export default class PlayerSync extends ZepetoScriptBehaviour {
                 animationParam.Add("MoveProgress", this._animator.GetFloat("MoveProgress"));
                 data.Add("animationParam", animationParam.GetObject());
 
-                if (state === CharacterState.Gesture && (this.GetAnimationClipFromResources || this.UseZepetoGestureAPI)) {
-                    //this.runtimeAnimator.animationClips[1] is always means gesture's clip
-                    data.Add("gestureName", this._animator.runtimeAnimatorController.animationClips[1].name);
-                }
-
+                data.Add("gestureName", this._animator.runtimeAnimatorController.animationClips[1].name ?? null);
+                
                 const playerAdditionalValue = new RoomData();
                 playerAdditionalValue.Add("additionalWalkSpeed", this.zepetoPlayer.character.additionalWalkSpeed);
                 playerAdditionalValue.Add("additionalRunSpeed", this.zepetoPlayer.character.additionalRunSpeed);

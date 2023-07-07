@@ -12,7 +12,7 @@ public class ImportHandler
             version + ConstantManager.EXTENSION_UNITYPACKAGE);
         Debug.Log(downloadUrl);
 
-        string tempFilePath = Path.Combine(Application.temporaryCachePath, title);
+        string tempFilePath = Path.Combine(Application.temporaryCachePath, title + ConstantManager.EXTENSION_UNITYPACKAGE);
 
         using (var webClient = new WebClient())
         {
