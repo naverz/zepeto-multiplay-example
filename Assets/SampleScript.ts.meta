@@ -1,0 +1,27 @@
+fileFormatVersion: 2
+guid: 3d25bf9424e714998970af8697d33163
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\nclass
+    SampleScript extends ZEPETO_Script_1.ZepetoScriptBehaviour {\n    Start() {\n       
+    console.log(\"Hello ZEPETO Script\");\n    }\n    Update() {\n        this.transform.Rotate(3,
+    0, 0);\n    }\n}\nexports.default = SampleScript;\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2FtcGxlU2NyaXB0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2FtcGxlU2NyaXB0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBRXJELE1BQXFCLFlBQWEsU0FBUSxxQ0FBcUI7SUFFM0QsS0FBSztRQUNELE9BQU8sQ0FBQyxHQUFHLENBQUMscUJBQXFCLENBQUMsQ0FBQztJQUN2QyxDQUFDO0lBRUQsTUFBTTtRQUNGLElBQUksQ0FBQyxTQUFTLENBQUMsTUFBTSxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7SUFDbkMsQ0FBQztDQUVKO0FBVkQsK0JBVUMifQ==","assetPath":"Assets/SampleScript.ts","manifest":{"properties":[],"name":"SampleScript","description":""},"isCompiled":true}'
+  references: []
+  typescriptHash: 21415859da49ff36a3171ce24a55618d
