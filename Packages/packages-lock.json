@@ -153,8 +153,8 @@
       "url": "https://upm.zepeto.run"
     },
     "zepeto.character": {
-      "version": "3.1.17",
-      "depth": 0,
+      "version": "3.1.18",
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "zepeto.asset": "1.1.1",
@@ -167,37 +167,38 @@
       "url": "https://upm.zepeto.run"
     },
     "zepeto.character.controller": {
-      "version": "1.10.0",
+      "version": "1.11.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.inputsystem": "1.0.2"
+        "com.unity.inputsystem": "1.0.2",
+        "zepeto.character": "3.1.18"
       },
       "url": "https://upm.zepeto.run"
     },
     "zepeto.chat": {
-      "version": "1.1.0",
+      "version": "1.1.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://upm.zepeto.run"
     },
     "zepeto.event.bus": {
-      "version": "0.5.1",
+      "version": "0.5.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://upm.zepeto.run"
     },
     "zepeto.iwp": {
-      "version": "1.2.1",
+      "version": "1.2.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://upm.zepeto.run"
     },
     "zepeto.multiplay": {
-      "version": "1.10.0",
+      "version": "1.11.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -206,28 +207,30 @@
       "url": "https://upm.zepeto.run"
     },
     "zepeto.multiplay.script": {
-      "version": "1.11.0",
+      "version": "1.12.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://upm.zepeto.run"
     },
     "zepeto.script": {
-      "version": "1.12.0",
+      "version": "1.13.2",
       "depth": 1,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "zepeto.event.bus": "0.5.0"
+      },
       "url": "https://upm.zepeto.run"
     },
     "zepeto.script.leaderboard": {
-      "version": "1.1.8",
+      "version": "1.1.9",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://upm.zepeto.run"
     },
     "zepeto.script.unityengine.typings": {
-      "version": "1.1.0",
+      "version": "1.1.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -236,22 +239,22 @@
       "url": "https://upm.zepeto.run"
     },
     "zepeto.world": {
-      "version": "1.20.0",
+      "version": "1.21.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "zepeto.world.common": "1.0.1",
-        "zepeto.world.shared": "1.10.0",
-        "zepeto.script": "1.12.0",
-        "zepeto.event.bus": "0.5.1",
-        "zepeto.multiplay": "1.10.0",
-        "zepeto.multiplay.script": "1.11.0",
-        "zepeto.chat": "1.1.0",
-        "zepeto.character": "3.1.16",
-        "zepeto.character.controller": "1.10.0",
-        "zepeto.script.unityengine.typings": "1.1.0",
-        "zepeto.iwp": "1.2.1",
-        "zepeto.script.leaderboard": "1.1.8",
+        "zepeto.world.common": "1.0.2",
+        "zepeto.world.shared": "1.10.2",
+        "zepeto.script": "1.13.2",
+        "zepeto.event.bus": "0.5.2",
+        "zepeto.multiplay": "1.11.1",
+        "zepeto.multiplay.script": "1.12.2",
+        "zepeto.chat": "1.1.1",
+        "zepeto.character": "3.1.18",
+        "zepeto.character.controller": "1.11.2",
+        "zepeto.script.unityengine.typings": "1.1.1",
+        "zepeto.iwp": "1.2.2",
+        "zepeto.script.leaderboard": "1.1.9",
         "com.unity.scriptablebuildpipeline": "1.15.2",
         "com.unity.editorcoroutines": "1.0.0",
         "com.unity.postprocessing": "3.1.1",
@@ -262,14 +265,14 @@
       "url": "https://upm.zepeto.run"
     },
     "zepeto.world.common": {
-      "version": "1.0.1",
+      "version": "1.0.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://upm.zepeto.run"
     },
     "zepeto.world.shared": {
-      "version": "1.10.0",
+      "version": "1.10.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {

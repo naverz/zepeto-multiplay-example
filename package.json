@@ -11,7 +11,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"@zepeto/sandbox": "file:Library/Packages/zepeto-sandbox.tgz",
-		"typescript": "^4.3.5",
+		"typescript": "^4.9.5",
 		"zepeto-script-compiler": "file:Library/Packages/zepeto-script-compiler.tgz"
 	}
 }

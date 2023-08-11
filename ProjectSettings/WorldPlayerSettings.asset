@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: 1
-  useVoiceChat: 0
   useProductSettings: 0
-  voiceChatMode: 0
   launcherMediaUrl: 
   launcherMediaType: 
+  isShowProfiler: 0

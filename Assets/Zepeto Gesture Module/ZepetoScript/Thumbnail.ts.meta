@@ -25,6 +25,6 @@ ScriptedImporter:
     = this.content.Title;\r\n        this.GetComponentInChildren($typeof(UnityEngine_UI_1.RawImage)).texture
     = this.content.Thumbnail;\r\n    }\r\n}\r\nexports.default = Thumbnail;\r\n//#
     sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGh1bWJuYWlsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVGh1bWJuYWlsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXNEO0FBRXRELG1EQUFnRDtBQUdoRCxNQUFxQixTQUFVLFNBQVEscUNBQXFCO0lBSXhELEtBQUs7UUFDRCxJQUFJLENBQUMsc0JBQXNCLFNBQUMscUJBQUksR0FBSSxJQUFJLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUM7UUFDOUQsSUFBSSxDQUFDLHNCQUFzQixTQUFDLHlCQUFRLEdBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsU0FBc0IsQ0FBQztJQUMxRixDQUFDO0NBRUo7QUFURCw0QkFTQyJ9","assetPath":"Assets/Zepeto
-    Gesture Module/ZepetoScript/Thumbnail.ts","manifest":{"properties":[{"assembly":"ZEPETO.World","name":"content","type":"ZEPETO.World.Content","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]}],"name":"Thumbnail","description":""},"isCompiled":true}'
+    Gesture Module/ZepetoScript/Thumbnail.ts","manifest":{"properties":[{"assembly":"ZEPETO.World","name":"content","type":"ZEPETO.World.Content","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]}],"name":"Thumbnail","description":"","hasAnimatorMove":false},"isCompiled":true}'
   typescriptHash: 5a56a4de6cc4b6d2cde4800f20704922
   onlyWriteTrigger: 0
