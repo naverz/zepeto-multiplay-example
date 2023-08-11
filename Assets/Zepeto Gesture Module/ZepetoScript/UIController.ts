@@ -11,11 +11,12 @@ export default class UIController extends ZepetoScriptBehaviour {
     @SerializeField() private _closeButton : Button;
     @SerializeField() private _typeToggleGroup : Toggle[];
 
-    private _gestureLodaer: GestureLoader;
+    private _gestureLoader: GestureLoader;
     private _myCharacter: ZepetoCharacter;
         
     Start() {
-        this._gestureLodaer = Object.FindObjectOfType<GestureLoader>();
+        this._gestureLoader = Object.FindObjectOfType<GestureLoader>();
+        
         ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(() => {
             this._myCharacter = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;
 
@@ -29,7 +30,7 @@ export default class UIController extends ZepetoScriptBehaviour {
                 this.StopGesture();
             });
         });
-        
+
         // UI Listener
         this._typeToggleGroup[0].onValueChanged.AddListener(() => {
             this.SetCategoryUI(OfficialContentType.All);
@@ -50,22 +51,34 @@ export default class UIController extends ZepetoScriptBehaviour {
     private SetCategoryUI(category: OfficialContentType) {
         
         if (category == OfficialContentType.All) {
-            this._gestureLodaer.thumbnails.forEach((Obj) => {
+            this._gestureLoader.thumbnails.forEach((Obj) => {
                 Obj.SetActive(true);
             });
         }   else {
-            for (let i = 0; i < this._gestureLodaer.thumbnails.length; i++) {
-                const content = this._gestureLodaer.thumbnails[i].GetComponent<Thumbnail>().content;
+            for (let i = 0; i < this._gestureLoader.thumbnails.length; i++) {
+                const content = this._gestureLoader.thumbnails[i].GetComponent<Thumbnail>().content;
                 if (content.Keywords.includes(category)) {
-                    this._gestureLodaer.thumbnails[i].SetActive(true);
+                    this._gestureLoader.thumbnails[i].SetActive(true);
                 } else {
-                    this._gestureLodaer.thumbnails[i].SetActive(false);
+                    this._gestureLoader.thumbnails[i].SetActive(false);
                 }
             }
         }
     }
-    
+      
     private StopGesture() {
+
+        //If there is a gesture coroutine stop it.
+        if(this._gestureLoader.gestureCoroutine)
+        {
+            this._gestureLoader.StopCoroutine(this._gestureLoader.gestureCoroutine);
+        }
+        //If there is a pose coroutine stop it and reinitialize the Animator speed to 1.
+        if(this._gestureLoader.poseCoroutine)
+        {
+            this._gestureLoader.StopCoroutine(this._gestureLoader.poseCoroutine);
+            this._myCharacter.ZepetoAnimator.speed = 1;
+        }
         this._myCharacter.CancelGesture();
     }
 }
