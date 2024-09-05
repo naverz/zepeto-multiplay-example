@@ -4,7 +4,7 @@ import {ZepetoPlayers} from "ZEPETO.Character.Controller";
 import MultiplayManager from '../Common/MultiplayManager';
 
 export default class InstantiateObject extends ZepetoScriptBehaviour {
-    @SerializeField() private _prefabName:string = "Ghost(TransformSync)";
+    @SerializeField() private _prefabName:string = "Prefabs/Ghost(TransformSync)";
     
     private OnTriggerEnter(coll: Collider) {
         if(coll != ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent<Collider>()){

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1531310573, guid: 5ed5fc990562640bca475bb90d769b51, type: 3}
+  m_Name: ProductSettings
+  m_EditorClassIdentifier: 
+  productTextureInfo:
+  - targetId: highjump
+    targetAssetPath: 
+  - targetId: resurrection_star
+    targetAssetPath: 
+  - targetId: resurrection_zem
+    targetAssetPath: 
+  - targetId: shield
+    targetAssetPath: 
+  - targetId: star100
+    targetAssetPath: 
+  - targetId: star12000
+    targetAssetPath: 
+  - targetId: star2750
+    targetAssetPath: 
+  - targetId: star420
+    targetAssetPath: 
+  - targetId: tip
+    targetAssetPath: 
+  - targetId: trail_
+    targetAssetPath: 
+  - targetId: trail_1
+    targetAssetPath: 
+  - targetId: trail_2
+    targetAssetPath: 
+  - targetId: trail_3
+    targetAssetPath: 
+  - targetId: trail_4
+    targetAssetPath: 
+  currencyTextureInfo:
+  - targetId: star
+    targetAssetPath: 

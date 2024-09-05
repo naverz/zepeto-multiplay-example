@@ -1,6 +1,10 @@
 fileFormatVersion: 2
 guid: 06e97c7be21f34ff7aad3f689044cbbf
-importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+importerOverride:
+  nativeImporterType: 2089858483
+  scriptedImporterType:
+    serializedVersion: 2
+    Hash: 89072204048b7087d871d10c191cb608
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -24,7 +28,7 @@ ScriptedImporter:
     {\r\n    Start() {\r\n        this.GetComponentInChildren($typeof(UnityEngine_UI_1.Text)).text
     = this.content.Title;\r\n        this.GetComponentInChildren($typeof(UnityEngine_UI_1.RawImage)).texture
     = this.content.Thumbnail;\r\n    }\r\n}\r\nexports.default = Thumbnail;\r\n//#
-    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGh1bWJuYWlsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVGh1bWJuYWlsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXNEO0FBRXRELG1EQUFnRDtBQUdoRCxNQUFxQixTQUFVLFNBQVEscUNBQXFCO0lBSXhELEtBQUs7UUFDRCxJQUFJLENBQUMsc0JBQXNCLFNBQUMscUJBQUksR0FBSSxJQUFJLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUM7UUFDOUQsSUFBSSxDQUFDLHNCQUFzQixTQUFDLHlCQUFRLEdBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsU0FBc0IsQ0FBQztJQUMxRixDQUFDO0NBRUo7QUFURCw0QkFTQyJ9","assetPath":"Assets/Zepeto
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGh1bWJuYWlsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVGh1bWJuYWlsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXNEO0FBRXRELG1EQUFnRDtBQUdoRCxNQUFxQixTQUFVLFNBQVEscUNBQXFCO0lBSXhELEtBQUs7UUFDRCxJQUFJLENBQUMsc0JBQXNCLFNBQUMscUJBQUksRUFBRyxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQztRQUM5RCxJQUFJLENBQUMsc0JBQXNCLFNBQUMseUJBQVEsRUFBRyxDQUFDLE9BQU8sR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLFNBQXNCLENBQUM7SUFDMUYsQ0FBQztDQUVKO0FBVEQsNEJBU0MifQ==","assetPath":"Assets/Zepeto
     Gesture Module/ZepetoScript/Thumbnail.ts","manifest":{"properties":[{"assembly":"ZEPETO.World","name":"content","type":"ZEPETO.World.Content","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]}],"name":"Thumbnail","description":"","hasAnimatorMove":false},"isCompiled":true}'
   typescriptHash: 5a56a4de6cc4b6d2cde4800f20704922
   onlyWriteTrigger: 0

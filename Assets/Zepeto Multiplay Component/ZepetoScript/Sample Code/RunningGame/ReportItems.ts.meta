@@ -1,6 +1,10 @@
 fileFormatVersion: 2
 guid: ff2471e262db3479aa4cc8590f0b88b2
-importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+importerOverride:
+  nativeImporterType: 2089858483
+  scriptedImporterType:
+    serializedVersion: 2
+    Hash: 89072204048b7087d871d10c191cb608
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -23,6 +27,6 @@ ScriptedImporter:
     UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nclass ReportItems extends
     ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n}\r\nexports.default = ReportItems;\r\n//#
     sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVwb3J0SXRlbXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJSZXBvcnRJdGVtcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCxtREFBb0M7QUFFcEMsTUFBcUIsV0FBWSxTQUFRLHFDQUFxQjtDQUs3RDtBQUxELDhCQUtDIn0=","assetPath":"Assets/Zepeto
-    Multiplay Component/ZepetoScript/Sample Code/RunningGame/ReportItems.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"sessionIdText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"lapTimeText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"ReportItems","description":""},"isCompiled":true}'
+    Multiplay Component/ZepetoScript/Sample Code/RunningGame/ReportItems.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"sessionIdText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"lapTimeText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"ReportItems","description":"","hasAnimatorMove":false},"isCompiled":true}'
   typescriptHash: b764b0d5b1f05a45aa6c365d126d9cee
   onlyWriteTrigger: 0

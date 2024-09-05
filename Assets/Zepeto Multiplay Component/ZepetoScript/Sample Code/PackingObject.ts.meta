@@ -1,6 +1,10 @@
 fileFormatVersion: 2
 guid: 55e3cc36a864f455396b0bb654b75847
-importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+importerOverride:
+  nativeImporterType: 2089858483
+  scriptedImporterType:
+    serializedVersion: 2
+    Hash: 89072204048b7087d871d10c191cb608
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -39,6 +43,6 @@ ScriptedImporter:
     //If the user is not in the room, Destroy it.\r\n        else\r\n           
     UnityEngine_1.Object.Destroy(this.gameObject);\r\n    }\r\n}\r\nexports.default
     = PackingObject;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGFja2luZ09iamVjdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlBhY2tpbmdPYmplY3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsNkNBQXNHO0FBQ3RHLDZFQUEwRDtBQUMxRCwwRUFBbUU7QUFDbkUsaUVBQTBEO0FBRTFELE1BQXFCLGFBQWMsU0FBUSxxQ0FBcUI7SUFBaEU7O1FBSThCLGtCQUFhLEdBQVkscUJBQU8sQ0FBQyxJQUFJLENBQUM7UUFDdEMsa0JBQWEsR0FBWSxxQkFBTyxDQUFDLElBQUksQ0FBQztJQXlCcEUsQ0FBQztJQXRCVyxLQUFLO1FBQ1QsSUFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLFlBQVksU0FBQyw2QkFBbUIsRUFBRyxDQUFDO1FBQ3BFLElBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxjQUFjO1lBQzVCLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLGNBQWMsQ0FBQyxDQUFDLENBQUM7SUFDaEYsQ0FBQztJQUVPLENBQUMsY0FBYyxDQUFDLGVBQXVCO1FBQzNDLE1BQU0sSUFBSSwrQkFBaUIsRUFBRSxDQUFDO1FBRTlCLE1BQU0sSUFBSSxHQUFHLDBCQUFnQixDQUFDLFFBQVEsRUFBRSxJQUFJLEVBQUUsS0FBSyxFQUFFLE9BQU8sRUFBRSxRQUFRLENBQUMsZUFBZSxDQUFDLElBQUksSUFBSSxDQUFDO1FBQ2hHLElBQUcsSUFBSSxLQUFLLElBQUksRUFBRTtZQUNkLE1BQU0sSUFBSSx1QkFBUyxDQUFDLEdBQUcsRUFBRSxDQUFDLDJDQUFhLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxlQUFlLENBQUMsQ0FBQyxDQUFDO1lBQzdFLE1BQU0sTUFBTSxHQUFHLDJDQUFhLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxlQUFlLENBQUMsQ0FBQyxTQUFTLENBQUM7WUFDM0UsSUFBSSxDQUFDLFNBQVMsQ0FBQyxNQUFNLEdBQUcsTUFBTSxDQUFDLGNBQWMsQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7WUFDaEYsSUFBSSxDQUFDLFNBQVMsQ0FBQyxhQUFhLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQztZQUNsRCxJQUFJLENBQUMsU0FBUyxDQUFDLGFBQWEsR0FBRyx3QkFBVSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDLENBQUM7U0FDdkU7UUFFRCw2Q0FBNkM7O1lBRXpDLG9CQUFNLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUN4QyxDQUFDO0NBQ0o7QUE5QkQsZ0NBOEJDIn0=","assetPath":"Assets/Zepeto
-    Multiplay Component/ZepetoScript/Sample Code/PackingObject.ts","manifest":{"properties":[{"assembly":"UnityEngine.AnimationModule","name":"targetBone","type":"UnityEngine.HumanBodyBones","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"localPosition","type":"UnityEngine.Vector3","isArray":false,"initValue":["zero"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"localRotation","type":"UnityEngine.Vector3","isArray":false,"initValue":["zero"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"PackingObject","description":""},"isCompiled":true}'
+    Multiplay Component/ZepetoScript/Sample Code/PackingObject.ts","manifest":{"properties":[{"assembly":"UnityEngine.AnimationModule","name":"targetBone","type":"UnityEngine.HumanBodyBones","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"localPosition","type":"UnityEngine.Vector3","isArray":false,"initValue":["zero"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"localRotation","type":"UnityEngine.Vector3","isArray":false,"initValue":["zero"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"PackingObject","description":"","hasAnimatorMove":false},"isCompiled":true}'
   typescriptHash: 438ed53899b74bc6141c0089034f4c25
   onlyWriteTrigger: 0

@@ -1,6 +1,10 @@
 fileFormatVersion: 2
-guid: ef4d6edf5d0084c5bab45e45caff1c82
-importerOverride: ZEPETO.Multiplay.Script.Editor:ZEPETO.Multiplay.Script.Editor:ZepetoMultiplayResourceImporter
+guid: 868f356599e94f8da6f0d97f08f6e56b
+importerOverride:
+  nativeImporterType: 2089858483
+  scriptedImporterType:
+    serializedVersion: 2
+    Hash: 0e4dac5e3c202b6cd94b5053cf050c2d
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
