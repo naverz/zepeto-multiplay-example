@@ -1,0 +1,138 @@
+fileFormatVersion: 2
+guid: cf992fe547e808b43b491305ab0a8848
+importerOverride:
+  nativeImporterType: 2089858483
+  scriptedImporterType:
+    serializedVersion: 2
+    Hash: 89072204048b7087d871d10c191cb608
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_Events_1 = require(\"UnityEngine.Events\");\r\nconst ZEPETO_Script_1
+    = require(\"ZEPETO.Script\");\r\nconst UnityEngine_Video_1 = require(\"UnityEngine.Video\");\r\nconst
+    ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nclass ScreenshotController extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n        super(...arguments);\r\n       
+    this._videoMaxDuration = 60;\r\n        this._videoResolutionType = ZEPETO_World_1.VideoResolutions.W720xH1280;\r\n   
+    }\r\n    LateUpdate() {\r\n        if (!this.IsValid(this._replicaCamera)) {\r\n           
+    return;\r\n        }\r\n        this._replicaCamera.transform.position = this._mainCamera.transform.position;\r\n       
+    this._replicaCamera.transform.rotation = this._mainCamera.transform.rotation;\r\n   
+    }\r\n    IsValid(value) {\r\n        if (value == undefined || value == null)
+    {\r\n            return false;\r\n        }\r\n        return true;\r\n    }\r\n   
+    SetScreenshotCamera(camera) {\r\n        this._mainCamera = camera;\r\n    }\r\n   
+    get OnScreenshotDone() {\r\n        if (!this.IsValid(this._onScreenshotDone))
+    {\r\n            this._onScreenshotDone = new UnityEngine_Events_1.UnityEvent();\r\n       
+    }\r\n        return this._onScreenshotDone;\r\n    }\r\n    get OnFailEvent()
+    {\r\n        if (!this.IsValid(this._onFailEvent)) {\r\n            this._onFailEvent
+    = new UnityEngine_Events_1.UnityEvent();\r\n        }\r\n        return this._onFailEvent;\r\n   
+    }\r\n    get OnSuccessEvent() {\r\n        if (!this.IsValid(this._onSuccessEvent))
+    {\r\n            this._onSuccessEvent = new UnityEngine_Events_1.UnityEvent();\r\n       
+    }\r\n        return this._onSuccessEvent;\r\n    }\r\n    get OnProgressEvent()
+    {\r\n        if (!this.IsValid(this._onProgressEvent)) {\r\n            this._onProgressEvent
+    = new UnityEngine_Events_1.UnityEvent();\r\n        }\r\n        return this._onProgressEvent;\r\n   
+    }\r\n    get OnVideoRecordingStartEvent() {\r\n        if (!this.IsValid(this._onVideoRecordingStartEvent))
+    {\r\n            this._onVideoRecordingStartEvent = new UnityEngine_Events_1.UnityEvent();\r\n       
+    }\r\n        return this._onVideoRecordingStartEvent;\r\n    }\r\n    get OnVideoRecordingStopEvent()
+    {\r\n        if (!this.IsValid(this._onVideoRecordingStopEvent)) {\r\n           
+    this._onVideoRecordingStopEvent = new UnityEngine_Events_1.UnityEvent();\r\n       
+    }\r\n        return this._onVideoRecordingStopEvent;\r\n    }\r\n    // returns
+    {RenderTexture}\r\n    get ScreenshotRenderTexture() {\r\n        if (!this.IsValid(this._screenshotRenderTexture))
+    {\r\n            console.error(\"Invalid screenshot RenderTexture for recording\");\r\n           
+    return null;\r\n        }\r\n        return this._screenshotRenderTexture;\r\n   
+    }\r\n    /* PhotoFunction */\r\n    StartTakePhotoScreenshot(isVideo) {\r\n       
+    // Use as a screenshot camera after replicating the main camera.\r\n        let
+    screenshotCamera = UnityEngine_1.GameObject.Instantiate(this._mainCamera).GetComponent($typeof(UnityEngine_1.Camera));\r\n       
+    UnityEngine_1.GameObject.Destroy(screenshotCamera.GetComponent($typeof(UnityEngine_1.AudioListener)));\r\n       
+    screenshotCamera.gameObject.name = \"ScreenshotCamera\";\r\n        screenshotCamera.targetTexture
+    = this._screenshotRenderTexture;\r\n        this.StartCoroutine(this.CoTakePhotoScreenshot(screenshotCamera,
+    isVideo));\r\n    }\r\n    *CoTakePhotoScreenshot(camera, isVideo) {\r\n       
+    let waitForEndOfFrame = new UnityEngine_1.WaitForEndOfFrame();\r\n        yield
+    waitForEndOfFrame;\r\n        camera.transform.position = this._mainCamera.transform.position;\r\n       
+    camera.transform.rotation = this._mainCamera.transform.rotation;\r\n        camera.Render();\r\n       
+    camera.targetTexture = null;\r\n        yield waitForEndOfFrame;\r\n        if
+    (!this.IsValid(isVideo)) {\r\n            if (this.IsValid(this._onScreenshotDone))
+    {\r\n                this._onScreenshotDone.Invoke();\r\n            }\r\n       
+    }\r\n        UnityEngine_1.GameObject.Destroy(camera.gameObject);\r\n    }\r\n   
+    PhotoPostToFeed(feedMessage) {\r\n        if (UnityEngine_1.Application.isEditor)
+    {\r\n            this._onFailEvent.Invoke();\r\n        }\r\n        if (this.IsValid(this._onProgressEvent))
+    {\r\n            this._onProgressEvent.Invoke();\r\n        }\r\n        ZEPETO_World_1.ZepetoWorldContent.CreateFeed(this._screenshotRenderTexture,
+    feedMessage, (result) => {\r\n            if (result && this.IsValid(this._onSuccessEvent))
+    {\r\n                this._onSuccessEvent.Invoke();\r\n            }\r\n           
+    if (!result && this.IsValid(this._onFailEvent)) {\r\n                this._onFailEvent.Invoke();\r\n           
+    }\r\n        });\r\n    }\r\n    PhotoSave() {\r\n        if (UnityEngine_1.Application.isEditor)
+    {\r\n            this._onFailEvent.Invoke();\r\n        }\r\n        if (this.IsValid(this._onProgressEvent))
+    {\r\n            this._onProgressEvent.Invoke();\r\n        }\r\n        ZEPETO_World_1.ZepetoWorldContent.SaveToCameraRoll(this._screenshotRenderTexture,
+    (result) => {\r\n            if (result) {\r\n                if (result && this.IsValid(this._onSuccessEvent))
+    {\r\n                    this._onSuccessEvent.Invoke();\r\n                }\r\n               
+    if (!result && this.IsValid(this._onFailEvent)) {\r\n                    this._onFailEvent.Invoke();\r\n               
+    }\r\n            }\r\n        });\r\n    }\r\n    PhotoShare() {\r\n        ZEPETO_World_1.ZepetoWorldContent.Share(this._screenshotRenderTexture,
+    (result) => {\r\n            if (!result && this.IsValid(this._onFailEvent))
+    {\r\n                this._onFailEvent.Invoke();\r\n            }\r\n       
+    });\r\n    }\r\n    /* VideoFunction */\r\n    ResetVideoRecordingEvent() {\r\n       
+    if (!this.IsValid(this._onVideoRecordingStartEvent)) {\r\n            this._onVideoRecordingStartEvent
+    = new UnityEngine_Events_1.UnityEvent();\r\n        }\r\n        else {\r\n           
+    this._onVideoRecordingStartEvent.RemoveAllListeners();\r\n        }\r\n       
+    if (!this.IsValid(this._onVideoRecordingStopEvent)) {\r\n            this._onVideoRecordingStopEvent
+    = new UnityEngine_Events_1.UnityEvent();\r\n        }\r\n        else {\r\n           
+    this._onVideoRecordingStopEvent.RemoveAllListeners();\r\n        }\r\n    }\r\n   
+    RecordVideo() {\r\n        if (ZEPETO_World_1.WorldVideoRecorder.IsRecording())
+    {\r\n            this.StopCoroutine(this._coRecordVideo);\r\n            this.RecordingDone();\r\n       
+    }\r\n        else {\r\n            this._coRecordVideo = this.StartCoroutine(this.CoRecordVideo());\r\n       
+    }\r\n    }\r\n    *CoRecordVideo() {\r\n        this._replicaCamera = UnityEngine_1.GameObject.Instantiate(this._mainCamera).GetComponent($typeof(UnityEngine_1.Camera));\r\n       
+    UnityEngine_1.GameObject.Destroy(this._replicaCamera.GetComponent($typeof(UnityEngine_1.AudioListener)));\r\n       
+    this._replicaCamera.gameObject.name = \"ScreenshotCamera\";\r\n        let startRecording
+    = ZEPETO_World_1.WorldVideoRecorder.StartRecording(this._replicaCamera, this._videoResolutionType,
+    this._videoMaxDuration);\r\n        // startRecording\r\n        if (!startRecording)
+    {\r\n            if (this.IsValid(this._onFailEvent)) {\r\n                this._onFailEvent.Invoke();\r\n           
+    }\r\n        }\r\n        else {\r\n            if (this.IsValid(this._onVideoRecordingStartEvent))
+    {\r\n                this._onVideoRecordingStartEvent.Invoke();\r\n           
+    }\r\n        }\r\n        // IsRecording\r\n        if (startRecording && !ZEPETO_World_1.WorldVideoRecorder.IsRecording())
+    {\r\n            if (this.IsValid(this._onFailEvent)) {\r\n                this._onFailEvent.Invoke();\r\n           
+    }\r\n            return;\r\n        }\r\n        while (ZEPETO_World_1.WorldVideoRecorder.IsRecording())
+    {\r\n            yield null;\r\n        }\r\n        // RecordingDone\r\n       
+    this.RecordingDone();\r\n    }\r\n    RecordingDone() {\r\n        if (this.IsValid(this._onVideoRecordingStopEvent))
+    {\r\n            this._onVideoRecordingStopEvent.Invoke();\r\n        }\r\n       
+    ZEPETO_World_1.WorldVideoRecorder.StopRecording();\r\n        UnityEngine_1.GameObject.Destroy(this._replicaCamera.gameObject);\r\n       
+    this._replicaCamera = null;\r\n    }\r\n    VideoPostToFeed(feedMessage) {\r\n       
+    if (UnityEngine_1.Application.isEditor) {\r\n            this._onFailEvent.Invoke();\r\n       
+    }\r\n        if (this.IsValid(this._onProgressEvent)) {\r\n            this._onProgressEvent.Invoke();\r\n       
+    }\r\n        ZEPETO_World_1.WorldVideoRecorder.CreateFeed(feedMessage, (result)
+    => {\r\n            if (result && this.IsValid(this._onSuccessEvent)) {\r\n               
+    this._onSuccessEvent.Invoke();\r\n            }\r\n            if (!result &&
+    this.IsValid(this._onFailEvent)) {\r\n                this._onFailEvent.Invoke();\r\n           
+    }\r\n        });\r\n    }\r\n    VideoSave() {\r\n        if (UnityEngine_1.Application.isEditor)
+    {\r\n            this._onFailEvent.Invoke();\r\n        }\r\n        if (this.IsValid(this._onProgressEvent))
+    {\r\n            this._onProgressEvent.Invoke();\r\n        }\r\n        ZEPETO_World_1.WorldVideoRecorder.SaveToCameraRoll((result)
+    => {\r\n            if (result) {\r\n                if (result && this.IsValid(this._onSuccessEvent))
+    {\r\n                    this._onSuccessEvent.Invoke();\r\n                }\r\n               
+    if (!result && this.IsValid(this._onFailEvent)) {\r\n                    this._onFailEvent.Invoke();\r\n               
+    }\r\n            }\r\n        });\r\n    }\r\n    VideoShare() {\r\n        ZEPETO_World_1.WorldVideoRecorder.Share((result)
+    => {\r\n            if (result) {\r\n                if (!result && this.IsValid(this._onFailEvent))
+    {\r\n                    this._onFailEvent.Invoke();\r\n                }\r\n           
+    }\r\n        });\r\n    }\r\n    DestroyVideoPlayerComponent(playerObject) {\r\n       
+    let existingVideoPlayer = playerObject.GetComponent($typeof(UnityEngine_Video_1.VideoPlayer));\r\n       
+    if (existingVideoPlayer != null) {\r\n            existingVideoPlayer.Stop();\r\n           
+    UnityEngine_1.GameObject.Destroy(existingVideoPlayer);\r\n        }\r\n    }\r\n   
+    PlayPreviewVideo(playerObject, width, height) {\r\n        let videoPlayer =
+    ZEPETO_World_1.WorldVideoRecorder.AddVideoPlayerComponent(playerObject, width,
+    height);\r\n        if (videoPlayer == null) {\r\n            return;\r\n       
+    }\r\n        videoPlayer.isLooping = true;\r\n        videoPlayer.Play();\r\n   
+    }\r\n}\r\nexports.default = ScreenshotController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2NyZWVuc2hvdENvbnRyb2xsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTY3JlZW5zaG90Q29udHJvbGxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUF5SDtBQUN6SCwyREFBZ0Q7QUFDaEQsaURBQXFEO0FBQ3JELHlEQUFnRDtBQUNoRCwrQ0FBd0Y7QUFFeEYsTUFBcUIsb0JBQXFCLFNBQVEscUNBQXFCO0lBQXZFOztRQUc4QixzQkFBaUIsR0FBVyxFQUFFLENBQUM7UUFDL0IseUJBQW9CLEdBQXFCLCtCQUFnQixDQUFDLFVBQVUsQ0FBQztJQThTbkcsQ0FBQztJQS9SRyxVQUFVO1FBQ04sSUFBSSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxFQUFFO1lBQ3BDLE9BQU87U0FDVjtRQUNELElBQUksQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsV0FBVyxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUM7UUFDN0UsSUFBSSxDQUFDLGNBQWMsQ0FBQyxTQUFTLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxXQUFXLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQztJQUNqRixDQUFDO0lBRU8sT0FBTyxDQUFDLEtBQVU7UUFDdEIsSUFBSSxLQUFLLElBQUksU0FBUyxJQUFJLEtBQUssSUFBSSxJQUFJLEVBQUU7WUFDckMsT0FBTyxLQUFLLENBQUM7U0FDaEI7UUFDRCxPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0lBRU0sbUJBQW1CLENBQUMsTUFBYztRQUNyQyxJQUFJLENBQUMsV0FBVyxHQUFHLE1BQU0sQ0FBQztJQUM5QixDQUFDO0lBRUQsSUFBVyxnQkFBZ0I7UUFDdkIsSUFBSSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLGlCQUFpQixDQUFDLEVBQUU7WUFDdkMsSUFBSSxDQUFDLGlCQUFpQixHQUFHLElBQUksK0JBQVUsRUFBRSxD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","assetPath":"Assets/Zepeto
+    Screenshot Mudule/Scripts/ScreenshotController.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"_screenshotRenderTexture","type":"UnityEngine.RenderTexture","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"mscorlib","name":"_videoMaxDuration","type":"System.Single","isArray":false,"initValue":["60"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"ZEPETO.World","name":"_videoResolutionType","type":"ZEPETO.World.VideoResolutions","isArray":false,"initValue":["W720xH1280"],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"ScreenshotController","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 90d5d7129581feb8faad9d9a8d7029c6
+  onlyWriteTrigger: 0
