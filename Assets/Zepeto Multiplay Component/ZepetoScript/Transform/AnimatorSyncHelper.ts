@@ -5,6 +5,7 @@ import MultiplayManager from '../Common/MultiplayManager';
 import {ZepetoWorldMultiplay} from "ZEPETO.World";
 import SyncIndexManager from '../Common/SyncIndexManager';
 import TransformSyncHelper from '../Transform/TransformSyncHelper';
+import ToolClassGather from '../ToolClass/ToolClassGather';
 
 export default class AnimatorSyncHelper extends ZepetoScriptBehaviour {
     //This synchronizes the animator when its state changes. 
@@ -27,6 +28,11 @@ export default class AnimatorSyncHelper extends ZepetoScriptBehaviour {
     }
 
     private Start() {
+        const tcg = MultiplayManager.instance.gameObject?.GetComponent<ToolClassGather>();
+        if(null === tcg) {
+            MultiplayManager.instance.gameObject.AddComponent<ToolClassGather>();
+        }
+        ToolClassGather.Instance.AnimHelper.push(this.gameObject.GetComponent<AnimatorSyncHelper>());
         this._animator = this.GetComponentInChildren<Animator>();
         
         this._Id = this.GetComponent<TransformSyncHelper>()?.Id ?? (SyncIndexManager.SyncIndex++).toString();

@@ -6,6 +6,7 @@ import * as UnityEngine from "UnityEngine";
 import {State, SyncTransform} from "ZEPETO.Multiplay.Schema";
 import SyncIndexManager from "../Common/SyncIndexManager";
 import MultiplayManager, { GameObjectStatus } from '../Common/MultiplayManager';
+import ToolClassGather from "../ToolClass/ToolClassGather";
 
 export default class TransformSyncHelper extends ZepetoScriptBehaviour {
     public UpdateOwnerType: UpdateOwner = UpdateOwner.Undefine;
@@ -63,6 +64,11 @@ export default class TransformSyncHelper extends ZepetoScriptBehaviour {
     private prevGet = () => this._bufferedState?.length > 1 ? this._bufferedState[1] : null;
 
     private Start() {
+        const tcg = MultiplayManager.instance.gameObject?.GetComponent<ToolClassGather>();
+        if(null === tcg) {
+            MultiplayManager.instance.gameObject.AddComponent<ToolClassGather>();
+        }
+        ToolClassGather.Instance.TfHelpers.push(this.gameObject.GetComponent<TransformSyncHelper>());
         if(!this._Id) {
             SyncIndexManager.SyncIndex++;
             this._Id = SyncIndexManager.SyncIndex.toString();

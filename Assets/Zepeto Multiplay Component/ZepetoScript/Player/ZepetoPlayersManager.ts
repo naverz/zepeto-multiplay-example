@@ -6,6 +6,7 @@ import {State, Player} from "ZEPETO.Multiplay.Schema";
 import {GameObject, Object, Quaternion, Vector3, WaitForSeconds} from "UnityEngine";
 import PlayerSync from './PlayerSync';
 import TransformSyncHelper,{PositionExtrapolationType, PositionInterpolationType} from '../Transform/TransformSyncHelper';
+import ToolClassGather from '../ToolClass/ToolClassGather';
 
 export enum ZepetoPlayerSpawnType {
     NoneSpawn,//Do not create players
@@ -161,6 +162,7 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
             for(let i=0; i<contents.length; i++) {
                 this.GestureAPIContents.set(contents[i].Id, contents[i]);
             }
+            ToolClassGather.Instance.ZPMGestureAPIContents = this.GestureAPIContents;
         });
     }
     

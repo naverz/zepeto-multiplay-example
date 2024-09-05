@@ -6,7 +6,8 @@ import { RuntimeAnimatorController, Object, Animator, AnimatorClipInfo, Resource
 import {Player} from 'ZEPETO.Multiplay.Schema';
 import MultiplayManager from '../Common/MultiplayManager';
 import TransformSyncHelper from '../Transform/TransformSyncHelper';
-import ZepetoPlayersManager from './ZepetoPlayersManager';
+// import ZepetoPlayersManager from './ZepetoPlayersManager';
+import ToolClassGather from '../ToolClass/ToolClassGather';
 
 export default class PlayerSync extends ZepetoScriptBehaviour {
     @HideInInspector() public isLocal: boolean = false;
@@ -57,8 +58,8 @@ export default class PlayerSync extends ZepetoScriptBehaviour {
             
             if (!gestureName || clipInfo[0].clip.name === gestureName) return;
             let animClip: AnimationClip | null = null;
-            if (this.UseZepetoGestureAPI && ZepetoPlayersManager.instance.GestureAPIContents.has(gestureName)) {
-                const content = ZepetoPlayersManager.instance.GestureAPIContents.get(gestureName);
+            if (this.UseZepetoGestureAPI && ToolClassGather.Instance.ZPMGestureAPIContents.has(gestureName)) {
+                const content = ToolClassGather.Instance.ZPMGestureAPIContents.get(gestureName);
                 if (!content.IsDownloadedAnimation) {
                     // If the animation has not been downloaded, download it.
                     content.DownloadAnimation(() => {

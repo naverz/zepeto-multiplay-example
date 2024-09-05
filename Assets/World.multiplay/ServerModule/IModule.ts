@@ -1,10 +1,10 @@
 import { SandboxPlayer } from "ZEPETO.Multiplay";
-import Server from "..";
+// import Server from "..";
 
 export abstract class IModule {
-    private readonly _server: Server;
-    protected get server(): Server { return this._server; }
-    constructor(server: Server) {
+    private readonly _server: any;
+    protected get server(): any { return this._server; }
+    constructor(server: any) {
         this._server = server;
     }
     abstract OnCreate(): Promise<void>;
