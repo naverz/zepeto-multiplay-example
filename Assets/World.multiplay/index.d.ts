@@ -60,8 +60,8 @@ declare module "encoding/decode" {
     export function switchStructureCheck(bytes: any, it: Iterator): boolean;
 }
 declare module "types/ArraySchema" {
-    import { ChangeTree } from "changes/ChangeTree";
     import { SchemaDecoderCallbacks } from "Schema";
+    import { ChangeTree } from "changes/ChangeTree";
     export function getArrayProxy(value: ArraySchema): ArraySchema<any>;
     export class ArraySchema<V = any> implements Array<V>, SchemaDecoderCallbacks {
         protected $changes: ChangeTree;
@@ -289,8 +289,8 @@ declare module "types/ArraySchema" {
     }
 }
 declare module "types/MapSchema" {
-    import { ChangeTree } from "changes/ChangeTree";
     import { SchemaDecoderCallbacks } from "Schema";
+    import { ChangeTree } from "changes/ChangeTree";
     export function getMapProxy(value: MapSchema): MapSchema<any>;
     export class MapSchema<V = any> implements Map<string, V>, SchemaDecoderCallbacks {
         protected $changes: ChangeTree;
@@ -325,8 +325,8 @@ declare module "types/MapSchema" {
     }
 }
 declare module "types/CollectionSchema" {
-    import { ChangeTree } from "changes/ChangeTree";
     import { SchemaDecoderCallbacks } from "Schema";
+    import { ChangeTree } from "changes/ChangeTree";
     type K = number;
     export class CollectionSchema<V = any> implements SchemaDecoderCallbacks {
         protected $changes: ChangeTree;
@@ -358,8 +358,8 @@ declare module "types/CollectionSchema" {
     }
 }
 declare module "types/SetSchema" {
-    import { ChangeTree } from "changes/ChangeTree";
     import { SchemaDecoderCallbacks } from "Schema";
+    import { ChangeTree } from "changes/ChangeTree";
     export class SetSchema<V = any> implements SchemaDecoderCallbacks {
         protected $changes: ChangeTree;
         protected $items: Map<number, V>;
@@ -432,8 +432,8 @@ declare module "events/EventEmitter" {
     }
 }
 declare module "filters/index" {
-    import { ChangeTree } from "changes/ChangeTree";
     import { ClientWithSessionId } from "annotations";
+    import { ChangeTree } from "changes/ChangeTree";
     export class ClientState {
         refIds: WeakSet<ChangeTree>;
         containerIndexes: WeakMap<ChangeTree, Set<number>>;
@@ -450,12 +450,12 @@ declare module "types/index" {
     export function getType(identifier: string): TypeDefinition;
 }
 declare module "Schema" {
-    import { OPERATION } from "spec";
-    import { ClientWithSessionId, Context, SchemaDefinition, DefinitionType } from "annotations";
-    import type { Iterator } from "encoding/decode";
+    import { ClientWithSessionId, Context, DefinitionType, SchemaDefinition } from "annotations";
     import { ChangeTree, Ref } from "changes/ChangeTree";
-    import { NonFunctionPropNames } from "types/HelperTypes";
+    import type { Iterator } from "encoding/decode";
     import { EventEmitter_ } from "events/EventEmitter";
+    import { OPERATION } from "spec";
+    import { NonFunctionPropNames } from "types/HelperTypes";
     export interface DataChange<T = any> {
         op: OPERATION;
         field: string;
@@ -510,12 +510,12 @@ declare module "Schema" {
     }
 }
 declare module "changes/ChangeTree" {
-    import { OPERATION } from "spec";
     import { Schema } from "Schema";
     import { FilterChildrenCallback } from "annotations";
-    import { MapSchema } from "types/MapSchema";
+    import { OPERATION } from "spec";
     import { ArraySchema } from "types/ArraySchema";
     import { CollectionSchema } from "types/CollectionSchema";
+    import { MapSchema } from "types/MapSchema";
     import { SetSchema } from "types/SetSchema";
     export type Ref = Schema | ArraySchema | MapSchema | CollectionSchema | SetSchema;
     export interface ChangeOperation {
@@ -658,8 +658,8 @@ declare module "annotations" {
 }
 declare module "Reflection" {
     import { Schema } from "Schema";
-    import { ArraySchema } from "types/ArraySchema";
     import { Iterator } from "encoding/decode";
+    import { ArraySchema } from "types/ArraySchema";
     /**
      * Reflection
      */
@@ -684,376 +684,706 @@ declare module "utils" {
     export function dumpChanges(schema: Schema): {};
 }
 declare module "@colyseus/schema" {
-    export { Schema, DataChange } from "Schema";
-    import { MapSchema } from "types/MapSchema";
-    export { MapSchema };
-    import { ArraySchema } from "types/ArraySchema";
-    export { ArraySchema };
-    import { CollectionSchema } from "types/CollectionSchema";
-    export { CollectionSchema };
-    import { SetSchema } from "types/SetSchema";
-    export { SetSchema };
-    import { registerType } from "types/index";
-    export { registerType };
-    export { dumpChanges } from "utils";
+    export { Reflection, ReflectionField, ReflectionType } from "Reflection";
+    export { DataChange, Schema } from "Schema";
+    export { Context, Definition, DefinitionType, FilterCallback, PrimitiveType, SchemaDefinition, defineTypes, deprecated, filter, filterChildren, hasFilter, type } from "annotations";
     export { Iterator } from "encoding/decode";
-    import * as encode from "encoding/encode";
-    import * as decode from "encoding/decode";
-    export { encode, decode };
-    export { Reflection, ReflectionType, ReflectionField, } from "Reflection";
-    export { type, deprecated, filter, filterChildren, defineTypes, hasFilter, SchemaDefinition, Context, PrimitiveType, Definition, DefinitionType, FilterCallback, } from "annotations";
     export { OPERATION } from "spec";
+    export { dumpChanges } from "utils";
+    export { ArraySchema, CollectionSchema, MapSchema, SetSchema, decode, encode, registerType };
+    import * as decode from "encoding/decode";
+    import * as encode from "encoding/encode";
+    import { ArraySchema } from "types/ArraySchema";
+    import { CollectionSchema } from "types/CollectionSchema";
+    import { MapSchema } from "types/MapSchema";
+    import { SetSchema } from "types/SetSchema";
+    import { registerType } from "types/index";
 }
 
 
 declare module "ZEPETO.Multiplay" {
 
-    import { State, Schema } from 'ZEPETO.Multiplay.Schema';
-    
+    import { State } from 'ZEPETO.Multiplay.Schema';
+
     interface SystemError {
         code: string,
         message: string
     }
 
+    /**
+     * Represents a player's client connected to the Multiplay Room.
+     */
     interface SandboxPlayer {
+        /**
+         * Client's session ID
+         */
         readonly sessionId: string;
+        /**
+         * Player's user ID
+         */
         readonly userId: string;
-        readonly hashCode?: string;
-        
+
+        /**
+         * Sends a message through a specified channel to a client.
+         * @typeParam T Optionally specifies the type of `message`.
+         * @param type The identifier of the channel to send the message through.
+         * @param message message Optional content of the message to be sent.
+         */
         send<T>(type: string | number, message?: T): void;
-        send(message: Schema): void;
     }
 
-    class BroadcastMessage {
-        sender: string;
-        data: any;
-        constructor(sender: string, data: any);
-    }
-
+    /**
+     * Options for broadcasting messages from the Multiplay Room to clients.
+     */
     interface IBroadcastOptions {
+        /**
+         * Specifies a client to be excluded from the broadcast.
+         */
         except?: SandboxPlayer;
     }
 
+    /**
+     * Options for creating a Multiplay Room.
+     */
     interface SandboxOptions {
-        readonly applicationId: string;
+        /**
+         * Specifies whether the Room is hosted locally, such as for QR Mobile testing in the Unity editor.
+         */
         readonly isSandbox: boolean;
-        readonly tickInterval: number;
-        readonly isPrivate: boolean;
-        readonly matchMakingValue: {[key: string]: any};
+
+        readonly matchMakingValue: { [key: string]: any };
     }
-    
+
+    /**
+     * Represents a Multiplay Room.
+     */
     abstract class Sandbox {
-        readonly applicationId: string;
+        /**
+         * Specifies whether the Multiplay Room is locked.
+         */
         readonly locked: boolean;
-        readonly metadata: any;
-        readonly clock: any;
+        /**
+         * ID of the Multiplay Room, assigned randomly upon creation to avoid duplication.
+         */
         readonly roomId: string;
-        readonly roomType: string;
+        /**
+         * ID of the Multiplay Room, explicitly assigned upon creation.
+         */
         readonly uniqueId?: string;
+        /**
+         * Maximum number of clients able to connect to the Multiplay Room.
+         */
         readonly maxClients: number;
-        readonly patchRate: number;
-        readonly autoDispose: boolean;
+        /**
+         * State of a Multiplay Room. The schema for the state data is defined by the Multiplay Schema.
+         */
         readonly state: State;
+        /**
+         * Iterable representation of the clients connected to the Multiplay Room.
+         */
         readonly clients: IterableIterator<SandboxPlayer>;
+        /**
+         * Time limit (in seconds) for allowing the reconnection of a client with an unstable connection.
+         */
         readonly allowReconnectionTime: number;
+        /**
+         * Specifies whether the Multiplay Room is private.
+         */
         readonly private: boolean;
+        /**
+         * Implementation of this abstract method is run once, when the Multiplay Room is created.
+         * Implementation can be optionally declared `async`.
+         * @param options Options for creating the Multiplay Room.
+         * @returns If asynchronous, it returns `Promise<void>`. Otherwise, `void`.
+         */
         abstract onCreate?(options: SandboxOptions): void | Promise<void>;
+        /**
+         * Implementation of this abstract method is run when a client joins the Multiplay Room.
+         * Implementation can be optionally declared `async`.
+         * @param client Client object of the player.
+         * @returns If asynchronous, it returns `Promise<void>`. Otherwise, `void`.
+         */
         abstract onJoin?(client: SandboxPlayer): void | Promise<void>;
+        /**
+         * Implementation of this abstract method is run when a client leaves the Multiplay Room.
+         * Implementation can be optionally declared `async`.
+         * @param client Client object of the player.
+         * @param consented Specifies whether the player has consented to reconnect.
+         * @returns If asynchronous, it returns `Promise<void>`. Otherwise, `void`.
+         */
         abstract onLeave?(client: SandboxPlayer, consented?: boolean): void | Promise<void>;
+        /**
+         * Locks the Multiplay Room.
+         * @returns `Promise` resolved upon completion of the locking process.
+         */
         lock(): Promise<void>;
+        /**
+         * Unlocks the Multiplay Room.
+         * @returns `Promise` resolved upon completion of the unlocking process.
+         */
         unlock(): Promise<void>;
+        /**
+         * Implementation of this method is executed approximately every 100 milliseconds.
+         * @param deltaTime Represents the time difference (in milliseconds) from the previous call.
+         */
         onTick?(deltaTime: number): void;
+        /**
+         * Registers a callback to handle messages received from clients.
+         * @typeParam T Optionally specifies the type of `message` in the `callback`.
+         * @param messageType The identifier of the channel the message was sent through.
+         * @param callback Callback method to handle the received message.
+         */
         onMessage<T = any>(messageType: '*' | string | number, callback: (client: SandboxPlayer, message: T) => void): void;
+        /**
+         * Sends a message through a specified channel to every client connected to the Multiplay Room.
+         * @param type The identifier of the channel to send the message through.
+         * @param message Optional content of the message.
+         * @param options Broadcast options.
+         */
         broadcast(type: string | number, message?: any, options?: IBroadcastOptions): void;
+        /**
+         * Gets the client object associated with a session ID.
+         * @param sessionId Client's session ID.
+         * @returns The client object.
+         */
         loadPlayer(sessionId: string): SandboxPlayer | undefined;
+        /**
+         * Sets the private status of the Multiplay Room.
+         * @param isPrivate Specifies the private status of the Multiplay Room.
+         * @returns `Promise` resolved upon completion of the process.
+         */
         setPrivate(isPrivate: boolean): Promise<void>;
+        /**
+         * Kicks out a client from the Multiplay Room.
+         * @param client Object of the client to be kicked out.
+         * @param reason Optionally describe the reason for the kick-out.
+         * @returns `Promise` resolved upon completion of the process.
+         */
         kick(client: SandboxPlayer, reason?: string): Promise<void>;
     }
 }
 
-
 declare module "ZEPETO.Multiplay.Currency" {
-    import { SandboxPlayer } from "ZEPETO.Multiplay";
+    /**
+     * The error code specifies the reason for the failure of in-World currency-related requests.
+     */
     const enum CurrencyError {
+        /**
+         * Error: Unknown error.
+         */
         Unknown = -1,
+        /**
+         * Error: Errors related to network issues, including disconnections or unstable connections.
+         */
         NetworkError = 0
     }
+    import { SandboxPlayer } from "ZEPETO.Multiplay";
+    /**
+     * {@link Currency} manages operations associated with ZEPETO World currencies.
+     */
     interface Currency {
+        /**
+         * Deducts the specified amount from the player's in-World currency balance. Throws {@link CurrencyError}.
+         * @param id ID of the currency to deduct.
+         * @param quantity The quantity of the currency to deduct. Defaults to `1`.
+         * @param reason Optionally describes the reason for deduction.
+         * @returns `Promise` resolved upon completion, indicating success (`true`) or failure (`false`).
+         */
         debit(id: string, quantity?: number, reason?: string): Promise<boolean>;
+        /**
+         * Increases the specified amount to the player's in-World currency balance. Throws {@link CurrencyError}.
+         * @param id ID of the currency to increase.
+         * @param quantity The quantity of the currency to increase. Defaults to `1`.
+         * @param reason Optionally describes the reason for increase.
+         * @returns `Promise` resolved upon completion, indicating success (`true`) or failure (`false`).
+         */
         credit(id: string, quantity?: number, reason?: string): Promise<boolean>;
-        getBalance(id: string): Promise<number | null>;
+        /**
+         * Retrieves the balance of the player's in-World currency. Throws {@link CurrencyError}.
+         * @param id ID of the currency to retrieve.
+         * @returns `Promise` resolved upon completion, with the retrieved balance amount.
+         */
+        getBalance(id: string): Promise<number>;
+        /**
+         * Retrieves the balances of each in-World currency the player has. Throws {@link CurrencyError}.
+         * @returns `Promise` resolved upon completion, with the object where each in-World currency ID is a key, and its corresponding balance is the associated value.
+         */
         getBalances(): Promise<{
             [key: string]: number
         }>;
     }
+    /**
+     * Retrieves the currency object associated with a specific player. Throws {@link CurrencyError}.
+     * @param userId The user ID of the player.
+     * @returns `Promise` resolved upon completion, with the retrieved {@link Currency} object.
+     */
     function loadCurrency(userId: string): Promise<Currency>;
+    /**
+     * Retrieves the currency object associated with a specific player. Throws {@link CurrencyError}.
+     * @param client Client object of the player.
+     * @returns `Promise` resolved upon completion, with the retrieved {@link Currency} object.
+     */
     function loadCurrency(player: SandboxPlayer): Promise<Currency>;
 }
 
 declare module 'ZEPETO.Multiplay.DataStorage' {
+    /**
+     * The error code specifies the reason for the failure of data storage-related requests.
+     */
     const enum DataStorageError {
+        /**
+         * Error: Unknown error.
+         */
         Unknown = -1,
+        /**
+         * Error: Errors related to network issues, including disconnections or unstable connections.
+         */
         NetworkError = 0,
+        /**
+         * Error: Key error.
+         */
         KeyConstraintViolated = 103,
+        /**
+         * Error: Value error.
+         */
         ValueConstraintViolated = 104
     }
+    /**
+     * Represents a data storage abstraction providing methods to store, retrieve, and remove data.
+     * This interface defines asynchronous operations for single and multiple data manipulations.
+     */
     interface DataStorage {
-        set<T>(key: string, value: T) : Promise<boolean>;
-        mset<T>(keyValueSet: { key: string; value: T; }[]): Promise<boolean>;
+        /**
+         * Stores a value with a specified key. Throws {@link DataStorageError}.
+         * @typeParam T Optionally specifies the type of the data to store.
+         * @param key The key for storage.
+         * @param value Data to store.
+         * @returns `Promise` resolved upon completion, indicating success (`true`) or failure (`false`).
+         */
+        set<T>(key: string, value: T): Promise<boolean>;
+        /**
+         * Retrieves a value by its key. Throws {@link DataStorageError}.
+         * @typeParam T Optionally specifies the type of the retrieved value.
+         * @param key The key to search for.
+         * @returns `Promise` resolved upon completion with a value of type `T`.
+         */
         get<T>(key: string): Promise<T>;
-        mget<T>(keys: string[]): Promise<{ [key: string]: T }>;
+        /**
+         * Removes a value with a specified key. Throws {@link DataStorageError}.
+         * @typeParam T Optionally specifies the type of the retrieved value.
+         * @param key The key to search for.
+         * @returns `Promise` resolved upon completion, indicating success (`true`) or failure (`false`).
+         */
         remove(key: string): Promise<boolean>;
+        /**
+         * Retrieves values by multiple keys. Throws {@link DataStorageError}.
+         * @typeParam T Optionally specifies the type of retrieved values.
+         * @param keys Array of keys to search for.
+         * @returns `Promise` resolved upon completion with a key-value object.
+         */
+        mget<T>(keys: string[]): Promise<{ [key: string]: T }>;
+        /**
+         * Stores multiple values with specified keys. Throws {@link DataStorageError}.
+         * @typeParam T Optionally specifies the type of data to store.
+         * @param keyValueSet Array of key-value objects to store.
+         * @returns `Promise` resolved upon completion, indicating success (`true`) or failure (`false`).
+         */
+        mset<T>(keyValueSet: { key: string; value: T; }[]): Promise<boolean>;
     }
+    /**
+     * Retrieves the data storage object associated with a specified player.
+     * @param userId The user ID of the player.
+     * @returns `Promise` resolved upon completion with the `DataStorage` object associated with the specified player.
+     */
     function loadDataStorage(userId: string): Promise<DataStorage>;
 }
 
 declare module 'ZEPETO.Multiplay' {
     import { DataStorage } from 'ZEPETO.Multiplay.DataStorage';
     interface SandboxPlayer {
+        /**
+         * Retrieves the data storage object associated with the client's player.
+         * @returns `DataStorage` object associated with the client's player.
+         */
         loadDataStorage(): DataStorage;
     }
 }
 
-
 declare module "ZEPETO.Multiplay.HttpService" {
+    /**
+     * Enumeration of constants specifying the HTTP Content-Type.
+     */
     const enum HttpContentType {
+        /**
+         * Represents application/json content type.
+         */
         ApplicationJson = 'application/json',
+        /**
+         * Represents application/xml content type.
+         */
         ApplicationXml = 'application/xml',
+        /**
+         * Represents application/x-www-form-urlencoded content type.
+         */
         ApplicationUrlEncoded = 'application/x-www-form-urlencoded',
+        /**
+         * Represents text/plain content type.
+         */
         TextPlain = 'text/plain',
+        /**
+         * Represents text/xml content type.
+         */
         TextXml = 'text/xml'
     }
+    /**
+     * Type alias for HTTP Body content, which can be either plain text or a key-value object.
+     */
     type HttpBodyType = string | { [key: string]: any; };
+    /**
+     * Type alias for HTTP Headers, representing a key-value object.
+     */
     type HttpHeader = { [key: string]: string | number; };
+    /**
+     * Enumeration of constants specifying reasons for failure in HTTP requests.
+     */
     const enum HttpErrorType {
+        /**
+         * Error: Access denied.
+         */
         ERR_ACCESS_DENIED = 'ERR_ACCESS_DENIED',
+        /**
+         * Error: Length required.
+         */
         ERR_LENGTH_REQUIRED = 'ERR_LENGTH_REQUIRED'
     }
+    /**
+      * Represents an error that occurred during an HTTP request.
+     */
     interface HttpError extends Error {
+        /**
+         * Error message.
+         */
         message: string;
+        /**
+         * Error code defined as a value from {@link HttpErrorType} enum.
+         */
         code?: string;
     }
+    /**
+     * Represents an HTTP Response.
+     */
     interface HttpResponse {
+        /**
+         * The status code of the response. Typically, 200 indicates a successful request.
+         */
         readonly statusCode: number;
+        /**
+         * The status message corresponding to the status code. Typically, "OK" indicates a successful request.
+         */
         readonly statusText: string;
+        /**
+         * The body of the HTTP response, which may vary in format based on the response's Content-Type.
+         * It is recommended to use an appropriate parser based on the specific Content-Type received.         
+         * */
         readonly response: string;
     }
+    /**
+     * {@link HttpService} provides an API to establish HTTP connections with external web services and make requests.
+     * - Ensure using HTTPS protocol; HTTP is supported only in the development environment.
+     * - Requests are limited to ports 80 and 443.
+     * - The maximum size for request and response bodies is 16KB.
+     * - Keep requests per minute below 500 to avoid potential limitations on the World service due to excessive requests.
+     * - Requests will fail if external web services do not respond within 5 seconds.
+     * - Ensure that the Content-Type in response headers matches values defined in {@link HttpContentType} enum to prevent request failures.
+     * - Due to potential web request failures for various reasons, it's recommended to code defensively.
+     */
     interface HttpService {
+        /**
+         * Asynchronously performs an HTTP GET request. Throws {@link HttpError}.
+         * @param url The web address to send the request.
+         * @param headers HTTP request headers. (Optional)
+         * @returns `Promise` resolved with the {@link HttpResponse} object upon completion.
+         */
         getAsync(url: string, headers?: HttpHeader): Promise<HttpResponse>;
+        /**
+         * Perform HTTP POST requests asynchronously. Throws {@link HttpError}.
+         * @param url The web address to send the request.
+         * @param body Request body content.
+         * @param headers HTTP request headers. (Optional)
+         * @returns `Promise` resolved with the {@link HttpResponse} object upon completion.
+         */
         postAsync(url: string, body: HttpBodyType, headers?: HttpHeader): Promise<HttpResponse>;
+        /**
+         * Perform HTTP POST requests asynchronously. Throws {@link HttpError}.
+         * When using this signature, if you add 'Content-Type' to headers, it will be overwritten by what is specified in `httpContentType`.
+         * @param url The web address to send the request.
+         * @param body Request body content.
+         * @param headers HTTP request headers. (Optional)
+         * @param httpContentType Specifies the request Content-Type header.
+         * @returns `Promise` resolved with the {@link HttpResponse} object upon completion.
+         */
         postAsync(url: string, body: HttpBodyType, httpContentType: HttpContentType, headers?: HttpHeader): Promise<HttpResponse>;
     }
     const HttpService: HttpService;
 }
 
-/**
- * @deprecated The module should not be used
- */
-declare module "ZEPETO.Multiplay.IWP" {
-    import { SandboxPlayer } from "ZEPETO.Multiplay";
-
-    /**
-     * @deprecated The interface should not be used
-     */
-    interface IReceiptMessage {
-        receiptId: string;
-        itemId: string;
-        worldId: string;
-        purchasePrice: number;
-        status: string;
-        purchasedAt: string;
-        createdAt: string;
-        updatedAt: string;
-    }
-
-    /**
-     * @deprecated The interface should not be used
-     */
-    interface IWP {
-        /**
-         * @deprecated The function should not be used
-         */
-        onPurchased(client: SandboxPlayer, receipt: IReceiptMessage): void | Promise<void>;
-    }
-}
-
 declare module "ZEPETO.Multiplay.Inventory" {
     import { SandboxPlayer } from "ZEPETO.Multiplay";
+    /**
+     * The error code specifies the reason for the failure of inventory-related requests.
+     */
     const enum InventoryError {
+        /**
+         * Error: Unknown error.
+         */
         Unknown = -1,
+        /**
+         * Error: Errors related to network issues, including disconnections or unstable connections.
+         */
         NetworkError = 0
     }
+    /**
+     * Inventory product information.
+     */
     interface InventoryRecord {
+        /**
+         * Product ID.
+         */
         productId: string;
+        /**
+         * Quantity of the product.
+         */
         quantity: number;
+        /**
+         * Date and time when the product was added to the inventory.
+         */
         createdAt: Date;
+        /**
+         * Date and time when the product information was last updated.
+         */
         updatedAt: Date;
     }
+    /**
+     * {@link Inventory} manages operations associated with the player's in-World product inventory.
+     */
     interface Inventory {
+        /**
+         * Uses an in-World product from the player's inventory. Throws {@link InventoryError}.
+         * @param productId ID of the product to use.
+         * @param quantity Quantity of the product to use. Defaults to `1`.
+         * @param reason Optionally describes the reason for usage.
+         * @returns `Promise` resolved upon completion, indicating success (`true`) or failure (`false`).
+         */
         use(productId: string, quantity?: number, reason?: string): Promise<boolean>;
+        /**
+         * Adds an in-World product to the player's inventory. Throws {@link InventoryError}.
+         * @param productId ID of the product to add.
+         * @param quantity Quantity of the product to add. Defaults to `1`.
+         * @param reason Optionally describes the reason for the addition.
+         * @returns `Promise` resolved upon completion, indicating success (`true`) or failure (`false`).
+         */
         add(productId: string, quantity?: number, reason?: string): Promise<boolean>;
+        /**
+         * Adds multiple in-World products to the player's inventory. Throws {@link InventoryError}.
+         * @param products Array of products to add.
+         * @returns `Promise` resolved upon completion, indicating success (`true`) or failure (`false`).
+         */
         madd(products: {
             productId: string;
             quantity: number;
             reason?: string;
         }[]): Promise<boolean>;
-        get(productId: string): Promise<InventoryRecord | null>;
+        /**
+         * Checks the existence of an in-World product in the player's inventory.Throws {@link InventoryError}.
+         * @param productId ID of the product to check.
+         * @returns `Promise` resolved upon completion, indicating exist (`true`) or non-exist (`false`).
+         */
         has(productId: string): Promise<boolean>;
+        /**
+         * Retrieves an in-World product from the player's inventory. Throws {@link InventoryError}.
+         * @param productId ID of the product to retrieve.
+         * @returns `Promise` resolved upon completion, with the retrieved {@link InventoryRecord} object.
+         */
+        get(productId: string): Promise<InventoryRecord | null>;
+        /**
+         * Removes an in-World product from the player's inventory. Throws {@link InventoryError}.
+         * @param productId ID of the product to remove.
+         * @returns `Promise` resolved upon completion, indicating success (`true`) or failure (`false`).
+         */
         remove(productId: string): Promise<boolean>;
+        /**
+         * Retrieves all in-World products from the player's inventory. Throws {@link InventoryError}.
+         * @returns `Promise` resolved upon completion, with an array of the retrieved {@link InventoryRecord} objects.
+         */
         list(): Promise<InventoryRecord[]>;
     }
+    /**
+     * Retrieves the inventory object associated with a specific player. Throws {@link InventoryError}.
+     * @param userId The user ID of the player.
+     * @returns `Promise` resolved upon completion, with the retrieved {@link Inventory} object.
+     */
     function loadInventory(userId: string): Promise<Inventory>;
+    /**
+     * Retrieves the inventory object associated with a specific player. Throws {@link InventoryError}.
+     * @param client Client object of the player.
+     * @returns `Promise` resolved upon completion, with the retrieved {@link Inventory} object.
+     */
     function loadInventory(player: SandboxPlayer): Promise<Inventory>;
 }
 
-declare module 'ZEPETO.Multiplay.Leaderboard' {
-    const LeaderboardWeekDayType: {
-        MONDAY: string;
-        TUESDAY: string;
-        WEDNESDAY: string;
-        THURSDAY: string;
-        FRIDAY: string;
-        SATURDAY: string;
-        SUNDAY: string;
-    };
-    type LeaderboardWeekDayType = typeof LeaderboardWeekDayType[keyof typeof LeaderboardWeekDayType];
-
-    enum ResetRule
-    {
-        none = 0,
-        day = 1,
-        week = 2,
-        month = 3,
-    }
-
-    enum UpdateRule
-    {
-        max_score = 0,
-        min_score = 1,
-        accumulate_score = 2,
-    }
-
-    interface ResetInfo {
-        customResetStartTimestamp: number;
-        day: number;
-        hour: number;
-        min: number;
-        resetRule: ResetRule;
-        sec: number;
-        weekDay: LeaderboardWeekDayType;
-    }
-
-    interface Leaderboard {
-        id: string;
-        name: string;
-        resetInfoList: ResetInfo[];
-        updateRule: UpdateRule;
-    }
-
-    interface ResponseBase {
-        isSuccess: boolean;
-        error?: string;
-    }
-
-    interface LeaderboardResponse extends ResponseBase {
-        exception?: string;
-    }
-
-    interface Rank {
-        extraInfo: string;
-        userId: string;
-        rank: number;
-        score: number;
-    }
-
-    interface RankInfo {
-        rankList: Rank[];
-        totalRankCount: number;
-    }
-
-    interface GetAllLeaderboardsResponse extends LeaderboardResponse {
-        leaderboards?: Leaderboard[];
-    }
-
-    interface GetLeaderboardResponse extends LeaderboardResponse {
-        leaderboard?: Leaderboard;
-    }
-
-    interface GetLeaderboardRankResponse extends LeaderboardResponse {
-        rankInfo?: RankInfo;
-    }
-
-    interface Leaderboard {
-        getAllLeaderboards(): Promise<GetAllLeaderboardsResponse>;
-        getLeaderboard(leaderboardId: string): Promise<GetLeaderboardResponse>;
-        getRank(leaderboardId: string, userIds: string[], resetRule: ResetRule, prevRanking?: boolean): Promise<GetLeaderboardRankResponse>;
-        getRankRange(leaderboardId: string, startRank: number, endRank: number, resetRule: ResetRule, prevRanking?: boolean): Promise<GetLeaderboardRankResponse>;
-        setScore(leaderboardId: string, userId: string, score: number, prevRanking?: boolean): Promise<LeaderboardResponse>;
-        deleteRank(leaderboardId: string, userId: string, prevRanking?: boolean): Promise<LeaderboardResponse>;
-    }
-    const Leaderboard: Leaderboard;
-}
-
-
-declare module "ZEPETO.Multiplay.Messaging" {
-    const enum MessagingError {
-        Unknown = -1,
-        ParameterError,
-        NetworkError,
-    }
-    interface Subscriber {
-        disconnect(): void;
-    }
-    interface Messaging {
-        publish<T>(topic: string, payload: T): void;
-        subscribe<T>(topic: string, callback: (topic: string, data: T, sent: number) => void): Subscriber;
-    }
-    const Messaging: Messaging;
-}
-
 declare module "ZEPETO.Multiplay.Product" {
+    /**
+     * The error code specifies the reason for the failure of in-World product-related requests.
+     */
     const enum ProductError {
+        /**
+         * Error: Unknown error.
+         */
         Unknown = -1,
+        /**
+         * Error: Errors related to network issues, including disconnections or unstable connections.
+         */
         NetworkError = 0
     }
+    /**
+     * Enum representing the in-World product purchase type.
+     */
     const enum PurchaseType {
+        /**
+         * Consumable in-World product.
+         */
         Consumable = 'CONSUMABLE',
+        /**
+         * Non-consumable in-World product.
+         */
         NonConsumable = 'NON_CONSUMABLE'
     }
+    /**
+     * Enum representing the in-World product status.
+     */
     const enum ProductStatus {
+        /**
+         * Active state.
+         */
         Active = 'ACTIVE',
+        /**
+         * Inactive state.
+         */
         InActive = 'INACTIVE',
+        /**
+         * Forbidden state due to expiration of use.
+         */
         Forbidden = 'FORBIDDEN'
     }
+    /**
+     * Enum representing the in-World product type.
+     */
     const enum ProductType {
+        /**
+         * Single item in-World product.
+         */
         Item = 'ITEM',
+        /**
+         * Item in-World product package, including multiple items.
+         */
         ItemPackage = 'ITEM_PACKAGE',
+        /**
+         * Currency in-World product package, including multiple currencies.
+         */
         CurrencyPackage = 'CURRENCY_PACKAGE'
     }
+    /**
+     * In-World product information.
+     */
     interface ProductRecord {
+        /**
+         * In-World Product ID.
+         */
         productId: string;
+        /**
+         * In-World Product name.
+         */
         name: string;
+        /**
+         * In-World Product price.
+         */
         price: number;
+        /**
+         * {@link PurchaseType} of the in-World product.
+         */
         purchaseType: PurchaseType;
+        /**
+         * {@link ProductStatus} of the in-World product.
+         */
         status: ProductStatus;
+        /**
+         * {@link ProductType} of the in-World product.
+         */
         productType: ProductType,
+        /**
+         * Returns the type of the currency used for purchasing the in-World product.
+         */
         currency: {
-            currencyId?: string;
-            name?: string,
+            /**
+             * Currency ID.
+             */
+            currencyId: string;
+            /**
+             * Currency name.
+             */
+            name: string,
+            /**
+             * Indicates whether the currency is ZEPETO’s official currency (ZEM) or an in-World currency.
+             */
             isOfficialCurrency: boolean,
         };
+        /**
+         * Items included in the in-World product if {@link ProductType} is `ItemPackage`.
+         */
         itemPackageUnits?: {
+            /**
+             * In-World Product ID.
+             */
             productId: string;
+            /**
+             * Item name.
+             */
             itemName: string;
+            /**
+             * Item product quantity.
+             */
             quantity: number;
         }[];
+        /**
+         * Currencies included in the in-World product if {@link ProductType} is `CurrencyPackage`.
+         */
         currencyPackageUnits?: {
+            /**
+             * Currency ID.
+             */
             currencyId: string;
+            /**
+             * Currency name.
+             */
             currencyName: string;
+            /**
+             * Currency quantity.
+             */
             quantity: number;
         }[];
     }
+    /**
+     * Retrieves the in-World product information based on the provided product ID. Throws {@link ProductError}.
+     * @param productId ID of the in-World product to fetch.
+     * @returns `Promise` resolved upon completion, with the retrieved {@link ProductRecord} object.
+     */
     function getProduct(productId: string): Promise<ProductRecord | null>;
+    /**
+     * Retrieves the in-World product information list based on provided product IDs. Throws {@link ProductError}.
+     *
+     * @param productIds IDs of the in-World products to fetch.
+     * @returns `Promise` resolved upon completion, with a array of retrieved {@link ProductRecord} objects.
+     */
     function getProducts(productIds: string[]): Promise<ProductRecord[] | null>;
 }
 

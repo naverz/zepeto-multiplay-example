@@ -1,0 +1,37 @@
+fileFormatVersion: 2
+guid: 897bc5de28f3b49eda623dfc5297504c
+importerOverride:
+  nativeImporterType: 2089858483
+  scriptedImporterType:
+    serializedVersion: 2
+    Hash: 89072204048b7087d871d10c191cb608
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst ZEPETO_Character_Controller_1
+    = require(\"ZEPETO.Character.Controller\");\r\nconst UIController_1 = require(\"./UIController\");\r\nclass
+    UIControllerTracker extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    //This
+    function runs everytime the V-Pad is enabled\r\n    OnEnable() {\r\n        this._UiController
+    = UnityEngine_1.Object.FindObjectOfType($typeof(UIController_1.default));\r\n       
+    this.screenTouchPad = this.gameObject.GetComponentInChildren($typeof(ZEPETO_Character_Controller_1.ZepetoScreenTouchpad));\r\n       
+    this._UiController.InitScreenTouchPadListener(this.screenTouchPad);\r\n    }\r\n}\r\nexports.default
+    = UIControllerTracker;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlDb250cm9sbGVyVHJhY2tlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlVJQ29udHJvbGxlclRyYWNrZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBc0Q7QUFDdEQsNkNBQW9DO0FBQ3BDLDZFQUFtRTtBQUNuRSxpREFBMEM7QUFHMUMsTUFBcUIsbUJBQW9CLFNBQVEscUNBQXFCO0lBS2xFLG1EQUFtRDtJQUNuRCxRQUFRO1FBRUosSUFBSSxDQUFDLGFBQWEsR0FBRyxvQkFBTSxDQUFDLGdCQUFnQixTQUFDLHNCQUFZLEVBQUcsQ0FBQztRQUM3RCxJQUFJLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsc0JBQXNCLFNBQUMsa0RBQW9CLEVBQUcsQ0FBQTtRQUNwRixJQUFJLENBQUMsYUFBYSxDQUFDLDBCQUEwQixDQUFDLElBQUksQ0FBQyxjQUFjLENBQUMsQ0FBQTtJQUN0RSxDQUFDO0NBQ0o7QUFaRCxzQ0FZQyJ9","assetPath":"Assets/Zepeto
+    Gesture Module/ZepetoScript/UIControllerTracker.ts","manifest":{"properties":[{"assembly":"ZEPETO.Character.Controller","name":"screenTouchPad","type":"ZEPETO.Character.Controller.ZepetoScreenTouchpad","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIControllerTracker","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 79490ec1d7f54bd1272b8ae1f4c05fdd
+  onlyWriteTrigger: 0

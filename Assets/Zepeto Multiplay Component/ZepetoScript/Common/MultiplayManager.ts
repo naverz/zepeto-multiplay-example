@@ -2,9 +2,10 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import {GameObject, Object, Quaternion, Transform, Vector3, WaitForSeconds, WaitUntil, Resources} from 'UnityEngine';
 import {ZepetoWorldMultiplay} from "ZEPETO.World";
 import {Room, RoomData} from "ZEPETO.Multiplay";
-import TransformSyncHelper, { UpdateOwner } from '../Transform/TransformSyncHelper';
-import DOTWeenSyncHelper from '../DOTween/DOTWeenSyncHelper';
-import AnimatorSyncHelper from '../Transform/AnimatorSyncHelper';
+// import TransformSyncHelper, { UpdateOwner } from '../Transform/TransformSyncHelper';
+// import DOTWeenSyncHelper from '../DOTween/DOTWeenSyncHelper';
+// import AnimatorSyncHelper from '../Transform/AnimatorSyncHelper';
+import ToolClassGather from '../ToolClass/ToolClassGather';
 
 export default class MultiplayManager extends ZepetoScriptBehaviour {
     public multiplay: ZepetoWorldMultiplay;
@@ -16,9 +17,12 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
     @SerializeField() private _diffServerTime:number = 0;
 
     private _masterSessionId:string;
-    private _tfHelpers: TransformSyncHelper[] = [];
-    private _dtHelpers: DOTWeenSyncHelper[] = [];
-    private _animHelper: AnimatorSyncHelper[] = [];
+    // private _tfHelpers: TransformSyncHelper[] = [];
+    // private _dtHelpers: DOTWeenSyncHelper[] = [];
+    // private _animHelper: AnimatorSyncHelper[] = [];
+    private _tfHelpers: any[] = [];
+    private _dtHelpers: any[] = [];
+    private _animHelper: any[] = [];
     
     private readonly pingInterval:number = 1;
     
@@ -55,8 +59,14 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
             this.CheckMaster();
             this.GetInstantiate();
         }
-        this._dtHelpers = Object.FindObjectsOfType<DOTWeenSyncHelper>();
-        this._animHelper = Object.FindObjectsOfType<AnimatorSyncHelper>();
+        // this._dtHelpers = Object.FindObjectsOfType<DOTWeenSyncHelper>();
+        // this._animHelper = Object.FindObjectsOfType<AnimatorSyncHelper>();
+        const tcg = this.gameObject?.GetComponent<ToolClassGather>();
+        if(null === tcg) {
+            this.gameObject.AddComponent<ToolClassGather>();
+        }
+        this._dtHelpers = ToolClassGather.Instance.DtHelpers;
+        this._animHelper = ToolClassGather.Instance.AnimHelper;
     }
 
     /**Util**/
@@ -65,7 +75,12 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
 
         this.room.AddMessageHandler(MESSAGE.MasterResponse, (masterSessionId :string) => {
             this._masterSessionId = masterSessionId;
-            this._tfHelpers = Object.FindObjectsOfType<TransformSyncHelper>();
+            // this._tfHelpers = Object.FindObjectsOfType<TransformSyncHelper>();
+            const tcg = this.gameObject?.GetComponent<ToolClassGather>();
+            if(null === tcg) {
+                this.gameObject.AddComponent<ToolClassGather>();
+            }
+            this._tfHelpers = ToolClassGather.Instance.TfHelpers;
             this._tfHelpers.forEach((tf)=>{
                 if(tf.UpdateOwnerType == UpdateOwner.Master){
                     tf.ChangeOwner(this._masterSessionId);
@@ -94,10 +109,9 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
             const spawnRotation= message.spawnRotation ? new Quaternion(message.spawnRotation.x, message.spawnRotation.y, message.spawnRotation.z, message.spawnRotation.w) : prefabObj.transform.rotation
 
             const newObj:GameObject = Object.Instantiate(prefabObj, spawnPosition, spawnRotation) as GameObject;
-            
             // If the object has a TransformSyncHelper script attached to it, it sets the script's ID and owner information. 
             // If the object does not have a TransformSyncHelper script, a warning is logged to the console.
-            const tf = newObj?.GetComponent<TransformSyncHelper>();
+            const tf = newObj?.GetComponent<any>();
             if(null === tf) { //Creates an none-sync object.
                 console.warn(`${tf.name} does not have a TransformSyncHelper script.`);
                 return;
@@ -115,7 +129,7 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
 
     /** Destroy synchronization objects */
     public Destroy(DestroyObject: GameObject){
-        const tf = DestroyObject.GetComponent<TransformSyncHelper>();
+        const tf = DestroyObject.GetComponent<any>();
         const objId = tf?.Id;
         if(null === objId) {
             console.warn("Only objects that contain TransformSyncHelper scripts can be deleted.");
@@ -172,8 +186,13 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
 
         this.bPaused = true;
         this._pingCheckCount = 0;
-        this._tfHelpers = Object.FindObjectsOfType<TransformSyncHelper>();
+        // this._tfHelpers = Object.FindObjectsOfType<TransformSyncHelper>();
         // While paused, no information is received.
+        const tcg = this.gameObject?.GetComponent<ToolClassGather>();
+        if(null === tcg) {
+            this.gameObject.AddComponent<ToolClassGather>();
+        }
+        this._tfHelpers = ToolClassGather.Instance.TfHelpers;
         this._tfHelpers?.forEach((tf)=> {
             if(tf.UpdateOwnerType === UpdateOwner.Master) {
                 tf.ChangeOwner(null);
@@ -191,7 +210,12 @@ export default class MultiplayManager extends ZepetoScriptBehaviour {
         this.room?.Send(MESSAGE.UnPauseUser);
 
         this.bPaused = false;
-        this._tfHelpers = Object.FindObjectsOfType<TransformSyncHelper>();
+        // this._tfHelpers = Object.FindObjectsOfType<TransformSyncHelper>();
+        const tcg = this.gameObject?.GetComponent<ToolClassGather>();
+        if(null === tcg) {
+            this.gameObject.AddComponent<ToolClassGather>();
+        }
+        this._tfHelpers = ToolClassGather.Instance.TfHelpers;
         this._tfHelpers?.forEach((tf)=>{
             if(tf.isOwner){
                 this.SendStatus(tf.Id,GameObjectStatus.Enable);
@@ -272,4 +296,9 @@ enum MESSAGE {
     PauseUser = "PauseUser",
     UnPauseUser = "UnPauseUser",
     SyncTransformStatus = "SyncTransformStatus"
+}
+
+enum UpdateOwner {
+    Master, // Default
+    Undefine, // It is separately designated by the user as a changeowner function.
 }

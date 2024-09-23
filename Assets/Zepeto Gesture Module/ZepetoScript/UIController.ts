@@ -1,6 +1,6 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 import { Button, RawImage, Text, Toggle } from 'UnityEngine.UI';
-import { LocalPlayer, ZepetoCharacter, ZepetoPlayers, ZepetoScreenTouchpad } from 'ZEPETO.Character.Controller';
+import { LocalPlayer, ZepetoCharacter, ZepetoPlayers, ZepetoScreenTouchpad, ZepetoPlayer } from 'ZEPETO.Character.Controller';
 import { OfficialContentType, Content } from 'ZEPETO.World';
 import { Object, GameObject, Transform } from 'UnityEngine';
 import GestureLoader from './GestureLoader';
@@ -16,21 +16,15 @@ export default class UIController extends ZepetoScriptBehaviour {
         
     Start() {
         this._gestureLoader = Object.FindObjectOfType<GestureLoader>();
-        
         ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(() => {
             this._myCharacter = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;
-
-            // If click the touchpad, cancel the gesture
-            Object.FindObjectOfType<ZepetoScreenTouchpad>().OnPointerDownEvent.AddListener(() => {
-                this.StopGesture();
-            });
 
             // If click the close button, cancel the gesture
             this._closeButton.onClick.AddListener(() => {
                 this.StopGesture();
             });
         });
-
+        
         // UI Listener
         this._typeToggleGroup[0].onValueChanged.AddListener(() => {
             this.SetCategoryUI(OfficialContentType.All);
@@ -65,6 +59,15 @@ export default class UIController extends ZepetoScriptBehaviour {
             }
         }
     }
+
+    //This function initialize the ZepetoScreenTouchPad event listener
+    public InitScreenTouchPadListener(ScreenTouchpad: ZepetoScreenTouchpad)
+    {
+        ScreenTouchpad.OnPointerDownEvent.AddListener(()=>
+        {
+            this.StopGesture();
+        })
+    }
       
     private StopGesture() {
 
@@ -72,13 +75,8 @@ export default class UIController extends ZepetoScriptBehaviour {
         if(this._gestureLoader.gestureCoroutine)
         {
             this._gestureLoader.StopCoroutine(this._gestureLoader.gestureCoroutine);
-        }
-        //If there is a pose coroutine stop it and reinitialize the Animator speed to 1.
-        if(this._gestureLoader.poseCoroutine)
-        {
-            this._gestureLoader.StopCoroutine(this._gestureLoader.poseCoroutine);
-            this._myCharacter.ZepetoAnimator.speed = 1;
-        }
+        }        
+        this._myCharacter.ZepetoAnimator.speed = 1;
         this._myCharacter.CancelGesture();
     }
 }

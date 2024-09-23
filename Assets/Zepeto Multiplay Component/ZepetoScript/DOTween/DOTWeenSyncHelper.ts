@@ -4,6 +4,7 @@ import {ZepetoWorldMultiplay} from "ZEPETO.World";
 import {Room, RoomData} from "ZEPETO.Multiplay";
 import SyncIndexManager from '../Common/SyncIndexManager';
 import MultiplayManager from '../Common/MultiplayManager';
+import ToolClassGather from '../ToolClass/ToolClassGather';
 
 export default class DOTWeenSyncHelper extends ZepetoScriptBehaviour {
     /** It is used for game objects that move through a given path.
@@ -55,6 +56,11 @@ export default class DOTWeenSyncHelper extends ZepetoScriptBehaviour {
     }
     
     private Start(){
+        const tcg = MultiplayManager.instance.gameObject?.GetComponent<ToolClassGather>();
+        if(null === tcg) {
+            MultiplayManager.instance.gameObject.AddComponent<ToolClassGather>();
+        }
+        ToolClassGather.Instance.DtHelpers.push(this.gameObject.GetComponent<DOTWeenSyncHelper>());
         this.Init();
         
         if (this.syncType == SyncType.Sync) {

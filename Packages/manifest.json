@@ -1,16 +1,9 @@
 {
   "dependencies": {
-    "com.jasper.teamutillity": "https://github.com/JasperGame/zepeto-teamutility.git",
-    "com.unity.editorcoroutines": "1.0.0",
-    "com.unity.ext.nunit": "1.0.6",
-    "com.unity.ide.rider": "2.0.7",
-    "com.unity.test-framework": "1.1.24",
+    "com.unity.ide.rider": "3.0.28",
     "com.unity.textmeshpro": "3.0.6",
-    "com.unity.toolchain.macos-x86_64-linux-x86_64": "0.1.22-preview",
     "com.unity.ugui": "1.0.0",
-    "zepeto.buildit.loader": "0.0.3",
-    "zepeto.character": "3.1.17",
-    "zepeto.world": "1.21.2",
+    "zepeto.world": "1.22.3",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",

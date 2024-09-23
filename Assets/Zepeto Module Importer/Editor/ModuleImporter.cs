@@ -16,7 +16,7 @@ public class ModuleImporter : EditorWindow
     private Language _selectedLanguage = Language.English;
     private readonly string[] _languages = Enum.GetNames(typeof(Language));
     private static EditorWindow _window;
-
+    
     [MenuItem("ZEPETO/Module Importer")]
     public static void ShowWindow()
     {
@@ -113,12 +113,12 @@ public class ModuleImporter : EditorWindow
             {
                 _selectedData = data;
             }
-
+            
             Rect guiRect = GUILayoutUtility.GetLastRect();
-            Rect titleRect = new Rect(guiRect.x + (guiRect.width * 0.05f), guiRect.y, guiRect.width, guiRect.height);
-            Rect versionRect = new Rect(guiRect.x + (guiRect.width * 0.77f), guiRect.y, guiRect.width, guiRect.height);
-            Rect statusRect = new Rect(guiRect.x + (guiRect.width * 0.9f), guiRect.y, guiRect.width, guiRect.height);
-
+            Rect statusRect = new Rect(guiRect.x + (guiRect.width * 0.02f), guiRect.y, guiRect.width, guiRect.height);
+            Rect titleRect = new Rect(guiRect.x + (guiRect.width * 0.12f), guiRect.y, guiRect.width, guiRect.height);
+            Rect versionRect = new Rect(guiRect.x + (guiRect.width * 0.82f), guiRect.y, guiRect.width, guiRect.height);
+            
             GUI.Label(titleRect, data.Title);
             string version = VersionHandler.VersionCheck(GetRemoveSpace(data.Title) + "Version");
             if (version != "UNKNOWN")
@@ -158,6 +158,11 @@ public class ModuleImporter : EditorWindow
     {
         GUILayout.BeginVertical();
         GUILayout.FlexibleSpace();
+        if (GUILayout.Button("Issue Report", GUILayout.Width(200), GUILayout.Height(20)))
+        {
+            string url = ConstantManager.ISSUE_REPORT_PATH;
+            OpenLocalizeURL((url));
+        }
         if (GUILayout.Button("Contribute", GUILayout.Width(200), GUILayout.Height(20)))
         {
             string url = ConstantManager.CONTRIBUTE_PATH;

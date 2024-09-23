@@ -1,6 +1,6 @@
 {
 "State" : {"players" : {"map" : "Player"},"SyncTransforms" : {"map" : "SyncTransform"}},
-"Player" : {"sessionId" : "string","zepetoHash" : "string","zepetoUserId" : "string","playerAdditionalValue" : "PlayerAdditionalValue","animationParam" : "ZepetoAnimationParam","gestureName" : "string"},
+"Player" : {"sessionId" : "string", "zepetoUserId" : "string","playerAdditionalValue" : "PlayerAdditionalValue","animationParam" : "ZepetoAnimationParam","gestureName" : "string"},
 "sVector3" : {"x" : "number","y" : "number","z" : "number"},
 "sQuaternion" : {"x" : "number","y" : "number","z" : "number","w" : "number"},
 "SyncTransform" : {"Id" : "string","position" : "sVector3","localPosition" : "sVector3","rotation" : "sQuaternion","scale" : "sVector3","status" : "number","sendTime" : "float64"},

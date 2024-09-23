@@ -8,11 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CommunicationScene.unity
     guid: adef4219952e56c418ca27996292dba5
-  - enabled: 1
-    path: Assets/Zepeto Multiplay Component/Scene/Demo.unity
-    guid: 0b62b70c0a74947afa3f78db49d5de07
-  - enabled: 1
-    path: Assets/Scenes/SimpleMultiplay.unity
-    guid: 1115e89ea310e0b4e93860a7cca73b8d
-  m_configObjects:
-    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 09cac3b0e41604dacab6217291fdc87b, type: 2}
+  m_configObjects: {}

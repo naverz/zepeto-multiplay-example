@@ -9,7 +9,6 @@ declare module "ZEPETO.Multiplay.Schema" {
 	}
 	class Player extends Schema {
 		sessionId: string;
-		zepetoHash: string;
 		zepetoUserId: string;
 		playerAdditionalValue: PlayerAdditionalValue;
 		animationParam: ZepetoAnimationParam;
