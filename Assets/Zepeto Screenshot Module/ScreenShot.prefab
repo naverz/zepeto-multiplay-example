@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 531121484023379696}
   - component: {fileID: 531121484023379695}
   m_Layer: 5
-  m_Name: ScreenShot_Horizontal
+  m_Name: ScreenShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &531121484023379696
 MonoBehaviour:
@@ -1476,7 +1476,7 @@ MonoBehaviour:
     values:
     - 
     - '{"type":"System.Single, mscorlib","value":"60"}'
-    - '{"type":"ZEPETO.World.VideoResolutions, ZEPETO.World","value":"{\"value__\":0}"}'
+    - '{"type":"ZEPETO.World.VideoResolutions, ZEPETO.World","value":"{\"value__\":2}"}'
     unityArrayValues: []
     arrayValues: []
 --- !u!114 &6811595875057307702
@@ -1791,7 +1791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -36, y: -325}
+  m_AnchoredPosition: {x: -36, y: -340}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &6811595875057307872
@@ -4465,7 +4465,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '#ZEPETO World #Obby Template'
+  m_Text: '#ZEPETO World #Runner Template'
 --- !u!1 &6811595875057308466
 GameObject:
   m_ObjectHideFlags: 0
